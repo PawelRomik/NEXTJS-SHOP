@@ -9,13 +9,15 @@
 		"lint": "next lint --fix --dir src"
 	},
 	"dependencies": {
+		"@radix-ui/themes": "^3.0.2",
 		"@typescript-eslint/eslint-plugin": "^7.8.0",
 		"@typescript-eslint/parser": "^7.8.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-import": "^2.29.1",
 		"next": "14.2.3",
 		"react": "^18",
-		"react-dom": "^18"
+		"react-dom": "^18",
+		"remixicon": "^4.2.0"
 	},
 	"devDependencies": {
 		"@types/node": "^20",
