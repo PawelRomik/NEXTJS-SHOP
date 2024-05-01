@@ -1,5 +1,3 @@
-"use client";
-
 export default function Hamburger() {
 	return (
 		<div className="block lg:hidden">
