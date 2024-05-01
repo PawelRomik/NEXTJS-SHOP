@@ -1,6 +1,6 @@
 export default function ProductPage() {
 	return (
-		<main className="h-full p-8">
+		<main className="flex-1 p-6">
 			<p>Produkt</p>
 		</main>
 	);
