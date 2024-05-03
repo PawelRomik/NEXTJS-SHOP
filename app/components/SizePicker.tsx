@@ -11,7 +11,7 @@ export default function SizePicker() {
 	};
 
 	const buttonClassName = (size: number) =>
-		`w-[6rem] border-2 px-6 py-2 text-white ${selectedSize === size ? "bg-white text-black font-bold" : ""}`;
+		`w-[6rem] border-2 px-6 py-2 ${selectedSize === size ? "bg-white text-black font-bold" : "text-white"}`;
 
 	return (
 		<div className="flex flex-col gap-2">
