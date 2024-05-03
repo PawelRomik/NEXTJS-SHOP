@@ -72,7 +72,7 @@ export default async function HomePage() {
 						name={product.attributes.name}
 						price={product.attributes.price}
 						category={""}
-						imageUrl={`http://localhost:1337${product.attributes.image.data.attributes.url}`}
+						imageUrl={`${process.env.PROD_PATH}${product.attributes.image.data.attributes.url}`}
 						key={product.id}
 					></ProductDisplay>
 				))}

@@ -82,7 +82,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 					<Image
 						width={400}
 						height={400}
-						src={`http://localhost:1337${currProduct?.attributes.image.data.attributes.url}`}
+						src={`${process.env.PROD_PATH}${currProduct?.attributes.image.data.attributes.url}`}
 						alt={currProduct?.attributes.name}
 						className="w-[50%] object-cover p-10"
 					></Image>

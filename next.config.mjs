@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		domains: ["localhost"],
+		domains: ["localhost", process.env.DOMAIN],
 	},
 	experimental: {
 		typedRoutes: true,
