@@ -1,11 +1,11 @@
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 
 type ProductDisplayProps = {
 	id: string;
 	name: string;
 	price: number;
-	imageUrl: StaticImageData;
+	imageUrl: string;
 	category: string;
 };
 
@@ -19,8 +19,16 @@ export default function ProductDisplay({
 	return (
 		<Link href={`/product/${id}`}>
 			<div className="group flex cursor-pointer flex-col items-center justify-center">
-				<div className="relative flex bg-zinc-100 p-8">
-					<Image src={imageUrl} alt={name} className="h-[400px] transition group-hover:scale-105" />
+				<div className="relative w-full flex-1 bg-zinc-100 p-8">
+					<div className="h-[400px]">
+						<Image
+							fill={true}
+							src={imageUrl}
+							alt={name}
+							className=" p-10 transition group-hover:scale-105"
+						/>
+					</div>
+
 					<p className="absolute bottom-0 left-2 bg-white p-2 transition group-hover:-translate-y-1">
 						{price}zł
 					</p>
