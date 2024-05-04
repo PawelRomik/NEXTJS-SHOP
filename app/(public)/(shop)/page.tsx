@@ -2,6 +2,7 @@ import { Grid } from "@radix-ui/themes";
 import ProductDisplay from "../../components/ProductDisplay";
 import { gql, ApolloQueryResult } from "@apollo/client";
 import createApolloClient from "../../../apollo-client";
+import { revalidatePath } from "next/cache";
 
 interface ProductData {
 	id: string;
@@ -33,7 +34,7 @@ interface QueryResult {
 
 const GET_PRODUCTS = gql`
 	query {
-		products {
+		products(pagination: { limit: 100 }, sort: "createdAt:desc") {
 			data {
 				id
 				attributes {
@@ -60,11 +61,13 @@ const GET_PRODUCTS = gql`
 `;
 
 export default async function HomePage() {
+	revalidatePath("/");
 	const client = createApolloClient();
 	const { data }: ApolloQueryResult<QueryResult> = await client.query({ query: GET_PRODUCTS });
 
 	return (
 		<main className="flex-1 p-6	">
+			<h1 className="pl-6 text-4xl font-bold capitalize">All</h1>
 			<Grid gap="4" width="auto" className="grid-cols-1 p-6 lg:grid-cols-4">
 				{data.products.data.map((product) => (
 					<ProductDisplay
