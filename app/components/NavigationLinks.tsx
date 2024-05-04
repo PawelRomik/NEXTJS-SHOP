@@ -9,7 +9,7 @@ export default function NavigationLinks() {
 			<NavigationMenu.List className="flex items-center justify-center gap-6  overflow-hidden">
 				<NavigationMenu.Item>
 					<NavigationMenu.Trigger className="focus:shadow-violet7 hover:border-b-2 hover:border-black">
-						<Link href="#" title="Shoes">
+						<Link href="/shop/new/" title="New">
 							NEW
 						</Link>
 					</NavigationMenu.Trigger>
@@ -17,7 +17,7 @@ export default function NavigationLinks() {
 
 				<NavigationMenu.Item>
 					<NavigationMenu.Trigger className="focus:shadow-violet7 hover:border-b-2 hover:border-black">
-						<Link href="#" title="Shoes">
+						<Link href="/" title="Shoes">
 							ALL
 						</Link>
 					</NavigationMenu.Trigger>
@@ -30,7 +30,7 @@ export default function NavigationLinks() {
 						<ul className="one m-0 grid w-[200px] list-none grid-cols-1 gap-x-[10px] p-[22px]">
 							<li>
 								<Link
-									href="#"
+									href="/shop/shoes/male"
 									title="Shoes"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
@@ -39,8 +39,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/sneakers/male"
+									title="Sneakers"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Sneakers
@@ -48,8 +48,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/slides/male"
+									title="Slides & Sandals"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Slides & Sandals
@@ -57,8 +57,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/running/male"
+									title="Running"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Running
@@ -66,8 +66,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/walking/male"
+									title="Walking"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Walking
@@ -75,8 +75,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/hiking/male"
+									title="Hiking"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Hiking
@@ -86,8 +86,8 @@ export default function NavigationLinks() {
 						<ul className="two m-0 grid w-[200px] list-none grid-cols-1 gap-x-[10px] p-[22px]">
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/clothing/male"
+									title="Clothing"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									<b>Clothing</b>
@@ -95,8 +95,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/tshirt/male"
+									title="T-Shirt & Tops"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									T-Shirt & Tops
@@ -104,8 +104,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/hoodies/male"
+									title="Hoodies"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Hoodies
@@ -113,8 +113,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/pants/male"
+									title="Pants"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Pants
@@ -122,8 +122,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/swimwear/male"
+									title="Swimwear"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Swimwear
@@ -131,8 +131,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/shorts/male"
+									title="Shorts"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Shorts
@@ -142,8 +142,8 @@ export default function NavigationLinks() {
 						<ul className="two m-0 grid w-[200px] list-none grid-cols-1 gap-x-[10px] p-[22px]">
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/accesories/male"
+									title="Accesories"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									<b>Accesories</b>
@@ -151,8 +151,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/bags/male"
+									title="Bags & Backpacks"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Bags & Backpacks
@@ -160,8 +160,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/hats/male"
+									title="Hats"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Hats
@@ -169,8 +169,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/gloves/male"
+									title="Gloves"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Gloves
@@ -178,8 +178,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/socks/male"
+									title="Socks"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Socks
@@ -187,8 +187,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/underwear/male"
+									title="Underwear"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Underwear
@@ -205,7 +205,7 @@ export default function NavigationLinks() {
 						<ul className="two m-0 grid w-[200px] list-none grid-cols-1 gap-x-[10px] p-[22px]">
 							<li>
 								<Link
-									href="#"
+									href="/shop/shoes/female"
 									title="Shoes"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
@@ -214,8 +214,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/sneakers/female"
+									title="Sneakers"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Sneakers
@@ -223,8 +223,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/slides/female"
+									title="Slides"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Slides & Sandals
@@ -232,8 +232,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/running/female"
+									title="Running"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Running
@@ -241,8 +241,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/walking/female"
+									title="Walking"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Walking
@@ -250,8 +250,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/hiking/female"
+									title="Hiking"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Hiking
@@ -261,8 +261,8 @@ export default function NavigationLinks() {
 						<ul className="two m-0 grid w-[200px] list-none grid-cols-1 gap-x-[10px] p-[22px]">
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/clothing/female"
+									title="Clothing"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									<b>Clothing</b>
@@ -270,8 +270,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/tshirt/female"
+									title="T-Shirt & Tops"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									T-Shirt & Tops
@@ -279,8 +279,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/hoodies/female"
+									title="Hoodies"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Hoodies
@@ -288,8 +288,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/pants/female"
+									title="Pants"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Pants
@@ -297,8 +297,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/tights/female"
+									title="Tights & Leggings"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Tights & Leggings
@@ -306,8 +306,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/dresses/female"
+									title="Dresses & Skirts"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Dresses & Skirts
@@ -315,8 +315,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/swimwear/female"
+									title="Swimwear"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Swimwear
@@ -324,8 +324,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/shorts/female"
+									title="Shorts"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Shorts
@@ -335,8 +335,8 @@ export default function NavigationLinks() {
 						<ul className="two m-0 grid w-[200px] list-none grid-cols-1 gap-x-[10px] p-[22px]">
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/accesories/female"
+									title="Accesories"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									<b>Accesories</b>
@@ -344,8 +344,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/bags/female"
+									title="Bags & Backpacks"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Bags & Backpacks
@@ -353,8 +353,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/hats/female"
+									title="Hats"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Hats
@@ -362,8 +362,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/gloves/female"
+									title="Gloves"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Gloves
@@ -371,8 +371,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/socks/female"
+									title="Socks"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Socks
@@ -380,8 +380,8 @@ export default function NavigationLinks() {
 							</li>
 							<li>
 								<Link
-									href="#"
-									title="Shoes"
+									href="/shop/underwear/female"
+									title="Underwear"
 									className="focus:shadow-violet7 hover:border-b-2 hover:border-black"
 								>
 									Underwear
@@ -393,7 +393,7 @@ export default function NavigationLinks() {
 
 				<NavigationMenu.Item>
 					<NavigationMenu.Trigger className="focus:shadow-violet7 hover:border-b-2 hover:border-black">
-						<Link href="#" title="Shoes">
+						<Link href="/shop/sale/" title="Shoes">
 							ON SALE
 						</Link>
 					</NavigationMenu.Trigger>
