@@ -11,12 +11,12 @@ export default function SizePicker() {
 	};
 
 	const buttonClassName = (size: number) =>
-		`w-[6rem] border-2 px-6 py-2 ${selectedSize === size ? "bg-white text-black font-bold" : "text-white"}`;
+		`w-[6rem] border-2 px-6 py-2 ${selectedSize === size ? "lg:bg-white lg:text-black font-bold bg-zinc-900 text-white" : "lg:text-white text-black"}`;
 
 	return (
 		<div className="flex flex-col gap-2">
-			<h4 className="text-1xl text-white">Size:</h4>
-			<div className="flex flex-wrap gap-2">
+			<h4 className="text-1xl hidden text-white lg:block">Size</h4>
+			<div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
 				<button onClick={changeSize} data-size={0} className={buttonClassName(0)}>
 					XS
 				</button>

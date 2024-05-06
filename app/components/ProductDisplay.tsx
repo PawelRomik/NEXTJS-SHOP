@@ -14,13 +14,13 @@ export default function ProductDisplay({
 	price,
 	imageUrl,
 	category,
-	id,
+	id
 }: ProductDisplayProps) {
 	return (
-		<Link href={`/product/${id}`}>
+		<Link href={`/product/${id}`} className=" flex-[0_0_100%] lg:flex-[1_0_33%]">
 			<div className="group flex cursor-pointer flex-col items-center justify-center">
 				<div className="relative w-full flex-1 bg-zinc-100 p-8">
-					<div className="h-[400px]">
+					<div className="h-[300px] lg:h-[400px]">
 						<Image
 							fill={true}
 							src={imageUrl}
