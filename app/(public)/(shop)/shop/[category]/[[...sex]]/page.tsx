@@ -161,7 +161,7 @@ export default async function ShopPage({ params }: { params: { category: string;
 						id={product.id}
 						name={product.attributes.name}
 						price={product.attributes.price}
-						category={""}
+						category={product.attributes.categories.data[1].attributes.name}
 						imageUrl={`${process.env.PROD_PATH}${product.attributes.image.data.attributes.url}`}
 						key={product.id}
 					></ProductDisplay>
