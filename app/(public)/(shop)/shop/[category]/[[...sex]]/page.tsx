@@ -155,7 +155,7 @@ export default async function ShopPage({ params }: { params: { category: string;
 				)}
 				<span>{category}</span>
 			</h1>
-			<Grid gap="4" width="auto" className="grid-cols-1 p-6 lg:grid-cols-4">
+			<Grid gap="4" width="auto" className="grid-cols-1 p-6 md:grid-cols-2 lg:grid-cols-4">
 				{data.products.data.map((product) => (
 					<ProductDisplay
 						id={product.id}
