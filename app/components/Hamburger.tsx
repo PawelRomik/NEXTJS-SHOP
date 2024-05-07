@@ -1,10 +1,19 @@
 "use client";
 import Link from "next/link";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export default function Hamburger() {
 	const [menuOn, setMenuOn] = useState(false);
+
+	const path = usePathname();
+	const searchparams = useSearchParams();
+
+	useEffect(() => {
+		setMenuOn(false);
+	}, [path, searchparams]);
+
 	return (
 		<>
 			<button className="block lg:hidden" onClick={() => setMenuOn((prev) => !prev)}>
@@ -16,9 +25,7 @@ export default function Hamburger() {
 						<NavigationMenu.Item>
 							<NavigationMenu.Trigger>
 								<Link href="/shop/new/" title="New">
-									<b>
-										<i className="ri-arrow-right-s-fill"></i> NEW
-									</b>
+									<b>NEW</b>
 								</Link>
 							</NavigationMenu.Trigger>
 						</NavigationMenu.Item>
@@ -26,17 +33,13 @@ export default function Hamburger() {
 						<NavigationMenu.Item>
 							<NavigationMenu.Trigger>
 								<Link href="/" title="All">
-									<b>
-										<i className="ri-arrow-right-s-fill"></i> ALL
-									</b>
+									<b>ALL</b>
 								</Link>
 							</NavigationMenu.Trigger>
 						</NavigationMenu.Item>
 						<NavigationMenu.Item>
 							<NavigationMenu.Trigger>
-								<b>
-									<i className="ri-arrow-right-s-fill"></i> MEN
-								</b>
+								<b>MEN</b>
 							</NavigationMenu.Trigger>
 							<NavigationMenu.Content className="data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight absolute left-0 top-0 flex h-[200%] w-screen flex-col items-start justify-start gap-6 overflow-x-hidden  border-2 bg-zinc-100">
 								<NavigationMenu.Trigger asChild={true}>
@@ -220,9 +223,7 @@ export default function Hamburger() {
 						</NavigationMenu.Item>
 						<NavigationMenu.Item>
 							<NavigationMenu.Trigger>
-								<b>
-									<i className="ri-arrow-right-s-fill"></i> WOMEN
-								</b>
+								<b>WOMEN</b>
 							</NavigationMenu.Trigger>
 							<NavigationMenu.Content className="data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight absolute left-0 top-0 flex h-[200%] w-screen flex-col items-start justify-start gap-6 overflow-x-hidden  border-2 bg-zinc-100">
 								<NavigationMenu.Trigger asChild={true}>
@@ -426,9 +427,7 @@ export default function Hamburger() {
 						<NavigationMenu.Item>
 							<NavigationMenu.Trigger>
 								<Link href="/shop/sale/" title="Shoes">
-									<b>
-										<i className="ri-arrow-right-s-fill"></i> SALE
-									</b>
+									<b>SALE</b>
 								</Link>
 							</NavigationMenu.Trigger>
 						</NavigationMenu.Item>

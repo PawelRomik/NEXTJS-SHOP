@@ -68,7 +68,7 @@ export default async function HomePage() {
 	return (
 		<main className="flex-1 p-6	">
 			<h1 className="pl-6 text-4xl font-bold capitalize">All</h1>
-			<Grid gap="4" width="auto" className="grid-cols-1 p-2 lg:grid-cols-4 lg:p-6">
+			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
 				{data.products.data.map((product) => (
 					<ProductDisplay
 						id={product.id}
