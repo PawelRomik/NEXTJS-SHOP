@@ -3,6 +3,7 @@ import Image from "next/image";
 import { gql, ApolloQueryResult } from "@apollo/client";
 import createApolloClient from "../../../../../apollo-client";
 import ProductDisplay from "../../../../components/ProductDisplay";
+import { revalidatePath } from "next/cache";
 
 interface ProductData {
 	id: string;
@@ -121,6 +122,7 @@ const GET_OTHER_PRODUCTS = gql`
 `;
 
 export default async function ProductPage({ params }: { params: { productId: string } }) {
+	revalidatePath("/product/[productId]", "page");
 	const productId = params.productId;
 
 	const client = createApolloClient();
@@ -132,8 +134,6 @@ export default async function ProductPage({ params }: { params: { productId: str
 	});
 
 	const currProduct = data.product.data;
-
-	console.log(currProduct.attributes.categories.data[1].attributes.name);
 
 	const otherData: ApolloQueryResult<otherQueryResult> = await client.query({
 		query: GET_OTHER_PRODUCTS,
