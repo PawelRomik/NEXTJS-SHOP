@@ -17,14 +17,14 @@ export default function NavigationLinks() {
 
 				<NavigationMenu.Item>
 					<NavigationMenu.Trigger className="focus:shadow-violet7 hover:border-b-2 hover:border-black">
-						<Link href="/" title="Shoes">
+						<Link href="/" title="All">
 							ALL
 						</Link>
 					</NavigationMenu.Trigger>
 				</NavigationMenu.Item>
 				<NavigationMenu.Item>
 					<NavigationMenu.Trigger className="focus:shadow-violet7 hover:border-b-2 hover:border-black">
-						FOR MEN
+						MEN
 					</NavigationMenu.Trigger>
 					<NavigationMenu.Content className="data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight fixed left-0 top-[5rem] flex w-screen items-start justify-center gap-6 overflow-x-hidden  border-2 bg-zinc-100">
 						<ul className="one m-0 grid w-[200px] list-none grid-cols-1 gap-x-[10px] p-[22px]">
@@ -199,7 +199,7 @@ export default function NavigationLinks() {
 				</NavigationMenu.Item>
 				<NavigationMenu.Item>
 					<NavigationMenu.Trigger className="focus:shadow-violet7 hover:border-b-2 hover:border-black">
-						FOR WOMEN
+						WOMEN
 					</NavigationMenu.Trigger>
 					<NavigationMenu.Content className="data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight fixed left-0 top-[5rem] flex w-screen items-start justify-center gap-6 overflow-x-hidden  border-2 bg-zinc-100">
 						<ul className="two m-0 grid w-[200px] list-none grid-cols-1 gap-x-[10px] p-[22px]">
