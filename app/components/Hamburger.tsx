@@ -2,17 +2,16 @@
 import Link from "next/link";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { useEffect, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function Hamburger() {
 	const [menuOn, setMenuOn] = useState(false);
 
 	const path = usePathname();
-	const searchparams = useSearchParams();
 
 	useEffect(() => {
 		setMenuOn(false);
-	}, [path, searchparams]);
+	}, [path]);
 
 	return (
 		<>
