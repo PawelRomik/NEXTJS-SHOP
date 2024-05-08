@@ -5,7 +5,7 @@ import createApolloClient from "../../../../../apollo-client";
 import ProductDisplay from "../../../../components/ProductDisplay";
 import { revalidatePath } from "next/cache";
 
-interface ProductData {
+type ProductData = {
 	id: string;
 	attributes: {
 		name: string;
@@ -34,7 +34,7 @@ interface ProductData {
 			}[];
 		};
 	};
-}
+};
 
 type QueryResult = {
 	product: {
