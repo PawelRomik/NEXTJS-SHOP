@@ -80,9 +80,16 @@ export default async function SearchPage({
 		}
 	});
 
+	console.log(data.products.data);
+
 	return (
 		<main className="flex-1 p-6	">
-			<h1 className="pl-6 text-4xl font-bold">Matches for: {query}</h1>
+			<h1 className="flex items-center pl-6 text-4xl font-bold">
+				<span className="mr-2 rounded-full border-2 border-black px-3 text-2xl">
+					{data.products.data.length}
+				</span>
+				<span>Matches for &quot;{query}&quot;</span>
+			</h1>
 
 			<Grid gap="4" width="auto" className="grid-cols-1 p-6 md:grid-cols-2 lg:grid-cols-4">
 				{data.products.data.map((product) => (
