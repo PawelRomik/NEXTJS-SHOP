@@ -80,8 +80,6 @@ export default async function SearchPage({
 		}
 	});
 
-	console.log(data.products.data);
-
 	return (
 		<main className="flex-1 p-6	">
 			<h1 className="flex items-center pl-6 text-4xl font-bold">

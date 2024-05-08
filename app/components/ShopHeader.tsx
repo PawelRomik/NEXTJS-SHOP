@@ -2,6 +2,11 @@ import Hamburger from "./Hamburger";
 import NavigationLinks from "./NavigationLinks";
 import SearchBar from "./SearchBar";
 import ShopLogo from "./ShopLogo";
+import { Suspense } from "react";
+
+function SearchBarFallback() {
+	return <>Loading</>;
+}
 
 export default function ShopHeader() {
 	return (
@@ -10,7 +15,9 @@ export default function ShopHeader() {
 			<ShopLogo />
 
 			<NavigationLinks />
-			<SearchBar />
+			<Suspense fallback={<SearchBarFallback />}>
+				<SearchBar />
+			</Suspense>
 		</header>
 	);
 }
