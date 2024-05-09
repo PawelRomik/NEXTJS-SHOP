@@ -62,7 +62,7 @@ const GET_NEW_PRODUCTS = gql`
 
 const GET_SALE_PRODUCTS = gql`
 	query {
-		products(pagination: { start: 0, limit: 10 }) {
+		products(pagination: { start: 0, limit: 100 }, filters: { onSale: { eq: true } }) {
 			data {
 				id
 				attributes {
