@@ -9,6 +9,8 @@ type ProductData = {
 	attributes: {
 		name: string;
 		price: number;
+		salePrice: number;
+		onSale: boolean;
 		image: {
 			data: {
 				attributes: {
@@ -40,6 +42,8 @@ const GET_NEW_PRODUCTS = gql`
 				attributes {
 					name
 					price
+					onSale
+					salePrice
 					image {
 						data {
 							attributes {
@@ -68,6 +72,8 @@ const GET_SALE_PRODUCTS = gql`
 				attributes {
 					name
 					price
+					onSale
+					salePrice
 					image {
 						data {
 							attributes {
@@ -100,6 +106,8 @@ const GET_PRODUCTS = gql`
 				attributes {
 					name
 					price
+					onSale
+					salePrice
 					image {
 						data {
 							attributes {
@@ -160,6 +168,8 @@ export default async function ShopPage({ params }: { params: { category: string;
 					<ProductDisplay
 						id={product.id}
 						name={product.attributes.name}
+						onSale={product.attributes.onSale}
+						salePrice={product.attributes.salePrice}
 						price={product.attributes.price}
 						category={product.attributes.categories.data[1].attributes.name}
 						imageUrl={`${process.env.PROD_PATH}${product.attributes.image.data.attributes.url}`}

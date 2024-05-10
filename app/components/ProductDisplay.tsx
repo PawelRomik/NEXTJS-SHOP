@@ -6,6 +6,8 @@ type ProductDisplayProps = {
 	name: string;
 	price: number;
 	imageUrl: string;
+	onSale: boolean;
+	salePrice: number;
 	category: string;
 };
 
@@ -14,6 +16,8 @@ export default function ProductDisplay({
 	price,
 	imageUrl,
 	category,
+	salePrice,
+	onSale,
 	id
 }: ProductDisplayProps) {
 	return (
@@ -29,9 +33,16 @@ export default function ProductDisplay({
 						/>
 					</div>
 
-					<p className="absolute bottom-0 left-2 bg-white p-2 transition group-hover:-translate-y-1">
-						{price}zł
-					</p>
+					<div className="absolute bottom-0 left-2  flex items-center justify-center  transition group-hover:-translate-y-1">
+						<p
+							className={`bg-white p-2 ${onSale ? "line-through decoration-red-600 decoration-4 " : ""}`}
+						>
+							{price}zł
+						</p>
+
+						{onSale && <p className="bg-red-600 p-2 text-white ">{salePrice}zł</p>}
+					</div>
+					{onSale && <p className="absolute bottom-2 right-2 font-bold text-red-600">ON SALE</p>}
 				</div>
 				<div className="ml-6 mt-2 flex w-full flex-col">
 					<h2>{name}</h2>

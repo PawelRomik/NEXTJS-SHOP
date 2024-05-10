@@ -8,6 +8,8 @@ type ProductData = {
 	attributes: {
 		name: string;
 		price: number;
+		onSale: boolean;
+		salePrice: number;
 		image: {
 			data: {
 				attributes: {
@@ -43,6 +45,8 @@ const GET_PRODUCTS = gql`
 				attributes {
 					name
 					price
+					onSale
+					salePrice
 					image {
 						data {
 							attributes {
@@ -94,6 +98,8 @@ export default async function SearchPage({
 					<ProductDisplay
 						id={product.id}
 						name={product.attributes.name}
+						salePrice={product.attributes.salePrice}
+						onSale={product.attributes.onSale}
 						price={product.attributes.price}
 						category={product.attributes.categories.data[1].attributes.name}
 						imageUrl={`${process.env.PROD_PATH}${product.attributes.image.data.attributes.url}`}

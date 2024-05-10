@@ -391,9 +391,9 @@ export default function NavigationLinks() {
 				</NavigationMenu.Item>
 
 				<NavigationMenu.Item>
-					<NavigationMenu.Trigger className="focus:shadow-violet7 hover:border-b-2 hover:border-black">
-						<Link href="/shop/sale/" title="Shoes">
-							ON SALE
+					<NavigationMenu.Trigger className="focus:shadow-violet7 hover:border-b-2 hover:border-red-600">
+						<Link href="/shop/sale/" title="Shoes" className="font-bold text-red-600">
+							SALE
 						</Link>
 					</NavigationMenu.Trigger>
 				</NavigationMenu.Item>

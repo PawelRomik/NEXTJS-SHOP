@@ -425,7 +425,7 @@ export default function Hamburger() {
 
 						<NavigationMenu.Item>
 							<NavigationMenu.Trigger>
-								<Link href="/shop/sale/" title="Shoes">
+								<Link href="/shop/sale/" title="Sale" className="font-bold text-red-600">
 									<b>SALE</b>
 								</Link>
 							</NavigationMenu.Trigger>
