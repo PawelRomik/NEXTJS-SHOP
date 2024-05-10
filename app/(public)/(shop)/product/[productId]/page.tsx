@@ -11,6 +11,8 @@ type ProductData = {
 		name: string;
 		price: number;
 		desc: string;
+		salePrice: number;
+		onSale: boolean;
 		image: {
 			data: {
 				attributes: {
@@ -56,6 +58,8 @@ const GET_PRODUCT = gql`
 				attributes {
 					name
 					price
+					salePrice
+					onSale
 					desc
 					image {
 						data {
@@ -100,6 +104,8 @@ const GET_OTHER_PRODUCTS = gql`
 				attributes {
 					name
 					price
+					onSale
+					salePrice
 					desc
 					image {
 						data {
@@ -161,8 +167,11 @@ export default async function ProductPage({ params }: { params: { productId: str
 						</span>
 					))}
 				</h3>
-				<h1 className="mb-6 mt-3 w-full text-4xl font-bold text-black">
-					{currProduct?.attributes.name}
+				<h1 className="mb-6 mt-3 flex w-full flex-col justify-between  text-4xl font-bold text-black lg:flex-row lg:items-center">
+					<span>{currProduct?.attributes.name}</span>
+					{currProduct.attributes.onSale && (
+						<span className="text-2xl text-red-600 lg:text-4xl">ON SALE</span>
+					)}
 				</h1>
 				<div className="flex h-full w-full items-center justify-center border-2 bg-zinc-100">
 					<Image
@@ -182,7 +191,20 @@ p-4 text-white"
 						>
 							BUY
 						</button>{" "}
-						<p className="font-bold">{currProduct?.attributes.price}zł</p>
+						<p className="flex flex-col font-bold">
+							<span
+								className={
+									currProduct.attributes.onSale
+										? "font-bold line-through decoration-red-600 decoration-4"
+										: "font-bold"
+								}
+							>
+								{currProduct?.attributes.price}zł
+							</span>
+							{currProduct.attributes.onSale && (
+								<span className="text-2xl text-red-600">{currProduct?.attributes.salePrice}zł</span>
+							)}
+						</p>
 					</div>
 				</div>
 
@@ -197,6 +219,8 @@ p-4 text-white"
 									id={product.id}
 									name={product.attributes.name}
 									price={product.attributes.price}
+									onSale={product.attributes.onSale}
+									salePrice={product.attributes.salePrice}
 									category={product.attributes.categories.data[1].attributes.name}
 									imageUrl={`${process.env.PROD_PATH}${product.attributes.image.data.attributes.url}`}
 									key={product.id}
@@ -226,8 +250,20 @@ flex-1 bg-zinc-900 p-6 pl-20 lg:flex"
 						<h1 className="hidden text-4xl font-bold text-white lg:block">
 							{currProduct?.attributes.name}
 						</h1>
-						<h3 className="text-1xlfont-bold italic text-white">
-							{currProduct?.attributes.price}zł
+						<h3 className="text-1xlfont-bold flex gap-3 italic text-white">
+							<span
+								className={
+									currProduct.attributes.onSale
+										? "line-through decoration-red-600 decoration-4"
+										: ""
+								}
+							>
+								{currProduct?.attributes.price}zł
+							</span>
+
+							<span className="text-2xl font-bold text-red-600">
+								{currProduct.attributes.onSale ? `${currProduct?.attributes.salePrice}zł` : null}
+							</span>
 						</h3>
 					</div>
 					<SizePicker />

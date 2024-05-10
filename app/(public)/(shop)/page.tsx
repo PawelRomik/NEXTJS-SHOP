@@ -9,6 +9,8 @@ interface ProductData {
 	attributes: {
 		name: string;
 		price: number;
+		onSale: boolean;
+		salePrice: number;
 		image: {
 			data: {
 				attributes: {
@@ -40,6 +42,8 @@ const GET_PRODUCTS = gql`
 				attributes {
 					name
 					price
+					onSale
+					salePrice
 					image {
 						data {
 							attributes {
@@ -74,6 +78,8 @@ export default async function HomePage() {
 						id={product.id}
 						name={product.attributes.name}
 						price={product.attributes.price}
+						onSale={product.attributes.onSale}
+						salePrice={product.attributes.salePrice}
 						category={product.attributes.categories.data[1].attributes.name}
 						imageUrl={`${process.env.PROD_PATH}${product.attributes.image.data.attributes.url}`}
 						key={product.id}
