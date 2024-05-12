@@ -4,7 +4,7 @@ import { gql, ApolloQueryResult } from "@apollo/client";
 import createApolloClient from "../../../apollo-client";
 import { revalidatePath } from "next/cache";
 
-interface ProductData {
+type ProductData = {
 	id: string;
 	attributes: {
 		name: string;
@@ -26,13 +26,13 @@ interface ProductData {
 			}[];
 		};
 	};
-}
+};
 
-interface QueryResult {
+type QueryResult = {
 	products: {
 		data: ProductData[];
 	};
-}
+};
 
 const GET_PRODUCTS = gql`
 	query {
