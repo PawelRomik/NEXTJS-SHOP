@@ -1,3 +1,4 @@
+import CartPopover from "./CartPopover";
 import Hamburger from "./Hamburger";
 import NavigationLinks from "./NavigationLinks";
 import SearchBar from "./SearchBar";
@@ -18,6 +19,7 @@ export default function ShopHeader() {
 			<Suspense fallback={<SearchBarFallback />}>
 				<SearchBar />
 			</Suspense>
+			<CartPopover />
 		</header>
 	);
 }
