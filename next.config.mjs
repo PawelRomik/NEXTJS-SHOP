@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		domains: ["localhost", process.env.DOMAIN],
+		domains: ["localhost", process.env.DOMAIN]
 	},
 	experimental: {
-		typedRoutes: true,
-	},
+		typedRoutes: true
+	}
 };
 
 export default nextConfig;
