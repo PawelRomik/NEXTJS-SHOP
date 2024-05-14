@@ -1,6 +1,9 @@
 {
 	"$schema": "https://json.schemastore.org/eslintrc.json",
 	"plugins": ["@typescript-eslint", "import"],
+	"rules": {
+		"@typescript-eslint/no-misused-promises": "off"
+	},
 	"parserOptions": {
 		"project": "tsconfig.json"
 	},
