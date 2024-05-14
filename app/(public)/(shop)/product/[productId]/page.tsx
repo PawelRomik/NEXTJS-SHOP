@@ -4,6 +4,7 @@ import { gql, ApolloQueryResult } from "@apollo/client";
 import createApolloClient from "../../../../../apollo-client";
 import ProductDisplay from "../../../../components/ProductDisplay";
 import { revalidatePath } from "next/cache";
+import BuyButton from "../../../../components/BuyButton";
 
 type ProductData = {
 	id: string;
@@ -132,6 +133,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 	const productId = params.productId;
 
 	const client = createApolloClient();
+
 	const { data }: ApolloQueryResult<QueryResult> = await client.query({
 		query: GET_PRODUCT,
 		variables: {
@@ -185,12 +187,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 				<div className="mt-3 flex w-full flex-col items-center justify-center gap-3 lg:hidden">
 					<SizePicker />
 					<div className="flex items-center justify-center gap-6">
-						<button
-							className="w-[10rem] rounded-full bg-black
-p-4 text-white"
-						>
-							BUY
-						</button>{" "}
+						<BuyButton productIdProp={productId} />
 						<p className="flex flex-col font-bold">
 							<span
 								className={
@@ -235,7 +232,7 @@ p-4 text-white"
 				className="right-0 top-0 hidden 
 flex-1 bg-zinc-900 p-6 pl-20 lg:flex"
 			>
-				<div className="sticky top-[20%] flex h-full max-h-[50%] flex-col justify-around">
+				<div className="sticky top-[25%] flex h-full max-h-[30%] flex-col justify-around">
 					<div className="flex flex-col items-start justify-center gap-1">
 						<h3 className="hidden text-2xl text-zinc-300 lg:block ">
 							{currProduct?.attributes.categories.data.map((category, index) => (
@@ -268,12 +265,7 @@ flex-1 bg-zinc-900 p-6 pl-20 lg:flex"
 					</div>
 					<SizePicker />
 					<div className="flex w-full items-center justify-center">
-						<button
-							className="w-[50%] rounded-full bg-black
-p-4 text-white"
-						>
-							BUY
-						</button>
+						<BuyButton productIdProp={productId} />
 					</div>
 				</div>
 			</div>
