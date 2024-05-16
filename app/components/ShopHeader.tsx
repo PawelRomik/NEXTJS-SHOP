@@ -4,6 +4,7 @@ import NavigationLinks from "./NavigationLinks";
 import SearchBar from "./SearchBar";
 import ShopLogo from "./ShopLogo";
 import { Suspense } from "react";
+import UserProfile from "./UserProfile";
 
 function SearchBarFallback() {
 	return <>Loading</>;
@@ -19,7 +20,9 @@ export default function ShopHeader() {
 			<Suspense fallback={<SearchBarFallback />}>
 				<SearchBar />
 			</Suspense>
+
 			<CartPopover />
+			<UserProfile />
 		</header>
 	);
 }
