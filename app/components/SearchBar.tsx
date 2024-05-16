@@ -98,7 +98,6 @@ export default function SearchBar() {
 					)}
 				</div>
 
-				<i className="ri-account-circle-line text-2xl lg:text-3xl"></i>
 			</div>
 		</div>
 	);

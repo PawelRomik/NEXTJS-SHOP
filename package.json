@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"@apollo/client": "^3.10.1",
+		"@clerk/nextjs": "^5.0.11",
 		"@radix-ui/react-navigation-menu": "^1.1.4",
 		"@radix-ui/react-popover": "^1.0.7",
 		"@radix-ui/react-toast": "^1.1.5",
@@ -23,7 +24,8 @@
 		"react": "^18",
 		"react-dom": "^18",
 		"remixicon": "^4.2.0",
-		"stripe": "^15.6.0"
+		"stripe": "^15.6.0",
+		"svix": "^1.24.0"
 	},
 	"devDependencies": {
 		"@types/node": "^20",
