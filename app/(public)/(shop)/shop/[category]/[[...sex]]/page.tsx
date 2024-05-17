@@ -97,7 +97,7 @@ const GET_SALE_PRODUCTS = gql`
 const GET_PRODUCTS = gql`
 	query getProducts($category: String!, $sex: String!) {
 		products(
-			pagination: { start: 0, limit: 8 }
+			pagination: { start: 0, limit: 100 }
 			sort: "createdAt:desc"
 			filters: { categories: { slug: { eq: $category } }, sexes: { sex: { eq: $sex } } }
 		) {
