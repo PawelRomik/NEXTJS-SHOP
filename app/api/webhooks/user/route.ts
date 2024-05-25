@@ -31,7 +31,7 @@ const MODIFY_USER = gql`
 	}
 `;
 
-const webhookSecret = process.env.WEBHOOK_SECRET || "";
+const webhookSecret = process.env.NEXT_PUBLIC_WEBHOOK_SECRET || "";
 
 async function handler(request: Request) {
 	const payload = await request.json();
