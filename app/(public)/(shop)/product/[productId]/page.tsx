@@ -179,7 +179,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 					<Image
 						width={400}
 						height={400}
-						src={`${process.env.PROD_PATH}${currProduct?.attributes.image.data.attributes.url}`}
+						src={`${process.env.NEXT_PUBLIC_PROD_PATH}${currProduct?.attributes.image.data.attributes.url}`}
 						alt={currProduct?.attributes.name}
 						className="w-[100%] object-cover p-10 lg:w-[50%]"
 					></Image>
@@ -187,7 +187,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 				<div className="mt-3 flex w-full flex-col items-center justify-center gap-3 lg:hidden">
 					<SizePicker />
 					<div className="flex items-center justify-center gap-6">
-						<BuyButton productIdProp={productId} />
+						<BuyButton currProductProp={currProduct} />
 						<p className="flex flex-col font-bold">
 							<span
 								className={
@@ -219,7 +219,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 									onSale={product.attributes.onSale}
 									salePrice={product.attributes.salePrice}
 									category={product.attributes.categories.data[1].attributes.name}
-									imageUrl={`${process.env.PROD_PATH}${product.attributes.image.data.attributes.url}`}
+									imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.image.data.attributes.url}`}
 									key={product.id}
 								></ProductDisplay>
 							))}
@@ -265,7 +265,7 @@ flex-1 bg-zinc-900 p-6 pl-20 lg:flex"
 					</div>
 					<SizePicker />
 					<div className="flex w-full items-center justify-center">
-						<BuyButton productIdProp={productId} />
+						<BuyButton currProductProp={currProduct} />
 					</div>
 				</div>
 			</div>

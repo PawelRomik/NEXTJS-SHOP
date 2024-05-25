@@ -81,7 +81,7 @@ export default async function HomePage() {
 						onSale={product.attributes.onSale}
 						salePrice={product.attributes.salePrice}
 						category={product.attributes.categories.data[1].attributes.name}
-						imageUrl={`${process.env.PROD_PATH}${product.attributes.image.data.attributes.url}`}
+						imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.image.data.attributes.url}`}
 						key={product.id}
 					></ProductDisplay>
 				))}
