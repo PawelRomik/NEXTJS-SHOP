@@ -102,22 +102,28 @@ export default function CartPopover() {
 						{products.length > 3 && (
 							<p className="text-gray-500">{`${products.length - 3} more...`}</p>
 						)}
-						<div className="total mb-5 flex justify-between text-lg font-medium">
-							<span>SUBTOTAL</span>
-							<span>{totalPrice()}zł</span>
-						</div>
-						<button
-							onClick={handlePayment}
-							className="mx-auto mb-5 flex w-full cursor-pointer items-center justify-center gap-5 border-none bg-zinc-950 p-2.5 font-medium text-white"
-						>
-							CHECKOUT
-						</button>
-						<span
-							className="reset cursor-pointer text-xs text-red-600"
-							onClick={() => dispatch(resetCart())}
-						>
-							Reset Cart
-						</span>
+						{products.length > 0 ? (
+							<>
+								<div className="total mb-5 flex justify-between text-lg font-medium">
+									<span>SUBTOTAL</span>
+									<span>{totalPrice()}zł</span>
+								</div>
+								<button
+									onClick={handlePayment}
+									className="mx-auto mb-5 flex w-full cursor-pointer items-center justify-center gap-5 border-none bg-zinc-950 p-2.5 font-medium text-white"
+								>
+									CHECKOUT
+								</button>
+								<span
+									className="reset cursor-pointer text-xs text-red-600"
+									onClick={() => dispatch(resetCart())}
+								>
+									Reset Cart
+								</span>
+							</>
+						) : (
+							<p>No products in cart.</p>
+						)}
 					</div>
 					<Popover.Close
 						className="text-violet11 absolute right-[5px] top-[5px] z-50 inline-flex h-[25px] w-[25px] cursor-pointer items-center justify-center rounded-full outline-none "
