@@ -50,6 +50,8 @@ export default function CartPopover() {
 		}
 	};
 
+	console.log(products);
+
 	return (
 		<Popover.Root>
 			<Popover.Trigger asChild>
@@ -64,29 +66,36 @@ export default function CartPopover() {
 				</div>
 			</Popover.Trigger>
 			<Popover.Portal>
-				<Popover.Content className="data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade relative right-7 flex  w-[260px] rounded bg-white p-5 shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] will-change-[transform,opacity] focus:shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2),0_0_0_2px_theme(colors.violet7)]">
+				<Popover.Content className="data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade relative right-7 flex w-full  rounded border-2 border-zinc-200 bg-white p-5 will-change-[transform,opacity]">
 					<div className="z-50 bg-white p-5">
 						<h1 className="mb-7 text-2xl font-light text-gray-400">Products in your cart</h1>
 						{products?.slice(0, 3).map((item) => (
 							<div className="item mb-7 flex items-center gap-5" key={item.id}>
 								<Image
 									className="h-[100px] max-h-[100px] w-[80px] max-w-[80px] object-cover"
-									src={"http://localhost:1337" + item.image}
+									src={process.env.NEXT_PUBLIC_PROD_PATH + item.image}
 									width={80}
 									height={100}
 									alt=""
 								/>
 								<div className="details">
 									<h1 className="text-lg font-medium">{item.name}</h1>
-									<div className="price text-zinc-600">
-										{item.quantity} x {item.price}zł
+									<div className="flex items-center justify-start gap-2">
+										<p className={`${item.onSale ? "text-red-600" : "text-zinc-600"}`}>
+											{item.quantity} x {item.price}zł
+										</p>
+										{item.onSale && (
+											<div className="flex items-center justify-center bg-red-600 px-2 font-bold text-white">
+												SALE
+											</div>
+										)}
 									</div>
 								</div>
 								<button
-									className="delete cursor-pointer text-2xl text-red-600"
+									className="delete cursor-pointer text-2xl"
 									onClick={() => dispatch(removeItem(item.id))}
 								>
-									<i className="ri-delete-bin-line"></i>
+									<i className="ri-close-circle-line"></i>
 								</button>
 							</div>
 						))}
@@ -99,7 +108,7 @@ export default function CartPopover() {
 						</div>
 						<button
 							onClick={handlePayment}
-							className="mb-5 flex w-64 cursor-pointer items-center justify-center gap-5 border-none bg-zinc-950 p-2.5 font-medium text-white"
+							className="mx-auto mb-5 flex w-full cursor-pointer items-center justify-center gap-5 border-none bg-zinc-950 p-2.5 font-medium text-white"
 						>
 							CHECKOUT
 						</button>
@@ -111,7 +120,7 @@ export default function CartPopover() {
 						</span>
 					</div>
 					<Popover.Close
-						className="text-violet11 absolute right-[5px] top-[5px] inline-flex h-[25px] w-[25px] cursor-default items-center justify-center rounded-full outline-none "
+						className="text-violet11 absolute right-[5px] top-[5px] z-50 inline-flex h-[25px] w-[25px] cursor-pointer items-center justify-center rounded-full outline-none "
 						aria-label="Close"
 					>
 						X
