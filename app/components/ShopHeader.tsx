@@ -5,6 +5,7 @@ import SearchBar from "./SearchBar";
 import ShopLogo from "./ShopLogo";
 import { Suspense } from "react";
 import UserProfile from "./UserProfile";
+import { SignedIn } from "@clerk/nextjs";
 
 function SearchBarFallback() {
 	return <>Loading</>;
@@ -21,7 +22,10 @@ export default function ShopHeader() {
 				<SearchBar />
 			</Suspense>
 
-			<CartPopover />
+			<SignedIn>
+				<CartPopover />
+			</SignedIn>
+
 			<UserProfile />
 		</header>
 	);

@@ -19,8 +19,11 @@ lg:h-full lg:w-full"
 						id: currProductProp.id,
 						name: currProductProp.attributes.name,
 						desc: currProductProp.attributes.desc,
-						price: currProductProp.attributes.price,
+						price: currProductProp.attributes.onSale
+							? currProductProp.attributes.salePrice
+							: currProductProp.attributes.price,
 						image: currProductProp.attributes.image.data.attributes.url,
+						onSale: currProductProp.attributes.onSale,
 						quantity: 1
 					})
 				)
