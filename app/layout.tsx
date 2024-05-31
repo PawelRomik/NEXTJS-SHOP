@@ -8,12 +8,12 @@ import Providers from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "N3XT SH0P",
-	description: "THE N3XT GENERATION SHOP ON THE INTERNET",
+	title: "N3XT",
+	description: "THE N3XT GENERATION SHOP ON THE INTERNET"
 };
 
 export default function RootLayout({
-	children,
+	children
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
