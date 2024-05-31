@@ -18,15 +18,17 @@ export default function ShopHeader() {
 			<ShopLogo />
 
 			<NavigationLinks />
-			<Suspense fallback={<SearchBarFallback />}>
-				<SearchBar />
-			</Suspense>
+			<div className="flex items-center justify-center">
+				<Suspense fallback={<SearchBarFallback />}>
+					<SearchBar />
+				</Suspense>
 
-			<SignedIn>
-				<CartPopover />
-			</SignedIn>
+				<SignedIn>
+					<CartPopover />
+				</SignedIn>
 
-			<UserProfile />
+				<UserProfile />
+			</div>
 		</header>
 	);
 }
