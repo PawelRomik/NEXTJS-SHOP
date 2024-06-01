@@ -26,8 +26,9 @@ export default function ShopHeader() {
 				<SignedIn>
 					<CartPopover />
 				</SignedIn>
-
-				<UserProfile />
+				<div className="hidden lg:block">
+					<UserProfile />
+				</div>
 			</div>
 		</header>
 	);
