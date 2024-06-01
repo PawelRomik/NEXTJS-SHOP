@@ -41,7 +41,7 @@ export default function CartPopover() {
 				.post("/api/orders", {
 					products
 				});
-			console.log(await res.data.stripeSession);
+
 			await stripe?.redirectToCheckout({
 				sessionId: res.data.stripeSession.id
 			});
@@ -49,8 +49,6 @@ export default function CartPopover() {
 			console.log(err);
 		}
 	};
-
-	console.log(products);
 
 	return (
 		<Popover.Root>

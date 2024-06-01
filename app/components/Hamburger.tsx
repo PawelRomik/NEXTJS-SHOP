@@ -13,7 +13,6 @@ export default function Hamburger() {
 	const [menuOn, setMenuOn] = useState(false);
 	const { user } = useUser();
 
-	console.log(user);
 	const path = usePathname();
 
 	useEffect(() => {
