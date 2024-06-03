@@ -20,7 +20,7 @@ export default function Footer() {
 				</Flex>
 			</nav>
 
-			<p className="text-zinc-300">©2024 N3XT SHOP</p>
+			<p className="text-zinc-300">©2024 N3XT</p>
 		</footer>
 	);
 }
