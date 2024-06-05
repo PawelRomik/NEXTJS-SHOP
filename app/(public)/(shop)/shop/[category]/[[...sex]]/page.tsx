@@ -1,132 +1,14 @@
 import { Grid } from "@radix-ui/themes";
 import ProductDisplay from "../../../../../components/ProductDisplay";
-import { gql, ApolloQueryResult } from "@apollo/client";
+import { ApolloQueryResult } from "@apollo/client";
 import createApolloClient from "../../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
-
-type ProductData = {
-	id: string;
-	attributes: {
-		name: string;
-		price: number;
-		salePrice: number;
-		onSale: boolean;
-		image: {
-			data: {
-				attributes: {
-					url: string;
-				};
-			};
-		};
-		categories: {
-			data: {
-				attributes: {
-					name: string;
-				};
-			}[];
-		};
-	};
-};
-
-type QueryResult = {
-	products: {
-		data: ProductData[];
-	};
-};
-
-const GET_NEW_PRODUCTS = gql`
-	query {
-		products(pagination: { start: 0, limit: 8 }, sort: "createdAt:desc") {
-			data {
-				id
-				attributes {
-					name
-					price
-					onSale
-					salePrice
-					image {
-						data {
-							attributes {
-								url
-							}
-						}
-					}
-					categories {
-						data {
-							attributes {
-								name
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-`;
-
-const GET_SALE_PRODUCTS = gql`
-	query {
-		products(pagination: { start: 0, limit: 100 }, filters: { onSale: { eq: true } }) {
-			data {
-				id
-				attributes {
-					name
-					price
-					onSale
-					salePrice
-					image {
-						data {
-							attributes {
-								url
-							}
-						}
-					}
-					categories {
-						data {
-							attributes {
-								name
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-`;
-
-const GET_PRODUCTS = gql`
-	query getProducts($category: String!, $sex: String!) {
-		products(
-			pagination: { start: 0, limit: 100 }
-			sort: "createdAt:desc"
-			filters: { categories: { slug: { eq: $category } }, sexes: { sex: { eq: $sex } } }
-		) {
-			data {
-				id
-				attributes {
-					name
-					price
-					onSale
-					salePrice
-					image {
-						data {
-							attributes {
-								url
-							}
-						}
-					}
-					categories {
-						data {
-							attributes {
-								name
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-`;
+import {
+	GET_NEW_PRODUCTS,
+	GET_PRODUCTS_BY_CATEGORIES,
+	GET_SALE_PRODUCTS
+} from "../../../../../queries/shopPage";
+import { QueryResult } from "../../../../../queries/productType";
 
 export default async function ShopPage({ params }: { params: { category: string; sex?: string } }) {
 	revalidatePath("/shop/[category]/[[...sex]]", "page");
@@ -142,7 +24,7 @@ export default async function ShopPage({ params }: { params: { category: string;
 			query = GET_SALE_PRODUCTS;
 			break;
 		default:
-			query = GET_PRODUCTS;
+			query = GET_PRODUCTS_BY_CATEGORIES;
 	}
 	const { data }: ApolloQueryResult<QueryResult> = await client.query({
 		query: query,

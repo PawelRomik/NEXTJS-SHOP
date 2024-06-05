@@ -1,68 +1,10 @@
 import { Grid } from "@radix-ui/themes";
 import ProductDisplay from "../../components/ProductDisplay";
-import { gql, ApolloQueryResult } from "@apollo/client";
+import { ApolloQueryResult } from "@apollo/client";
 import createApolloClient from "../../../apollo-client";
 import { revalidatePath } from "next/cache";
-
-type ProductData = {
-	id: string;
-	attributes: {
-		name: string;
-		price: number;
-		onSale: boolean;
-		salePrice: number;
-		image: {
-			data: {
-				attributes: {
-					url: string;
-				};
-			};
-		};
-		categories: {
-			data: {
-				attributes: {
-					name: string;
-				};
-			}[];
-		};
-	};
-};
-
-type QueryResult = {
-	products: {
-		data: ProductData[];
-	};
-};
-
-const GET_PRODUCTS = gql`
-	query {
-		products(pagination: { limit: 100 }, sort: "createdAt:desc") {
-			data {
-				id
-				attributes {
-					name
-					price
-					onSale
-					salePrice
-					image {
-						data {
-							attributes {
-								url
-							}
-						}
-					}
-					categories {
-						data {
-							attributes {
-								name
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-`;
+import { GET_PRODUCTS } from "../../queries/allPage";
+import { QueryResult } from "../../queries/productType";
 
 export default async function HomePage() {
 	revalidatePath("/");
