@@ -5,128 +5,8 @@ import createApolloClient from "../../../../../apollo-client";
 import ProductDisplay from "../../../../components/ProductDisplay";
 import { revalidatePath } from "next/cache";
 import BuyButton from "../../../../components/BuyButton";
-
-type ProductData = {
-	id: string;
-	attributes: {
-		name: string;
-		price: number;
-		desc: string;
-		salePrice: number;
-		onSale: boolean;
-		image: {
-			data: {
-				attributes: {
-					url: string;
-				};
-			};
-		};
-		sexes: {
-			data: {
-				attributes: {
-					sex: string;
-				};
-			}[];
-		};
-		categories: {
-			data: {
-				attributes: {
-					name: string;
-					slug: string;
-				};
-			}[];
-		};
-	};
-};
-
-type QueryResult = {
-	product: {
-		data: ProductData;
-	};
-};
-
-type otherQueryResult = {
-	products: {
-		data: ProductData[];
-	};
-};
-
-const GET_PRODUCT = gql`
-	query getProduct($productId: ID!) {
-		product(id: $productId) {
-			data {
-				id
-				attributes {
-					name
-					price
-					salePrice
-					onSale
-					desc
-					image {
-						data {
-							attributes {
-								url
-							}
-						}
-					}
-					categories {
-						data {
-							attributes {
-								name
-								slug
-							}
-						}
-					}
-					sexes {
-						data {
-							attributes {
-								sex
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-`;
-
-const GET_OTHER_PRODUCTS = gql`
-	query getProducts($productId: ID!, $category: String!, $sex: String!) {
-		products(
-			pagination: { limit: 5 }
-			filters: {
-				categories: { slug: { eq: $category } }
-				sexes: { sex: { eq: $sex } }
-				id: { ne: $productId }
-			}
-		) {
-			data {
-				id
-				attributes {
-					name
-					price
-					onSale
-					salePrice
-					desc
-					image {
-						data {
-							attributes {
-								url
-							}
-						}
-					}
-					categories {
-						data {
-							attributes {
-								name
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-`;
+import { QueryResult, QueryResultSingle } from "../../../../queries/productType";
+import { GET_PRODUCT_BY_ID, GET_OTHER_PRODUCTS } from "../../../../queries/productPage";
 
 export default async function ProductPage({ params }: { params: { productId: string } }) {
 	revalidatePath("/product/[productId]", "page");
@@ -134,8 +14,8 @@ export default async function ProductPage({ params }: { params: { productId: str
 
 	const client = createApolloClient();
 
-	const { data }: ApolloQueryResult<QueryResult> = await client.query({
-		query: GET_PRODUCT,
+	const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
+		query: GET_PRODUCT_BY_ID,
 		variables: {
 			productId
 		}
@@ -143,7 +23,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 
 	const currProduct = data.product.data;
 
-	const otherData: ApolloQueryResult<otherQueryResult> = await client.query({
+	const otherData: ApolloQueryResult<QueryResult> = await client.query({
 		query: GET_OTHER_PRODUCTS,
 		variables: {
 			productId: productId,
@@ -152,7 +32,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 		}
 	});
 
-	const products: ProductData[] = otherData.data.products.data;
+	const products = otherData.data.products.data;
 
 	if (!currProduct || !products) return;
 
