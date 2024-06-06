@@ -4,7 +4,7 @@ import Footer from "../../components/Footer";
 import ShopHeader from "../../components/ShopHeader";
 const inter = Inter({
 	subsets: ["latin"],
-	display: "swap",
+	display: "swap"
 });
 
 export default function ShopLayout({ children }: { children: React.ReactNode }) {

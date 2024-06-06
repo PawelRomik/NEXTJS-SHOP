@@ -6,6 +6,12 @@ import { revalidatePath } from "next/cache";
 import { GET_PRODUCTS } from "../../queries/allPage";
 import { QueryResult } from "../../queries/productType";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "N3XT | All"
+};
+
 export default async function HomePage() {
 	revalidatePath("/");
 	const client = createApolloClient();
