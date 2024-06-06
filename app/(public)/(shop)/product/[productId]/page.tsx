@@ -7,11 +7,9 @@ import { revalidatePath } from "next/cache";
 import BuyButton from "../../../../components/BuyButton";
 import { QueryResult, QueryResultSingle } from "../../../../queries/productType";
 import { GET_PRODUCT_BY_ID, GET_OTHER_PRODUCTS } from "../../../../queries/productPage";
+import { Metadata } from "next";
 
-export default async function ProductPage({ params }: { params: { productId: string } }) {
-	revalidatePath("/product/[productId]", "page");
-	const productId = params.productId;
-
+async function fetchProduct(productId: string) {
 	const client = createApolloClient();
 
 	const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
@@ -22,17 +20,47 @@ export default async function ProductPage({ params }: { params: { productId: str
 	});
 
 	const currProduct = data.product.data;
+	return currProduct;
+}
 
-	const otherData: ApolloQueryResult<QueryResult> = await client.query({
+async function fetchOtherProducts(productId: string, category: string, sex: string) {
+	const client = createApolloClient();
+
+	const data: ApolloQueryResult<QueryResult> = await client.query({
 		query: GET_OTHER_PRODUCTS,
 		variables: {
 			productId: productId,
-			category: currProduct.attributes.categories.data[1].attributes.slug,
-			sex: currProduct.attributes.sexes.data[0].attributes.sex
+			category: category,
+			sex: sex
 		}
 	});
 
-	const products = otherData.data.products.data;
+	const products = data.data.products.data;
+	return products;
+}
+
+export async function generateMetadata({
+	params
+}: {
+	params: { productId: string };
+}): Promise<Metadata> {
+	const { productId } = params;
+	const product = await fetchProduct(productId);
+
+	return {
+		title: `N3XT | ${product.attributes.name}`
+	};
+}
+
+export default async function ProductPage({ params }: { params: { productId: string } }) {
+	revalidatePath("/product/[productId]", "page");
+	const productId = params.productId;
+	const currProduct = await fetchProduct(productId);
+	const products = await fetchOtherProducts(
+		productId,
+		currProduct.attributes.categories.data[1].attributes.slug,
+		currProduct.attributes.sexes.data[0].attributes.sex
+	);
 
 	if (!currProduct || !products) return;
 

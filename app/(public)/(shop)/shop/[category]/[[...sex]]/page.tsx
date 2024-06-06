@@ -10,6 +10,19 @@ import {
 } from "../../../../../queries/shopPage";
 import { QueryResult } from "../../../../../queries/productType";
 
+import { Metadata } from "next";
+
+export async function generateMetadata({
+	params
+}: {
+	params: { category: string; sex?: string };
+}): Promise<Metadata> {
+	const { category } = params;
+	return {
+		title: `N3XT | ${category.charAt(0).toUpperCase() + category.slice(1)}`
+	};
+}
+
 export default async function ShopPage({ params }: { params: { category: string; sex?: string } }) {
 	revalidatePath("/shop/[category]/[[...sex]]", "page");
 	const category = params.category;

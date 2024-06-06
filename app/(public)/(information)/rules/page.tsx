@@ -1,3 +1,9 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "N3XT | Rules"
+};
+
 export default function RulesPage() {
 	return (
 		<main className="flex flex-1 flex-col items-center justify-start gap-6 p-6">

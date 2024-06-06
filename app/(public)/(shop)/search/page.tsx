@@ -5,6 +5,12 @@ import ProductDisplay from "../../../components/ProductDisplay";
 import { QueryResult } from "../../../queries/productType";
 import { GET_SEARCH_PRODUCTS } from "../../../queries/search";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "N3XT | Search results"
+};
+
 export default async function SearchPage({
 	searchParams
 }: {
