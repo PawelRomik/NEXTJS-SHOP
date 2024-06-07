@@ -26,10 +26,11 @@ export default function ProductDisplay({
 				<div className="relative w-full flex-1 bg-zinc-100 p-8">
 					<div className="h-[300px] lg:h-[400px]">
 						<Image
-							fill={true}
 							src={imageUrl}
 							alt={name}
-							className=" p-10 transition group-hover:scale-105"
+							width={400}
+							height={400}
+							className=" h-full w-full object-contain p-10  transition group-hover:scale-105"
 						/>
 					</div>
 

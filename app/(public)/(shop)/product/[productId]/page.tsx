@@ -1,6 +1,6 @@
 import SizePicker from "../../../../components/SizePicker";
 import Image from "next/image";
-import { gql, ApolloQueryResult } from "@apollo/client";
+import { ApolloQueryResult } from "@apollo/client";
 import createApolloClient from "../../../../../apollo-client";
 import ProductDisplay from "../../../../components/ProductDisplay";
 import { revalidatePath } from "next/cache";
