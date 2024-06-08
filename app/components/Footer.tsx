@@ -6,8 +6,8 @@ export default function Footer() {
 		<footer className="mx-auto flex w-full flex-col items-center justify-between bg-zinc-800  p-4 text-white lg:flex-row lg:justify-center">
 			<nav className="flex flex-1 items-center ">
 				<Flex align="center" className="gap-1 lg:gap-3">
-					<Link href="/rules" title="rules" className="text-zinc-300">
-						Rules
+					<Link href="/terms" title="terms and conditions" className="text-zinc-300">
+						Terms and Conditions
 					</Link>
 					<Separator orientation="vertical" className="bg-zinc-300" />
 					<Link href="/privacy" title="rules" className="text-zinc-300">
