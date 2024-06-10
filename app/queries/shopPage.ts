@@ -31,11 +31,11 @@ export const GET_NEW_PRODUCTS = gql`
 `;
 
 export const GET_PRODUCTS_BY_CATEGORIES = gql`
-	query getProducts($category: String!, $sex: String!) {
+	query getProducts($category: String!, $sex: [String!]) {
 		products(
 			pagination: { start: 0, limit: 100 }
 			sort: "createdAt:desc"
-			filters: { categories: { slug: { eq: $category } }, sexes: { sex: { eq: $sex } } }
+			filters: { categories: { slug: { eq: $category } }, sexes: { sex: { in: $sex } } }
 		) {
 			data {
 				id
