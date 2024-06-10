@@ -26,7 +26,7 @@ export async function generateMetadata({
 export default async function ShopPage({ params }: { params: { category: string; sex?: string } }) {
 	revalidatePath("/shop/[category]/[[...sex]]", "page");
 	const category = params.category;
-	const sex = params.sex && params.sex[0] ? params.sex[0] : "";
+	const sexParam = params.sex && params.sex[0] ? params.sex[0] : "";
 	const client = createApolloClient();
 	let query;
 	switch (params.category) {
@@ -39,20 +39,28 @@ export default async function ShopPage({ params }: { params: { category: string;
 		default:
 			query = GET_PRODUCTS_BY_CATEGORIES;
 	}
+	let sexVar;
+	if (sexParam === "male" || sexParam === "female") {
+		sexVar = [sexParam];
+	} else if (sexParam === "") {
+		sexVar = ["female", "male"];
+	} else {
+		sexVar = "";
+	}
 	const { data }: ApolloQueryResult<QueryResult> = await client.query({
 		query: query,
 		variables: {
 			category: category,
-			sex: sex
+			sex: sexVar
 		}
 	});
 
 	return (
 		<main className="flex-1 p-6	">
 			<h1 className="pl-6 text-4xl font-bold capitalize">
-				{sex && (
+				{sexParam && (
 					<>
-						<span>{sex}</span>
+						<span>{sexParam}</span>
 						<i className="ri-circle-fill mx-2 align-middle text-[1rem]"></i>
 					</>
 				)}
