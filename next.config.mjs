@@ -28,10 +28,7 @@ const nextConfig = {
 			}
 		];
 	},
-	pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
-	experimental: {
-		typedRoutes: true
-	}
+	pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"]
 };
 
 export default withMDX(nextConfig);
