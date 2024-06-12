@@ -1,14 +1,14 @@
 import { Grid } from "@radix-ui/themes";
-import ProductDisplay from "../../../../../components/ProductDisplay";
+import ProductDisplay from "../../../../../../components/ProductDisplay";
 import { ApolloQueryResult } from "@apollo/client";
-import createApolloClient from "../../../../../../apollo-client";
+import createApolloClient from "../../../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
 import {
 	GET_NEW_PRODUCTS,
 	GET_PRODUCTS_BY_CATEGORIES,
 	GET_SALE_PRODUCTS
-} from "../../../../../queries/shopPage";
-import { QueryResult } from "../../../../../queries/productType";
+} from "../../../../../../queries/shopPage";
+import { QueryResult } from "../../../../../../queries/productType";
 
 import { Metadata } from "next";
 
@@ -23,10 +23,14 @@ export async function generateMetadata({
 	};
 }
 
-export default async function ShopPage({ params }: { params: { category: string; sex?: string } }) {
-	revalidatePath("/shop/[category]/[[...sex]]", "page");
-	const category = params.category;
-	const sexParam = params.sex && params.sex[0] ? params.sex[0] : "";
+export default async function ShopPage({
+	params
+}: {
+	params: { category: string; sex: string; page: number };
+}) {
+	revalidatePath("/shop/[category]/[sex]/[page]", "page");
+	const { category, sex, page } = params;
+
 	const client = createApolloClient();
 	let query;
 	switch (params.category) {
@@ -39,28 +43,21 @@ export default async function ShopPage({ params }: { params: { category: string;
 		default:
 			query = GET_PRODUCTS_BY_CATEGORIES;
 	}
-	let sexVar;
-	if (sexParam === "male" || sexParam === "female") {
-		sexVar = [sexParam];
-	} else if (sexParam === "") {
-		sexVar = ["female", "male"];
-	} else {
-		sexVar = "";
-	}
 	const { data }: ApolloQueryResult<QueryResult> = await client.query({
 		query: query,
 		variables: {
 			category: category,
-			sex: sexVar
+			sex: sex === "all" ? ["male", "female"] : [sex],
+			page: Number(page)
 		}
 	});
 
 	return (
-		<main className="flex-1 p-6	">
+		<main className="p-6">
 			<h1 className="pl-6 text-4xl font-bold capitalize">
-				{sexParam && (
+				{sex && (
 					<>
-						<span>{sexParam}</span>
+						<span>{sex}</span>
 						<i className="ri-circle-fill mx-2 align-middle text-[1rem]"></i>
 					</>
 				)}
