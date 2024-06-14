@@ -39,5 +39,10 @@ export type QueryResultSingle = {
 export type QueryResult = {
 	products: {
 		data: ProductData[];
+		meta: {
+			pagination: {
+				pageCount: number;
+			};
+		};
 	};
 };

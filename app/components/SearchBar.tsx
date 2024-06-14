@@ -14,6 +14,7 @@ export default function SearchBar() {
 		const params = new URLSearchParams(searchParams);
 		if (inputValue) {
 			params.set("query", inputValue);
+			params.set("page", "1");
 			router.push(`/search?${params.toString()}`);
 		} else {
 			params.delete("query");
@@ -97,7 +98,6 @@ export default function SearchBar() {
 						</div>
 					)}
 				</div>
-
 			</div>
 		</div>
 	);

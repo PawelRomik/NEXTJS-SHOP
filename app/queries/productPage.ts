@@ -73,6 +73,11 @@ export const GET_OTHER_PRODUCTS = gql`
 					}
 				}
 			}
+			meta {
+				pagination {
+					pageCount
+				}
+			}
 		}
 	}
 `;
