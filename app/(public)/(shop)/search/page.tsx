@@ -6,6 +6,7 @@ import { QueryResult } from "../../../queries/productType";
 import { GET_SEARCH_PRODUCTS } from "../../../queries/search";
 
 import { Metadata } from "next";
+import SearchPagination from "../../../components/SearchPagination";
 
 export const metadata: Metadata = {
 	title: "N3XT | Search results"
@@ -16,15 +17,18 @@ export default async function SearchPage({
 }: {
 	searchParams?: {
 		query?: string;
+		page?: number;
 	};
 }) {
 	const query = searchParams?.query || "";
+	const currPage = searchParams?.page || 1;
 	const client = createApolloClient();
 
 	const { data }: ApolloQueryResult<QueryResult> = await client.query({
 		query: GET_SEARCH_PRODUCTS,
 		variables: {
-			name: query
+			name: query,
+			page: Number(currPage)
 		}
 	});
 
@@ -51,6 +55,10 @@ export default async function SearchPage({
 					></ProductDisplay>
 				))}
 			</Grid>
+			<SearchPagination
+				currentPage={Number(currPage)}
+				pagesCount={Number(data.products.meta.pagination.pageCount)}
+			/>
 		</main>
 	);
 }

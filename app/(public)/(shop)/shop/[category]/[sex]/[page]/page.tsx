@@ -9,8 +9,8 @@ import {
 	GET_SALE_PRODUCTS
 } from "../../../../../../queries/shopPage";
 import { QueryResult } from "../../../../../../queries/productType";
-
 import { Metadata } from "next";
+import Pagination from "../../../../../../components/Pagination";
 
 export async function generateMetadata({
 	params
@@ -53,7 +53,7 @@ export default async function ShopPage({
 	});
 
 	return (
-		<main className="p-6">
+		<main>
 			<h1 className="pl-6 text-4xl font-bold capitalize">
 				{sex && (
 					<>
@@ -77,6 +77,10 @@ export default async function ShopPage({
 					></ProductDisplay>
 				))}
 			</Grid>
+			<Pagination
+				currentPage={Number(params.page)}
+				pagesCount={Number(data.products.meta.pagination.pageCount)}
+			/>
 		</main>
 	);
 }

@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
 
 export const GET_SEARCH_PRODUCTS = gql`
-	query getProducts($name: String!) {
+	query getProducts($name: String!, $page: Int) {
 		products(
-			pagination: { start: 0, limit: 8 }
+			pagination: { page: $page, pageSize: 8 }
 			sort: "createdAt:desc"
 			filters: { name: { contains: $name } }
 		) {
@@ -28,6 +28,11 @@ export const GET_SEARCH_PRODUCTS = gql`
 							}
 						}
 					}
+				}
+			}
+			meta {
+				pagination {
+					pageCount
 				}
 			}
 		}

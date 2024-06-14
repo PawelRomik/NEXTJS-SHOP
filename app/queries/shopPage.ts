@@ -30,6 +30,11 @@ export const GET_NEW_PRODUCTS = gql`
 					}
 				}
 			}
+			meta {
+				pagination {
+					pageCount
+				}
+			}
 		}
 	}
 `;
@@ -64,6 +69,11 @@ export const GET_PRODUCTS_BY_CATEGORIES = gql`
 					}
 				}
 			}
+			meta {
+				pagination {
+					pageCount
+				}
+			}
 		}
 	}
 `;
@@ -95,6 +105,11 @@ export const GET_SALE_PRODUCTS = gql`
 							}
 						}
 					}
+				}
+			}
+			meta {
+				pagination {
+					pageCount
 				}
 			}
 		}
