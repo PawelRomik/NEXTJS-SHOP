@@ -53,7 +53,7 @@ export default async function ShopPage({
 	});
 
 	return (
-		<main>
+		<main className="flex-1 p-6">
 			<h1 className="pl-6 text-4xl font-bold capitalize">
 				{sex && (
 					<>
