@@ -5,7 +5,6 @@ const httpLink = createHttpLink({
 	uri: `${process.env.NEXT_PUBLIC_PROD_PATH}/graphql`
 });
 
-console.log(`${process.env.NEXT_PUBLIC_PROD_PATH}/graphql`);
 const authLink = setContext((_, { headers }) => {
 	return {
 		headers: {
