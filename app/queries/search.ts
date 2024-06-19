@@ -38,3 +38,37 @@ export const GET_SEARCH_PRODUCTS = gql`
 		}
 	}
 `;
+
+export const GET_SEARCH_PRODUCTS_COUNT = gql`
+	query getProducts($name: String!) {
+		products(
+			pagination: { limit: 100 }
+			sort: "createdAt:desc"
+			filters: { name: { contains: $name } }
+		) {
+			data {
+				id
+				attributes {
+					name
+					price
+					onSale
+					salePrice
+					image {
+						data {
+							attributes {
+								url
+							}
+						}
+					}
+					categories {
+						data {
+							attributes {
+								name
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+`;

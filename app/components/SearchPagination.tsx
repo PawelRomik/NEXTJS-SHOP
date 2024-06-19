@@ -8,7 +8,6 @@ type SearchPaginationProps = {
 };
 
 export default function SearchPagination({ pagesCount, currentPage }: SearchPaginationProps) {
-	console.log(currentPage);
 	const getPaginationRange = () => {
 		const middleIndex = Math.ceil(5 / 2);
 

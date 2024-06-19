@@ -7,32 +7,53 @@ import { GET_PRODUCTS } from "../../queries/allPage";
 import { QueryResult } from "../../queries/productType";
 
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
 	title: "N3XT | All"
 };
 
+async function fetchProducts() {
+	const client = createApolloClient();
+	try {
+		const { data }: ApolloQueryResult<QueryResult> = await client.query({ query: GET_PRODUCTS });
+
+		return data.products;
+	} catch {
+		return null;
+	}
+}
+
+async function testF() {
+	const data = await fetchProducts();
+	if (!data) return <p>Error</p>;
+
+	return (
+		<>
+			{data.data.map((product) => (
+				<ProductDisplay
+					id={product.id}
+					name={product.attributes.name}
+					price={product.attributes.price}
+					onSale={product.attributes.onSale}
+					salePrice={product.attributes.salePrice}
+					category={product.attributes.categories.data[1].attributes.name}
+					imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.image.data.attributes.url}`}
+					key={product.id}
+				></ProductDisplay>
+			))}
+		</>
+	);
+}
+
 export default async function HomePage() {
 	revalidatePath("/");
-	const client = createApolloClient();
-	const { data }: ApolloQueryResult<QueryResult> = await client.query({ query: GET_PRODUCTS });
 
 	return (
 		<main className="flex-1 p-6	">
 			<h1 className="pl-6 text-4xl font-bold capitalize">All</h1>
 			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
-				{data.products.data.map((product) => (
-					<ProductDisplay
-						id={product.id}
-						name={product.attributes.name}
-						price={product.attributes.price}
-						onSale={product.attributes.onSale}
-						salePrice={product.attributes.salePrice}
-						category={product.attributes.categories.data[1].attributes.name}
-						imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.image.data.attributes.url}`}
-						key={product.id}
-					></ProductDisplay>
-				))}
+				<Suspense fallback={<p>Loading products, please wait...</p>}>{testF()}</Suspense>
 			</Grid>
 		</main>
 	);

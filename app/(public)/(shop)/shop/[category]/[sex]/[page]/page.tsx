@@ -1,6 +1,6 @@
 import { Grid } from "@radix-ui/themes";
 import ProductDisplay from "../../../../../../components/ProductDisplay";
-import { ApolloQueryResult } from "@apollo/client";
+import { ApolloQueryResult, DocumentNode } from "@apollo/client";
 import createApolloClient from "../../../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
 import {
@@ -11,6 +11,8 @@ import {
 import { QueryResult } from "../../../../../../queries/productType";
 import { Metadata } from "next";
 import Pagination from "../../../../../../components/Pagination";
+import { Suspense } from "react";
+import SkeletonProductDisplay from "../../../../../../components/SkeletonProductDisplay";
 
 export async function generateMetadata({
 	params
@@ -23,6 +25,55 @@ export async function generateMetadata({
 	};
 }
 
+async function fetchProducts(query: DocumentNode, category: string, sex: string, page: number) {
+	const client = createApolloClient();
+	try {
+		const { data }: ApolloQueryResult<QueryResult> = await client.query({
+			query: query,
+			variables: {
+				category: category,
+				sex: sex === "all" ? ["male", "female"] : [sex],
+				page: Number(page)
+			}
+		});
+
+		return data.products;
+	} catch {
+		return null;
+	}
+}
+
+async function testF(query: DocumentNode, category: string, sex: string, page: number) {
+	const data = await fetchProducts(query, category, sex, page);
+	if (!data) return <p>Error</p>;
+
+	return (
+		<>
+			{data.data.map((product) => (
+				<ProductDisplay
+					id={product.id}
+					name={product.attributes.name}
+					price={product.attributes.price}
+					onSale={product.attributes.onSale}
+					salePrice={product.attributes.salePrice}
+					category={product.attributes.categories.data[1].attributes.name}
+					imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.image.data.attributes.url}`}
+					key={product.id}
+				></ProductDisplay>
+			))}
+		</>
+	);
+}
+
+async function testP(query: DocumentNode, category: string, sex: string, page: number) {
+	const data = await fetchProducts(query, category, sex, page);
+	if (!data) return null;
+
+	return (
+		<Pagination currentPage={Number(page)} pagesCount={Number(data.meta.pagination.pageCount)} />
+	);
+}
+
 export default async function ShopPage({
 	params
 }: {
@@ -31,7 +82,6 @@ export default async function ShopPage({
 	revalidatePath("/shop/[category]/[sex]/[page]", "page");
 	const { category, sex, page } = params;
 
-	const client = createApolloClient();
 	let query;
 	switch (params.category) {
 		case "new":
@@ -43,14 +93,6 @@ export default async function ShopPage({
 		default:
 			query = GET_PRODUCTS_BY_CATEGORIES;
 	}
-	const { data }: ApolloQueryResult<QueryResult> = await client.query({
-		query: query,
-		variables: {
-			category: category,
-			sex: sex === "all" ? ["male", "female"] : [sex],
-			page: Number(page)
-		}
-	});
 
 	return (
 		<main className="flex-1 p-6">
@@ -63,24 +105,20 @@ export default async function ShopPage({
 				)}
 				<span>{category}</span>
 			</h1>
-			<Grid gap="4" width="auto" className="grid-cols-1 p-6 md:grid-cols-2 lg:grid-cols-4">
-				{data.products.data.map((product) => (
-					<ProductDisplay
-						id={product.id}
-						name={product.attributes.name}
-						onSale={product.attributes.onSale}
-						salePrice={product.attributes.salePrice}
-						price={product.attributes.price}
-						category={product.attributes.categories.data[1].attributes.name}
-						imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.image.data.attributes.url}`}
-						key={product.id}
-					></ProductDisplay>
-				))}
+			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
+				<Suspense
+					fallback={
+						<>
+							{[...Array(8)].map((_, index) => (
+								<SkeletonProductDisplay key={index} />
+							))}
+						</>
+					}
+				>
+					{testF(query, category, sex, page)}
+				</Suspense>
 			</Grid>
-			<Pagination
-				currentPage={Number(params.page)}
-				pagesCount={Number(data.products.meta.pagination.pageCount)}
-			/>
+			<Suspense>{testP(query, category, sex, page)}</Suspense>
 		</main>
 	);
 }

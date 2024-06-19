@@ -3,14 +3,84 @@ import createApolloClient from "../../../../apollo-client";
 import { Grid } from "@radix-ui/themes";
 import ProductDisplay from "../../../components/ProductDisplay";
 import { QueryResult } from "../../../queries/productType";
-import { GET_SEARCH_PRODUCTS } from "../../../queries/search";
+import { GET_SEARCH_PRODUCTS, GET_SEARCH_PRODUCTS_COUNT } from "../../../queries/search";
 
 import { Metadata } from "next";
 import SearchPagination from "../../../components/SearchPagination";
+import { Suspense } from "react";
+import SkeletonProductDisplay from "../../../components/SkeletonProductDisplay";
 
 export const metadata: Metadata = {
 	title: "N3XT | Search results"
 };
+
+async function fetchProducts(query: string, currPage: number, pagination: boolean) {
+	const client = createApolloClient();
+	try {
+		if (pagination) {
+			const { data }: ApolloQueryResult<QueryResult> = await client.query({
+				query: GET_SEARCH_PRODUCTS,
+				variables: {
+					name: query,
+					page: Number(currPage)
+				}
+			});
+			return data.products;
+		} else {
+			const { data }: ApolloQueryResult<QueryResult> = await client.query({
+				query: GET_SEARCH_PRODUCTS_COUNT,
+				variables: {
+					name: query
+				}
+			});
+			console.log(data);
+			return data.products;
+		}
+	} catch {
+		return null;
+	}
+}
+
+async function testF(query: string, currPage: number) {
+	const data = await fetchProducts(query, currPage, true);
+	if (!data) return <p>Error</p>;
+
+	return (
+		<>
+			{data.data.map((product) => (
+				<ProductDisplay
+					id={product.id}
+					name={product.attributes.name}
+					price={product.attributes.price}
+					onSale={product.attributes.onSale}
+					salePrice={product.attributes.salePrice}
+					category={product.attributes.categories.data[1].attributes.name}
+					imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.image.data.attributes.url}`}
+					key={product.id}
+				></ProductDisplay>
+			))}
+		</>
+	);
+}
+
+async function testP(query: string, currPage: number) {
+	const data = await fetchProducts(query, currPage, true);
+	if (!data) return null;
+
+	return (
+		<SearchPagination
+			currentPage={Number(currPage)}
+			pagesCount={Number(data.meta.pagination.pageCount)}
+		/>
+	);
+}
+
+async function testS(query: string, currPage: number) {
+	const data = await fetchProducts(query, currPage, false);
+	if (!data) return null;
+
+	return data.data.length;
+}
 
 export default async function SearchPage({
 	searchParams
@@ -22,43 +92,30 @@ export default async function SearchPage({
 }) {
 	const query = searchParams?.query || "";
 	const currPage = searchParams?.page || 1;
-	const client = createApolloClient();
-
-	const { data }: ApolloQueryResult<QueryResult> = await client.query({
-		query: GET_SEARCH_PRODUCTS,
-		variables: {
-			name: query,
-			page: Number(currPage)
-		}
-	});
 
 	return (
 		<main className="flex-1 p-6	">
 			<h1 className="flex items-center pl-6 text-4xl font-bold">
 				<span className="mr-2 rounded-full border-2 border-black px-3 text-2xl">
-					{data.products.data.length}
+					<Suspense fallback={<p>Loading</p>}>{testS(query, currPage)}</Suspense>
 				</span>
 				<span>Matches for &quot;{query}&quot;</span>
 			</h1>
 
 			<Grid gap="4" width="auto" className="grid-cols-1 p-6 md:grid-cols-2 lg:grid-cols-4">
-				{data.products.data.map((product) => (
-					<ProductDisplay
-						id={product.id}
-						name={product.attributes.name}
-						salePrice={product.attributes.salePrice}
-						onSale={product.attributes.onSale}
-						price={product.attributes.price}
-						category={product.attributes.categories.data[1].attributes.name}
-						imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.image.data.attributes.url}`}
-						key={product.id}
-					></ProductDisplay>
-				))}
+				<Suspense
+					fallback={
+						<>
+							{[...Array(8)].map((_, index) => (
+								<SkeletonProductDisplay key={index} />
+							))}
+						</>
+					}
+				>
+					{testF(query, currPage)}
+				</Suspense>
 			</Grid>
-			<SearchPagination
-				currentPage={Number(currPage)}
-				pagesCount={Number(data.products.meta.pagination.pageCount)}
-			/>
+			<Suspense>{testP(query, currPage)}</Suspense>
 		</main>
 	);
 }
