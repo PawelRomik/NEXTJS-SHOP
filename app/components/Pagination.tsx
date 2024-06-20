@@ -8,6 +8,11 @@ type PaginationProps = {
 };
 
 export default function Pagination({ pagesCount, currentPage }: PaginationProps) {
+	const pageUrl = usePathname();
+	if (pagesCount <= 1) {
+		return null;
+	}
+
 	const getPaginationRange = () => {
 		const middleIndex = Math.ceil(5 / 2);
 
@@ -28,7 +33,7 @@ export default function Pagination({ pagesCount, currentPage }: PaginationProps)
 	};
 
 	const paginationRange = getPaginationRange();
-	const pageUrl = usePathname();
+
 	const hrefPage = pageUrl.split("/").slice(0, -1).join("/");
 
 	return (

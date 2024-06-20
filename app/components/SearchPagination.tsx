@@ -8,6 +8,11 @@ type SearchPaginationProps = {
 };
 
 export default function SearchPagination({ pagesCount, currentPage }: SearchPaginationProps) {
+	const pageUrl = usePathname() + "?" + useSearchParams();
+	if (pagesCount <= 1) {
+		return null;
+	}
+
 	const getPaginationRange = () => {
 		const middleIndex = Math.ceil(5 / 2);
 
@@ -28,7 +33,7 @@ export default function SearchPagination({ pagesCount, currentPage }: SearchPagi
 	};
 
 	const paginationRange = getPaginationRange();
-	const pageUrl = usePathname() + "?" + useSearchParams();
+
 	const hrefPage = pageUrl.split("&")[0];
 
 	return (
