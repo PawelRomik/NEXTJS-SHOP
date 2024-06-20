@@ -43,9 +43,15 @@ async function fetchProducts(query: DocumentNode, category: string, sex: string,
 	}
 }
 
-async function testF(query: DocumentNode, category: string, sex: string, page: number) {
+async function loadProducts(query: DocumentNode, category: string, sex: string, page: number) {
 	const data = await fetchProducts(query, category, sex, page);
-	if (!data) return <p>Error</p>;
+	if (!data)
+		return (
+			<p className="col-span-4 row-auto w-full text-center text-3xl font-bold text-zinc-400">
+				<i className="ri-error-warning-line"></i> An error occurred while loading products, please
+				try again later.
+			</p>
+		);
 
 	return (
 		<>
@@ -65,7 +71,7 @@ async function testF(query: DocumentNode, category: string, sex: string, page: n
 	);
 }
 
-async function testP(query: DocumentNode, category: string, sex: string, page: number) {
+async function loadPagination(query: DocumentNode, category: string, sex: string, page: number) {
 	const data = await fetchProducts(query, category, sex, page);
 	if (!data) return null;
 
@@ -115,10 +121,10 @@ export default async function ShopPage({
 						</>
 					}
 				>
-					{testF(query, category, sex, page)}
+					{loadProducts(query, category, sex, page)}
 				</Suspense>
 			</Grid>
-			<Suspense>{testP(query, category, sex, page)}</Suspense>
+			<Suspense>{loadPagination(query, category, sex, page)}</Suspense>
 		</main>
 	);
 }

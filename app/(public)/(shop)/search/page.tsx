@@ -41,9 +41,15 @@ async function fetchProducts(query: string, currPage: number, pagination: boolea
 	}
 }
 
-async function testF(query: string, currPage: number) {
+async function loadProducts(query: string, currPage: number) {
 	const data = await fetchProducts(query, currPage, true);
-	if (!data) return <p>Error</p>;
+	if (!data)
+		return (
+			<p className="col-span-4 row-auto w-full text-center text-3xl font-bold text-zinc-400">
+				<i className="ri-error-warning-line"></i> An error occurred while loading products, please
+				try again later.
+			</p>
+		);
 
 	return (
 		<>
@@ -63,7 +69,7 @@ async function testF(query: string, currPage: number) {
 	);
 }
 
-async function testP(query: string, currPage: number) {
+async function loadPagination(query: string, currPage: number) {
 	const data = await fetchProducts(query, currPage, true);
 	if (!data) return null;
 
@@ -75,7 +81,7 @@ async function testP(query: string, currPage: number) {
 	);
 }
 
-async function testS(query: string, currPage: number) {
+async function loadCount(query: string, currPage: number) {
 	const data = await fetchProducts(query, currPage, false);
 	if (!data) return null;
 
@@ -96,9 +102,12 @@ export default async function SearchPage({
 	return (
 		<main className="flex-1 p-6	">
 			<h1 className="flex items-center pl-6 text-4xl font-bold">
-				<span className="mr-2 rounded-full border-2 border-black px-3 text-2xl">
-					<Suspense fallback={<p>Loading</p>}>{testS(query, currPage)}</Suspense>
-				</span>
+				<Suspense>
+					<span className="mr-2 rounded-full border-2 border-black px-3 text-2xl">
+						{loadCount(query, currPage)}
+					</span>
+				</Suspense>
+
 				<span>Matches for &quot;{query}&quot;</span>
 			</h1>
 
@@ -112,10 +121,10 @@ export default async function SearchPage({
 						</>
 					}
 				>
-					{testF(query, currPage)}
+					{loadProducts(query, currPage)}
 				</Suspense>
 			</Grid>
-			<Suspense>{testP(query, currPage)}</Suspense>
+			<Suspense>{loadPagination(query, currPage)}</Suspense>
 		</main>
 	);
 }
