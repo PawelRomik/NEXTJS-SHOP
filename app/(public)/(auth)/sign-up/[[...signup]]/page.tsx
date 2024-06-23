@@ -6,6 +6,6 @@ export const metadata: Metadata = {
 	title: "N3XT | Sign Up"
 };
 
-export default function Page() {
+export default function SignUpPage() {
 	return <SignUp />;
 }
