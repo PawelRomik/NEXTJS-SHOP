@@ -17,6 +17,11 @@ const nextConfig = {
 				permanent: true
 			},
 			{
+				source: "/order",
+				destination: "/",
+				permanent: true
+			},
+			{
 				source: "/shop/:slug",
 				destination: "/shop/:slug/all/1",
 				permanent: true
