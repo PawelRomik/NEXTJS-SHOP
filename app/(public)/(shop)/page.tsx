@@ -55,24 +55,5 @@ async function loadProducts() {
 export default async function HomePage() {
 	revalidatePath("/");
 
-	return (
-		<main className="flex-1 p-6	">
-			<h1 className="pl-6 text-4xl font-bold capitalize">All</h1>
-			<Grid
-				gap="4"
-				width="auto"
-				className="h-full grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6"
-			>
-				<Suspense
-					fallback={
-						<p className="col-span-4 row-auto w-full text-center text-3xl font-bold text-zinc-400">
-							<i className="ri-error-warning-line"></i> Loading products, please wait.
-						</p>
-					}
-				>
-					{loadProducts()}
-				</Suspense>
-			</Grid>
-		</main>
-	);
+	return <main className=" w-full bg-zinc-900 p-6"></main>;
 }

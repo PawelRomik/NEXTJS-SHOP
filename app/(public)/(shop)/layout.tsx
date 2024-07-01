@@ -13,11 +13,10 @@ export default function ShopLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<div className={`${inter.className} flex min-h-screen flex-col`}>
 			<ShopHeader />
-			<div className="flex-1">
+			<div className="flex flex-1 items-stretch">
 				{children}
 				<ScrollToTopButton />
 			</div>
-
 			<Footer />
 		</div>
 	);

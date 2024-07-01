@@ -21,9 +21,11 @@ export default function Hamburger() {
 
 	return (
 		<>
-			<button className="block lg:hidden" onClick={() => setMenuOn((prev) => !prev)}>
-				<i className="ri-menu-line text-2xl"></i>
-			</button>
+			<div className="flex items-center justify-start">
+				<button className="flex lg:hidden" onClick={() => setMenuOn((prev) => !prev)}>
+					<i className="ri-menu-line text-2xl"></i>
+				</button>
+			</div>
 			{menuOn && (
 				<NavigationMenu.Root className="fixed left-0 top-0 z-30 h-screen w-svw flex-1 flex-col justify-center text-2xl lg:hidden">
 					<NavigationMenu.List className="one data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight m-0 flex h-screen  w-screen list-none flex-col items-start justify-start overflow-x-hidden border-2 bg-zinc-100">

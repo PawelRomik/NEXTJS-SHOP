@@ -4,14 +4,12 @@ import { SignedOut, SignedIn, SignUpButton, UserButton } from "@clerk/nextjs";
 
 export default function UserProfile() {
 	return (
-		<div className="ml-4 flex items-center justify-center">
+		<div className="flex items-center justify-center">
 			<SignedIn>
-				<div className="flex items-center justify-center rounded-full border-2 border-black">
-					<UserButton />
-				</div>
+				<i className="ri-user-line text-3xl"></i>
 			</SignedIn>
 			<SignedOut>
-				<div className="ml-2 flex items-center justify-center font-bold">
+				<div className="flex items-center justify-center font-bold">
 					<SignUpButton />
 				</div>
 			</SignedOut>
