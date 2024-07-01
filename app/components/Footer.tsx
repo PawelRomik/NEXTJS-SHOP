@@ -3,24 +3,41 @@ import Link from "next/link";
 
 export default function Footer() {
 	return (
-		<footer className="mx-auto flex w-full flex-col items-center justify-between bg-zinc-800  p-4 text-sm text-white lg:flex-row lg:justify-center">
-			<nav className="flex flex-1 items-center ">
-				<Flex align="center" className="gap-1 lg:gap-3">
-					<Link href="/terms" title="terms and conditions" className="text-zinc-300">
-						Terms and Conditions
-					</Link>
-					<Separator orientation="vertical" className="bg-zinc-300" />
-					<Link href="/privacy" title="rules" className="text-zinc-300">
-						Privacy Policy
-					</Link>
-					<Separator orientation="vertical" className="bg-zinc-300" />
-					<Link href="/contact" title="rules" className="text-zinc-300">
-						Contact
-					</Link>
-				</Flex>
+		<footer className="flex w-full flex-col items-center justify-between gap-2 border-t-8 border-zinc-800 bg-black p-4 text-sm text-zinc-300 lg:flex-row lg:gap-0">
+			<p className="lg:w-1/3">Copyright © 2024 Ephonix Inc. All rights reserved.</p>
+			<nav className="flex items-center justify-center gap-3 lg:w-1/3">
+				<Link href="/terms" title="terms and conditions">
+					Terms and Conditions
+				</Link>
+				<Separator orientation="vertical" className="bg-zinc-300" />
+				<Link href="/privacy" title="rules">
+					Privacy Policy
+				</Link>
+				<Separator orientation="vertical" className="bg-zinc-300" />
+				<Link href="/contact" title="rules">
+					Contact
+				</Link>
 			</nav>
-
-			<p className="text-zinc-300">©2024 N3XT</p>
+			<hr className="h-[2px] w-full border-none bg-zinc-800 lg:hidden"></hr>
+			<div className="flex items-center justify-end lg:w-1/3">
+				<ul className="flex items-center justify-end gap-2 text-2xl">
+					<li>
+						<i className="ri-facebook-box-fill"></i>
+					</li>
+					<li>
+						<i className="ri-instagram-fill"></i>
+					</li>
+					<li>
+						<i className="ri-twitter-x-fill"></i>
+					</li>
+					<li>
+						<i className="ri-youtube-fill"></i>
+					</li>
+					<li>
+						<i className="ri-discord-fill"></i>
+					</li>
+				</ul>
+			</div>
 		</footer>
 	);
 }

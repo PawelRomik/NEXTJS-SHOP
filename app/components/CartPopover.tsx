@@ -55,12 +55,15 @@ export default function CartPopover() {
 			<Popover.Trigger asChild>
 				<div className="flex items-center justify-center lg:ml-2">
 					<button
-						className="inline-flex h-[35px] w-[35px] cursor-pointer items-center justify-center rounded-full bg-white outline-none"
+						className="inline-flex h-[35px] w-[35px] cursor-pointer items-center justify-center rounded-full outline-none"
 						aria-label="Update dimensions"
 					>
-						<i className="ri-shopping-cart-2-line text-2xl"></i>
+						<i className="ri-shopping-cart-2-line relative text-3xl">
+							<span className="z-3 absolute left-[10px] top-0 flex h-[15px] w-[30px] items-center justify-center rounded-full bg-red-700 py-2 font-sans text-sm font-bold text-white">
+								{products.length}
+							</span>
+						</i>
 					</button>
-					<p className="font-bold">{products.length}</p>
 				</div>
 			</Popover.Trigger>
 			<Popover.Portal>
