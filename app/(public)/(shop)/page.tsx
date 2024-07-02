@@ -10,7 +10,7 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-	title: "N3XT | All"
+	title: "Ephonix"
 };
 
 async function fetchProducts() {
@@ -55,5 +55,5 @@ async function loadProducts() {
 export default async function HomePage() {
 	revalidatePath("/");
 
-	return <main className=" w-full bg-zinc-900 p-6"></main>;
+	return <main className=" w-full bg-black p-6"></main>;
 }

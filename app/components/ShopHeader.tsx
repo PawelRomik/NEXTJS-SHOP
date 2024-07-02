@@ -5,6 +5,7 @@ import ShopLogo from "./ShopLogo";
 import { Suspense } from "react";
 import UserProfile from "./UserProfile";
 import { SignedIn } from "@clerk/nextjs";
+import NavigationLinks from "./NavigationLinks";
 
 export default function ShopHeader() {
 	return (
@@ -12,18 +13,7 @@ export default function ShopHeader() {
 			<Hamburger />
 			<ShopLogo />
 			<nav className="hidden w-1/3 items-center justify-center lg:flex">
-				<ul className="flex items-center justify-center gap-6 text-xl">
-					<li>
-						Shop <i className="ri-arrow-drop-down-line"></i>
-					</li>
-					<li>
-						Components <i className="ri-arrow-drop-down-line"></i>
-					</li>
-					<li>
-						Accessories <i className="ri-arrow-drop-down-line"></i>
-					</li>
-					<li>Support</li>
-				</ul>
+				<NavigationLinks />
 			</nav>
 			<div className="flex items-center justify-end gap-5 lg:w-1/3">
 				<SignedIn>
