@@ -59,9 +59,11 @@ export default function CartPopover() {
 						aria-label="Update dimensions"
 					>
 						<i className="ri-shopping-cart-2-line relative text-3xl">
-							<span className="z-3 absolute left-[10px] top-0 flex h-[15px] w-[30px] items-center justify-center rounded-full bg-red-700 py-2 font-sans text-sm font-bold text-white">
-								{products.length}
-							</span>
+							{products.length > 0 && (
+								<span className="z-3 absolute left-[10px] top-0 flex h-[15px] w-[30px] items-center justify-center rounded-full bg-red-700 py-2 font-sans text-sm font-bold text-white">
+									{products.length}
+								</span>
+							)}
 						</i>
 					</button>
 				</div>
