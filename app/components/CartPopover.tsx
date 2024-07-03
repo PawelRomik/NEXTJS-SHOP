@@ -53,7 +53,7 @@ export default function CartPopover() {
 	return (
 		<Popover.Root>
 			<Popover.Trigger asChild>
-				<div className="flex items-center justify-center lg:ml-2">
+				<div className="flex items-center justify-center">
 					<button
 						className="inline-flex h-[35px] w-[35px] cursor-pointer items-center justify-center rounded-full outline-none"
 						aria-label="Update dimensions"
