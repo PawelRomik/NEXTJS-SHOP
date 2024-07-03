@@ -4,10 +4,10 @@ import nextLogo from "../../public/logo.png";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import UserProfile from "./UserProfile";
 import { SignOutButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
+import { categories } from "../data/categories";
 
 export default function Hamburger() {
 	const [menuOn, setMenuOn] = useState(false);
@@ -28,14 +28,14 @@ export default function Hamburger() {
 			</div>
 			{menuOn && (
 				<NavigationMenu.Root className="fixed left-0 top-0 z-30 h-screen w-svw flex-1 flex-col justify-center text-2xl lg:hidden">
-					<NavigationMenu.List className="one data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight m-0 flex h-screen  w-screen list-none flex-col items-start justify-start overflow-x-hidden border-2 bg-zinc-100">
+					<NavigationMenu.List className="one data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight m-0 flex h-screen  w-screen list-none flex-col items-start justify-start overflow-x-hidden border-2 border-zinc-900 bg-black">
 						<NavigationMenu.Item className="fixed right-2 top-2">
 							<button onClick={() => setMenuOn(false)}>
 								<i className="ri-close-circle-line"></i>
 							</button>
 						</NavigationMenu.Item>
 
-						<NavigationMenu.Item className="flex w-full flex-1 flex-col items-center justify-center gap-2 border-b-2 bg-white">
+						<NavigationMenu.Item className="flex w-full flex-1 flex-col items-center justify-center gap-2 border-b-2 border-zinc-900 bg-black">
 							<Image
 								src={user?.imageUrl || nextLogo}
 								alt="avatar"
@@ -49,24 +49,24 @@ export default function Hamburger() {
 							</h1>
 							<div className="flex w-full items-center justify-center gap-3">
 								<SignedIn>
-									<button className="flex w-[30%] items-center justify-center rounded-full border-2 bg-zinc-100 px-3 py-2 text-sm">
+									<button className="flex w-[30%] items-center justify-center rounded-full border-2 bg-black px-3 py-2 text-sm">
 										Settings
 									</button>
 									<SignOutButton>
-										<button className="flex w-[30%] items-center justify-center rounded-full border-2 bg-zinc-100 px-3 py-2 text-sm">
+										<button className="flex w-[30%] items-center justify-center rounded-full border-2 bg-black px-3 py-2 text-sm">
 											Log out
 										</button>
 									</SignOutButton>
 								</SignedIn>
 								<SignedOut>
-									<div className="flex w-[30%] items-center justify-center rounded-full border-2 bg-zinc-100 px-3 py-2 text-sm">
+									<div className="flex w-[30%] items-center justify-center rounded-full border-2 bg-black px-3 py-2 text-sm">
 										<SignUpButton />
 									</div>
 								</SignedOut>
 							</div>
 						</NavigationMenu.Item>
 
-						<NavigationMenu.Item className="w-full border-b-2 border-zinc-300 bg-white px-2 py-6">
+						<NavigationMenu.Item className=" w-full border-b-2 border-zinc-900 bg-black px-2 py-6">
 							<NavigationMenu.Trigger className="w-full">
 								<Link
 									onClick={() => setMenuOn(false)}
@@ -84,7 +84,7 @@ export default function Hamburger() {
 							</NavigationMenu.Trigger>
 						</NavigationMenu.Item>
 
-						<NavigationMenu.Item className="w-full border-b-2 border-zinc-300 bg-white px-2 py-6">
+						<NavigationMenu.Item className="w-full border-b-2 border-zinc-900 bg-black px-2 py-6">
 							<NavigationMenu.Trigger className="w-full">
 								<Link
 									onClick={() => setMenuOn(false)}
@@ -102,7 +102,7 @@ export default function Hamburger() {
 							</NavigationMenu.Trigger>
 						</NavigationMenu.Item>
 
-						<NavigationMenu.Item className="w-full border-b-2 border-zinc-300 bg-white px-2 py-6">
+						<NavigationMenu.Item className="w-full border-b-2 border-zinc-900 bg-black px-2 py-6">
 							<NavigationMenu.Trigger className="w-full">
 								<Link onClick={() => setMenuOn(false)} href="/" title="All" className="w-full">
 									<b className="flex w-full justify-between">
@@ -114,7 +114,7 @@ export default function Hamburger() {
 								</Link>
 							</NavigationMenu.Trigger>
 						</NavigationMenu.Item>
-						<NavigationMenu.Item className="w-full border-b-2 border-zinc-300 bg-white px-2 py-6">
+						<NavigationMenu.Item className="w-full border-b-2 border-zinc-900 bg-black px-2 py-6">
 							<NavigationMenu.Trigger className="w-full">
 								<b className="flex w-full justify-between">
 									<span>MEN</span>
@@ -123,7 +123,7 @@ export default function Hamburger() {
 									</span>
 								</b>
 							</NavigationMenu.Trigger>
-							<NavigationMenu.Content className="data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight fixed left-0 top-0 flex h-[100%] w-screen flex-col items-start justify-start overflow-x-hidden  border-2 bg-zinc-100">
+							<NavigationMenu.Content className="data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight fixed left-0 top-0 flex h-[100%] w-screen flex-col items-start justify-start overflow-x-hidden border-zinc-900 bg-black">
 								<NavigationMenu.Trigger asChild={true}>
 									<p
 										className=" absolute right-0
@@ -133,7 +133,7 @@ export default function Hamburger() {
 									</p>
 								</NavigationMenu.Trigger>
 
-								<ul className="one m-0 grid w-full list-none grid-cols-1 gap-x-[10px] border-b-2 bg-white p-[22px]">
+								<ul className="one m-0 grid w-full list-none grid-cols-1 gap-x-[10px] border-zinc-900 bg-black p-[22px]">
 									<li>
 										<Link
 											onClick={() => setMenuOn(false)}
@@ -321,7 +321,7 @@ export default function Hamburger() {
 								</ul>
 							</NavigationMenu.Content>
 						</NavigationMenu.Item>
-						<NavigationMenu.Item className="w-full border-zinc-300 bg-white px-2 py-6">
+						<NavigationMenu.Item className="w-full bg-black px-2 py-6">
 							<NavigationMenu.Trigger className="w-full">
 								<b className="flex w-full justify-between">
 									<span>WOMEN</span>
