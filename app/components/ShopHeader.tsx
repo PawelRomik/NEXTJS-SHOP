@@ -1,7 +1,6 @@
 import CartPopover from "./CartPopover";
 import Hamburger from "./Hamburger";
 import ShopLogo from "./ShopLogo";
-import { Suspense } from "react";
 import UserProfile from "./UserProfile";
 import { SignedIn } from "@clerk/nextjs";
 import NavigationLinks from "./NavigationLinks";
