@@ -84,7 +84,7 @@ export default function Hamburger() {
 														>
 															<Link
 																onClick={() => setMenuOn(false)}
-																href={`/${href}`}
+																href={`/category/${href}`}
 																title={subCategory}
 																className=" pl-2"
 															>

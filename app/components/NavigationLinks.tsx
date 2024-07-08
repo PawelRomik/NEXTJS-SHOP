@@ -19,7 +19,7 @@ export default function NavigationLinks() {
 							{category.subCategories && <i className="ri-arrow-drop-down-line"></i>}
 						</NavigationMenu.Trigger>
 						{category.subCategories && (
-							<NavigationMenu.Content className="animate-showNav fixed left-0 top-[5rem] flex w-screen origin-top items-start justify-center gap-6 overflow-hidden overflow-x-hidden border-b-[3px] border-b-red-600 bg-zinc-900">
+							<NavigationMenu.Content className="fixed left-0 top-[5rem] flex w-screen origin-top animate-showNav items-start justify-center gap-6 overflow-hidden overflow-x-hidden border-b-[3px] border-b-red-600 bg-zinc-900">
 								<div className="m-0 flex w-1/3 flex-col gap-2 p-[22px] ">
 									<div className="relative">
 										<h2 className="w-auto text-zinc-400">{category.name}</h2>
@@ -37,7 +37,7 @@ export default function NavigationLinks() {
 										{category.subCategories.map((subCategory) => (
 											<li key={subCategory} className="">
 												<Link
-													href={`/products/${subCategory
+													href={`/category/${subCategory
 														.toLowerCase()
 														.replace(/\s*\(.*?\)\s*/g, "")
 														.replace(/ /g, "-")}`}
