@@ -87,7 +87,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 					<Image
 						width={400}
 						height={400}
-						src={`${process.env.NEXT_PUBLIC_PROD_PATH}${currProduct?.attributes.image.data.attributes.url}`}
+						src={`${process.env.NEXT_PUBLIC_PROD_PATH}${currProduct?.attributes.images.data[0].attributes.url}`}
 						alt={currProduct?.attributes.name}
 						className="w-[100%] object-cover p-10 lg:w-[50%]"
 					></Image>
@@ -124,10 +124,9 @@ export default async function ProductPage({ params }: { params: { productId: str
 									id={product.id}
 									name={product.attributes.name}
 									price={product.attributes.price}
-									onSale={product.attributes.onSale}
 									salePrice={product.attributes.salePrice}
 									category={product.attributes.categories.data[1].attributes.name}
-									imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.image.data.attributes.url}`}
+									imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.images.data[0].attributes.url}`}
 									key={product.id}
 								></ProductDisplay>
 							))}
