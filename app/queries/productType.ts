@@ -6,12 +6,12 @@ type ProductData = {
 		desc: string;
 		salePrice: number;
 		onSale: boolean;
-		image: {
+		images: {
 			data: {
 				attributes: {
 					url: string;
 				};
-			};
+			}[];
 		};
 		sexes: {
 			data: {

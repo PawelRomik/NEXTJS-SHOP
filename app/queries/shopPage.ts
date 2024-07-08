@@ -40,20 +40,19 @@ export const GET_NEW_PRODUCTS = gql`
 `;
 
 export const GET_PRODUCTS_BY_CATEGORIES = gql`
-	query getProducts($category: String!, $sex: [String!], $page: Int) {
+	query getProducts($category: String!, $page: Int) {
 		products(
-			pagination: { page: $page, pageSize: 8 }
+			pagination: { page: $page, pageSize: 1 }
 			sort: "createdAt:desc"
-			filters: { categories: { slug: { eq: $category } }, sexes: { sex: { in: $sex } } }
+			filters: { categories: { slug: { eq: $category } } }
 		) {
 			data {
 				id
 				attributes {
 					name
 					price
-					onSale
 					salePrice
-					image {
+					images {
 						data {
 							attributes {
 								url
@@ -67,11 +66,6 @@ export const GET_PRODUCTS_BY_CATEGORIES = gql`
 							}
 						}
 					}
-				}
-			}
-			meta {
-				pagination {
-					pageCount
 				}
 			}
 		}
