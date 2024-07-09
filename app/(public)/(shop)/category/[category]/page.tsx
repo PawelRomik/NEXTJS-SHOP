@@ -3,11 +3,7 @@ import ProductDisplay from "../../../../components/ProductDisplay";
 import { ApolloQueryResult, DocumentNode } from "@apollo/client";
 import createApolloClient from "../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
-import {
-	GET_NEW_PRODUCTS,
-	GET_PRODUCTS_BY_CATEGORIES,
-	GET_SALE_PRODUCTS
-} from "../../../../queries/shopPage";
+import { GET_PRODUCTS_BY_CATEGORIES } from "../../../../queries/shopPage";
 import { QueryResult } from "../../../../queries/productType";
 import { Metadata } from "next";
 import Pagination from "../../../../components/Pagination";
@@ -25,11 +21,11 @@ export async function generateMetadata({
 	};
 }
 
-async function fetchProducts(query: DocumentNode, category: string, page: number) {
+async function fetchProducts(category: string, page: number) {
 	const client = createApolloClient();
 	try {
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
-			query: query,
+			query: GET_PRODUCTS_BY_CATEGORIES,
 			variables: {
 				category: category,
 				page: Number(page)
@@ -42,8 +38,8 @@ async function fetchProducts(query: DocumentNode, category: string, page: number
 	}
 }
 
-async function loadProducts(query: DocumentNode, category: string, page: number) {
-	const data = await fetchProducts(query, category, page);
+async function loadProducts(category: string, page: number) {
+	const data = await fetchProducts(category, page);
 	if (!data)
 		return (
 			<p className="col-span-4 row-auto w-full text-center text-3xl font-bold text-zinc-400">
@@ -93,18 +89,6 @@ export default async function ShopPage({
 	const { category, searchParams } = params;
 	const page = searchParams?.page || 1;
 
-	let query;
-	switch (params.category) {
-		case "new":
-			query = GET_NEW_PRODUCTS;
-			break;
-		case "sale":
-			query = GET_SALE_PRODUCTS;
-			break;
-		default:
-			query = GET_PRODUCTS_BY_CATEGORIES;
-	}
-
 	return (
 		<main className=" w-full bg-zinc-950 p-6">
 			<h1 className="pl-6 text-4xl font-bold capitalize text-red-600">
@@ -120,7 +104,7 @@ export default async function ShopPage({
 						</>
 					}
 				>
-					{loadProducts(query, category, page)}
+					{loadProducts(category, page)}
 				</Suspense>
 			</Grid>
 		</main>
