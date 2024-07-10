@@ -54,6 +54,7 @@ async function loadProducts(category: string, page: number) {
 				<ProductDisplay
 					id={product.id}
 					name={product.attributes.name}
+					desc={product.attributes.desc}
 					price={product.attributes.price}
 					salePrice={product.attributes.salePrice}
 					category={product.attributes.categories.data[0].attributes.name}
@@ -92,7 +93,10 @@ export default async function ShopPage({
 	return (
 		<main className=" w-full bg-zinc-950 p-6">
 			<h1 className="pl-6 text-4xl font-bold capitalize text-red-600">
-				<span>{category + "s"}</span>
+				<span>
+					<i className="ri-arrow-right-double-fill"></i>
+					{category + "s"}
+				</span>
 			</h1>
 			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
 				<Suspense

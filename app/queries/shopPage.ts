@@ -42,7 +42,7 @@ export const GET_NEW_PRODUCTS = gql`
 export const GET_PRODUCTS_BY_CATEGORIES = gql`
 	query getProducts($category: String!, $page: Int) {
 		products(
-			pagination: { page: $page, pageSize: 1 }
+			pagination: { page: $page, pageSize: 8 }
 			sort: "createdAt:desc"
 			filters: { categories: { slug: { eq: $category } } }
 		) {
@@ -51,6 +51,7 @@ export const GET_PRODUCTS_BY_CATEGORIES = gql`
 				attributes {
 					name
 					price
+					desc
 					salePrice
 					images {
 						data {
