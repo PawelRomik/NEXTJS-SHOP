@@ -44,6 +44,7 @@ async function loadProducts() {
 						<ProductDisplay
 							id={product.id}
 							name={product.attributes.name}
+							desc={product.attributes.desc}
 							price={product.attributes.price}
 							salePrice={product.attributes.salePrice}
 							category={product.attributes.categories.data[1].attributes.name}
