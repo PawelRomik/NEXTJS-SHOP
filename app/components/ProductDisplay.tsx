@@ -67,7 +67,6 @@ export default function ProductDisplay({
 							Dodaj do koszyka
 						</button>
 					</div>
-					{salePrice && <p className="absolute bottom-2 right-2 font-bold text-red-600">ON SALE</p>}
 				</div>
 			</div>
 		</Link>
