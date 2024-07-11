@@ -39,6 +39,7 @@ async function loadProducts() {
 			{data.data.map((product) => (
 				<ProductDisplay
 					id={product.id}
+					desc={product.attributes.desc}
 					name={product.attributes.name}
 					price={product.attributes.price}
 					salePrice={product.attributes.salePrice}

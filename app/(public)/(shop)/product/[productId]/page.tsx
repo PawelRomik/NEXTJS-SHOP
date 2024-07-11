@@ -2,11 +2,10 @@ import SizePicker from "../../../../components/SizePicker";
 import Image from "next/image";
 import { ApolloQueryResult } from "@apollo/client";
 import createApolloClient from "../../../../../apollo-client";
-import ProductDisplay from "../../../../components/ProductDisplay";
 import { revalidatePath } from "next/cache";
 import BuyButton from "../../../../components/BuyButton";
-import { QueryResult, QueryResultSingle } from "../../../../queries/productType";
-import { GET_PRODUCT_BY_ID, GET_OTHER_PRODUCTS } from "../../../../queries/productPage";
+import { QueryResultSingle } from "../../../../queries/productType";
+import { GET_PRODUCT_BY_ID } from "../../../../queries/productPage";
 import { Metadata } from "next";
 
 async function fetchProduct(productId: string) {
@@ -21,22 +20,6 @@ async function fetchProduct(productId: string) {
 
 	const currProduct = data.product.data;
 	return currProduct;
-}
-
-async function fetchOtherProducts(productId: string, category: string, sex: string) {
-	const client = createApolloClient();
-
-	const data: ApolloQueryResult<QueryResult> = await client.query({
-		query: GET_OTHER_PRODUCTS,
-		variables: {
-			productId: productId,
-			category: category,
-			sex: sex
-		}
-	});
-
-	const products = data.data.products.data;
-	return products;
 }
 
 export async function generateMetadata({
@@ -56,13 +39,8 @@ export default async function ProductPage({ params }: { params: { productId: str
 	revalidatePath("/product/[productId]", "page");
 	const productId = params.productId;
 	const currProduct = await fetchProduct(productId);
-	const products = await fetchOtherProducts(
-		productId,
-		currProduct.attributes.categories.data[1].attributes.slug,
-		currProduct.attributes.sexes.data[0].attributes.sex
-	);
 
-	if (!currProduct || !products) return;
+	if (!currProduct) return;
 
 	return (
 		<div className="flex flex-1 flex-col items-stretch justify-start gap-6  lg:flex-row">
@@ -117,22 +95,6 @@ export default async function ProductPage({ params }: { params: { productId: str
 					<h2 className="my-6 border-b-2 pb-2 text-4xl font-bold">About</h2>
 					<p>{currProduct?.attributes.desc}</p>
 					<h2 className="my-6 border-b-2 pb-2 text-4xl font-bold">Check other products!</h2>
-					<div className="relative h-[400px] w-full overflow-hidden lg:static lg:flex-1">
-						<div className="absolute left-0 top-0 flex max-w-[100%] gap-6 overflow-x-auto lg:static">
-							{products.map((product) => (
-								<ProductDisplay
-									id={product.id}
-									name={product.attributes.name}
-									desc={product.attributes.desc}
-									price={product.attributes.price}
-									salePrice={product.attributes.salePrice}
-									category={product.attributes.categories.data[1].attributes.name}
-									imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.images.data[0].attributes.url}`}
-									key={product.id}
-								></ProductDisplay>
-							))}
-						</div>
-					</div>
 				</div>
 			</div>
 
