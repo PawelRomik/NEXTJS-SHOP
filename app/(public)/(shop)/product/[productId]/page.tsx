@@ -5,7 +5,7 @@ import createApolloClient from "../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
 import BuyButton from "../../../../components/BuyButton";
 import { QueryResultSingle } from "../../../../queries/productType";
-import { GET_PRODUCT_BY_ID, GET_OTHER_PRODUCTS } from "../../../../queries/productPage";
+import { GET_PRODUCT_BY_ID } from "../../../../queries/productPage";
 import { Metadata } from "next";
 
 async function fetchProduct(productId: string) {
