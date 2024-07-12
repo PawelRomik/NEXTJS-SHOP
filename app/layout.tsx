@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "@radix-ui/themes/styles.css";
 import "remixicon/fonts/remixicon.css";
 import "./globals.css";
 import Providers from "./providers";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+	weight: ["300", "400", "700"],
+	subsets: ["latin"],
+	variable: "--font-roboto"
+});
 
 export const metadata: Metadata = {
 	title: "N3XT",
@@ -19,7 +23,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${inter.className} custom-scrollbar`}>
+			<body className={`${roboto.variable} custom-scrollbar`}>
 				<Providers>{children}</Providers>
 			</body>
 		</html>
