@@ -7,7 +7,7 @@ export default function ScrollToTopButton() {
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
 	const toggleVisibility = () => {
-		if (window.scrollY > 400) {
+		if (window.scrollY > 200) {
 			setIsVisible(true);
 		} else {
 			setIsVisible(false);

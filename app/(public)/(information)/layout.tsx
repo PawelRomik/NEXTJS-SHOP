@@ -10,9 +10,9 @@ const inter = Inter({
 
 export default function InformationLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<div className={`${inter.className} flex min-h-screen flex-col`}>
+		<div className={`${inter.className} flex min-h-screen flex-col bg-zinc-950 text-white`}>
 			<InformationHeader />
-			<div>
+			<div className="flex flex-1 items-stretch pl-6">
 				{children}
 				<ScrollToTopButton />
 			</div>
