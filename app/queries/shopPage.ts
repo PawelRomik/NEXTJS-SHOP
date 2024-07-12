@@ -69,6 +69,11 @@ export const GET_PRODUCTS_BY_CATEGORIES = gql`
 					}
 				}
 			}
+			meta {
+				pagination {
+					pageCount
+				}
+			}
 		}
 	}
 `;

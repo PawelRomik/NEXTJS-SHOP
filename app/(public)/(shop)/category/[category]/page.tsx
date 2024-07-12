@@ -66,28 +66,28 @@ async function loadProducts(category: string, page: number) {
 	);
 }
 
-/*
-async function loadPagination(query: DocumentNode, category: string, sex: string, page: number) {
-	const data = await fetchProducts(query, category, page);
+async function loadPagination(category: string, page: number) {
+	const data = await fetchProducts(category, page);
 	if (!data) return null;
 
 	return (
 		<Pagination currentPage={Number(page)} pagesCount={Number(data.meta.pagination.pageCount)} />
 	);
-}*/
+}
 
 export default async function ShopPage({
-	params
+	params,
+	searchParams
 }: {
 	params: {
 		category: string;
-		searchParams?: {
-			page?: number;
-		};
+	};
+	searchParams?: {
+		page?: number;
 	};
 }) {
 	revalidatePath("/category/[category]", "page");
-	const { category, searchParams } = params;
+	const { category } = params;
 	const page = searchParams?.page || 1;
 
 	return (
@@ -111,6 +111,7 @@ export default async function ShopPage({
 					{loadProducts(category, page)}
 				</Suspense>
 			</Grid>
+			<Suspense>{loadPagination(category, page)}</Suspense>
 		</main>
 	);
 }

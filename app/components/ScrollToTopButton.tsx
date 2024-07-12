@@ -41,7 +41,7 @@ export default function ScrollToTopButton() {
 		if (button) {
 			if (windowBottom > footerTop) {
 				button.style.position = "absolute";
-				button.style.bottom = `5rem`;
+				button.style.bottom = `7rem`;
 			} else {
 				button.style.position = "fixed";
 				button.style.bottom = "1rem";
