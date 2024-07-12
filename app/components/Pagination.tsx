@@ -44,7 +44,11 @@ export default function Pagination({ pagesCount, currentPage }: PaginationProps)
 
 	return (
 		<div className=" flex w-full items-center justify-center gap-1 lg:gap-2">
-			<Link key={"pageBefore"} href={createPageLink(currentPage - 1 > 0 ? currentPage - 1 : 1)}>
+			<Link
+				key={"pageBefore"}
+				href={createPageLink(currentPage - 1 > 0 ? currentPage - 1 : 1)}
+				scroll={false}
+			>
 				<button
 					disabled={currentPage - 1 <= 0}
 					className={`flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center border-2
@@ -59,6 +63,7 @@ export default function Pagination({ pagesCount, currentPage }: PaginationProps)
 				<Link
 					key={page}
 					href={createPageLink(page)}
+					scroll={false}
 					className={`${page != currentPage ? "hidden lg:flex" : "flex"}`}
 				>
 					<button
@@ -73,6 +78,7 @@ export default function Pagination({ pagesCount, currentPage }: PaginationProps)
 
 			<Link
 				key={"pageAfter"}
+				scroll={false}
 				href={createPageLink(currentPage + 1 <= pagesCount ? currentPage + 1 : pagesCount)}
 			>
 				<button
