@@ -24,7 +24,6 @@ export default function ScrollToTopButton() {
 	useEffect(() => {
 		const handleScroll = () => {
 			toggleVisibility();
-			adjustButtonPosition();
 		};
 
 		window.addEventListener("scroll", handleScroll);
@@ -33,26 +32,10 @@ export default function ScrollToTopButton() {
 		};
 	}, []);
 
-	const adjustButtonPosition = () => {
-		const button = buttonRef.current;
-		const footer = document.querySelector("footer");
-		const footerTop = (footer?.getBoundingClientRect().top || 0) + window.scrollY;
-		const windowBottom = window.scrollY + window.innerHeight;
-		if (button) {
-			if (windowBottom > footerTop) {
-				button.style.position = "absolute";
-				button.style.bottom = `5rem`;
-			} else {
-				button.style.position = "fixed";
-				button.style.bottom = "1rem";
-			}
-		}
-	};
-
 	return (
 		<IconButton
 			ref={buttonRef}
-			className={`scroll-to-top-button fixed right-4 h-12 w-12 cursor-pointer border-2 border-solid border-red-600 bg-zinc-950 font-bold text-white transition  ${
+			className={`scroll-to-top-button fixed bottom-4 right-4 h-12 w-12 cursor-pointer border-2 border-solid border-red-600 bg-zinc-950 font-bold text-white transition  ${
 				isVisible ? "opacity-100" : "opacity-0"
 			}`}
 			title="Go to top"

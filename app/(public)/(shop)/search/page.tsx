@@ -6,9 +6,9 @@ import { QueryResult } from "../../../queries/productType";
 import { GET_SEARCH_PRODUCTS, GET_SEARCH_PRODUCTS_COUNT } from "../../../queries/search";
 
 import { Metadata } from "next";
-import SearchPagination from "../../../components/SearchPagination";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../components/SkeletonProductDisplay";
+import Pagination from "../../../components/Pagination";
 
 export const metadata: Metadata = {
 	title: "N3XT | Search results"
@@ -74,7 +74,7 @@ async function loadPagination(query: string, currPage: number) {
 	if (!data) return null;
 
 	return (
-		<SearchPagination
+		<Pagination
 			currentPage={Number(currPage)}
 			pagesCount={Number(data.meta.pagination.pageCount)}
 		/>
