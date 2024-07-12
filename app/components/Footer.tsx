@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
 	return (
-		<footer className="flex w-full flex-col items-center justify-between gap-2 border-t-8 border-zinc-800 bg-zinc-900 p-4 text-sm text-zinc-300 lg:flex-row lg:gap-0">
+		<footer className="flex  w-full flex-col items-center justify-between gap-2 border-t-8 border-zinc-800 bg-zinc-900 p-4 text-sm text-zinc-300 lg:flex-row lg:gap-0 lg:px-[6rem]">
 			<p className="lg:w-1/3">Copyright © 2024 Ephonix Inc. All rights reserved.</p>
 			<nav className="flex items-center justify-center gap-3 lg:w-1/3">
 				<Link href="/terms" title="terms and conditions" className="hover:text-white">
