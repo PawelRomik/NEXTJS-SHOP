@@ -12,9 +12,9 @@ export const GET_SEARCH_PRODUCTS = gql`
 				attributes {
 					name
 					price
-					onSale
+					desc
 					salePrice
-					image {
+					images {
 						data {
 							attributes {
 								url
@@ -40,33 +40,15 @@ export const GET_SEARCH_PRODUCTS = gql`
 `;
 
 export const GET_SEARCH_PRODUCTS_COUNT = gql`
-	query getProducts($name: String!) {
+	query getProductsCount($name: String!, $page: Int) {
 		products(
-			pagination: { limit: 100 }
+			pagination: { page: $page, pageSize: 8 }
 			sort: "createdAt:desc"
 			filters: { name: { contains: $name } }
 		) {
-			data {
-				id
-				attributes {
-					name
-					price
-					onSale
-					salePrice
-					image {
-						data {
-							attributes {
-								url
-							}
-						}
-					}
-					categories {
-						data {
-							attributes {
-								name
-							}
-						}
-					}
+			meta {
+				pagination {
+					total
 				}
 			}
 		}

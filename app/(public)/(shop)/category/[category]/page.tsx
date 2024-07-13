@@ -92,11 +92,8 @@ export default async function ShopPage({
 
 	return (
 		<main className=" w-full bg-zinc-950 p-6">
-			<h1 className="pl-6 text-4xl font-bold capitalize text-red-600">
-				<span>
-					<i className="ri-arrow-right-double-fill"></i>
-					{category + "s"}
-				</span>
+			<h1 className="flex items-center justify-center text-4xl font-bold capitalize text-red-600 lg:justify-start lg:pl-6">
+				<span>{category + "s"}</span>
 			</h1>
 			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
 				<Suspense
