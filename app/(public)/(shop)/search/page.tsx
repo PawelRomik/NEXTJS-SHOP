@@ -1,48 +1,55 @@
-import { ApolloQueryResult } from "@apollo/client";
-import createApolloClient from "../../../../apollo-client";
 import { Grid } from "@radix-ui/themes";
 import ProductDisplay from "../../../components/ProductDisplay";
+import { ApolloQueryResult } from "@apollo/client";
+import createApolloClient from "../../../../apollo-client";
+import { revalidatePath } from "next/cache";
 import { QueryResult } from "../../../queries/productType";
-import { GET_SEARCH_PRODUCTS, GET_SEARCH_PRODUCTS_COUNT } from "../../../queries/search";
-
 import { Metadata } from "next";
+import Pagination from "../../../components/Pagination";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../components/SkeletonProductDisplay";
-import Pagination from "../../../components/Pagination";
+import { GET_SEARCH_PRODUCTS, GET_SEARCH_PRODUCTS_COUNT } from "../../../queries/search";
 
 export const metadata: Metadata = {
 	title: "N3XT | Search results"
 };
 
-async function fetchProducts(query: string, currPage: number, pagination: boolean) {
+async function fetchProducts(query: string, page: number) {
 	const client = createApolloClient();
 	try {
-		if (pagination) {
-			const { data }: ApolloQueryResult<QueryResult> = await client.query({
-				query: GET_SEARCH_PRODUCTS,
-				variables: {
-					name: query,
-					page: Number(currPage)
-				}
-			});
-			return data.products;
-		} else {
-			const { data }: ApolloQueryResult<QueryResult> = await client.query({
-				query: GET_SEARCH_PRODUCTS_COUNT,
-				variables: {
-					name: query
-				}
-			});
-			console.log(data);
-			return data.products;
-		}
+		const { data }: ApolloQueryResult<QueryResult> = await client.query({
+			query: GET_SEARCH_PRODUCTS,
+			variables: {
+				name: query,
+				page: Number(page)
+			}
+		});
+
+		return data.products;
 	} catch {
 		return null;
 	}
 }
 
-async function loadProducts(query: string, currPage: number) {
-	const data = await fetchProducts(query, currPage, true);
+async function loadCount(query: string, page: number) {
+	const client = createApolloClient();
+	try {
+		const { data }: ApolloQueryResult<QueryResult> = await client.query({
+			query: GET_SEARCH_PRODUCTS_COUNT,
+			variables: {
+				name: query,
+				page: Number(page)
+			}
+		});
+
+		return data.products.meta.pagination.total;
+	} catch {
+		return null;
+	}
+}
+
+async function loadProducts(category: string, page: number) {
+	const data = await fetchProducts(category, page);
 	if (!data)
 		return (
 			<p className="col-span-4 row-auto w-full text-center text-3xl font-bold text-zinc-400">
@@ -60,7 +67,7 @@ async function loadProducts(query: string, currPage: number) {
 					desc={product.attributes.desc}
 					price={product.attributes.price}
 					salePrice={product.attributes.salePrice}
-					category={product.attributes.categories.data[1].attributes.name}
+					category={product.attributes.categories.data[0].attributes.name}
 					imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.images.data[0].attributes.url}`}
 					key={product.id}
 				></ProductDisplay>
@@ -69,23 +76,13 @@ async function loadProducts(query: string, currPage: number) {
 	);
 }
 
-async function loadPagination(query: string, currPage: number) {
-	const data = await fetchProducts(query, currPage, true);
+async function loadPagination(category: string, page: number) {
+	const data = await fetchProducts(category, page);
 	if (!data) return null;
 
 	return (
-		<Pagination
-			currentPage={Number(currPage)}
-			pagesCount={Number(data.meta.pagination.pageCount)}
-		/>
+		<Pagination currentPage={Number(page)} pagesCount={Number(data.meta.pagination.pageCount)} />
 	);
-}
-
-async function loadCount(query: string, currPage: number) {
-	const data = await fetchProducts(query, currPage, false);
-	if (!data) return null;
-
-	return data.data.length;
 }
 
 export default async function SearchPage({
@@ -96,22 +93,27 @@ export default async function SearchPage({
 		page?: number;
 	};
 }) {
-	const query = searchParams?.query || "";
-	const currPage = searchParams?.page || 1;
+	revalidatePath("/search", "page");
+	const query = searchParams?.query;
+	const page = searchParams?.page || 1;
+
+	if (!query) return null;
 
 	return (
-		<main className="flex-1 p-6	">
-			<h1 className="flex items-center pl-6 text-4xl font-bold">
+		<main className=" w-full bg-zinc-950 p-6">
+			<h1 className="flex items-center justify-center text-3xl font-bold text-red-600 lg:justify-start lg:pl-6 lg:text-4xl">
 				<Suspense>
-					<span className="mr-2 rounded-full border-2 border-black px-3 text-2xl">
-						{loadCount(query, currPage)}
+					<span className="mr-2 rounded-full border-4 border-red-600 px-3 text-xl text-white lg:px-[0.75rem] lg:text-2xl">
+						{loadCount(query, page)}
 					</span>
 				</Suspense>
 
-				<span>Matches for &quot;{query}&quot;</span>
+				<span>
+					Matches for
+					<span className="text-white">{" " + query}</span>
+				</span>
 			</h1>
-
-			<Grid gap="4" width="auto" className="grid-cols-1 p-6 md:grid-cols-2 lg:grid-cols-4">
+			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
 				<Suspense
 					fallback={
 						<>
@@ -121,10 +123,10 @@ export default async function SearchPage({
 						</>
 					}
 				>
-					{loadProducts(query, currPage)}
+					{loadProducts(query, page)}
 				</Suspense>
 			</Grid>
-			<Suspense>{loadPagination(query, currPage)}</Suspense>
+			<Suspense>{loadPagination(query, page)}</Suspense>
 		</main>
 	);
 }

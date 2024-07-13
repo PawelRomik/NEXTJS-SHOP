@@ -9,9 +9,7 @@ export default function SearchBar() {
 	const [inputValue, setInputValue] = useState("");
 	const [searchInputOpen, setSearchInputOpen] = useState(false);
 
-	/*
 	const handleSearch = () => {
-		setInputVisibility(false);
 		const params = new URLSearchParams(searchParams);
 		if (inputValue) {
 			params.set("query", inputValue);
@@ -23,14 +21,11 @@ export default function SearchBar() {
 		}
 	};
 
-	
-
 	const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === "Enter") {
 			handleSearch();
 		}
 	};
-	*/
 
 	const handleInputChange = (term: string) => {
 		setInputValue(term);
@@ -48,8 +43,8 @@ export default function SearchBar() {
 	return (
 		<div className="flex h-full items-center justify-center">
 			{searchInputOpen && (
-				<div className="animate-showSearchbar absolute right-0 top-0 z-10 flex h-full w-[80vw] origin-right items-center justify-center lg:w-1/4">
-					<button onClick={closeSearchBar} className="h-full  bg-zinc-900 p-2 outline-none">
+				<div className="absolute right-0 top-0 z-10 flex h-full w-[80vw] origin-right animate-showSearchbar items-center justify-center lg:w-1/4">
+					<button onClick={handleSearch} className="h-full  bg-zinc-900 p-2 outline-none">
 						<i className="ri-search-line pl-1 text-xl"></i>
 					</button>
 					<input
@@ -63,6 +58,7 @@ export default function SearchBar() {
 						onChange={(e) => {
 							handleInputChange(e.target.value);
 						}}
+						onKeyUp={handleKeyPress}
 					></input>
 					<button onClick={closeSearchBar} className="h-full bg-zinc-900 p-2 outline-none">
 						<i className="ri-close-line pr-1 text-xl"></i>

@@ -42,6 +42,7 @@ export type QueryResult = {
 		meta: {
 			pagination: {
 				pageCount: number;
+				total: number;
 			};
 		};
 	};
