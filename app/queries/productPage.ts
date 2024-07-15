@@ -9,9 +9,9 @@ export const GET_PRODUCT_BY_ID = gql`
 					name
 					price
 					salePrice
-					onSale
 					desc
-					image {
+					technical
+					images {
 						data {
 							attributes {
 								url
@@ -26,10 +26,36 @@ export const GET_PRODUCT_BY_ID = gql`
 							}
 						}
 					}
-					sexes {
+				}
+			}
+		}
+	}
+`;
+
+export const GET_OTHER_PRODUCTS = gql`
+	query getProducts($productId: ID!, $category: String!) {
+		products(
+			pagination: { limit: 5 }
+			filters: { categories: { slug: { eq: $category } }, id: { ne: $productId } }
+		) {
+			data {
+				id
+				attributes {
+					name
+					price
+					salePrice
+					desc
+					images {
 						data {
 							attributes {
-								sex
+								url
+							}
+						}
+					}
+					categories {
+						data {
+							attributes {
+								name
 							}
 						}
 					}

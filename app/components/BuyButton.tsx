@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/cardReducer";
 import { SignUpButton, SignedIn } from "@clerk/nextjs";
 import { SignedOut } from "@clerk/nextjs";
-import Link from "next/link";
 
 type BuyButtonsProps = {
 	currProductProp: any;
@@ -16,7 +15,7 @@ export default function BuyButton({ currProductProp }: BuyButtonsProps) {
 		<>
 			<SignedIn>
 				<button
-					className="w-[10rem] rounded-full bg-black p-4 text-white
+					className="w-[10rem] bg-red-600 p-2 text-white
 lg:h-full lg:w-full"
 					onClick={() =>
 						dispatch(
@@ -24,17 +23,16 @@ lg:h-full lg:w-full"
 								id: currProductProp.id,
 								name: currProductProp.attributes.name,
 								desc: currProductProp.attributes.desc,
-								price: currProductProp.attributes.onSale
+								price: currProductProp.attributes.salePrice
 									? currProductProp.attributes.salePrice
 									: currProductProp.attributes.price,
 								image: currProductProp.attributes.image.data.attributes.url,
-								onSale: currProductProp.attributes.onSale,
 								quantity: 1
 							})
 						)
 					}
 				>
-					BUY
+					DODAJ DO KOSZYKA
 				</button>
 			</SignedIn>
 			<SignedOut>
