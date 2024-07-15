@@ -6,6 +6,7 @@ type ProductData = {
 		desc: string;
 		salePrice: number;
 		onSale: boolean;
+		technical: string;
 		images: {
 			data: {
 				attributes: {

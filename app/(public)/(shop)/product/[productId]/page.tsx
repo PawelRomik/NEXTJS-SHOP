@@ -1,12 +1,15 @@
-import SizePicker from "../../../../components/SizePicker";
 import Image from "next/image";
 import { ApolloQueryResult } from "@apollo/client";
 import createApolloClient from "../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
 import BuyButton from "../../../../components/BuyButton";
 import { QueryResultSingle } from "../../../../queries/productType";
-import { GET_PRODUCT_BY_ID } from "../../../../queries/productPage";
+import { GET_OTHER_PRODUCTS, GET_PRODUCT_BY_ID } from "../../../../queries/productPage";
 import { Metadata } from "next";
+import ProductDisplay from "../../../../components/ProductDisplay";
+import { QueryResult } from "../../../../queries/productType";
+import ScrollBuyButton from "../../../../components/ScrollBuyButton";
+import ProductNavigationButtons from "../../../../components/ProductNavigationButtons";
 
 async function fetchProduct(productId: string) {
 	const client = createApolloClient();
@@ -31,114 +34,222 @@ export async function generateMetadata({
 	const product = await fetchProduct(productId);
 
 	return {
-		title: `N3XT | ${product.attributes.name}`
+		title: `${product.attributes.name} | Ephonix`
 	};
 }
 
 export default async function ProductPage({ params }: { params: { productId: string } }) {
+	async function fetchProducts(productId: string, category: string) {
+		const client = createApolloClient();
+		try {
+			const { data }: ApolloQueryResult<QueryResult> = await client.query({
+				query: GET_OTHER_PRODUCTS,
+				variables: {
+					productId: productId,
+					category: category
+				}
+			});
+
+			return data.products;
+		} catch {
+			return null;
+		}
+	}
+
+	async function loadProducts(productId: string, category: string) {
+		const data = await fetchProducts(productId, category);
+		if (!data)
+			return (
+				<p className="col-span-4 row-auto w-full text-center text-3xl font-bold text-zinc-400">
+					<i className="ri-error-warning-line"></i> An error occurred while loading products, please
+					try again later.
+				</p>
+			);
+
+		return (
+			<>
+				{data.data.map((product) => (
+					<ProductDisplay
+						id={product.id}
+						name={product.attributes.name}
+						desc={product.attributes.desc}
+						price={product.attributes.price}
+						salePrice={product.attributes.salePrice}
+						category={product.attributes.categories.data[0].attributes.name}
+						imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.images.data[0].attributes.url}`}
+						key={product.id}
+					></ProductDisplay>
+				))}
+			</>
+		);
+	}
+
 	revalidatePath("/product/[productId]", "page");
 	const productId = params.productId;
-	const currProduct = await fetchProduct(productId);
+	const currProduct = (await fetchProduct(productId)).attributes;
+	console.log(currProduct.images.data[0].attributes.url);
+
+	const extractText = (text: string) => {
+		const startIndex = text.indexOf("--START--") + "--START--".length;
+		const endIndex = text.indexOf(".");
+		return text.slice(startIndex, endIndex).trim() + ".";
+	};
 
 	if (!currProduct) return;
 
-	return (
-		<div className="flex flex-1 flex-col items-stretch justify-start gap-6  lg:flex-row">
-			<div className="bg-red flex h-full w-full flex-[2_2_0%] flex-col items-start justify-center p-6">
-				<h3 className="text-2xl text-zinc-300 lg:hidden">
-					{currProduct?.attributes.categories.data.map((category, index) => (
-						<span key={index}>
-							{category.attributes.name}
-							{index !== currProduct.attributes.categories.data.length - 1 && (
-								<i className="ri-circle-fill mx-2 align-middle text-[0.5rem]"></i>
+	const sections = currProduct.desc
+		.replace("--START--", "--SECTION--")
+		.replace("--END--", "--SECTION--")
+		.split("--SECTION--")
+		.map((section) => section.trim());
+
+	const renderSections = () => {
+		return sections.map((section, index) => {
+			let imageFirst = false;
+
+			if (section.trim() === "") {
+				return null;
+			}
+			const parts = section.split("\n");
+			if (parts[0].startsWith("![")) {
+				imageFirst = true;
+			}
+			const description = parts
+				.filter((part) => !part.startsWith("!["))
+				.map((part) => {
+					if (part.startsWith("-")) {
+						return `<li>${part.substring(1).trim()}</li>`;
+					} else if (part.startsWith("**") && part.endsWith("**")) {
+						return `<strong>${part.substring(2, part.length - 2)}</strong>`;
+					} else {
+						return part;
+					}
+				})
+				.join("\n");
+
+			let imageUrl = "";
+			parts.forEach((part) => {
+				if (part.startsWith("![")) {
+					imageUrl = part.substring(part.indexOf("(") + 1, part.indexOf(")"));
+				}
+			});
+
+			return (
+				<div key={index} className="flex items-center justify-between gap-20  px-32 py-4 text-xl">
+					{imageFirst ? (
+						<>
+							{imageUrl && (
+								<Image
+									width={600}
+									height={600}
+									src={imageUrl}
+									alt="Processor"
+									className="h-full object-contain p-6"
+								/>
 							)}
-						</span>
-					))}
-				</h3>
-				<h1 className="mb-6 mt-3 flex w-full flex-col justify-between  text-4xl font-bold text-black lg:flex-row lg:items-center">
-					<span>{currProduct?.attributes.name}</span>
-					{currProduct.attributes.onSale && (
-						<span className="text-2xl text-red-600 lg:text-4xl">ON SALE</span>
+
+							<div className="description" dangerouslySetInnerHTML={{ __html: description }} />
+						</>
+					) : (
+						<>
+							<div className="description" dangerouslySetInnerHTML={{ __html: description }} />
+							{imageUrl && (
+								<Image
+									width={600}
+									height={600}
+									src={imageUrl}
+									alt="Processor"
+									className="h-full object-contain p-6"
+								/>
+							)}
+						</>
 					)}
-				</h1>
-				<div className="flex h-full w-full items-center justify-center border-2 bg-zinc-100">
+				</div>
+			);
+		});
+	};
+
+	const lines = currProduct.technical.trim().split("\n");
+
+	const tableRows = lines.map((line, index) => {
+		const parts = line.split(" | ");
+
+		return (
+			<tr key={index} className="w-full">
+				<td className=" w-[30%] border-2 border-red-600  p-2">{parts[0]}:</td>
+				<td className=" w-[70%] border-2 border-red-600  p-2">{parts[1]}</td>
+			</tr>
+		);
+	});
+
+	return (
+		<main className=" flex w-full flex-col gap-3 bg-zinc-950">
+			<ScrollBuyButton currProductProp={currProduct} />
+			<ProductNavigationButtons />
+			<section id="product" className=" relative flex w-full  gap-3">
+				<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
+					Produkt
+				</h2>
+				<div className="flex flex-[60%] items-center justify-center bg-black">
 					<Image
-						width={400}
-						height={400}
-						src={`${process.env.NEXT_PUBLIC_PROD_PATH}${currProduct?.attributes.images.data[0].attributes.url}`}
-						alt={currProduct?.attributes.name}
-						className="w-[100%] object-cover p-10 lg:w-[50%]"
-					></Image>
+						width={600}
+						height={600}
+						src={`${process.env.NEXT_PUBLIC_PROD_PATH}${currProduct.images.data[0].attributes.url}`}
+						alt={currProduct.name}
+						className="h-[100%] object-contain p-6"
+					/>
 				</div>
-				<div className="mt-3 flex w-full flex-col items-center justify-center gap-3 lg:hidden">
-					<SizePicker />
-					<div className="flex items-center justify-center gap-6">
+
+				<div className="flex flex-[40%] flex-col justify-between  bg-black px-20 py-32 text-white">
+					<div className="flex flex-col gap-3">
+						<h1 className="text-4xl font-bold uppercase">{currProduct.name}</h1>
+						<h2 className="uppercase text-red-600">
+							{currProduct.categories.data[0].attributes.name}
+						</h2>
+						<p>{extractText(currProduct.desc)}</p>
+					</div>
+					<div className="flex flex-col justify-center gap-3">
+						<p className="text-3xl font-bold">PLN {currProduct.price}</p>
 						<BuyButton currProductProp={currProduct} />
-						<p className="flex flex-col font-bold">
-							<span
-								className={
-									currProduct.attributes.onSale
-										? "font-bold line-through decoration-red-600 decoration-4"
-										: "font-bold"
-								}
-							>
-								{currProduct?.attributes.price}zł
-							</span>
-							{currProduct.attributes.onSale && (
-								<span className="text-2xl text-red-600">{currProduct?.attributes.salePrice}zł</span>
-							)}
-						</p>
 					</div>
 				</div>
+			</section>
 
-				<div className="flex flex-col">
-					<h2 className="my-6 border-b-2 pb-2 text-4xl font-bold">About</h2>
-					<p>{currProduct?.attributes.desc}</p>
-					<h2 className="my-6 border-b-2 pb-2 text-4xl font-bold">Check other products!</h2>
-				</div>
-			</div>
-
-			<div
-				className="right-0 top-0 hidden 
-flex-1 bg-zinc-900 p-6 pl-20 lg:flex"
+			<section
+				id="description"
+				className="relative flex flex-col gap-3  bg-black  py-24  text-white"
 			>
-				<div className="sticky top-[25%] flex h-full max-h-[30%] flex-col justify-around">
-					<div className="flex flex-col items-start justify-center gap-1">
-						<h3 className="hidden text-2xl text-zinc-300 lg:block ">
-							{currProduct?.attributes.categories.data.map((category, index) => (
-								<span key={index}>
-									{category.attributes.name}
-									{index !== currProduct.attributes.categories.data.length - 1 && (
-										<i className="ri-circle-fill mx-2 align-middle text-[0.5rem]"></i>
-									)}
-								</span>
-							))}
-						</h3>
-						<h1 className="hidden text-4xl font-bold text-white lg:block">
-							{currProduct?.attributes.name}
-						</h1>
-						<h3 className="text-1xlfont-bold flex gap-3 italic text-white">
-							<span
-								className={
-									currProduct.attributes.onSale
-										? "line-through decoration-red-600 decoration-4"
-										: ""
-								}
-							>
-								{currProduct?.attributes.price}zł
-							</span>
+				<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
+					Opis
+				</h2>
+				{renderSections()}
+			</section>
 
-							<span className="text-2xl font-bold text-red-600">
-								{currProduct.attributes.onSale ? `${currProduct?.attributes.salePrice}zł` : null}
-							</span>
-						</h3>
-					</div>
-					<SizePicker />
-					<div className="flex w-full items-center justify-center">
-						<BuyButton currProductProp={currProduct} />
+			<section
+				id="technical"
+				className="relative flex w-full flex-col bg-black   p-3 pt-24 text-white "
+			>
+				<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
+					Techniczne
+				</h2>
+				<table className=" w-full">
+					<tbody className="w-full">{tableRows}</tbody>
+				</table>
+			</section>
+
+			<section
+				id="others"
+				className="relative flex w-full flex-col bg-black  p-3  pt-24 text-white "
+			>
+				<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
+					Inne Produkty
+				</h2>
+				<div className="relative h-[400px] w-full overflow-hidden lg:static lg:flex-1">
+					<div className="absolute left-0 top-0 flex max-w-[100%] gap-6 overflow-x-auto lg:static">
+						{loadProducts(productId, currProduct.categories.data[0].attributes.slug)}
 					</div>
 				</div>
-			</div>
-		</div>
+			</section>
+		</main>
 	);
 }

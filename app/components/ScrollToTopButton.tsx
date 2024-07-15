@@ -35,7 +35,7 @@ export default function ScrollToTopButton() {
 	return (
 		<IconButton
 			ref={buttonRef}
-			className={`scroll-to-top-button fixed bottom-4 right-4 h-12 w-12 cursor-pointer border-2 border-solid border-red-600 bg-zinc-950 font-bold text-white transition  ${
+			className={`scroll-to-top-button fixed bottom-4 right-4 z-20 h-12 w-12 cursor-pointer border-2 border-solid border-red-600 bg-zinc-950 font-bold text-white transition  ${
 				isVisible ? "opacity-100" : "opacity-0"
 			}`}
 			title="Go to top"
