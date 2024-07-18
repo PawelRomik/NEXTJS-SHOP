@@ -58,13 +58,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 
 	async function loadProducts(productId: string, category: string) {
 		const data = await fetchProducts(productId, category);
-		if (!data)
-			return (
-				<p className="col-span-4 row-auto w-full text-center text-3xl font-bold text-zinc-400">
-					<i className="ri-error-warning-line"></i> An error occurred while loading products, please
-					try again later.
-				</p>
-			);
+		if (!data) return null;
 
 		return (
 			<>
@@ -78,6 +72,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 						category={product.attributes.categories.data[0].attributes.name}
 						imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.images.data[0].attributes.url}`}
 						key={product.id}
+						type={"fixed"}
 					></ProductDisplay>
 				))}
 			</>
@@ -135,7 +130,10 @@ export default async function ProductPage({ params }: { params: { productId: str
 			});
 
 			return (
-				<div key={index} className="flex items-center justify-between gap-20  px-32 py-4 text-xl">
+				<div
+					key={index}
+					className="flex flex-col items-center justify-between gap-20 px-6 py-4  text-xl lg:flex-row lg:px-32"
+				>
 					{imageFirst ? (
 						<>
 							{imageUrl && (
@@ -186,11 +184,11 @@ export default async function ProductPage({ params }: { params: { productId: str
 		<main className=" flex w-full flex-col gap-3 bg-zinc-950">
 			<ScrollBuyButton currProductProp={currProduct} />
 			<ProductNavigationButtons />
-			<section id="product" className=" relative flex w-full  gap-3">
-				<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
+			<section id="product" className=" relative flex w-full flex-col lg:flex-row  lg:gap-3">
+				<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-2 px-10 text-2xl font-bold text-red-600">
 					Produkt
 				</h2>
-				<div className="flex flex-[60%] items-center justify-center bg-black">
+				<div className="flex flex-[60%] items-center justify-center bg-black pt-12">
 					<Image
 						width={600}
 						height={600}
@@ -200,7 +198,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 					/>
 				</div>
 
-				<div className="flex flex-[40%] flex-col justify-between  bg-black px-20 py-32 text-white">
+				<div className="flex flex-[40%] flex-col justify-between  bg-black px-6 py-6 text-white lg:px-20 lg:py-32">
 					<div className="flex flex-col gap-3">
 						<h1 className="text-4xl font-bold uppercase">{currProduct.name}</h1>
 						<h2 className="uppercase text-red-600">
@@ -208,7 +206,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 						</h2>
 						<p>{extractText(currProduct.desc)}</p>
 					</div>
-					<div className="flex flex-col justify-center gap-3">
+					<div className="mr-4 flex flex-col items-end justify-center gap-3 lg:items-start">
 						<p className="text-3xl font-bold">PLN {currProduct.price}</p>
 						<BuyButton currProductProp={currProduct} />
 					</div>
@@ -244,8 +242,8 @@ export default async function ProductPage({ params }: { params: { productId: str
 				<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
 					Inne Produkty
 				</h2>
-				<div className="relative h-[400px] w-full overflow-hidden lg:static lg:flex-1">
-					<div className="absolute left-0 top-0 flex max-w-[100%] gap-6 overflow-x-auto lg:static">
+				<div className="relative w-full overflow-hidden lg:static lg:flex-1">
+					<div className="flex gap-6 overflow-x-auto py-2 lg:static">
 						{loadProducts(productId, currProduct.categories.data[0].attributes.slug)}
 					</div>
 				</div>

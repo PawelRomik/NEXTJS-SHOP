@@ -36,8 +36,10 @@ export default function ScrollBuyButton({ currProductProp }: BuyButtonsProps) {
 				isVisible ? "opacity-100" : "opacity-0"
 			}`}
 		>
-			<div className="absolute right-[6rem] flex h-full items-center justify-center gap-3 text-white">
-				<p className=" text-3xl font-bold">PLN {currProductProp.price}</p>
+			<div className="absolute right-[5rem] flex h-full items-center justify-center gap-3 text-white lg:right-[6rem]">
+				<p className=" text-xl font-bold lg:text-3xl">
+					PLN {currProductProp.salePrice ? currProductProp.salePrice : currProductProp.price}
+				</p>
 				<div className="w-[200px]">
 					<BuyButton currProductProp={currProductProp} />
 				</div>
