@@ -1,15 +1,34 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import BuyButton from "./BuyButton";
+import { ApolloQueryResult } from "@apollo/client";
+import { QueryResultSingle } from "../queries/productType";
+import { GET_PRODUCT_PRICE } from "../queries/productPage";
+import createApolloClient from "../../apollo-client";
 
 type BuyButtonsProps = {
-	currProductProp: any;
+	productId: string;
 };
 
-export default function ScrollBuyButton({ currProductProp }: BuyButtonsProps) {
+export default function ScrollBuyButton({ productId }: BuyButtonsProps) {
+	const client = createApolloClient();
 	const [isVisible, setIsVisible] = useState(false);
-	const others = document.getElementById("others");
-	console.log(others);
+
+	async function getProductPrice() {
+		const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
+			query: GET_PRODUCT_PRICE,
+			variables: {
+				productId: productId
+			}
+		});
+
+		const currProduct = data.product.data.attributes;
+		return (
+			<p className=" text-xl font-bold lg:text-3xl">
+				PLN {currProduct.salePrice ? currProduct.salePrice : currProduct.price}
+			</p>
+		);
+	}
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -37,11 +56,9 @@ export default function ScrollBuyButton({ currProductProp }: BuyButtonsProps) {
 			}`}
 		>
 			<div className="absolute right-[5rem] flex h-full items-center justify-center gap-3 text-white lg:right-[6rem]">
-				<p className=" text-xl font-bold lg:text-3xl">
-					PLN {currProductProp.salePrice ? currProductProp.salePrice : currProductProp.price}
-				</p>
 				<div className="w-[200px]">
-					<BuyButton currProductProp={currProductProp} />
+					<Suspense>{getProductPrice()}</Suspense>
+					<BuyButton productId={productId} />
 				</div>
 			</div>
 		</div>

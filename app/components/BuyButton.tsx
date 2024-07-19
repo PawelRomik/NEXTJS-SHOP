@@ -3,30 +3,44 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/cardReducer";
 import { SignUpButton, SignedIn } from "@clerk/nextjs";
 import { SignedOut } from "@clerk/nextjs";
+import { ApolloQueryResult } from "@apollo/client";
+import { QueryResultSingle } from "../queries/productType";
+import createApolloClient from "../../apollo-client";
+import { GET_PRODUCT_ALLDATA } from "../queries/productPage";
+import { Suspense } from "react";
 
 type BuyButtonsProps = {
-	currProductProp: any;
+	productId: string;
 };
 
-export default function BuyButton({ currProductProp }: BuyButtonsProps) {
+export default function BuyButton({ productId }: BuyButtonsProps) {
 	const dispatch = useDispatch();
+	const client = createApolloClient();
 
-	return (
-		<>
-			<SignedIn>
+	const getProductData = async () => {
+		try {
+			const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
+				query: GET_PRODUCT_ALLDATA,
+				variables: {
+					productId: productId
+				}
+			});
+
+			const currProduct = data.product.data;
+			return (
 				<button
 					className="w-[10rem] bg-red-600 p-2 text-white
 lg:h-full lg:w-full"
 					onClick={() =>
 						dispatch(
 							addToCart({
-								id: currProductProp.id,
-								name: currProductProp.attributes.name,
-								desc: currProductProp.attributes.desc,
-								price: currProductProp.attributes.salePrice
-									? currProductProp.attributes.salePrice
-									: currProductProp.attributes.price,
-								image: currProductProp.attributes.image.data.attributes.url,
+								id: currProduct.id,
+								name: currProduct.attributes.name,
+								desc: currProduct.attributes.desc,
+								price: currProduct.attributes.salePrice
+									? currProduct.attributes.salePrice
+									: currProduct.attributes.price,
+								image: currProduct.attributes.images.data[0].attributes.url,
 								quantity: 1
 							})
 						)
@@ -34,6 +48,16 @@ lg:h-full lg:w-full"
 				>
 					DODAJ DO KOSZYKA
 				</button>
+			);
+		} catch {
+			return null;
+		}
+	};
+
+	return (
+		<>
+			<SignedIn>
+				<Suspense>{getProductData()}</Suspense>
 			</SignedIn>
 			<SignedOut>
 				<div className="mt-6 flex w-full flex-col items-center justify-center gap-3">
