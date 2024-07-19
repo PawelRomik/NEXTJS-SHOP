@@ -16,7 +16,6 @@ export default function ProductDisplay({
 	name,
 	price,
 	imageUrl,
-	category,
 	salePrice,
 	desc,
 	id,
