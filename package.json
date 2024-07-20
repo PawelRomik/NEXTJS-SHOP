@@ -16,6 +16,7 @@
 		"@next/mdx": "^14.2.3",
 		"@radix-ui/react-navigation-menu": "^1.1.4",
 		"@radix-ui/react-popover": "^1.0.7",
+		"@radix-ui/react-slot": "^1.1.0",
 		"@radix-ui/react-toast": "^1.1.5",
 		"@radix-ui/themes": "^3.0.2",
 		"@reduxjs/toolkit": "^2.2.5",
@@ -24,9 +25,13 @@
 		"@typescript-eslint/eslint-plugin": "^7.8.0",
 		"@typescript-eslint/parser": "^7.8.0",
 		"axios": "^1.7.2",
+		"class-variance-authority": "^0.7.0",
+		"clsx": "^2.1.1",
+		"embla-carousel-react": "^8.1.7",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-import": "^2.29.1",
 		"graphql": "^16.8.1",
+		"lucide-react": "^0.411.0",
 		"next": "14.2.3",
 		"react": "^18",
 		"react-dom": "^18",
@@ -34,7 +39,9 @@
 		"redux-persist": "^6.0.0",
 		"remixicon": "^4.2.0",
 		"stripe": "^15.6.0",
-		"svix": "^1.24.0"
+		"svix": "^1.24.0",
+		"tailwind-merge": "^2.4.0",
+		"tailwindcss-animate": "^1.0.7"
 	},
 	"devDependencies": {
 		"@types/node": "^20",

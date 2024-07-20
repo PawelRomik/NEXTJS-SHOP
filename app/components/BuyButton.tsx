@@ -65,7 +65,10 @@ lg:h-full lg:w-full"
 						You must be logged in to add a product to the cart.
 					</p>
 					<SignUpButton>
-						<button className="w-[10rem] rounded-full bg-black p-4 text-white lg:h-full lg:w-full">
+						<button
+							className="w-[10rem] bg-zinc-900 p-2 font-bold text-white
+lg:h-full lg:w-full"
+						>
 							Login
 						</button>
 					</SignUpButton>
