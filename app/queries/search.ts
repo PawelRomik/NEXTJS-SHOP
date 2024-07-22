@@ -92,7 +92,7 @@ export const GET_SEARCH_PRODUCTS_COUNT = gql`
 
 export const GET_KEYWORDS = gql`
 	query getFancyWords($name: String!) {
-		fancywords(pagination: { limit: 5 }, filters: { name: { containsi: $name } }) {
+		fancywords(pagination: { limit: 5 }, filters: { name: { startsWith: $name } }) {
 			data {
 				id
 				attributes {
@@ -105,7 +105,7 @@ export const GET_KEYWORDS = gql`
 
 export const GET_CATEGORY = gql`
 	query getCategory($name: String!) {
-		categories(pagination: { limit: 5 }, filters: { name: { containsi: $name } }) {
+		categories(pagination: { limit: 5 }, filters: { name: { startsWith: $name } }) {
 			data {
 				id
 				attributes {
