@@ -1,13 +1,26 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import createApolloClient from "../../apollo-client";
+import { ApolloQueryResult } from "@apollo/client";
+import { CategoriesData, KeywordsData } from "../queries/productType";
+import { GET_CATEGORY, GET_KEYWORDS } from "../queries/search";
+import Link from "next/link";
+
+type searchWordsType = {
+	id: string;
+	attributes: {
+		name: string;
+	};
+};
 
 export default function SearchBar() {
 	const searchParams = useSearchParams();
 	const router = useRouter();
 	const [inputValue, setInputValue] = useState("");
 	const [searchInputOpen, setSearchInputOpen] = useState(false);
+	const [searchWords, setSearchWords] = useState<searchWordsType[]>();
 
 	const handleSearch = () => {
 		const params = new URLSearchParams(searchParams);
@@ -40,30 +53,67 @@ export default function SearchBar() {
 		setInputValue("");
 	};
 
+	useEffect(() => {
+		const getKeywords = async () => {
+			if (inputValue) {
+				const client = createApolloClient();
+				const keywords: ApolloQueryResult<KeywordsData> = await client.query({
+					query: GET_KEYWORDS,
+					variables: {
+						name: inputValue
+					}
+				});
+				const categories: ApolloQueryResult<CategoriesData> = await client.query({
+					query: GET_CATEGORY,
+					variables: {
+						name: inputValue
+					}
+				});
+
+				setSearchWords([...keywords.data.fancywords.data, ...categories.data.categories.data]);
+			} else {
+				setSearchWords([]);
+			}
+		};
+		getKeywords();
+	}, [inputValue]);
+
 	return (
-		<div className="flex h-full items-center justify-center">
+		<div className="flex h-full items-center justify-center overflow-hidden">
 			{searchInputOpen && (
-				<div className="absolute right-0 top-0 z-10 flex h-full w-[80vw] origin-right animate-showSearchbar items-center justify-center lg:w-1/4">
-					<button onClick={handleSearch} className="h-full  bg-zinc-900 p-2 outline-none">
-						<i className="ri-search-line pl-1 text-xl"></i>
-					</button>
-					<input
-						type="text"
-						id="search"
-						name="search"
-						placeholder="Search"
-						className=" h-full w-full bg-zinc-900  p-2 text-xl outline-none"
-						maxLength={100}
-						value={inputValue}
-						onChange={(e) => {
-							handleInputChange(e.target.value);
-						}}
-						onKeyUp={handleKeyPress}
-					></input>
-					<button onClick={closeSearchBar} className="h-full bg-zinc-900 p-2 outline-none">
-						<i className="ri-close-line pr-1 text-xl"></i>
-					</button>
-				</div>
+				<>
+					<div className="animate-showSearchbar absolute right-0 top-0 z-10 flex h-full w-[80vw] origin-right items-center justify-center lg:w-1/4">
+						<button onClick={handleSearch} className="h-full  bg-zinc-900 p-2 outline-none">
+							<i className="ri-search-line pl-1 text-xl"></i>
+						</button>
+						<input
+							type="text"
+							id="search"
+							name="search"
+							placeholder="Search"
+							className=" h-full w-full bg-zinc-900  p-2 text-xl outline-none"
+							maxLength={100}
+							value={inputValue}
+							onChange={(e) => {
+								handleInputChange(e.target.value);
+							}}
+							onKeyUp={handleKeyPress}
+						></input>
+						<button onClick={closeSearchBar} className="h-full bg-zinc-900 p-2 outline-none">
+							<i className="ri-close-line pr-1 text-xl"></i>
+						</button>
+					</div>
+					<div className="absolute right-0 top-[100%] w-[100vw] overflow-hidden border-b-[3px] border-red-600 bg-zinc-800 lg:w-1/4 lg:border-l-[3px]">
+						{searchWords &&
+							searchWords.map((word) => (
+								<div key={word.attributes.name} className="p-4 text-zinc-400">
+									<Link href={`/search?query=${word.attributes.name}&page=1`}>
+										<p className="hover:text-red-600">{word.attributes.name}</p>
+									</Link>
+								</div>
+							))}
+					</div>
+				</>
 			)}
 
 			{!searchInputOpen && (

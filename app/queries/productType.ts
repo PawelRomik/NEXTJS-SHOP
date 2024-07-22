@@ -32,6 +32,28 @@ type ProductData = {
 	};
 };
 
+export type KeywordsData = {
+	fancywords: {
+		data: {
+			id: string;
+			attributes: {
+				name: string;
+			};
+		}[];
+	};
+};
+
+export type CategoriesData = {
+	categories: {
+		data: {
+			id: string;
+			attributes: {
+				name: string;
+			};
+		}[];
+	};
+};
+
 export type QueryResultSingle = {
 	product: {
 		data: ProductData;
