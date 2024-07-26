@@ -9,6 +9,7 @@ import { Metadata } from "next";
 import Pagination from "../../../../components/Pagination";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
+import ProductFIlters from "../../../../components/ProductFilters";
 
 export async function generateMetadata({
 	params
@@ -95,6 +96,7 @@ export default async function ShopPage({
 			<h1 className="flex items-center justify-center text-4xl font-bold capitalize text-red-600 lg:justify-start lg:pl-6">
 				<span>{category + "s"}</span>
 			</h1>
+			<ProductFIlters />
 			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
 				<Suspense
 					fallback={

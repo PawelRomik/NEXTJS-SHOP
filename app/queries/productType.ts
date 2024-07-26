@@ -43,6 +43,24 @@ export type KeywordsData = {
 	};
 };
 
+export type FiltersData = {
+	filters: {
+		data: {
+			id: string;
+			attributes: {
+				name: string;
+				tags: {
+					data: {
+						attributes: {
+							name: string;
+						};
+					}[];
+				};
+			};
+		}[];
+	};
+};
+
 export type CategoriesData = {
 	categories: {
 		data: {
