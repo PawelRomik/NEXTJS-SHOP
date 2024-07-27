@@ -40,11 +40,11 @@ export const GET_NEW_PRODUCTS = gql`
 `;
 
 export const GET_PRODUCTS_BY_CATEGORIES = gql`
-	query getProducts($category: String!, $page: Int) {
+	query getProducts($category: String!, $page: Int!, $tags: [String]) {
 		products(
 			pagination: { page: $page, pageSize: 8 }
 			sort: "createdAt:desc"
-			filters: { categories: { slug: { eq: $category } } }
+			filters: { categories: { slug: { eq: $category } }, tags: { name: { in: $tags } } }
 		) {
 			data {
 				id
