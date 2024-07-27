@@ -29,7 +29,8 @@ async function fetchProducts(category: string, page: number) {
 			query: GET_PRODUCTS_BY_CATEGORIES,
 			variables: {
 				category: category,
-				page: Number(page)
+				page: Number(page),
+				tags: ["Intel", "Ryzen"]
 			}
 		});
 
