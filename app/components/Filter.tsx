@@ -24,8 +24,8 @@ export default function FilterComponent({ filter }: FilterProps) {
 				{filter.attributes.tags.data.map((tag, index) => (
 					<div key={index} className="flex items-center justify-start gap-2">
 						<input
-							type="radio"
-							name={filter.attributes.name.toLowerCase()}
+							type="checkbox"
+							name={"tags"}
 							value={tag.attributes.name}
 							className="border-zinc-900 bg-zinc-800"
 						/>

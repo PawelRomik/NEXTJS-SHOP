@@ -10,6 +10,7 @@ import Pagination from "../../../../components/Pagination";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
 import ProductFIlters from "../../../../components/ProductFilters";
+import { gql } from "@apollo/client";
 
 export async function generateMetadata({
 	params
@@ -22,16 +23,83 @@ export async function generateMetadata({
 	};
 }
 
-async function fetchProducts(category: string, page: number) {
+async function fetchProducts(
+	category: string,
+	page: number,
+	tags?: string[],
+	sort: string = "latest"
+) {
 	const client = createApolloClient();
-	try {
-		const { data }: ApolloQueryResult<QueryResult> = await client.query({
-			query: GET_PRODUCTS_BY_CATEGORIES,
-			variables: {
-				category: category,
-				page: Number(page),
-				tags: ["Intel", "Ryzen"]
+
+	const getSortOrder = (sortKey: string) => {
+		switch (sortKey) {
+			case "latest":
+				return "createdAt:desc";
+			case "priceLow":
+				return "price:asc";
+			case "priceHigh":
+				return "price:desc";
+			case "nameStart":
+				return "name:asc";
+			case "nameEnd":
+				return "name:desc";
+			default:
+				return "createdAt:desc";
+		}
+	};
+
+	const newQuery = `
+		query getProducts($category: String!, $page: Int!${tags ? ", $tags: [String]" : ""}) {
+			products(
+				pagination: { page: $page, pageSize: 8 }
+				sort: "${getSortOrder(sort)}"
+				filters: { categories: { slug: { eq: $category } }${tags ? ", tags: { name: { in: $tags } } " : ""} }
+			) {
+				data {
+					id
+					attributes {
+						name
+						price
+						desc
+						salePrice
+						images {
+							data {
+								attributes {
+									url
+								}
+							}
+						}
+						categories {
+							data {
+								attributes {
+									name
+								}
+							}
+						}
+					}
+				}
+				meta {
+					pagination {
+						pageCount
+					}
+				}
 			}
+		}
+	`;
+
+	try {
+		const variables: Record<string, any> = {
+			category,
+			page: Number(page)
+		};
+
+		if (tags) {
+			variables.tags = tags;
+		}
+
+		const { data }: ApolloQueryResult<QueryResult> = await client.query({
+			query: gql(newQuery),
+			variables
 		});
 
 		return data.products;
@@ -40,8 +108,8 @@ async function fetchProducts(category: string, page: number) {
 	}
 }
 
-async function loadProducts(category: string, page: number) {
-	const data = await fetchProducts(category, page);
+async function loadProducts(category: string, page: number, tags?: string[], sort?: string) {
+	const data = await fetchProducts(category, page, tags, sort);
 	if (!data)
 		return (
 			<p className="col-span-4 row-auto w-full text-center text-3xl font-bold text-zinc-400">
@@ -68,8 +136,8 @@ async function loadProducts(category: string, page: number) {
 	);
 }
 
-async function loadPagination(category: string, page: number) {
-	const data = await fetchProducts(category, page);
+async function loadPagination(category: string, page: number, tags?: string[]) {
+	const data = await fetchProducts(category, page, tags);
 	if (!data) return null;
 
 	return (
@@ -86,11 +154,16 @@ export default async function ShopPage({
 	};
 	searchParams?: {
 		page?: number;
+		tags?: string;
+		sort?: string;
 	};
 }) {
 	revalidatePath("/category/[category]", "page");
 	const { category } = params;
 	const page = searchParams?.page || 1;
+	const tagsFromUrl = searchParams?.tags;
+	const tags = tagsFromUrl ? tagsFromUrl.split(",") : undefined;
+	const sort = searchParams?.sort || "latest";
 
 	return (
 		<main className=" w-full bg-zinc-950 p-6">
@@ -108,10 +181,10 @@ export default async function ShopPage({
 						</>
 					}
 				>
-					{loadProducts(category, page)}
+					{loadProducts(category, page, tags, sort)}
 				</Suspense>
 			</Grid>
-			<Suspense>{loadPagination(category, page)}</Suspense>
+			<Suspense>{loadPagination(category, page, tags)}</Suspense>
 		</main>
 	);
 }
