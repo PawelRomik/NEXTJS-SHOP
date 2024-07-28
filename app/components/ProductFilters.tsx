@@ -1,11 +1,15 @@
+"use client";
 import createApolloClient from "../../apollo-client";
 import { GET_FILTERS } from "../queries/filters";
 import { FiltersData } from "../queries/productType";
 import { ApolloQueryResult } from "@apollo/client";
 import FilterComponent from "./Filter";
 import { Suspense } from "react";
+import { useRouter } from "next/navigation";
+import SortOptions from "./SortOptions";
 
 export default function ProductFIlters() {
+	const router = useRouter();
 	async function fetchProducts(category: string) {
 		const client = createApolloClient();
 		try {
@@ -31,27 +35,47 @@ export default function ProductFIlters() {
 		}
 	}
 
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const formData = new FormData(e.currentTarget);
+		const params = new URLSearchParams(window.location.search);
+		const selectedTags = formData.getAll("tags").filter((tag) => tag);
+		const sort = formData.get("sort");
+		params.set("page", "1");
+
+		if (selectedTags.length < 1) {
+			params.delete("tags");
+		} else {
+			params.set("tags", selectedTags.join(","));
+		}
+
+		if (sort) {
+			params.set("sort", sort.toString());
+		} else {
+			params.delete("sort");
+		}
+
+		router.push(`${window.location.pathname}?${params.toString()}`);
+	};
+
 	return (
 		<div className="flex w-full flex-col items-start justify-center gap-2  p-6">
 			<h2 className="w-[40%] text-xl text-white">Filters</h2>
-			<div className=" flex w-full flex-col items-start justify-center gap-2">
+			<form
+				onSubmit={handleSubmit}
+				className=" flex w-full flex-col items-start justify-center gap-2"
+			>
 				<div className="flex w-[40%] flex-wrap gap-[3px] bg-zinc-800 p-[3px] text-white">
 					<Suspense>{fetchProducts("processor")}</Suspense>
-					<div className="flex w-full flex-[49%] flex-col flex-wrap bg-black px-10 py-2">
-						<h2 className="mb-2 w-full border-b-2 border-zinc-800 text-center">Sort</h2>
-						<select className="border-none bg-black p-2 text-center outline-none">
-							<option>Price - lowest to highest</option>
-							<option>Price - highest to lowest</option>
-							<option>Newest</option>
-							<option>Name - a to z</option>
-							<option>Name - z to a</option>
-						</select>
-					</div>
+					<SortOptions />
 				</div>
-				<button className="border-[3px] border-zinc-800 bg-black p-2 px-6 text-white hover:border-red-600 hover:bg-red-600">
+				<button
+					type="submit"
+					className="border-[3px] border-zinc-800 bg-black p-2 px-6 text-white hover:border-red-600 hover:bg-red-600"
+				>
 					Apply
 				</button>
-			</div>
+			</form>
 		</div>
 	);
 }

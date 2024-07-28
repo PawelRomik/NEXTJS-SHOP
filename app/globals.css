@@ -92,7 +92,7 @@
 	font-family: var(--font-roboto);
 }
 
-input[type="radio"] {
+input[type="checkbox"] {
 	-webkit-appearance: none;
 	appearance: none;
 	background-color: #2d2d2d;
@@ -105,7 +105,7 @@ input[type="radio"] {
 	cursor: pointer;
 }
 
-input[type="radio"]:checked::before {
+input[type="checkbox"]:checked::before {
 	content: "";
 	display: block;
 	width: 0.5rem;
