@@ -5,7 +5,7 @@ import createApolloClient from "../../../apollo-client";
 import { revalidatePath } from "next/cache";
 import { GET_PRODUCTS } from "../../queries/allPage";
 import { QueryResult } from "../../queries/productType";
-
+import SkeletonProductDisplay from "../../components/SkeletonProductDisplay";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -55,5 +55,21 @@ async function loadProducts() {
 export default async function HomePage() {
 	revalidatePath("/");
 
-	return <main className=" w-full bg-black p-6"></main>;
+	return (
+		<main className=" w-full bg-black p-6">
+			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
+				<Suspense
+					fallback={
+						<>
+							{[...Array(8)].map((_, index) => (
+								<SkeletonProductDisplay key={index} />
+							))}
+						</>
+					}
+				>
+					{loadProducts()}
+				</Suspense>
+			</Grid>
+		</main>
+	);
 }
