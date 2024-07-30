@@ -46,7 +46,7 @@ export default function ProductNavigationButtons() {
 	}, []);
 
 	return (
-		<div className="fixed right-2 top-[50%] z-10 flex translate-y-[-50%] flex-col gap-2">
+		<div className="fixed right-2 top-[50%] z-[5] flex translate-y-[-50%] flex-col gap-2">
 			<button
 				className={`${activeSection === "product" ? "bg-red-600" : "bg-white"} h-4 w-4 rounded-full`}
 				onClick={() => scrollToSection("product")}

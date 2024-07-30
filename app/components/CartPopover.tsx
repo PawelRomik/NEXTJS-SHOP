@@ -69,13 +69,13 @@ export default function CartPopover() {
 				</div>
 			</Popover.Trigger>
 			<Popover.Portal>
-				<Popover.Content className="data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade relative right-7 flex w-full  rounded border-2 border-zinc-200 bg-white p-5 will-change-[transform,opacity]">
-					<div className="z-50 bg-white p-5">
-						<h1 className="mb-7 text-2xl font-light text-gray-400">Products in your cart</h1>
+				<Popover.Content className="animate-showNav lg:animate-showSearchbar relative top-[0.9rem] flex w-[100vw] origin-top rounded border-[3px] border-r-0 border-zinc-900  border-b-red-600 bg-zinc-900 p-5 lg:top-10 lg:w-full lg:origin-right lg:border-red-600 ">
+					<div className="z-50 p-5 uppercase text-white">
+						<h1 className="mb-7 text-2xl font-bold text-red-600">Products in your cart</h1>
 						{products?.slice(0, 3).map((item) => (
 							<div className="item mb-7 flex items-center gap-5" key={item.id}>
 								<Image
-									className="h-[100px] max-h-[100px] w-[80px] max-w-[80px] object-cover"
+									className="h-[100px] max-h-[100px] w-[80px] max-w-[80px] object-contain"
 									src={process.env.NEXT_PUBLIC_PROD_PATH + item.image}
 									width={80}
 									height={100}
@@ -83,12 +83,12 @@ export default function CartPopover() {
 								/>
 								<div className="details">
 									<h1 className="text-lg font-medium">{item.name}</h1>
-									<div className="flex items-center justify-start gap-2">
-										<p className={`${item.onSale ? "text-red-600" : "text-zinc-600"}`}>
+									<div className="flex items-center justify-between gap-2">
+										<p className={item.onSale ? "text-red-600" : "text-zinc-400"}>
 											{item.quantity} x {item.price}zł
 										</p>
 										{item.onSale && (
-											<div className="flex items-center justify-center bg-red-600 px-2 font-bold text-white">
+											<div className="flex items-center justify-center px-2 font-bold text-red-600">
 												SALE
 											</div>
 										)}
@@ -98,43 +98,42 @@ export default function CartPopover() {
 									className="delete cursor-pointer text-2xl"
 									onClick={() => dispatch(removeItem(item.id))}
 								>
-									<i className="ri-close-circle-line"></i>
+									<i className="ri-close-circle-line text-red-600 hover:text-red-400"></i>
 								</button>
 							</div>
 						))}
 						{products.length > 3 && (
-							<p className="text-gray-500">{`${products.length - 3} more...`}</p>
+							<p className="mb-8 mt-4 font-bold text-zinc-400">+{`${products.length - 3}`} more</p>
 						)}
 						{products.length > 0 ? (
 							<>
 								<div className="total mb-5 flex justify-between text-lg font-medium">
-									<span>SUBTOTAL</span>
+									<span>SUBTOTAL:</span>
 									<span>{totalPrice()}zł</span>
 								</div>
 								<button
 									onClick={handlePayment}
-									className="mx-auto mb-5 flex w-full cursor-pointer items-center justify-center gap-5 border-none bg-zinc-950 p-2.5 font-medium text-white"
+									className="mx-auto mb-5 flex w-full cursor-pointer items-center justify-center gap-5 border-none bg-zinc-950 p-2.5 font-medium text-white transition hover:bg-red-600"
 								>
 									CHECKOUT
 								</button>
-								<span
-									className="reset cursor-pointer text-xs text-red-600"
+								<p
+									className=" cursor-pointer text-xs font-bold text-red-600 hover:text-red-400"
 									onClick={() => dispatch(resetCart())}
 								>
 									Reset Cart
-								</span>
+								</p>
 							</>
 						) : (
 							<p>No products in cart.</p>
 						)}
 					</div>
 					<Popover.Close
-						className="text-violet11 absolute right-[5px] top-[5px] z-50 inline-flex h-[25px] w-[25px] cursor-pointer items-center justify-center rounded-full outline-none "
+						className="text-violet11 absolute right-[5px] top-[5px] z-50 inline-flex h-[25px] w-[25px] cursor-pointer items-center justify-center rounded-full text-white outline-none "
 						aria-label="Close"
 					>
 						X
 					</Popover.Close>
-					<Popover.Arrow className="fill-white" />
 				</Popover.Content>
 			</Popover.Portal>
 		</Popover.Root>

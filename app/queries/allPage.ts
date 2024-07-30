@@ -8,9 +8,9 @@ export const GET_PRODUCTS = gql`
 				attributes {
 					name
 					price
-					onSale
+					desc
 					salePrice
-					image {
+					images {
 						data {
 							attributes {
 								url
@@ -24,6 +24,11 @@ export const GET_PRODUCTS = gql`
 							}
 						}
 					}
+				}
+			}
+			meta {
+				pagination {
+					pageCount
 				}
 			}
 		}
