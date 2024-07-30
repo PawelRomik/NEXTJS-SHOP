@@ -43,7 +43,7 @@ async function loadProducts() {
 					name={product.attributes.name}
 					price={product.attributes.price}
 					salePrice={product.attributes.salePrice}
-					category={product.attributes.categories.data[1].attributes.name}
+					category={product.attributes.categories.data[0].attributes.name}
 					imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.images.data[0].attributes.url}`}
 					key={product.id}
 				></ProductDisplay>

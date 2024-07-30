@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import BuyButton from "./BuyButton";
 
 type ProductDisplayProps = {
 	id: string;
@@ -63,10 +64,9 @@ export default function ProductDisplay({
 								<p className="flex items-end gap-2 text-xl font-bold text-white">PLN {price}</p>
 							)}
 						</div>
-
-						<button className="bg-red-600 px-4 py-3 font-bold text-white hover:scale-105 hover:bg-red-500">
-							Dodaj do koszyka
-						</button>
+						<div className="flex items-end justify-end">
+							<BuyButton productId={id} />
+						</div>
 					</div>
 				</div>
 			</div>

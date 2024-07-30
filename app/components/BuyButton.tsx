@@ -17,6 +17,29 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 	const dispatch = useDispatch();
 	const client = createApolloClient();
 
+	const handleButtonClick = (
+		product: QueryResultSingle,
+		e: React.MouseEvent<HTMLButtonElement>
+	) => {
+		e.preventDefault();
+		e.stopPropagation();
+
+		const currProduct = product.product.data;
+		dispatch(
+			addToCart({
+				id: currProduct.id,
+				name: currProduct.attributes.name,
+				desc: currProduct.attributes.desc,
+				price: currProduct.attributes.salePrice
+					? currProduct.attributes.salePrice
+					: currProduct.attributes.price,
+				onSale: currProduct.attributes.salePrice ? currProduct.attributes.salePrice : null,
+				image: currProduct.attributes.images.data[0].attributes.url,
+				quantity: 1
+			})
+		);
+	};
+
 	const getProductData = async () => {
 		try {
 			const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
@@ -26,25 +49,11 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 				}
 			});
 
-			const currProduct = data.product.data;
 			return (
 				<button
-					className="w-[10rem] bg-red-600 p-2 text-white
+					className="w-[10rem] bg-red-600 p-2 text-white hover:scale-105 hover:bg-red-500
 lg:h-full lg:w-full"
-					onClick={() =>
-						dispatch(
-							addToCart({
-								id: currProduct.id,
-								name: currProduct.attributes.name,
-								desc: currProduct.attributes.desc,
-								price: currProduct.attributes.salePrice
-									? currProduct.attributes.salePrice
-									: currProduct.attributes.price,
-								image: currProduct.attributes.images.data[0].attributes.url,
-								quantity: 1
-							})
-						)
-					}
+					onClick={(e) => handleButtonClick(data, e)}
 				>
 					DODAJ DO KOSZYKA
 				</button>
