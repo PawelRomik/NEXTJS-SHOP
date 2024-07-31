@@ -37,13 +37,14 @@ export default function ProductFIlters() {
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		console.log("ee");
 		const formData = new FormData(e.currentTarget);
 		const params = new URLSearchParams(window.location.search);
 		const selectedTags = formData.getAll("tags").filter((tag) => tag);
 		const sort = formData.get("sort");
 		params.set("page", "1");
 
-		if (selectedTags.length < 1) {
+		if (selectedTags.length == 0) {
 			params.delete("tags");
 		} else {
 			params.set("tags", selectedTags.join(","));

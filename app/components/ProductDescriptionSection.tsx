@@ -44,7 +44,7 @@ export default function ProductDescriptionSection({ productId }: ProductDescript
 						if (part.startsWith("-")) {
 							return `<li>${part.substring(1).trim()}</li>`;
 						} else if (part.startsWith("**") && part.endsWith("**")) {
-							return `<strong>${part.substring(2, part.length - 2)}</strong>`;
+							return `<h2 class="font-bold">${part.substring(2, part.length - 2)}</h2>`;
 						} else {
 							return part;
 						}
@@ -71,7 +71,7 @@ export default function ProductDescriptionSection({ productId }: ProductDescript
 										height={600}
 										src={imageUrl}
 										alt="Processor"
-										className="h-full object-contain p-6"
+										className="h-full max-h-[300px] object-contain p-6"
 									/>
 								)}
 
@@ -86,7 +86,7 @@ export default function ProductDescriptionSection({ productId }: ProductDescript
 										height={600}
 										src={imageUrl}
 										alt="Processor"
-										className="h-full object-contain p-6"
+										className="h-full max-h-[300px] object-contain p-6"
 									/>
 								)}
 							</>

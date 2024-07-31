@@ -69,11 +69,14 @@ export default function CartPopover() {
 				</div>
 			</Popover.Trigger>
 			<Popover.Portal>
-				<Popover.Content className="animate-showNav lg:animate-showSearchbar relative top-[0.9rem] flex w-[100vw] origin-top rounded border-[3px] border-r-0 border-zinc-900  border-b-red-600 bg-zinc-900 p-5 lg:top-10 lg:w-full lg:origin-right lg:border-red-600 ">
+				<Popover.Content className="relative top-[0.9rem] flex w-[100vw] origin-top animate-showNav rounded border-[3px] border-r-0 border-zinc-900 border-b-red-600  bg-zinc-900 p-5 lg:top-10 lg:w-full lg:origin-right lg:animate-showSearchbar lg:border-red-600 ">
 					<div className="z-50 p-5 uppercase text-white">
 						<h1 className="mb-7 text-2xl font-bold text-red-600">Products in your cart</h1>
 						{products?.slice(0, 3).map((item) => (
-							<div className="item mb-7 flex items-center gap-5" key={item.id}>
+							<div
+								className="item mb-7 flex w-full items-center justify-between gap-5"
+								key={item.id}
+							>
 								<Image
 									className="h-[100px] max-h-[100px] w-[80px] max-w-[80px] object-contain"
 									src={process.env.NEXT_PUBLIC_PROD_PATH + item.image}
