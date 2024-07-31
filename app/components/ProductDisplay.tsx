@@ -41,7 +41,7 @@ export default function ProductDisplay({
 							alt={name}
 							width={600}
 							height={600}
-							className="h-[100%] object-contain p-6  transition group-hover:scale-105"
+							className="h-[300px] object-contain p-6  transition group-hover:scale-105"
 						/>
 					</div>
 
@@ -51,7 +51,7 @@ export default function ProductDisplay({
 					<div className="mt-4 text-white">{extractText(desc)}</div>
 
 					<div className="mt-8 flex items-end justify-between">
-						<div className="flex flex-col justify-end">
+						<div className="flex h-[80px] flex-col justify-end">
 							{salePrice ? (
 								<>
 									<div className="text-xl font-bold text-red-600">SALE</div>

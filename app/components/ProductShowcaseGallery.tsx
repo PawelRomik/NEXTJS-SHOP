@@ -31,13 +31,16 @@ export default function ProductShowcaseGallery({ productId }: ProductShowcaseGal
 		<Suspense>
 			<ProductImages productId={productId} onImagesLoaded={handleImagesLoaded} />
 			<div className="flex h-[500px] w-full flex-col items-center justify-end lg:h-[700px]">
-				<Image
-					width={600}
-					height={600}
-					src={`${process.env.NEXT_PUBLIC_PROD_PATH}${mainPhotoSrc}`}
-					alt="Main product image"
-					className="h-[100%] object-contain p-6"
-				/>
+				<div className="flex max-h-[300px] items-center justify-center lg:max-h-[500px]">
+					<Image
+						width={600}
+						height={600}
+						src={`${process.env.NEXT_PUBLIC_PROD_PATH}${mainPhotoSrc}`}
+						alt="Main product image"
+						className="h-[100%] object-contain p-6"
+					/>
+				</div>
+
 				{productImages.length > 1 && (
 					<Carousel className="w-[60%] pb-5 lg:w-[30%]">
 						<CarouselContent className={`${productImages.length == 2 ? "justify-center" : ""}`}>
