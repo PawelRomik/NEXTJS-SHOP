@@ -51,7 +51,7 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 
 			return (
 				<button
-					className="w-[10rem] bg-red-600 p-2 text-white hover:scale-105 hover:bg-red-500
+					className="flex h-full w-full items-center justify-center bg-red-600 p-2 text-white hover:scale-105 hover:bg-red-500
 lg:h-full lg:w-full"
 					onClick={(e) => handleButtonClick(data, e)}
 				>

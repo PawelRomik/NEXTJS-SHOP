@@ -7,7 +7,12 @@ const withMDX = NextMdx.default({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		domains: ["localhost", process.env.NEXT_PUBLIC_DOMAIN, "img.clerk.com"]
+		remotePatterns: [
+			{
+				protocol: "http",
+				hostname: "**"
+			}
+		]
 	},
 	async redirects() {
 		return [

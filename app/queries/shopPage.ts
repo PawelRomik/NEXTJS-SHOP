@@ -45,6 +45,7 @@ export const GET_PRODUCTS_BY_CATEGORIES = gql`
 			pagination: { page: $page, pageSize: 8 }
 			sort: "createdAt:desc"
 			filters: { categories: { slug: { eq: $category } }, tags: { name: { in: $tags } } }
+			locale: "pl"
 		) {
 			data {
 				id

@@ -44,6 +44,7 @@ export default async function ProductPage({ params }: { params: { productId: str
 
 	return (
 		<main className=" flex w-full flex-col gap-3 bg-zinc-950">
+			<ScrollBuyButton productId={productId} />
 			<ProductNavigationButtons />
 			<ProductShowcaseSection productId={productId} />
 			<ProductDescriptionSection productId={productId} />
