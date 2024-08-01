@@ -1,9 +1,8 @@
 import { Grid } from "@radix-ui/themes";
 import ProductDisplay from "../../../../components/ProductDisplay";
-import { ApolloQueryResult, DocumentNode } from "@apollo/client";
+import { ApolloQueryResult } from "@apollo/client";
 import createApolloClient from "../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
-import { GET_PRODUCTS_BY_CATEGORIES } from "../../../../queries/shopPage";
 import { QueryResult } from "../../../../queries/productType";
 import { Metadata } from "next";
 import Pagination from "../../../../components/Pagination";
@@ -54,6 +53,7 @@ async function fetchProducts(
 				pagination: { page: $page, pageSize: 8 }
 				sort: "${getSortOrder(sort)}"
 				filters: { categories: { slug: { eq: $category } }${tags ? ", tags: { name: { in: $tags } } " : ""} }
+				locale: "pl"
 			) {
 				data {
 					id

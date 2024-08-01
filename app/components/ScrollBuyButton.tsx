@@ -24,7 +24,7 @@ export default function ScrollBuyButton({ productId }: BuyButtonsProps) {
 
 		const currProduct = data.product.data.attributes;
 		return (
-			<p className=" text-xl font-bold lg:text-3xl">
+			<p className=" w-full text-xl font-bold lg:text-3xl">
 				PLN {currProduct.salePrice ? currProduct.salePrice : currProduct.price}
 			</p>
 		);
@@ -55,10 +55,12 @@ export default function ScrollBuyButton({ productId }: BuyButtonsProps) {
 				isVisible ? "opacity-100" : "opacity-0"
 			}`}
 		>
-			<div className="absolute right-[5rem] flex h-full items-center justify-center gap-3 text-white lg:right-[6rem]">
-				<div className="w-[200px]">
+			<div className="absolute flex  h-full w-full items-center justify-center gap-3 text-white lg:right-[6rem] lg:w-auto">
+				<div className="flex  h-full w-full items-center justify-between px-[5rem] lg:w-[500px]">
 					<Suspense>{getProductPrice()}</Suspense>
-					<BuyButton productId={productId} />
+					<div className="h-full w-[20rem] p-3 lg:w-[30rem]">
+						<BuyButton productId={productId} />
+					</div>
 				</div>
 			</div>
 		</div>
