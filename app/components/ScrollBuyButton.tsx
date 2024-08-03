@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect, Suspense } from "react";
 import BuyButton from "./BuyButton";
 import { ApolloQueryResult } from "@apollo/client";
@@ -11,23 +12,27 @@ type BuyButtonsProps = {
 };
 
 export default function ScrollBuyButton({ productId }: BuyButtonsProps) {
-	const client = createApolloClient();
 	const [isVisible, setIsVisible] = useState(false);
 
 	async function getProductPrice() {
-		const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
-			query: GET_PRODUCT_PRICE,
-			variables: {
-				productId: productId
-			}
-		});
+		try {
+			const client = createApolloClient();
+			const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
+				query: GET_PRODUCT_PRICE,
+				variables: {
+					productId: productId
+				}
+			});
 
-		const currProduct = data.product.data.attributes;
-		return (
-			<p className=" w-full text-xl font-bold lg:text-3xl">
-				PLN {currProduct.salePrice ? currProduct.salePrice : currProduct.price}
-			</p>
-		);
+			const currProduct = data.product.data.attributes;
+			return (
+				<p className=" w-full text-xl font-bold lg:text-3xl">
+					PLN {currProduct.salePrice ? currProduct.salePrice : currProduct.price}
+				</p>
+			);
+		} catch {
+			return null;
+		}
 	}
 
 	useEffect(() => {

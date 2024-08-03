@@ -1,10 +1,9 @@
 "use client";
-import Link from "next/link";
 
+import Link from "next/link";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-
 import { categories } from "../data/categories";
 import HamburgerAccountSection from "./HamburgerAccountSection";
 

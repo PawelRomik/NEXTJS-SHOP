@@ -1,4 +1,5 @@
 "use client";
+
 import createApolloClient from "../../apollo-client";
 import { GET_FILTERS } from "../queries/filters";
 import { FiltersData } from "../queries/productType";
@@ -11,8 +12,8 @@ import SortOptions from "./SortOptions";
 export default function ProductFIlters() {
 	const router = useRouter();
 	async function fetchProducts(category: string) {
-		const client = createApolloClient();
 		try {
+			const client = createApolloClient();
 			const { data }: ApolloQueryResult<FiltersData> = await client.query({
 				query: GET_FILTERS,
 				variables: {
@@ -37,7 +38,6 @@ export default function ProductFIlters() {
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log("ee");
 		const formData = new FormData(e.currentTarget);
 		const params = new URLSearchParams(window.location.search);
 		const selectedTags = formData.getAll("tags").filter((tag) => tag);

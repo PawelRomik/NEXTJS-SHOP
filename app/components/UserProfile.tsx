@@ -1,6 +1,6 @@
 "use client";
 
-import { SignedOut, SignedIn, SignUpButton, UserButton } from "@clerk/nextjs";
+import { SignedOut, SignedIn, SignUpButton } from "@clerk/nextjs";
 
 export default function UserProfile() {
 	return (

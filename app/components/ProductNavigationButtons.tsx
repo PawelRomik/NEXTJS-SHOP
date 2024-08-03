@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { useState, useEffect } from "react";
 
@@ -35,7 +36,6 @@ export default function ProductNavigationButtons() {
 			});
 
 			setActiveSection(closestSection);
-			console.log(closestSection);
 		};
 
 		window.addEventListener("scroll", handleScroll);

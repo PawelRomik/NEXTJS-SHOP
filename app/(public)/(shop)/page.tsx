@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 };
 
 async function fetchProducts() {
-	const client = createApolloClient();
 	try {
+		const client = createApolloClient();
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({ query: GET_PRODUCTS });
 
 		return data.products;

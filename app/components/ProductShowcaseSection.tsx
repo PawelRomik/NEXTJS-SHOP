@@ -1,7 +1,3 @@
-import BuyButton from "./BuyButton";
-import { ApolloQueryResult } from "@apollo/client";
-import { Suspense } from "react";
-import { QueryResultSingle } from "../queries/productType";
 import ProductShowcaseGallery from "./ProductShowcaseGallery";
 import ProductShowcaseDesc from "./ProductShowcaseDesc";
 import ProductShowcasePrice from "./ProductShowcasePrice";

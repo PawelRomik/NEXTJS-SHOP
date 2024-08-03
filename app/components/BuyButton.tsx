@@ -1,4 +1,5 @@
 "use client";
+
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/cardReducer";
 import { SignUpButton, SignedIn } from "@clerk/nextjs";

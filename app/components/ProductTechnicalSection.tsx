@@ -9,35 +9,38 @@ type ProductTechnicalSectionProps = {
 };
 
 export default function ProductTechnicalSection({ productId }: ProductTechnicalSectionProps) {
-	const client = createApolloClient();
-
 	async function getTechnical() {
-		const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
-			query: GET_PRODUCT_TECHNICAL,
-			variables: {
-				productId: productId
-			}
-		});
-		if (!data) return null;
+		try {
+			const client = createApolloClient();
+			const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
+				query: GET_PRODUCT_TECHNICAL,
+				variables: {
+					productId: productId
+				}
+			});
+			if (!data) return null;
 
-		const lines = data.product.data.attributes.technical.trim().split("\n");
+			const lines = data.product.data.attributes.technical.trim().split("\n");
 
-		const tableRows = lines.map((line, index) => {
-			const parts = line.split(" | ");
+			const tableRows = lines.map((line, index) => {
+				const parts = line.split(" | ");
+
+				return (
+					<tr key={index} className="w-full">
+						<td className=" w-[30%] border-2 border-red-600  p-2">{parts[0]}:</td>
+						<td className=" w-[70%] border-2 border-red-600  p-2">{parts[1]}</td>
+					</tr>
+				);
+			});
 
 			return (
-				<tr key={index} className="w-full">
-					<td className=" w-[30%] border-2 border-red-600  p-2">{parts[0]}:</td>
-					<td className=" w-[70%] border-2 border-red-600  p-2">{parts[1]}</td>
-				</tr>
+				<table className=" w-full">
+					<tbody className="w-full">{tableRows}</tbody>
+				</table>
 			);
-		});
-
-		return (
-			<table className=" w-full">
-				<tbody className="w-full">{tableRows}</tbody>
-			</table>
-		);
+		} catch {
+			return null;
+		}
 	}
 
 	return (
