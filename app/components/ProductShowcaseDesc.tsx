@@ -9,8 +9,6 @@ type ProductShowcaseDescProps = {
 };
 
 export default function ProductShowcaseDesc({ productId }: ProductShowcaseDescProps) {
-	const client = createApolloClient();
-
 	const extractText = (text: string) => {
 		const startIndex = text.indexOf("--START--") + "--START--".length;
 		const endIndex = text.indexOf(".");
@@ -18,21 +16,28 @@ export default function ProductShowcaseDesc({ productId }: ProductShowcaseDescPr
 	};
 
 	async function getProductDesc() {
-		const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
-			query: GET_PRODUCT_DESC,
-			variables: {
-				productId: productId
-			}
-		});
+		try {
+			const client = createApolloClient();
+			const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
+				query: GET_PRODUCT_DESC,
+				variables: {
+					productId: productId
+				}
+			});
 
-		const currProduct = data.product.data.attributes;
-		return (
-			<div className="flex flex-col gap-3">
-				<h1 className="text-4xl font-bold uppercase">{currProduct.name}</h1>
-				<h2 className="uppercase text-red-600">{currProduct.categories.data[0].attributes.name}</h2>
-				<p>{extractText(currProduct.desc)}</p>
-			</div>
-		);
+			const currProduct = data.product.data.attributes;
+			return (
+				<div className="flex flex-col gap-3">
+					<h1 className="text-4xl font-bold uppercase">{currProduct.name}</h1>
+					<h2 className="uppercase text-red-600">
+						{currProduct.categories.data[0].attributes.name}
+					</h2>
+					<p>{extractText(currProduct.desc)}</p>
+				</div>
+			);
+		} catch {
+			return null;
+		}
 	}
 
 	return <Suspense>{getProductDesc()}</Suspense>;

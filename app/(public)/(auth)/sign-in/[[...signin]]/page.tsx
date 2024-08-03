@@ -1,10 +1,9 @@
 import { Metadata } from "next";
+import { SignIn } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
-	title: "N3XT | Sign In"
+	title: "Sign In | Ephonix"
 };
-
-import { SignIn } from "@clerk/nextjs";
 
 export default function SignInPage() {
 	return <SignIn />;

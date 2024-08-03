@@ -11,12 +11,12 @@ import SkeletonProductDisplay from "../../../components/SkeletonProductDisplay";
 import { GET_SEARCH_PRODUCTS, GET_SEARCH_PRODUCTS_COUNT } from "../../../queries/search";
 
 export const metadata: Metadata = {
-	title: "N3XT | Search results"
+	title: "Search results | Ephonix"
 };
 
 async function fetchProducts(query: string, page: number) {
-	const client = createApolloClient();
 	try {
+		const client = createApolloClient();
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_SEARCH_PRODUCTS,
 			variables: {
@@ -32,8 +32,8 @@ async function fetchProducts(query: string, page: number) {
 }
 
 async function loadCount(query: string, page: number) {
-	const client = createApolloClient();
 	try {
+		const client = createApolloClient();
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_SEARCH_PRODUCTS_COUNT,
 			variables: {

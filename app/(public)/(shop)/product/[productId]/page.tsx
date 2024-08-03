@@ -12,17 +12,21 @@ import ProductTechnicalSection from "../../../../components/ProductTechnicalSect
 import ProductOtherSection from "../../../../components/ProductOtherSection";
 
 async function fetchProduct(productId: string) {
-	const client = createApolloClient();
+	try {
+		const client = createApolloClient();
 
-	const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
-		query: GET_PRODUCT_NAME,
-		variables: {
-			productId
-		}
-	});
+		const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
+			query: GET_PRODUCT_NAME,
+			variables: {
+				productId
+			}
+		});
 
-	const currProduct = data.product.data;
-	return currProduct;
+		const currProduct = data.product.data;
+		return currProduct;
+	} catch {
+		return null;
+	}
 }
 
 export async function generateMetadata({
@@ -33,8 +37,13 @@ export async function generateMetadata({
 	const productId = params.productId;
 	const product = await fetchProduct(productId);
 
+	if (product) {
+		return {
+			title: `${product.attributes.name} | Ephonix`
+		};
+	}
 	return {
-		title: `${product.attributes.name} | Ephonix`
+		title: `Ephonix`
 	};
 }
 

@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect } from "react";
 import { ApolloQueryResult } from "@apollo/client";
 import createApolloClient from "../../apollo-client";

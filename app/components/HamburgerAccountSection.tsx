@@ -1,7 +1,6 @@
 import { SignOutButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import nextLogo from "../../public/logo.png";
-
 import { useUser } from "@clerk/nextjs";
 
 export default function HamburgerAccountSection() {

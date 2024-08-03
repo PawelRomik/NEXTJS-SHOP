@@ -10,46 +10,52 @@ type ProductOtherSectionProps = {
 };
 
 export default function ProductOtherSection({ productId }: ProductOtherSectionProps) {
-	const client = createApolloClient();
-
 	async function getCategory() {
-		const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
-			query: GET_PRODUCT_CATEGORY,
-			variables: {
-				productId: productId
-			}
-		});
+		try {
+			const client = createApolloClient();
+			const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
+				query: GET_PRODUCT_CATEGORY,
+				variables: {
+					productId: productId
+				}
+			});
 
-		return data.product.data.attributes.categories.data[0].attributes.slug;
+			return data.product.data.attributes.categories.data[0].attributes.slug;
+		} catch {
+			return null;
+		}
 	}
 
 	async function getProducts() {
-		const { data }: ApolloQueryResult<QueryResult> = await client.query({
-			query: GET_OTHER_PRODUCTS,
-			variables: {
-				productId: productId,
-				category: await getCategory()
-			}
-		});
-		if (!data) return null;
-
-		return (
-			<>
-				{data.products.data.map((product) => (
-					<ProductDisplay
-						id={product.id}
-						name={product.attributes.name}
-						desc={product.attributes.desc}
-						price={product.attributes.price}
-						salePrice={product.attributes.salePrice}
-						category={product.attributes.categories.data[0].attributes.name}
-						imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.images.data[0].attributes.url}`}
-						key={product.id}
-						type={"fixed"}
-					></ProductDisplay>
-				))}
-			</>
-		);
+		try {
+			const client = createApolloClient();
+			const { data }: ApolloQueryResult<QueryResult> = await client.query({
+				query: GET_OTHER_PRODUCTS,
+				variables: {
+					productId: productId,
+					category: await getCategory()
+				}
+			});
+			return (
+				<>
+					{data.products.data.map((product) => (
+						<ProductDisplay
+							id={product.id}
+							name={product.attributes.name}
+							desc={product.attributes.desc}
+							price={product.attributes.price}
+							salePrice={product.attributes.salePrice}
+							category={product.attributes.categories.data[0].attributes.name}
+							imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.images.data[0].attributes.url}`}
+							key={product.id}
+							type={"fixed"}
+						></ProductDisplay>
+					))}
+				</>
+			);
+		} catch {
+			return null;
+		}
 	}
 
 	return (

@@ -10,7 +10,7 @@ import SkeletonProductDisplay from "../../../components/SkeletonProductDisplay";
 import { GET_NEW_PRODUCTS_ORDER } from "../../../queries/order";
 
 export const metadata: Metadata = {
-	title: "N3XT | Order Status"
+	title: "Order Status | Ephonix"
 };
 
 async function fetchProducts() {
