@@ -34,24 +34,22 @@ export default function ProductTechnicalSection({ productId }: ProductTechnicalS
 			});
 
 			return (
-				<table className=" w-full">
-					<tbody className="w-full">{tableRows}</tbody>
-				</table>
+				<section
+					id="technical"
+					className="relative flex w-full flex-col bg-black   p-3 pt-24 text-white "
+				>
+					<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
+						Techniczne
+					</h2>
+					<table className=" w-full">
+						<tbody className="w-full">{tableRows}</tbody>
+					</table>
+				</section>
 			);
 		} catch {
 			return null;
 		}
 	}
 
-	return (
-		<section
-			id="technical"
-			className="relative flex w-full flex-col bg-black   p-3 pt-24 text-white "
-		>
-			<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
-				Techniczne
-			</h2>
-			<Suspense>{getTechnical()}</Suspense>
-		</section>
-	);
+	return <Suspense>{getTechnical()}</Suspense>;
 }

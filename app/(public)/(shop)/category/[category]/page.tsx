@@ -53,7 +53,6 @@ async function fetchProducts(
 				pagination: { page: $page, pageSize: 8 }
 				sort: "${getSortOrder(sort)}"
 				filters: { categories: { slug: { eq: $category } }${tags ? ", tags: { name: { in: $tags } } " : ""} }
-				locale: "pl"
 			) {
 				data {
 					id
