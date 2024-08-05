@@ -37,37 +37,36 @@ export default function ProductOtherSection({ productId }: ProductOtherSectionPr
 				}
 			});
 			return (
-				<>
-					{data.products.data.map((product) => (
-						<ProductDisplay
-							id={product.id}
-							name={product.attributes.name}
-							desc={product.attributes.desc}
-							price={product.attributes.price}
-							salePrice={product.attributes.salePrice}
-							category={product.attributes.categories.data[0].attributes.name}
-							imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.images.data[0].attributes.url}`}
-							key={product.id}
-							type={"fixed"}
-						></ProductDisplay>
-					))}
-				</>
+				<section
+					id="others"
+					className="relative flex w-full flex-col bg-black  p-3  pt-24 text-white "
+				>
+					<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
+						Inne Produkty
+					</h2>
+					<div className="relative w-full overflow-hidden lg:static lg:flex-1">
+						<div className="flex gap-6 overflow-x-auto py-2 lg:static">
+							{data.products.data.map((product) => (
+								<ProductDisplay
+									id={product.id}
+									name={product.attributes.name}
+									desc={product.attributes.desc}
+									price={product.attributes.price}
+									salePrice={product.attributes.salePrice}
+									category={product.attributes.categories.data[0].attributes.name}
+									imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.images.data[0].attributes.url}`}
+									key={product.id}
+									type={"fixed"}
+								></ProductDisplay>
+							))}
+						</div>
+					</div>
+				</section>
 			);
 		} catch {
 			return null;
 		}
 	}
 
-	return (
-		<section id="others" className="relative flex w-full flex-col bg-black  p-3  pt-24 text-white ">
-			<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
-				Inne Produkty
-			</h2>
-			<div className="relative w-full overflow-hidden lg:static lg:flex-1">
-				<div className="flex gap-6 overflow-x-auto py-2 lg:static">
-					<Suspense>{getProducts()}</Suspense>
-				</div>
-			</div>
-		</section>
-	);
+	return <Suspense>{getProducts()}</Suspense>;
 }
