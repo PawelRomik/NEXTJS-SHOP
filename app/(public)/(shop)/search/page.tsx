@@ -42,6 +42,10 @@ async function loadCount(query: string, page: number) {
 			}
 		});
 
+		if (data.products.meta.pagination.total === 0) {
+			return "No ";
+		}
+
 		return data.products.meta.pagination.total;
 	} catch {
 		return null;
@@ -50,13 +54,7 @@ async function loadCount(query: string, page: number) {
 
 async function loadProducts(category: string, page: number) {
 	const data = await fetchProducts(category, page);
-	if (!data)
-		return (
-			<p className="col-span-4 row-auto w-full text-center text-3xl font-bold text-zinc-400">
-				<i className="ri-error-warning-line"></i> An error occurred while loading products, please
-				try again later.
-			</p>
-		);
+	if (!data) return null;
 
 	return (
 		<>
