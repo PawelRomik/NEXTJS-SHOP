@@ -10,7 +10,6 @@ type ProductDisplayProps = {
 	salePrice: number;
 	category: string;
 	desc: string;
-	type?: string;
 };
 
 export default function ProductDisplay({
@@ -19,8 +18,7 @@ export default function ProductDisplay({
 	imageUrl,
 	salePrice,
 	desc,
-	id,
-	type = "normal"
+	id
 }: ProductDisplayProps) {
 	const extractText = (text: string) => {
 		const startIndex = text.indexOf("--START--") + "--START--".length;
@@ -31,7 +29,7 @@ export default function ProductDisplay({
 	return (
 		<Link
 			href={`/product/${id}`}
-			className={`border-4 ${type == "fixed" ? "min-w-[300px]" : ""} border-zinc-900 transition hover:border-red-600`}
+			className={`min-w-[300px] border-4 border-zinc-900 transition hover:border-red-600`}
 		>
 			<div className="group flex h-full cursor-pointer flex-col items-center justify-start">
 				<div className="flex h-full w-full flex-col justify-between bg-black p-6 ">

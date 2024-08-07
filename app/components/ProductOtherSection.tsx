@@ -56,7 +56,6 @@ export default function ProductOtherSection({ productId }: ProductOtherSectionPr
 									category={product.attributes.categories.data[0].attributes.name}
 									imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.images.data[0].attributes.url}`}
 									key={product.id}
-									type={"fixed"}
 								></ProductDisplay>
 							))}
 						</div>
