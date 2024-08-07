@@ -53,7 +53,7 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 			return (
 				<button
 					className="flex h-full w-full items-center justify-center bg-red-600 p-2 text-white hover:scale-105 hover:bg-red-500
-lg:h-full lg:w-full"
+"
 					onClick={(e) => handleButtonClick(data, e)}
 				>
 					DODAJ DO KOSZYKA
@@ -70,19 +70,11 @@ lg:h-full lg:w-full"
 				<Suspense>{getProductData()}</Suspense>
 			</SignedIn>
 			<SignedOut>
-				<div className="mt-6 flex w-full flex-col items-center justify-center gap-3">
-					<p className="text-center font-bold lg:text-white">
-						You must be logged in to add a product to the cart.
-					</p>
-					<SignUpButton>
-						<button
-							className="w-[10rem] bg-zinc-900 p-2 font-bold text-white
-lg:h-full lg:w-full"
-						>
-							Login
-						</button>
-					</SignUpButton>
-				</div>
+				<SignUpButton>
+					<button className="flex h-full w-full items-center justify-center bg-zinc-900 p-2 font-bold text-white">
+						Login
+					</button>
+				</SignUpButton>
 			</SignedOut>
 		</>
 	);
