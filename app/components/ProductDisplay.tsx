@@ -64,7 +64,7 @@ export default function ProductDisplay({
 								<p className="flex items-end gap-2 text-xl font-bold text-white">PLN {price}</p>
 							)}
 						</div>
-						<div className="flex items-end justify-end">
+						<div className="flex w-[50%] items-end justify-end">
 							<BuyButton productId={id} />
 						</div>
 					</div>
