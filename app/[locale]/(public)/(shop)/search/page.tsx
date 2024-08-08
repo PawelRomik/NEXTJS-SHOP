@@ -1,14 +1,14 @@
 import { Grid } from "@radix-ui/themes";
-import ProductDisplay from "../../../components/ProductDisplay";
+import ProductDisplay from "../../../../components/ProductDisplay";
 import { ApolloQueryResult } from "@apollo/client";
-import createApolloClient from "../../../../apollo-client";
+import createApolloClient from "../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
-import { QueryResult } from "../../../queries/productType";
+import { QueryResult } from "../../../../queries/productType";
 import { Metadata } from "next";
-import Pagination from "../../../components/Pagination";
+import Pagination from "../../../../components/Pagination";
 import { Suspense } from "react";
-import SkeletonProductDisplay from "../../../components/SkeletonProductDisplay";
-import { GET_SEARCH_PRODUCTS, GET_SEARCH_PRODUCTS_COUNT } from "../../../queries/search";
+import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
+import { GET_SEARCH_PRODUCTS, GET_SEARCH_PRODUCTS_COUNT } from "../../../../queries/search";
 
 export const metadata: Metadata = {
 	title: "Search results | Ephonix"

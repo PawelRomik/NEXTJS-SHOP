@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
-import Footer from "../../components/Footer";
-import InformationHeader from "../../components/InformationHeader";
-import ScrollToTopButton from "../../components/ScrollToTopButton";
+import Footer from "../../../components/Footer";
+import InformationHeader from "../../../components/InformationHeader";
+import ScrollToTopButton from "../../../components/ScrollToTopButton";
 
 const inter = Inter({
 	subsets: ["latin"],

@@ -1,13 +1,13 @@
 import { revalidatePath } from "next/cache";
 import { Metadata } from "next";
 import Link from "next/link";
-import ProductDisplay from "../../../components/ProductDisplay";
-import createApolloClient from "../../../../apollo-client";
+import ProductDisplay from "../../../../components/ProductDisplay";
+import createApolloClient from "../../../../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
-import { QueryResult } from "../../../queries/productType";
+import { QueryResult } from "../../../../queries/productType";
 import { Suspense } from "react";
-import SkeletonProductDisplay from "../../../components/SkeletonProductDisplay";
-import { GET_NEW_PRODUCTS_ORDER } from "../../../queries/order";
+import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
+import { GET_NEW_PRODUCTS_ORDER } from "../../../../queries/order";
 
 export const metadata: Metadata = {
 	title: "Order Status | Ephonix"

@@ -71,7 +71,7 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 			</SignedIn>
 			<SignedOut>
 				<SignUpButton>
-					<button className="flex h-full w-full items-center justify-center bg-zinc-900 p-2 font-bold text-white">
+					<button className="flex h-full w-full items-center justify-center bg-zinc-900 p-2 font-bold text-white hover:scale-105 hover:bg-zinc-800">
 						Login
 					</button>
 				</SignUpButton>
