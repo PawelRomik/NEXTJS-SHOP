@@ -1,4 +1,5 @@
 import * as NextMdx from "@next/mdx";
+import i18nConfig from "./i18nConfig.js";
 
 const withMDX = NextMdx.default({
 	extension: /\.mdx?$/

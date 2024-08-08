@@ -1,15 +1,15 @@
 import { ApolloQueryResult } from "@apollo/client";
-import createApolloClient from "../../../../../apollo-client";
+import createApolloClient from "../../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
-import { QueryResultSingle } from "../../../../queries/productType";
-import { GET_PRODUCT_NAME } from "../../../../queries/productPage";
+import { QueryResultSingle } from "../../../../../queries/productType";
+import { GET_PRODUCT_NAME } from "../../../../../queries/productPage";
 import { Metadata } from "next";
-import ScrollBuyButton from "../../../../components/ScrollBuyButton";
-import ProductNavigationButtons from "../../../../components/ProductNavigationButtons";
-import ProductShowcaseSection from "../../../../components/ProductShowcaseSection";
-import ProductDescriptionSection from "../../../../components/ProductDescriptionSection";
-import ProductTechnicalSection from "../../../../components/ProductTechnicalSection";
-import ProductOtherSection from "../../../../components/ProductOtherSection";
+import ScrollBuyButton from "../../../../../components/ScrollBuyButton";
+import ProductNavigationButtons from "../../../../../components/ProductNavigationButtons";
+import ProductShowcaseSection from "../../../../../components/ProductShowcaseSection";
+import ProductDescriptionSection from "../../../../../components/ProductDescriptionSection";
+import ProductTechnicalSection from "../../../../../components/ProductTechnicalSection";
+import ProductOtherSection from "../../../../../components/ProductOtherSection";
 
 async function fetchProduct(productId: string) {
 	try {
