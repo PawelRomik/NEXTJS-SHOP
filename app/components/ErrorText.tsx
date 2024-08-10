@@ -6,7 +6,7 @@ export default function ErrorText() {
 
 	return (
 		<p className="col-span-4 row-auto w-full text-center text-3xl font-bold text-zinc-400">
-			<i className="ri-error-warning-line"></i> {t("common:errorT")}
+			<i className="ri-error-warning-line"></i> {t("common:errorLoadingProducts")}
 		</p>
 	);
 }
