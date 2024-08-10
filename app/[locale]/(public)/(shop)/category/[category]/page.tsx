@@ -10,6 +10,7 @@ import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../../components/SkeletonProductDisplay";
 import ProductFIlters from "../../../../../components/ProductFilters";
 import { gql } from "@apollo/client";
+import ErrorText from "../../../../../components/ErrorText";
 
 export async function generateMetadata({
 	params
@@ -109,13 +110,7 @@ async function fetchProducts(
 
 async function loadProducts(category: string, page: number, tags?: string[], sort?: string) {
 	const data = await fetchProducts(category, page, tags, sort);
-	if (!data)
-		return (
-			<p className="col-span-4 row-auto w-full text-center text-3xl font-bold text-zinc-400">
-				<i className="ri-error-warning-line"></i> An error occurred while loading products, please
-				try again later.
-			</p>
-		);
+	if (!data) return <ErrorText />;
 
 	return (
 		<>
