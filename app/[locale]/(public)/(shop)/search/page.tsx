@@ -9,6 +9,8 @@ import Pagination from "../../../../components/Pagination";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
 import { GET_SEARCH_PRODUCTS, GET_SEARCH_PRODUCTS_COUNT } from "../../../../queries/search";
+import initTranslations from "../../../../i18n";
+import TranslationsProvider from "../../../../components/TranslationProvider";
 
 export const metadata: Metadata = {
 	title: "Search results | Ephonix"
@@ -84,47 +86,59 @@ async function loadPagination(category: string, page: number) {
 }
 
 export default async function SearchPage({
-	searchParams
+	searchParams,
+	params: { locale }
 }: {
 	searchParams?: {
 		query?: string;
 		page?: number;
 	};
+	params: {
+		locale: string;
+	};
 }) {
-	revalidatePath("/search", "page");
+	revalidatePath("/[locale]/search", "page");
+	const { t, resources } = await initTranslations(locale, ["common", "shop"]);
+
 	const query = searchParams?.query;
 	const page = searchParams?.page || 1;
 
 	if (!query) return null;
 
 	return (
-		<main className=" w-full bg-zinc-950 p-6">
-			<h1 className="flex items-center justify-center text-3xl font-bold text-red-600 lg:justify-start lg:pl-6 lg:text-4xl">
-				<Suspense>
-					<span className="mr-2 rounded-full border-4 border-red-600 px-3 text-xl text-white lg:px-[0.75rem] lg:text-2xl">
-						{loadCount(query, page)}
-					</span>
-				</Suspense>
+		<TranslationsProvider
+			namespaces={["common", "shop", "search"]}
+			locale={locale}
+			resources={resources}
+		>
+			<main className=" w-full bg-zinc-950 p-6">
+				<h1 className="flex items-center justify-center text-3xl font-bold text-red-600 lg:justify-start lg:pl-6 lg:text-4xl">
+					<Suspense>
+						<span className="mr-2 rounded-full border-4 border-red-600 px-3 text-xl text-white lg:px-[0.75rem] lg:text-2xl">
+							{loadCount(query, page)}
+						</span>
+					</Suspense>
 
-				<span>
-					Matches for
-					<span className="text-white">{" " + query}</span>
-				</span>
-			</h1>
-			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
-				<Suspense
-					fallback={
-						<>
-							{[...Array(8)].map((_, index) => (
-								<SkeletonProductDisplay key={index} />
-							))}
-						</>
-					}
-				>
-					{loadProducts(query, page)}
-				</Suspense>
-			</Grid>
-			<Suspense>{loadPagination(query, page)}</Suspense>
-		</main>
+					<span>
+						Matches for
+						<span className="text-white">{" " + query}</span>
+					</span>
+				</h1>
+				<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
+					<Suspense
+						fallback={
+							<>
+								{[...Array(8)].map((_, index) => (
+									<SkeletonProductDisplay key={index} />
+								))}
+							</>
+						}
+					>
+						{loadProducts(query, page)}
+					</Suspense>
+				</Grid>
+				<Suspense>{loadPagination(query, page)}</Suspense>
+			</main>
+		</TranslationsProvider>
 	);
 }

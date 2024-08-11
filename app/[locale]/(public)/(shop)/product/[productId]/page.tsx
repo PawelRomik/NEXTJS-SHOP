@@ -10,6 +10,8 @@ import ProductShowcaseSection from "../../../../../components/ProductShowcaseSec
 import ProductDescriptionSection from "../../../../../components/ProductDescriptionSection";
 import ProductTechnicalSection from "../../../../../components/ProductTechnicalSection";
 import ProductOtherSection from "../../../../../components/ProductOtherSection";
+import initTranslations from "../../../../../i18n";
+import TranslationsProvider from "../../../../../components/TranslationProvider";
 
 async function fetchProduct(productId: string) {
 	try {
@@ -32,7 +34,7 @@ async function fetchProduct(productId: string) {
 export async function generateMetadata({
 	params
 }: {
-	params: { productId: string };
+	params: { locale: string; productId: string };
 }): Promise<Metadata> {
 	const productId = params.productId;
 	const product = await fetchProduct(productId);
@@ -47,18 +49,28 @@ export async function generateMetadata({
 	};
 }
 
-export default async function ProductPage({ params }: { params: { productId: string } }) {
-	revalidatePath("/product/[productId]", "page");
-	const productId = params.productId;
+export default async function ProductPage({
+	params: { locale, productId }
+}: {
+	params: { locale: string; productId: string };
+}) {
+	revalidatePath("/[locale]/product/[productId]", "page");
+	const { t, resources } = await initTranslations(locale, ["common", "shop"]);
 
 	return (
-		<main className=" flex w-full flex-col gap-3 bg-zinc-950">
-			<ScrollBuyButton productId={productId} />
-			<ProductNavigationButtons />
-			<ProductShowcaseSection productId={productId} />
-			<ProductDescriptionSection productId={productId} />
-			<ProductTechnicalSection productId={productId} />
-			<ProductOtherSection productId={productId} />
-		</main>
+		<TranslationsProvider
+			namespaces={["common", "shop", "product"]}
+			locale={locale}
+			resources={resources}
+		>
+			<main className=" flex w-full flex-col gap-3 bg-zinc-950">
+				<ScrollBuyButton productId={productId} />
+				<ProductNavigationButtons />
+				<ProductShowcaseSection productId={productId} />
+				<ProductDescriptionSection productId={productId} />
+				<ProductTechnicalSection productId={productId} />
+				<ProductOtherSection productId={productId} />
+			</main>
+		</TranslationsProvider>
 	);
 }

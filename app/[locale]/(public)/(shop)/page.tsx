@@ -56,14 +56,12 @@ async function loadProducts() {
 	);
 }
 
-const i18nNamespaces = ["shop", "common"];
-
 export default async function HomePage({ params: { locale } }: HomePageProps) {
-	revalidatePath("/");
-	const { t, resources } = await initTranslations(locale, i18nNamespaces);
+	revalidatePath("/[locale]/");
+	const { t, resources } = await initTranslations(locale, ["common", "shop"]);
 
 	return (
-		<TranslationsProvider namespaces={i18nNamespaces} locale={locale} resources={resources}>
+		<TranslationsProvider namespaces={["common", "shop"]} locale={locale} resources={resources}>
 			<main className=" w-full bg-black p-6">
 				<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
 					<Suspense
