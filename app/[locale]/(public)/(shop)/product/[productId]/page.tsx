@@ -10,8 +10,6 @@ import ProductShowcaseSection from "../../../../../components/ProductShowcaseSec
 import ProductDescriptionSection from "../../../../../components/ProductDescriptionSection";
 import ProductTechnicalSection from "../../../../../components/ProductTechnicalSection";
 import ProductOtherSection from "../../../../../components/ProductOtherSection";
-import initTranslations from "../../../../../i18n";
-import TranslationsProvider from "../../../../../components/TranslationProvider";
 
 async function fetchProduct(productId: string) {
 	try {
@@ -55,22 +53,15 @@ export default async function ProductPage({
 	params: { locale: string; productId: string };
 }) {
 	revalidatePath("/[locale]/product/[productId]", "page");
-	const { t, resources } = await initTranslations(locale, ["common", "shop"]);
 
 	return (
-		<TranslationsProvider
-			namespaces={["common", "shop", "product"]}
-			locale={locale}
-			resources={resources}
-		>
-			<main className=" flex w-full flex-col gap-3 bg-zinc-950">
-				<ScrollBuyButton productId={productId} />
-				<ProductNavigationButtons />
-				<ProductShowcaseSection productId={productId} />
-				<ProductDescriptionSection productId={productId} />
-				<ProductTechnicalSection productId={productId} />
-				<ProductOtherSection productId={productId} />
-			</main>
-		</TranslationsProvider>
+		<main className=" flex w-full flex-col gap-3 bg-zinc-950">
+			<ScrollBuyButton productId={productId} />
+			<ProductNavigationButtons />
+			<ProductShowcaseSection locale={locale} productId={productId} />
+			<ProductDescriptionSection locale={locale} productId={productId} />
+			<ProductTechnicalSection locale={locale} productId={productId} />
+			<ProductOtherSection locale={locale} productId={productId} />
+		</main>
 	);
 }

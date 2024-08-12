@@ -8,8 +8,10 @@ import FilterComponent from "./Filter";
 import { Suspense } from "react";
 import { useRouter } from "next/navigation";
 import SortOptions from "./SortOptions";
+import { useTranslation } from "react-i18next";
 
-export default function ProductFIlters() {
+export default function ProductFIlters({ locale }: { locale: string }) {
+	const { t } = useTranslation();
 	const router = useRouter();
 	async function fetchProducts(category: string) {
 		try {
@@ -61,20 +63,20 @@ export default function ProductFIlters() {
 
 	return (
 		<div className="flex w-full flex-col items-start justify-center gap-2  p-6">
-			<h2 className="w-[40%] text-xl text-white">Filters</h2>
+			<h2 className="w-[40%] text-xl text-white">{t("product:filters")}</h2>
 			<form
 				onSubmit={handleSubmit}
 				className=" flex w-full flex-col items-start justify-center gap-2"
 			>
 				<div className="flex w-[40%] flex-wrap gap-[3px] bg-zinc-800 p-[3px] text-white">
 					<Suspense>{fetchProducts("processor")}</Suspense>
-					<SortOptions />
+					<SortOptions locale={locale} />
 				</div>
 				<button
 					type="submit"
 					className="border-[3px] border-zinc-800 bg-black p-2 px-6 text-white hover:border-red-600 hover:bg-red-600"
 				>
-					Apply
+					{t("product:filtersApply")}
 				</button>
 			</form>
 		</div>

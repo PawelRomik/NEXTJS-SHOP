@@ -4,12 +4,19 @@ import { ApolloQueryResult } from "@apollo/client";
 import { GET_PRODUCT_DESC } from "../queries/productPage";
 import { Suspense } from "react";
 import { QueryResultSingle } from "../queries/productType";
+import initTranslations from "../i18n";
 
 type ProductDescriptionSectionProps = {
 	productId: string;
+	locale: string;
 };
 
-export default function ProductDescriptionSection({ productId }: ProductDescriptionSectionProps) {
+export default async function ProductDescriptionSection({
+	productId,
+	locale
+}: ProductDescriptionSectionProps) {
+	const { t } = await initTranslations(locale, ["product"]);
+
 	async function getProductDesc() {
 		try {
 			const client = createApolloClient();
@@ -105,7 +112,7 @@ export default function ProductDescriptionSection({ productId }: ProductDescript
 	return (
 		<section id="description" className="relative flex flex-col gap-3  bg-black  py-24  text-white">
 			<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
-				Opis
+				{t("product:productDescription")}
 			</h2>
 			<Suspense>{getProductDesc()}</Suspense>
 		</section>

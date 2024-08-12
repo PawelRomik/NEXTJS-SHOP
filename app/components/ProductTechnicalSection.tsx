@@ -3,12 +3,19 @@ import { ApolloQueryResult } from "@apollo/client";
 import { GET_PRODUCT_TECHNICAL } from "../queries/productPage";
 import { Suspense } from "react";
 import { QueryResultSingle } from "../queries/productType";
+import initTranslations from "../i18n";
 
 type ProductTechnicalSectionProps = {
 	productId: string;
+	locale: string;
 };
 
-export default function ProductTechnicalSection({ productId }: ProductTechnicalSectionProps) {
+export default async function ProductTechnicalSection({
+	productId,
+	locale
+}: ProductTechnicalSectionProps) {
+	const { t } = await initTranslations(locale, ["product"]);
+
 	async function getTechnical() {
 		try {
 			const client = createApolloClient();
@@ -39,7 +46,7 @@ export default function ProductTechnicalSection({ productId }: ProductTechnicalS
 					className="relative flex w-full flex-col bg-black   p-3 pt-24 text-white "
 				>
 					<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
-						Techniczne
+						{t("product:technicalSection")}
 					</h2>
 					<table className=" w-full">
 						<tbody className="w-full">{tableRows}</tbody>

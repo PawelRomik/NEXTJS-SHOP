@@ -1,3 +1,13 @@
 {
-	"product": "product"
+	"product": "Product",
+	"description": "Description",
+	"filters": "Filters",
+	"filtersApply": "Apply",
+	"filtersReset": "Reset",
+	"productSection": "Product",
+	"descriptionSection": "Description",
+	"technicalSection": "Technical",
+	"otherSection": "Other products",
+	"mainImage": "Main product image",
+	"productImage": "Product image"
 }

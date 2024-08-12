@@ -2,8 +2,11 @@
 
 import React from "react";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function ProductNavigationButtons() {
+	const { t } = useTranslation();
+
 	const [activeSection, setActiveSection] = useState<string | null>("product");
 	const scrollToSection = (sectionId: string) => {
 		const section = document.getElementById(sectionId);
@@ -50,22 +53,22 @@ export default function ProductNavigationButtons() {
 			<button
 				className={`${activeSection === "product" ? "bg-red-600" : "bg-white"} h-4 w-4 rounded-full`}
 				onClick={() => scrollToSection("product")}
-				title="Produkt"
+				title={t("product:productSection")}
 			></button>
 			<button
 				className={`${activeSection === "description" ? "bg-red-600" : "bg-white"} h-4 w-4 rounded-full`}
 				onClick={() => scrollToSection("description")}
-				title="Opis"
+				title={t("product:descriptionSection")}
 			></button>
 			<button
 				className={`${activeSection === "technical" ? "bg-red-600" : "bg-white"} h-4 w-4 rounded-full`}
 				onClick={() => scrollToSection("technical")}
-				title="Techniczne"
+				title={t("product:technicalSection")}
 			></button>
 			<button
 				className={`${activeSection === "others" ? "bg-red-600" : "bg-white"} h-4 w-4 rounded-full`}
 				onClick={() => scrollToSection("others")}
-				title="Inne produkty"
+				title={t("product:otherSection")}
 			></button>
 		</div>
 	);

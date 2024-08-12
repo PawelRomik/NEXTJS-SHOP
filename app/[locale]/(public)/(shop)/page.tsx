@@ -9,8 +9,6 @@ import SkeletonProductDisplay from "../../../components/SkeletonProductDisplay";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import ErrorText from "../../../components/ErrorText";
-import initTranslations from "../../../i18n";
-import TranslationsProvider from "../../../components/TranslationProvider";
 
 type HomePageProps = {
 	params: {
@@ -57,26 +55,23 @@ async function loadProducts() {
 }
 
 export default async function HomePage({ params: { locale } }: HomePageProps) {
-	revalidatePath("/[locale]/");
-	const { t, resources } = await initTranslations(locale, ["common", "shop"]);
+	revalidatePath("/[locale]/", "page");
 
 	return (
-		<TranslationsProvider namespaces={["common", "shop"]} locale={locale} resources={resources}>
-			<main className=" w-full bg-black p-6">
-				<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
-					<Suspense
-						fallback={
-							<>
-								{[...Array(8)].map((_, index) => (
-									<SkeletonProductDisplay key={index} />
-								))}
-							</>
-						}
-					>
-						{loadProducts()}
-					</Suspense>
-				</Grid>
-			</main>
-		</TranslationsProvider>
+		<main className=" w-full bg-black p-6">
+			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
+				<Suspense
+					fallback={
+						<>
+							{[...Array(8)].map((_, index) => (
+								<SkeletonProductDisplay key={index} />
+							))}
+						</>
+					}
+				>
+					{loadProducts()}
+				</Suspense>
+			</Grid>
+		</main>
 	);
 }
