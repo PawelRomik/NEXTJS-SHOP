@@ -11,8 +11,6 @@ import SkeletonProductDisplay from "../../../../../components/SkeletonProductDis
 import ProductFIlters from "../../../../../components/ProductFilters";
 import { gql } from "@apollo/client";
 import ErrorText from "../../../../../components/ErrorText";
-import initTranslations from "../../../../../i18n";
-import TranslationsProvider from "../../../../../components/TranslationProvider";
 
 export async function generateMetadata({
 	params
@@ -156,34 +154,31 @@ export default async function ShopPage({
 	};
 }) {
 	revalidatePath("/[locale]/category/[category]", "page");
-	const { t, resources } = await initTranslations(locale, ["common", "shop"]);
 	const page = searchParams?.page || 1;
 	const tagsFromUrl = searchParams?.tags;
 	const tags = tagsFromUrl ? tagsFromUrl.split(",") : undefined;
 	const sort = searchParams?.sort || "latest";
 
 	return (
-		<TranslationsProvider namespaces={["common", "shop"]} locale={locale} resources={resources}>
-			<main className=" w-full bg-zinc-950 p-6">
-				<h1 className="flex items-center justify-center text-4xl font-bold capitalize text-red-600 lg:justify-start lg:pl-6">
-					<span>{category + "s"}</span>
-				</h1>
-				<ProductFIlters />
-				<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
-					<Suspense
-						fallback={
-							<>
-								{[...Array(8)].map((_, index) => (
-									<SkeletonProductDisplay key={index} />
-								))}
-							</>
-						}
-					>
-						{loadProducts(category, page, tags, sort)}
-					</Suspense>
-				</Grid>
-				<Suspense>{loadPagination(category, page, tags)}</Suspense>
-			</main>
-		</TranslationsProvider>
+		<main className=" w-full bg-zinc-950 p-6">
+			<h1 className="flex items-center justify-center text-4xl font-bold capitalize text-red-600 lg:justify-start lg:pl-6">
+				<span>{category + "s"}</span>
+			</h1>
+			<ProductFIlters locale={locale} />
+			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
+				<Suspense
+					fallback={
+						<>
+							{[...Array(8)].map((_, index) => (
+								<SkeletonProductDisplay key={index} />
+							))}
+						</>
+					}
+				>
+					{loadProducts(category, page, tags, sort)}
+				</Suspense>
+			</Grid>
+			<Suspense>{loadPagination(category, page, tags)}</Suspense>
+		</main>
 	);
 }

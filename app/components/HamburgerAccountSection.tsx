@@ -2,9 +2,11 @@ import { SignOutButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@c
 import Image from "next/image";
 import nextLogo from "../../public/logo.png";
 import { useUser } from "@clerk/nextjs";
+import initTranslations from "../i18n";
 
-export default function HamburgerAccountSection() {
+export default async function HamburgerAccountSection({ locale }: { locale: string }) {
 	const { user } = useUser();
+	const { t } = await initTranslations(locale, ["common", "shop"]);
 
 	return (
 		<>
@@ -16,17 +18,20 @@ export default function HamburgerAccountSection() {
 				height={100}
 			/>
 			<h1 className="text-xl">
-				<SignedIn>Hello {user?.username}!</SignedIn>
-				<SignedOut>Not Logged In!</SignedOut>
+				<SignedIn>
+					{t("common:hamburgerLoggedIn")}
+					{user?.username}!
+				</SignedIn>
+				<SignedOut>{t("common:hamburgerNotLoggedIn")}</SignedOut>
 			</h1>
 			<div className="flex w-full items-center justify-center gap-3">
 				<SignedIn>
 					<button className="flex w-[30%] items-center justify-center rounded-full border-2 border-red-600 bg-black px-3 py-2 text-sm">
-						Settings
+						{t("common:hamburgerSettings")}
 					</button>
 					<SignOutButton>
 						<button className="flex w-[30%] items-center justify-center rounded-full border-2 border-red-600 bg-black px-3 py-2 text-sm">
-							Log out
+							{t("common:hamburgerLogOut")}
 						</button>
 					</SignOutButton>
 				</SignedIn>

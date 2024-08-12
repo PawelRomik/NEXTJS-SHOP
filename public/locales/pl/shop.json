@@ -1,3 +1,16 @@
 {
-	"shop": "Sklep."
+	"shop": "Shop",
+	"buyButtonText": "Add to Cart",
+	"loginButton": "Login",
+	"sale": "Sale",
+	"cartSubtotal": "Subtotal",
+	"cartCheckout": "Checkout",
+	"cartResetBtn": "Reset Cart",
+	"cartProductImage": "Product Image",
+	"cartNoProducts": "No products in cart.",
+	"sortPriceToHigh": "Price: Low to High",
+	"sortPriceToLow": "Price: High to Low",
+	"sortNewest": "Newest",
+	"sortNameToZ": "Name: A to Z",
+	"sortNameToA": "Name: Z to A"
 }

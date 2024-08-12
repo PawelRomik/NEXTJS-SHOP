@@ -120,7 +120,7 @@ export default async function SearchPage({
 					</Suspense>
 
 					<span>
-						Matches for
+						{t("search:matches")}
 						<span className="text-white">{" " + query}</span>
 					</span>
 				</h1>

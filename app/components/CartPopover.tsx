@@ -7,6 +7,7 @@ import { removeItem, resetCart } from "../redux/cardReducer";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 import { loadStripe } from "@stripe/stripe-js";
+import { useTranslation } from "next-i18next";
 
 type RootState = {
 	cart: {
@@ -15,6 +16,7 @@ type RootState = {
 };
 
 export default function CartPopover() {
+	const { t } = useTranslation();
 	const products = useSelector((state: RootState) => state.cart.products);
 	const dispatch = useDispatch();
 
@@ -82,7 +84,7 @@ export default function CartPopover() {
 									src={process.env.NEXT_PUBLIC_PROD_PATH + item.image}
 									width={80}
 									height={100}
-									alt=""
+									alt={t("shop:cartProductImage")}
 								/>
 								<div className="details">
 									<h1 className="text-lg font-medium">{item.name}</h1>
@@ -91,8 +93,8 @@ export default function CartPopover() {
 											{item.quantity} x {item.price}zł
 										</p>
 										{item.onSale && (
-											<div className="flex items-center justify-center px-2 font-bold text-red-600">
-												SALE
+											<div className="flex items-center justify-center px-2 font-bold uppercase text-red-600">
+												{t("shop:sale")}
 											</div>
 										)}
 									</div>
@@ -110,25 +112,25 @@ export default function CartPopover() {
 						)}
 						{products.length > 0 ? (
 							<>
-								<div className="total mb-5 flex justify-between text-lg font-medium">
-									<span>SUBTOTAL:</span>
+								<div className="total mb-5 flex justify-between text-lg font-medium uppercase">
+									<span>{t("shop:cartSubtotal")}</span>
 									<span>{totalPrice()}zł</span>
 								</div>
 								<button
 									onClick={handlePayment}
-									className="mx-auto mb-5 flex w-full cursor-pointer items-center justify-center gap-5 border-none bg-zinc-950 p-2.5 font-medium text-white transition hover:bg-red-600"
+									className="mx-auto mb-5 flex w-full cursor-pointer items-center justify-center gap-5 border-none bg-zinc-950 p-2.5 font-medium uppercase text-white transition hover:bg-red-600"
 								>
-									CHECKOUT
+									{t("shop:cartCheckout")}
 								</button>
 								<p
 									className=" cursor-pointer text-xs font-bold text-red-600 hover:text-red-400"
 									onClick={() => dispatch(resetCart())}
 								>
-									Reset Cart
+									{t("shop:cartResetBtn")}
 								</p>
 							</>
 						) : (
-							<p>No products in cart.</p>
+							<p>{t("shop:cartNoProducts")}</p>
 						)}
 					</div>
 					<Popover.Close
