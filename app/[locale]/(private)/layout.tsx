@@ -4,12 +4,12 @@ import ScrollToTopButton from "../../components/ScrollToTopButton";
 import initTranslations from "../../i18n";
 import TranslationsProvider from "../../components/TranslationProvider";
 
-type informationLayoutProps = {
+type PrivateLayoutProps = {
 	children: React.ReactNode;
 	params: { locale: string };
 };
 
-export default async function InformationLayout({ children, params }: informationLayoutProps) {
+export default async function PrivateLayout({ children, params }: PrivateLayoutProps) {
 	const { locale } = params;
 	const { resources } = await initTranslations(locale, ["common", "shop"]);
 

@@ -3,7 +3,7 @@ import ShopLogo from "./ShopLogo";
 import initTranslations from "../i18n";
 
 export default async function InformationHeader({ locale }: { locale: string }) {
-	const { t } = await initTranslations(locale, ["common", "shop"]);
+	const { t } = await initTranslations(locale, ["common", "information"]);
 
 	return (
 		<header className="sticky top-0 z-10 mx-auto box-border flex h-full w-full items-center justify-between border-b-[3px] border-b-red-600 bg-black p-4 text-white lg:px-[6rem]">
