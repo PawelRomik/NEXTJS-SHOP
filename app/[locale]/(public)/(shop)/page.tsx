@@ -54,7 +54,7 @@ async function loadProducts() {
 	);
 }
 
-export default async function HomePage({ params: { locale } }: HomePageProps) {
+export default async function HomePage() {
 	revalidatePath("/[locale]/", "page");
 
 	return (
