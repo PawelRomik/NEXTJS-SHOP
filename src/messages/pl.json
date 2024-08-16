@@ -1,0 +1,62 @@
+{
+	"common": {
+		"errorLoadingProducts": "Wystąpił błąd podczas ładowania produktów, spróbuj ponownie później.",
+		"footerCopyright": "Copyright © 2024 Ephonix Inc. Wszelkie prawa zastrzeżone.",
+		"footerTerms": "Regulamin",
+		"footerPrivacy": "Polityka Prywatności",
+		"footerContact": "Kontakt",
+		"footerFacebookHover": "Nasz profil na Facebooku",
+		"footerInstagramHover": "Nasz profil na Instagramie",
+		"footerTwitterHover": "Nasz profil na X",
+		"footerYoutubeHover": "Nasz kanał na Youtube",
+		"footerDiscordHover": "Nasz serwer Discord",
+		"hamburgerLoggedIn": "Witaj ",
+		"hamburgerNotLoggedIn": "Nie Zalogowany!",
+		"hamburgerSettings": "Ustawienia",
+		"hamburgerLogOut": "Wyloguj się",
+		"scrollButtonTitle": "Idź na górę",
+		"shopLogo": "Logo sklepu"
+	},
+	"information": {
+		"navShop": "SKLEP",
+		"contact": "Kontakt",
+		"terms": "Warunki Korzystania z Usług",
+		"privacy": "Polityka Prywatności"
+	},
+	"order": {
+		"order": "Zamówienie"
+	},
+	"product": {
+		"product": "Produkt",
+		"description": "Opis",
+		"filters": "Filtry",
+		"filtersApply": "Zastosuj",
+		"filtersReset": "Resetuj",
+		"productSection": "Produkt",
+		"descriptionSection": "Opis",
+		"technicalSection": "Techniczne",
+		"otherSection": "Inne produkty",
+		"mainImage": "Główne zdjęcie produktu",
+		"productImage": "Zdjęcie produktu"
+	},
+	"search": {
+		"search": "Szukaj",
+		"matches": "Dopasowania dla"
+	},
+	"shop": {
+		"shop": "Sklep",
+		"buyButtonText": "Dodaj do koszyka",
+		"loginButton": "Zaloguj się",
+		"sale": "Wyprzedaż",
+		"cartSubtotal": "Suma:",
+		"cartCheckout": "Zamówienie",
+		"cartResetBtn": "Resetuj koszyk",
+		"cartProductImage": "Zdjęcie produktu",
+		"cartNoProducts": "Brak produktów w koszyku.",
+		"sortPriceToHigh": "Cena: od najniższej",
+		"sortPriceToLow": "Cena: od najwyższej",
+		"sortNewest": "Najnowsze",
+		"sortNameToZ": "Nazwa: od A do Z",
+		"sortNameToA": "Nazwa: od Z do A"
+	}
+}

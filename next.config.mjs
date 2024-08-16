@@ -1,12 +1,9 @@
-import * as NextMdx from "@next/mdx";
-import i18nConfig from "./i18nConfig.js";
+import withNextIntl from "next-intl/plugin";
 
-const withMDX = NextMdx.default({
-	extension: /\.mdx?$/
-});
+const nextIntlConfig = withNextIntl();
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const config = {
 	images: {
 		remotePatterns: [
 			{
@@ -15,7 +12,7 @@ const nextConfig = {
 			}
 		]
 	},
-	pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"]
+	pageExtensions: ["js", "jsx", "ts", "tsx"]
 };
 
-export default withMDX(nextConfig);
+export default nextIntlConfig(config);

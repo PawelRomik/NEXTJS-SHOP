@@ -48,9 +48,9 @@ export async function generateMetadata({
 }
 
 export default async function ProductPage({
-	params: { locale, productId }
+	params: { productId }
 }: {
-	params: { locale: string; productId: string };
+	params: { productId: string };
 }) {
 	revalidatePath("/[locale]/product/[productId]", "page");
 
@@ -58,10 +58,10 @@ export default async function ProductPage({
 		<main className=" flex w-full flex-col gap-3 bg-zinc-950">
 			<ScrollBuyButton productId={productId} />
 			<ProductNavigationButtons />
-			<ProductShowcaseSection locale={locale} productId={productId} />
-			<ProductDescriptionSection locale={locale} productId={productId} />
-			<ProductTechnicalSection locale={locale} productId={productId} />
-			<ProductOtherSection locale={locale} productId={productId} />
+			<ProductShowcaseSection productId={productId} />
+			<ProductDescriptionSection productId={productId} />
+			<ProductTechnicalSection productId={productId} />
+			<ProductOtherSection productId={productId} />
 		</main>
 	);
 }

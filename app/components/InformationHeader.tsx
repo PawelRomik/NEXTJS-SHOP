@@ -1,9 +1,9 @@
 import Link from "next/link";
 import ShopLogo from "./ShopLogo";
-import initTranslations from "../i18n";
+import { useTranslations } from "next-intl";
 
-export default async function InformationHeader({ locale }: { locale: string }) {
-	const { t } = await initTranslations(locale, ["common", "information"]);
+export default async function InformationHeader() {
+	const t = useTranslations("information");
 
 	return (
 		<header className="sticky top-0 z-10 mx-auto box-border flex h-full w-full items-center justify-between border-b-[3px] border-b-red-600 bg-black p-4 text-white lg:px-[6rem]">
@@ -14,11 +14,11 @@ export default async function InformationHeader({ locale }: { locale: string }) 
 					</button>
 				</Link>
 			</div>
-			<ShopLogo locale={locale} />
+			<ShopLogo />
 			<div className="hidden h-full w-1/3 items-center justify-center lg:flex">
 				<Link href="/" title="Shop">
 					<p className="hover:border-b-2 hover:border-red-600 hover:text-red-600 ">
-						{t("information:navShop")}
+						{t("navShop")}
 					</p>
 				</Link>
 			</div>

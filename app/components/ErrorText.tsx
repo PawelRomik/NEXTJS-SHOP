@@ -1,12 +1,12 @@
 "use client";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 export default function ErrorText() {
-	const { t } = useTranslation();
+	const t = useTranslations("common");
 
 	return (
 		<p className="col-span-4 row-auto w-full text-center text-3xl font-bold text-zinc-400">
-			<i className="ri-error-warning-line"></i> {t("common:errorLoadingProducts")}
+			<i className="ri-error-warning-line"></i> {t("errorLoadingProducts")}
 		</p>
 	);
 }

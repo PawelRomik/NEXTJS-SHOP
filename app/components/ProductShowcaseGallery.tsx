@@ -10,14 +10,14 @@ import {
 	CarouselNext
 } from "@/components/ui/carousel";
 import ProductImages from "./ProductImages";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 type ProductShowcaseGalleryProps = {
 	productId: string;
 };
 
 export default function ProductShowcaseGallery({ productId }: ProductShowcaseGalleryProps) {
-	const { t } = useTranslation();
+	const t = useTranslations("product");
 	const [mainPhotoSrc, setMainPhotoSrc] = useState<string>("");
 	const [productImages, setProductImages] = useState<any[]>([]);
 
@@ -39,7 +39,7 @@ export default function ProductShowcaseGallery({ productId }: ProductShowcaseGal
 						width={600}
 						height={600}
 						src={`${process.env.NEXT_PUBLIC_PROD_PATH}${mainPhotoSrc}`}
-						alt={t("product:mainImage")}
+						alt={t("mainImage")}
 						className="h-[100%] object-contain p-6"
 					/>
 				</div>
@@ -53,7 +53,7 @@ export default function ProductShowcaseGallery({ productId }: ProductShowcaseGal
 										width={600}
 										height={600}
 										src={`${process.env.NEXT_PUBLIC_PROD_PATH}${image.attributes.url}`}
-										alt={`${t("product:productImage")} ${index + 1}`}
+										alt={`${t("productImage")} ${index + 1}`}
 										className={`h-[100%] border-2 object-cover p-2 transition hover:p-1 lg:p-4 hover:lg:p-3 ${mainPhotoSrc === image.attributes.url ? "border-red-500" : "border-zinc-800"}`}
 										onClick={() => changeMainPhotoSrc(index)}
 									/>

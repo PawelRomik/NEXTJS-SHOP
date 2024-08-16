@@ -1,22 +1,18 @@
 import ProductShowcaseGallery from "./ProductShowcaseGallery";
 import ProductShowcaseDesc from "./ProductShowcaseDesc";
 import ProductShowcasePrice from "./ProductShowcasePrice";
-import initTranslations from "../i18n";
+import { useTranslations } from "next-intl";
 
 type ProductShowcaseSectionProps = {
 	productId: string;
-	locale: string;
 };
 
-export default async function ProductShowcaseSection({
-	productId,
-	locale
-}: ProductShowcaseSectionProps) {
-	const { t } = await initTranslations(locale, ["product"]);
+export default async function ProductShowcaseSection({ productId }: ProductShowcaseSectionProps) {
+	const t = useTranslations("product");
 	return (
 		<section id="product" className=" relative flex w-full flex-col lg:flex-row  lg:gap-3">
 			<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-2 px-10 text-2xl font-bold text-red-600">
-				{t("product:product")}
+				{t("product")}
 			</h2>
 			<div className="flex flex-[60%] items-center justify-center bg-black pt-12">
 				<ProductShowcaseGallery productId={productId} />

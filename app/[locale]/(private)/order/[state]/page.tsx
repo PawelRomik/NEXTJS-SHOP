@@ -8,8 +8,7 @@ import { QueryResult } from "../../../../queries/productType";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
 import { GET_NEW_PRODUCTS_ORDER } from "../../../../queries/order";
-import initTranslations from "../../../../i18n";
-import TranslationsProvider from "../../../../components/TranslationProvider";
+import { useTranslations } from "next-intl";
 
 export const metadata: Metadata = {
 	title: "Order Status | Ephonix"
@@ -60,44 +59,34 @@ async function loadProducts() {
 	);
 }
 
-export default async function OrderPage({
-	params: { locale, state }
-}: {
-	params: { locale: string; state: string };
-}) {
+export default async function OrderPage({ params: { state } }: { params: { state: string } }) {
 	revalidatePath("/[locale]/order/[state]", "page");
-	const { t, resources } = await initTranslations(locale, ["common", "shop"]);
+	const t = useTranslations();
 
 	return (
-		<TranslationsProvider
-			namespaces={["common", "shop", "order"]}
-			locale={locale}
-			resources={resources}
-		>
-			<div className="flex flex-1 flex-col items-center justify-center gap-6">
-				<p className="col-span-4 row-auto mt-6 w-full text-center text-3xl font-bold text-zinc-400">
-					<i className="ri-error-warning-line"></i>
-					{state === "success"
-						? "Your order has been successfully processed."
-						: "An error occurred while placing order, please try again later."}
-				</p>
-				<Link href="/" title="Home">
-					<button className="rounded-full bg-zinc-950 px-10 py-4 text-white">Home</button>
-				</Link>
-				<div className="flex w-[80%] flex-col items-center justify-center">
-					<Suspense
-						fallback={
-							<>
-								{[...Array(5)].map((_, index) => (
-									<SkeletonProductDisplay key={index} />
-								))}
-							</>
-						}
-					>
-						{loadProducts()}
-					</Suspense>
-				</div>
+		<div className="flex flex-1 flex-col items-center justify-center gap-6">
+			<p className="col-span-4 row-auto mt-6 w-full text-center text-3xl font-bold text-zinc-400">
+				<i className="ri-error-warning-line"></i>
+				{state === "success"
+					? "Your order has been successfully processed."
+					: "An error occurred while placing order, please try again later."}
+			</p>
+			<Link href="/" title="Home">
+				<button className="rounded-full bg-zinc-950 px-10 py-4 text-white">Home</button>
+			</Link>
+			<div className="flex w-[80%] flex-col items-center justify-center">
+				<Suspense
+					fallback={
+						<>
+							{[...Array(5)].map((_, index) => (
+								<SkeletonProductDisplay key={index} />
+							))}
+						</>
+					}
+				>
+					{loadProducts()}
+				</Suspense>
 			</div>
-		</TranslationsProvider>
+		</div>
 	);
 }

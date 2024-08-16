@@ -8,16 +8,15 @@ import { ApolloQueryResult } from "@apollo/client";
 import { QueryResultSingle } from "../queries/productType";
 import createApolloClient from "../../apollo-client";
 import { GET_PRODUCT_ALLDATA } from "../queries/productPage";
-import { Suspense } from "react";
-import { useTranslation } from "next-i18next";
 import LoginButton from "./LoginButton";
+import { useTranslations } from "next-intl";
 
 type BuyButtonsProps = {
 	productId: string;
 };
 
 export default function BuyButton({ productId }: BuyButtonsProps) {
-	const { t } = useTranslation();
+	const t = useTranslations("shop");
 	const dispatch = useDispatch();
 	const client = createApolloClient();
 
@@ -65,10 +64,10 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 				<button
 					className="flex h-full w-full items-center justify-center bg-red-600 p-2 text-white hover:scale-105 hover:bg-red-500
 "
-					title={t("shop:buyButtonText")}
+					title={t("buyButtonText")}
 					onClick={(e) => handleButtonClick(productId, e)}
 				>
-					{t("shop:buyButtonText")}
+					{t("buyButtonText")}
 				</button>
 			</SignedIn>
 			<SignedOut>

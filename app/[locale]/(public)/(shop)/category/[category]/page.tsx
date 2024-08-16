@@ -140,11 +140,10 @@ async function loadPagination(category: string, page: number, tags?: string[]) {
 }
 
 export default async function ShopPage({
-	params: { locale, category },
+	params: { category },
 	searchParams
 }: {
 	params: {
-		locale: string;
 		category: string;
 	};
 	searchParams?: {
@@ -164,7 +163,7 @@ export default async function ShopPage({
 			<h1 className="flex items-center justify-center text-4xl font-bold capitalize text-red-600 lg:justify-start lg:pl-6">
 				<span>{category + "s"}</span>
 			</h1>
-			<ProductFIlters locale={locale} />
+			<ProductFIlters />
 			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
 				<Suspense
 					fallback={

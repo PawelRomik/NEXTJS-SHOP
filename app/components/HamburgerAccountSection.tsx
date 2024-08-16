@@ -2,11 +2,11 @@ import { SignOutButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@c
 import Image from "next/image";
 import nextLogo from "../../public/logo.png";
 import { useUser } from "@clerk/nextjs";
-import initTranslations from "../i18n";
+import { useTranslations } from "next-intl";
 
-export default async function HamburgerAccountSection({ locale }: { locale: string }) {
+export default async function HamburgerAccountSection() {
 	const { user } = useUser();
-	const { t } = await initTranslations(locale, ["common", "shop"]);
+	const t = useTranslations("common");
 
 	return (
 		<>
@@ -19,19 +19,19 @@ export default async function HamburgerAccountSection({ locale }: { locale: stri
 			/>
 			<h1 className="text-xl">
 				<SignedIn>
-					{t("common:hamburgerLoggedIn")}
+					{t("hamburgerLoggedIn")}
 					{user?.username}!
 				</SignedIn>
-				<SignedOut>{t("common:hamburgerNotLoggedIn")}</SignedOut>
+				<SignedOut>{t("hamburgerNotLoggedIn")}</SignedOut>
 			</h1>
 			<div className="flex w-full items-center justify-center gap-3">
 				<SignedIn>
 					<button className="flex w-[30%] items-center justify-center rounded-full border-2 border-red-600 bg-black px-3 py-2 text-sm">
-						{t("common:hamburgerSettings")}
+						{t("hamburgerSettings")}
 					</button>
 					<SignOutButton>
 						<button className="flex w-[30%] items-center justify-center rounded-full border-2 border-red-600 bg-black px-3 py-2 text-sm">
-							{t("common:hamburgerLogOut")}
+							{t("hamburgerLogOut")}
 						</button>
 					</SignOutButton>
 				</SignedIn>

@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { categories } from "../data/categories";
 import HamburgerAccountSection from "./HamburgerAccountSection";
 
-export default function Hamburger({ locale }: { locale: string }) {
+export default function Hamburger() {
 	const [menuOn, setMenuOn] = useState(false);
 
 	const path = usePathname();
@@ -33,7 +33,7 @@ export default function Hamburger({ locale }: { locale: string }) {
 						</NavigationMenu.Item>
 
 						<NavigationMenu.Item className="flex w-full flex-1 flex-col items-center justify-center gap-2 border-b-2 border-zinc-900 bg-black">
-							<HamburgerAccountSection locale={locale} />
+							<HamburgerAccountSection />
 						</NavigationMenu.Item>
 
 						{categories.map((category) => (

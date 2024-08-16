@@ -1,11 +1,11 @@
 "use client";
 
 import { IconButton } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
 import React, { useState, useEffect, useRef } from "react";
-import { useTranslation } from "react-i18next";
 
 export default function ScrollToTopButton() {
-	const { t } = useTranslation();
+	const t = useTranslations("common");
 	const [isVisible, setIsVisible] = useState(false);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -41,7 +41,7 @@ export default function ScrollToTopButton() {
 			className={`scroll-to-top-button fixed bottom-4 right-4 z-20 h-12 w-12 cursor-pointer border-2 border-solid border-red-600 bg-zinc-950 font-bold text-white transition  ${
 				isVisible ? "opacity-100" : "opacity-0"
 			}`}
-			title={t("common:scrollButtonTitle")}
+			title={t("scrollButtonTitle")}
 			onClick={scrollToTop}
 		>
 			<i className="ri-arrow-up-line"></i>
