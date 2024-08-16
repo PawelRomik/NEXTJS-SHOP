@@ -7,7 +7,7 @@ import { removeItem, resetCart } from "../redux/cardReducer";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 import { loadStripe } from "@stripe/stripe-js";
-import { useTranslation } from "next-i18next";
+import { useTranslations } from "next-intl";
 
 type RootState = {
 	cart: {
@@ -16,7 +16,7 @@ type RootState = {
 };
 
 export default function CartPopover() {
-	const { t } = useTranslation();
+	const t = useTranslations("shop");
 	const products = useSelector((state: RootState) => state.cart.products);
 	const dispatch = useDispatch();
 
@@ -84,7 +84,7 @@ export default function CartPopover() {
 									src={process.env.NEXT_PUBLIC_PROD_PATH + item.image}
 									width={80}
 									height={100}
-									alt={t("shop:cartProductImage")}
+									alt={t("cartProductImage")}
 								/>
 								<div className="details">
 									<h1 className="text-lg font-medium">{item.name}</h1>
@@ -94,7 +94,7 @@ export default function CartPopover() {
 										</p>
 										{item.onSale && (
 											<div className="flex items-center justify-center px-2 font-bold uppercase text-red-600">
-												{t("shop:sale")}
+												{t("sale")}
 											</div>
 										)}
 									</div>
@@ -113,24 +113,24 @@ export default function CartPopover() {
 						{products.length > 0 ? (
 							<>
 								<div className="total mb-5 flex justify-between text-lg font-medium uppercase">
-									<span>{t("shop:cartSubtotal")}</span>
+									<span>{t("cartSubtotal")}</span>
 									<span>{totalPrice()}zł</span>
 								</div>
 								<button
 									onClick={handlePayment}
 									className="mx-auto mb-5 flex w-full cursor-pointer items-center justify-center gap-5 border-none bg-zinc-950 p-2.5 font-medium uppercase text-white transition hover:bg-red-600"
 								>
-									{t("shop:cartCheckout")}
+									{t("cartCheckout")}
 								</button>
 								<p
 									className=" cursor-pointer text-xs font-bold text-red-600 hover:text-red-400"
 									onClick={() => dispatch(resetCart())}
 								>
-									{t("shop:cartResetBtn")}
+									{t("cartResetBtn")}
 								</p>
 							</>
 						) : (
-							<p>{t("shop:cartNoProducts")}</p>
+							<p>{t("cartNoProducts")}</p>
 						)}
 					</div>
 					<Popover.Close

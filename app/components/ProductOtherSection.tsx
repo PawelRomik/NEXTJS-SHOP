@@ -4,15 +4,14 @@ import { GET_OTHER_PRODUCTS, GET_PRODUCT_CATEGORY } from "../queries/productPage
 import { Suspense } from "react";
 import ProductDisplay from "./ProductDisplay";
 import { QueryResult, QueryResultSingle } from "../queries/productType";
-import initTranslations from "../i18n";
+import { useTranslations } from "next-intl";
 
 type ProductOtherSectionProps = {
 	productId: string;
-	locale: string;
 };
 
-export default async function ProductOtherSection({ productId, locale }: ProductOtherSectionProps) {
-	const { t } = await initTranslations(locale, ["product"]);
+export default async function ProductOtherSection({ productId }: ProductOtherSectionProps) {
+	const t = useTranslations("product");
 	async function getCategory() {
 		try {
 			const client = createApolloClient();
@@ -45,7 +44,7 @@ export default async function ProductOtherSection({ productId, locale }: Product
 					className="relative flex w-full flex-col bg-black  p-3  pt-24 text-white "
 				>
 					<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
-						{t("product:otherSection")}
+						{t("otherSection")}
 					</h2>
 					<div className="relative w-full overflow-hidden lg:static lg:flex-1">
 						<div className="flex gap-6 overflow-x-auto py-2 lg:static">

@@ -1,11 +1,11 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import React from "react";
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 
 export default function ProductNavigationButtons() {
-	const { t } = useTranslation();
+	const t = useTranslations("product");
 
 	const [activeSection, setActiveSection] = useState<string | null>("product");
 	const scrollToSection = (sectionId: string) => {
@@ -53,22 +53,22 @@ export default function ProductNavigationButtons() {
 			<button
 				className={`${activeSection === "product" ? "bg-red-600" : "bg-white"} h-4 w-4 rounded-full`}
 				onClick={() => scrollToSection("product")}
-				title={t("product:productSection")}
+				title={t("productSection")}
 			></button>
 			<button
 				className={`${activeSection === "description" ? "bg-red-600" : "bg-white"} h-4 w-4 rounded-full`}
 				onClick={() => scrollToSection("description")}
-				title={t("product:descriptionSection")}
+				title={t("descriptionSection")}
 			></button>
 			<button
 				className={`${activeSection === "technical" ? "bg-red-600" : "bg-white"} h-4 w-4 rounded-full`}
 				onClick={() => scrollToSection("technical")}
-				title={t("product:technicalSection")}
+				title={t("technicalSection")}
 			></button>
 			<button
 				className={`${activeSection === "others" ? "bg-red-600" : "bg-white"} h-4 w-4 rounded-full`}
 				onClick={() => scrollToSection("others")}
-				title={t("product:otherSection")}
+				title={t("otherSection")}
 			></button>
 		</div>
 	);

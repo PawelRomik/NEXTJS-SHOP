@@ -10,12 +10,6 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 import ErrorText from "../../../components/ErrorText";
 
-type HomePageProps = {
-	params: {
-		locale: string;
-	};
-};
-
 export const metadata: Metadata = {
 	title: "Ephonix"
 };

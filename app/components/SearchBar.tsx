@@ -7,7 +7,7 @@ import { ApolloQueryResult } from "@apollo/client";
 import { CategoriesData, KeywordsData } from "../queries/productType";
 import { GET_CATEGORY, GET_KEYWORDS } from "../queries/search";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
+import { useTranslations } from "next-intl";
 
 type searchWordsType = {
 	id: string;
@@ -23,7 +23,7 @@ export default function SearchBar() {
 	const [searchInputOpen, setSearchInputOpen] = useState(false);
 	const [searchWords, setSearchWords] = useState<searchWordsType[]>();
 
-	const { t } = useTranslation();
+	const t = useTranslations("search");
 
 	const handleSearch = () => {
 		const params = new URLSearchParams(searchParams);
@@ -93,7 +93,7 @@ export default function SearchBar() {
 							type="text"
 							id="search"
 							name="search"
-							placeholder="Search"
+							placeholder={t("search")}
 							className=" h-full w-full bg-zinc-900  p-2 text-xl outline-none"
 							maxLength={100}
 							value={inputValue}

@@ -1,24 +1,24 @@
 import { Separator } from "@radix-ui/themes";
 import Link from "next/link";
-import initTranslations from "../i18n";
+import { useTranslations } from "next-intl";
 
-export default async function Footer({ locale }: { locale: string }) {
-	const { t } = await initTranslations(locale, ["common", "shop"]);
+export default async function Footer() {
+	const t = useTranslations("common");
 
 	return (
 		<footer className="flex  w-full flex-col items-center justify-between gap-2 border-t-8 border-zinc-800 bg-zinc-900 p-4 text-sm text-zinc-300 lg:flex-row lg:gap-0 lg:px-[6rem]">
-			<p className="lg:w-1/3">{t("common:footerCopyright")}</p>
+			<p className="lg:w-1/3">{t("footerCopyright")}</p>
 			<nav className="flex items-center justify-center gap-3 lg:w-1/3">
 				<Link href="/terms" title="terms and conditions" className="hover:text-white">
-					{t("common:footerTerms")}
+					{t("footerTerms")}
 				</Link>
 				<Separator orientation="vertical" className="bg-zinc-300" />
 				<Link href="/privacy" title="rules" className="hover:text-white">
-					{t("common:footerPrivacy")}
+					{t("footerPrivacy")}
 				</Link>
 				<Separator orientation="vertical" className="bg-zinc-300" />
 				<Link href="/contact" title="rules" className="hover:text-white">
-					{t("common:footerContact")}
+					{t("footerContact")}
 				</Link>
 			</nav>
 			<hr className="h-[2px] w-full border-none bg-zinc-800 lg:hidden"></hr>
@@ -27,7 +27,7 @@ export default async function Footer({ locale }: { locale: string }) {
 					<li>
 						<Link
 							href={"https://www.facebook.com"}
-							title={t("common:footerFacebookHover")}
+							title={t("footerFacebookHover")}
 							className="hover:text-white"
 						>
 							<i className="ri-facebook-box-fill"></i>
@@ -36,7 +36,7 @@ export default async function Footer({ locale }: { locale: string }) {
 					<li>
 						<Link
 							href={"https://www.instagram.com"}
-							title={t("common:footerInstagramHover")}
+							title={t("footerInstagramHover")}
 							className="hover:text-white"
 						>
 							<i className="ri-instagram-fill"></i>
@@ -45,7 +45,7 @@ export default async function Footer({ locale }: { locale: string }) {
 					<li>
 						<Link
 							href={"https://x.com"}
-							title={t("common:footerTwitterHover")}
+							title={t("footerTwitterHover")}
 							className="hover:text-white"
 						>
 							<i className="ri-twitter-x-fill"></i>
@@ -54,7 +54,7 @@ export default async function Footer({ locale }: { locale: string }) {
 					<li>
 						<Link
 							href={"https://www.youtube.com"}
-							title={t("common:footerYoutubekHover")}
+							title={t("footerYoutubeHover")}
 							className="hover:text-white"
 						>
 							<i className="ri-youtube-fill"></i>
@@ -63,7 +63,7 @@ export default async function Footer({ locale }: { locale: string }) {
 					<li>
 						<Link
 							href={"https://discord.com"}
-							title={t("common:footerDiscordHover")}
+							title={t("footerDiscordHover")}
 							className="hover:text-white"
 						>
 							<i className="ri-discord-fill"></i>
