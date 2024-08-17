@@ -84,7 +84,7 @@ async function loadPagination(category: string, page: number) {
 	);
 }
 
-export default async function SearchPage({
+export default function SearchPage({
 	searchParams
 }: {
 	searchParams?: {

@@ -58,5 +58,30 @@
 		"sortNewest": "Newest",
 		"sortNameToZ": "Name: A to Z",
 		"sortNameToA": "Name: Z to A"
+	},
+	"categories": {
+		"Shop": "Shop",
+		"New": "New",
+		"Sale": "Sale",
+		"Bundles": "Bundles",
+		"Components": "Components",
+		"Processor (CPU)": "Processor (CPU)",
+		"Motherboard": "Motherboard",
+		"Memory (RAM)": "Memory (RAM)",
+		"Storage (HDD/SSD)": "Storage (HDD/SSD)",
+		"Graphics Card (GPU)": "Graphics Card (GPU)",
+		"Power Supply Unit": "Power Supply Unit",
+		"Cooling System": "Cooling System",
+		"Case": "Case",
+		"Accessories": "Accessories",
+		"Keyboard": "Keyboard",
+		"Mouse": "Mouse",
+		"Mousepad": "Mousepad",
+		"Headphones": "Headphones",
+		"Microphone": "Microphone",
+		"Monitor": "Monitor",
+		"Webcam": "Webcam",
+		"Speakers": "Speakers",
+		"Support": "Support"
 	}
 }

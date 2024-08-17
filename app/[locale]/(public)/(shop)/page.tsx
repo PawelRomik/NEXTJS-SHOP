@@ -48,7 +48,7 @@ async function loadProducts() {
 	);
 }
 
-export default async function HomePage() {
+export default function HomePage() {
 	revalidatePath("/[locale]/", "page");
 
 	return (

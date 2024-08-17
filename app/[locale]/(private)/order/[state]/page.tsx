@@ -59,7 +59,7 @@ async function loadProducts() {
 	);
 }
 
-export default async function OrderPage({ params: { state } }: { params: { state: string } }) {
+export default function OrderPage({ params: { state } }: { params: { state: string } }) {
 	revalidatePath("/[locale]/order/[state]", "page");
 	const t = useTranslations();
 

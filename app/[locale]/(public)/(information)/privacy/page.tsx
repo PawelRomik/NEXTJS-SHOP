@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 	title: "Privacy Policy | Ephonix"
 };
 
-export default async function PrivacyPage() {
+export default function PrivacyPage() {
 	const t = useTranslations("information");
 	revalidatePath("/[locale]/privacy", "page");
 

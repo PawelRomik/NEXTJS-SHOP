@@ -58,5 +58,30 @@
 		"sortNewest": "Najnowsze",
 		"sortNameToZ": "Nazwa: od A do Z",
 		"sortNameToA": "Nazwa: od Z do A"
+	},
+	"categories": {
+		"Shop": "Sklep",
+		"New": "Nowości",
+		"Sale": "Wyprzedaż",
+		"Bundles": "Pakiety",
+		"Components": "Komponenty",
+		"Processor (CPU)": "Procesor (CPU)",
+		"Motherboard": "Płyta główna",
+		"Memory (RAM)": "Pamięć (RAM)",
+		"Storage (HDD/SSD)": "Magazyn (HDD/SSD)",
+		"Graphics Card (GPU)": "Karta graficzna (GPU)",
+		"Power Supply Unit": "Zasilacz",
+		"Cooling System": "System chłodzenia",
+		"Case": "Obudowa",
+		"Accessories": "Akcesoria",
+		"Keyboard": "Klawiatura",
+		"Mouse": "Myszka",
+		"Mousepad": "Podkładka pod mysz",
+		"Headphones": "Słuchawki",
+		"Microphone": "Mikrofon",
+		"Monitor": "Monitor",
+		"Webcam": "Kamera internetowa",
+		"Speakers": "Głośniki",
+		"Support": "Wsparcie"
 	}
 }

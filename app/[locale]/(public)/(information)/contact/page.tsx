@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 	title: "Contact | Ephonix"
 };
 
-export default async function ContactPage() {
+export default function ContactPage() {
 	const t = useTranslations("information");
 	revalidatePath("/[locale]/contact", "page");
 
