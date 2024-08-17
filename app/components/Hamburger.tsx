@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { categories } from "../data/categories";
 import HamburgerAccountSection from "./HamburgerAccountSection";
+import { useTranslations } from "next-intl";
 
 export default function Hamburger() {
 	const [menuOn, setMenuOn] = useState(false);
+	const t = useTranslations("categories");
 
 	const path = usePathname();
 
@@ -43,7 +45,7 @@ export default function Hamburger() {
 							>
 								<NavigationMenu.Trigger className="w-full">
 									<b className="flex w-full justify-between">
-										<span className="pl-2">{category.name.toUpperCase()}</span>
+										<span className="pl-2">{t(category.name).toUpperCase()}</span>
 										{category.subCategories && (
 											<span>
 												<i className="ri-arrow-right-double-line text-red-600"></i>
@@ -68,26 +70,23 @@ export default function Hamburger() {
 											<NavigationMenu.List className="w-full">
 												<NavigationMenu.Item>
 													<h2 className="border-b-2 border-red-600 px-2 py-2 pl-4 text-red-600">
-														{category.name}
+														{t(category.name)}
 													</h2>
 												</NavigationMenu.Item>
 												{category.subCategories.map((subCategory) => {
-													const href = subCategory
-														.toLowerCase()
-														.replace(/\s*\(.*?\)\s*/g, "")
-														.replace(/ /g, "-");
+													const href = subCategory.slug;
 													return (
 														<NavigationMenu.Item
-															key={subCategory}
+															key={subCategory.slug}
 															className="w-full border-b-2 border-zinc-900 bg-black px-2 py-[1.25rem]"
 														>
 															<Link
 																onClick={() => setMenuOn(false)}
 																href={`/category/${href}`}
-																title={subCategory}
+																title={t(subCategory.name)}
 																className=" pl-2"
 															>
-																<b>{subCategory}</b>
+																<b>{t(subCategory.name)}</b>
 															</Link>
 														</NavigationMenu.Item>
 													);
