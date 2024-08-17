@@ -47,11 +47,7 @@ export async function generateMetadata({
 	};
 }
 
-export default async function ProductPage({
-	params: { productId }
-}: {
-	params: { productId: string };
-}) {
+export default function ProductPage({ params: { productId } }: { params: { productId: string } }) {
 	revalidatePath("/[locale]/product/[productId]", "page");
 
 	return (

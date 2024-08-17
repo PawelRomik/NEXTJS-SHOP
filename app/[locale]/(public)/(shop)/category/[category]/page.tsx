@@ -139,7 +139,7 @@ async function loadPagination(category: string, page: number, tags?: string[]) {
 	);
 }
 
-export default async function ShopPage({
+export default function ShopPage({
 	params: { category },
 	searchParams
 }: {

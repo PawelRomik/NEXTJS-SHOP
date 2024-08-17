@@ -1,18 +1,11 @@
-import { revalidatePath } from "next/cache";
 import { Metadata } from "next";
 import { useTranslations } from "next-intl";
-
-type TermsProps = {
-	params: {
-		locale: string;
-	};
-};
 
 export const metadata: Metadata = {
 	title: "Terms and Conditions | Ephonix"
 };
 
-export default async function TermsPage() {
+export default function TermsPage() {
 	const t = useTranslations("information");
 
 	return (
