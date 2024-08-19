@@ -1,42 +1,27 @@
 "use client";
-
-import createApolloClient from "../../apollo-client";
-import { GET_FILTERS } from "../queries/filters";
-import { FiltersData } from "../queries/productType";
-import { ApolloQueryResult } from "@apollo/client";
-import FilterComponent from "./Filter";
-import { Suspense } from "react";
+import Filter from "./Filter";
 import { useRouter } from "next/navigation";
 import SortOptions from "./SortOptions";
 import { useTranslations } from "next-intl";
 
-export default function ProductFIlters() {
+type ProductFiltersProps = {
+	filters: {
+		id: string;
+		attributes: {
+			name: string;
+			tags: {
+				data: {
+					attributes: {
+						name: string;
+					};
+				}[];
+			};
+		};
+	}[];
+};
+export default function ProductFilters({ filters }: ProductFiltersProps) {
 	const t = useTranslations("product");
 	const router = useRouter();
-	async function fetchProducts(category: string) {
-		try {
-			const client = createApolloClient();
-			const { data }: ApolloQueryResult<FiltersData> = await client.query({
-				query: GET_FILTERS,
-				variables: {
-					category: category
-				}
-			});
-
-			if (!data) return null;
-
-			const filters = data.filters.data;
-			return (
-				<>
-					{filters.map((filter) => (
-						<FilterComponent key={filter.id} filter={filter} />
-					))}
-				</>
-			);
-		} catch {
-			return null;
-		}
-	}
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -69,7 +54,9 @@ export default function ProductFIlters() {
 				className=" flex w-full flex-col items-start justify-center gap-2"
 			>
 				<div className="flex w-[40%] flex-wrap gap-[3px] bg-zinc-800 p-[3px] text-white">
-					<Suspense>{fetchProducts("processor")}</Suspense>
+					{filters.map((filter) => (
+						<Filter key={filter.id} filter={filter} />
+					))}
 					<SortOptions />
 				</div>
 				<button

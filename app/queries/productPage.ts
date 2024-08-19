@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_PRODUCT_DESC = gql`
-	query getProduct($productId: ID!) {
-		product(id: $productId) {
+	query getProduct($productId: String!, $locale: I18NLocaleCode!) {
+		products(filters: { uuid: { eq: $productId } }, locale: $locale) {
 			data {
 				id
 				attributes {
@@ -22,8 +22,8 @@ export const GET_PRODUCT_DESC = gql`
 `;
 
 export const GET_PRODUCT_TECHNICAL = gql`
-	query getProduct($productId: ID!) {
-		product(id: $productId) {
+	query getProduct($productId: String!, $locale: I18NLocaleCode!) {
+		products(filters: { uuid: { eq: $productId } }, locale: $locale) {
 			data {
 				id
 				attributes {
@@ -35,8 +35,8 @@ export const GET_PRODUCT_TECHNICAL = gql`
 `;
 
 export const GET_PRODUCT_NAME = gql`
-	query getProduct($productId: ID!) {
-		product(id: $productId) {
+	query getProduct($productId: String!, $locale: I18NLocaleCode!) {
+		products(filters: { uuid: { eq: $productId } }, locale: $locale) {
 			data {
 				id
 				attributes {
@@ -47,8 +47,8 @@ export const GET_PRODUCT_NAME = gql`
 	}
 `;
 export const GET_PRODUCT_IMAGES = gql`
-	query getProduct($productId: ID!) {
-		product(id: $productId) {
+	query getProduct($productId: String!, $locale: I18NLocaleCode!) {
+		products(filters: { uuid: { eq: $productId } }, locale: $locale) {
 			data {
 				id
 				attributes {
@@ -67,8 +67,8 @@ export const GET_PRODUCT_IMAGES = gql`
 `;
 
 export const GET_PRODUCT_PRICE = gql`
-	query getProduct($productId: ID!) {
-		product(id: $productId) {
+	query getProduct($productId: String!, $locale: I18NLocaleCode!) {
+		products(filters: { uuid: { eq: $productId } }, locale: $locale) {
 			data {
 				id
 				attributes {
@@ -81,8 +81,8 @@ export const GET_PRODUCT_PRICE = gql`
 `;
 
 export const GET_PRODUCT_CATEGORY = gql`
-	query getProduct($productId: ID!) {
-		product(id: $productId) {
+	query getProduct($productId: String!, $locale: I18NLocaleCode!) {
+		products(filters: { uuid: { eq: $productId } }, locale: $locale) {
 			data {
 				id
 				attributes {
@@ -101,13 +101,14 @@ export const GET_PRODUCT_CATEGORY = gql`
 `;
 
 export const GET_PRODUCT_ALLDATA = gql`
-	query getProducts($productId: ID!) {
-		product(id: $productId) {
+	query getProducts($productId: String!, $locale: I18NLocaleCode!) {
+		products(filters: { uuid: { eq: $productId } }, locale: $locale) {
 			data {
 				id
 				attributes {
 					name
 					price
+					uuid
 					salePrice
 					desc
 					images {
@@ -131,16 +132,18 @@ export const GET_PRODUCT_ALLDATA = gql`
 `;
 
 export const GET_OTHER_PRODUCTS = gql`
-	query getProducts($productId: ID!, $category: String!) {
+	query getProducts($productId: String!, $category: String!, $locale: I18NLocaleCode!) {
 		products(
 			pagination: { limit: 5 }
-			filters: { categories: { slug: { eq: $category } }, id: { ne: $productId } }
+			filters: { categories: { slug: { eq: $category } }, uuid: { ne: $productId } }
+			locale: $locale
 		) {
 			data {
 				id
 				attributes {
 					name
 					price
+					uuid
 					salePrice
 					desc
 					images {

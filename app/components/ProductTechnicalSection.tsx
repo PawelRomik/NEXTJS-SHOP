@@ -2,28 +2,33 @@ import createApolloClient from "../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
 import { GET_PRODUCT_TECHNICAL } from "../queries/productPage";
 import { Suspense } from "react";
-import { QueryResultSingle } from "../queries/productType";
+import { QueryResult } from "../queries/productType";
 import { useTranslations } from "next-intl";
 
 type ProductTechnicalSectionProps = {
 	productId: string;
+	locale: string;
 };
 
-export default async function ProductTechnicalSection({ productId }: ProductTechnicalSectionProps) {
+export default function ProductTechnicalSection({
+	productId,
+	locale
+}: ProductTechnicalSectionProps) {
 	const t = useTranslations("product");
 
 	async function getTechnical() {
 		try {
 			const client = createApolloClient();
-			const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
+			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_TECHNICAL,
 				variables: {
-					productId: productId
+					productId: productId,
+					locale: locale
 				}
 			});
 			if (!data) return null;
 
-			const lines = data.product.data.attributes.technical.trim().split("\n");
+			const lines = data.products.data[0].attributes.technical.trim().split("\n");
 
 			const tableRows = lines.map((line, index) => {
 				const parts = line.split(" | ");

@@ -3,26 +3,29 @@ import { ApolloQueryResult } from "@apollo/client";
 import { GET_OTHER_PRODUCTS, GET_PRODUCT_CATEGORY } from "../queries/productPage";
 import { Suspense } from "react";
 import ProductDisplay from "./ProductDisplay";
-import { QueryResult, QueryResultSingle } from "../queries/productType";
+import { QueryResult } from "../queries/productType";
 import { useTranslations } from "next-intl";
 
 type ProductOtherSectionProps = {
 	productId: string;
+	locale: string;
 };
 
-export default async function ProductOtherSection({ productId }: ProductOtherSectionProps) {
+export default function ProductOtherSection({ productId, locale }: ProductOtherSectionProps) {
 	const t = useTranslations("product");
+
 	async function getCategory() {
 		try {
 			const client = createApolloClient();
-			const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
+			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_CATEGORY,
 				variables: {
-					productId: productId
+					productId: productId,
+					locale: locale
 				}
 			});
 
-			return data.product.data.attributes.categories.data[0].attributes.slug;
+			return data.products.data[0].attributes.categories.data[0].attributes.slug;
 		} catch {
 			return null;
 		}
@@ -35,7 +38,8 @@ export default async function ProductOtherSection({ productId }: ProductOtherSec
 				query: GET_OTHER_PRODUCTS,
 				variables: {
 					productId: productId,
-					category: await getCategory()
+					category: await getCategory(),
+					locale: locale
 				}
 			});
 			return (
@@ -50,7 +54,7 @@ export default async function ProductOtherSection({ productId }: ProductOtherSec
 						<div className="flex gap-6 overflow-x-auto py-2 lg:static">
 							{data.products.data.map((product) => (
 								<ProductDisplay
-									id={product.id}
+									uuid={product.attributes.uuid}
 									name={product.attributes.name}
 									desc={product.attributes.desc}
 									price={product.attributes.price}
