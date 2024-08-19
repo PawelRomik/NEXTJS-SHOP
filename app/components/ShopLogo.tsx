@@ -3,7 +3,7 @@ import nextLogo from "../../public/logo.png";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
-export default async function ShopLogo() {
+export default function ShopLogo() {
 	const t = useTranslations("common");
 	return (
 		<div className=" lg:w-1/3">
