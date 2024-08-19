@@ -5,11 +5,11 @@ import { addToCart } from "../redux/cardReducer";
 import { SignedIn } from "@clerk/nextjs";
 import { SignedOut } from "@clerk/nextjs";
 import { ApolloQueryResult } from "@apollo/client";
-import { QueryResultSingle } from "../queries/productType";
+import { QueryResult, QueryResultSingle } from "../queries/productType";
 import createApolloClient from "../../apollo-client";
 import { GET_PRODUCT_ALLDATA } from "../queries/productPage";
 import LoginButton from "./LoginButton";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 type BuyButtonsProps = {
 	productId: string;
@@ -18,18 +18,19 @@ type BuyButtonsProps = {
 export default function BuyButton({ productId }: BuyButtonsProps) {
 	const t = useTranslations("shop");
 	const dispatch = useDispatch();
+	const locale = useLocale();
 	const client = createApolloClient();
 
-	const handleButtonClick = async (productId: string, e: React.MouseEvent<HTMLButtonElement>) => {
+	const handleButtonClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		e.stopPropagation();
 
-		const product = await getProductData();
+		const product = await getProductData(locale);
 		if (product) {
-			const currProduct = product.product.data;
+			const currProduct = product.products.data[0];
 			dispatch(
 				addToCart({
-					id: currProduct.id,
+					id: currProduct.attributes.uuid,
 					name: currProduct.attributes.name,
 					desc: currProduct.attributes.desc,
 					price: currProduct.attributes.salePrice
@@ -43,12 +44,13 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 		}
 	};
 
-	const getProductData = async () => {
+	const getProductData = async (locale: string) => {
 		try {
-			const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
+			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_ALLDATA,
 				variables: {
-					productId: productId
+					productId: productId,
+					locale: locale
 				}
 			});
 
@@ -65,7 +67,7 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 					className="flex h-full w-full items-center justify-center bg-red-600 p-2 text-white hover:scale-105 hover:bg-red-500
 "
 					title={t("buyButtonText")}
-					onClick={(e) => handleButtonClick(productId, e)}
+					onClick={(e) => handleButtonClick(e)}
 				>
 					{t("buyButtonText")}
 				</button>

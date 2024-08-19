@@ -14,10 +14,15 @@ export const metadata: Metadata = {
 	title: "Ephonix"
 };
 
-async function fetchProducts() {
+async function fetchProducts(locale: string) {
 	try {
 		const client = createApolloClient();
-		const { data }: ApolloQueryResult<QueryResult> = await client.query({ query: GET_PRODUCTS });
+		const { data }: ApolloQueryResult<QueryResult> = await client.query({
+			query: GET_PRODUCTS,
+			variables: {
+				locale: locale
+			}
+		});
 
 		return data.products;
 	} catch {
@@ -25,8 +30,8 @@ async function fetchProducts() {
 	}
 }
 
-async function loadProducts() {
-	const data = await fetchProducts();
+async function loadProducts(locale: string) {
+	const data = await fetchProducts(locale);
 
 	if (!data) return <ErrorText />;
 
@@ -34,7 +39,7 @@ async function loadProducts() {
 		<>
 			{data.data.map((product) => (
 				<ProductDisplay
-					id={product.id}
+					uuid={product.attributes.uuid}
 					desc={product.attributes.desc}
 					name={product.attributes.name}
 					price={product.attributes.price}
@@ -48,7 +53,7 @@ async function loadProducts() {
 	);
 }
 
-export default function HomePage() {
+export default function HomePage({ params: { locale } }: { params: { locale: string } }) {
 	revalidatePath("/[locale]/", "page");
 
 	return (
@@ -63,7 +68,7 @@ export default function HomePage() {
 						</>
 					}
 				>
-					{loadProducts()}
+					{loadProducts(locale)}
 				</Suspense>
 			</Grid>
 		</main>

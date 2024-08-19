@@ -2,7 +2,7 @@ import { Separator } from "@radix-ui/themes";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-export default async function Footer() {
+export default function Footer() {
 	const t = useTranslations("common");
 
 	return (

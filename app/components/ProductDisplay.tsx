@@ -3,7 +3,7 @@ import Link from "next/link";
 import BuyButton from "./BuyButton";
 
 type ProductDisplayProps = {
-	id: string;
+	uuid: string;
 	name: string;
 	price: number;
 	imageUrl: string;
@@ -18,7 +18,7 @@ export default function ProductDisplay({
 	imageUrl,
 	salePrice,
 	desc,
-	id
+	uuid
 }: ProductDisplayProps) {
 	const extractText = (text: string) => {
 		const startIndex = text.indexOf("--START--") + "--START--".length;
@@ -28,8 +28,8 @@ export default function ProductDisplay({
 
 	return (
 		<Link
-			href={`/product/${id}`}
-			className={`min-w-[300px] border-4 border-zinc-900 transition hover:border-red-600`}
+			href={`/product/${uuid}`}
+			className={`min-w-[300px] max-w-[400px] border-4 border-zinc-900 transition hover:border-red-600`}
 		>
 			<div className="group flex h-full cursor-pointer flex-col items-center justify-start">
 				<div className="flex h-full w-full flex-col justify-between bg-black p-6 ">
@@ -63,7 +63,7 @@ export default function ProductDisplay({
 							)}
 						</div>
 						<div className="flex w-[50%] items-end justify-end">
-							<BuyButton productId={id} />
+							<BuyButton productId={uuid} />
 						</div>
 					</div>
 				</div>

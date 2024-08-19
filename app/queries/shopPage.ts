@@ -1,17 +1,19 @@
 import { gql } from "@apollo/client";
 
 export const GET_NEW_PRODUCTS = gql`
-	query getNewProducts($sex: [String!], $page: Int) {
+	query getNewProducts($sex: [String!], $page: Int, $locale: I18NLocaleCode!) {
 		products(
 			pagination: { page: $page, pageSize: 8 }
 			sort: "createdAt:desc"
 			filters: { sexes: { sex: { in: $sex } } }
+			locale: $locale
 		) {
 			data {
 				id
 				attributes {
 					name
 					price
+					uuid
 					onSale
 					salePrice
 					image {
@@ -40,18 +42,19 @@ export const GET_NEW_PRODUCTS = gql`
 `;
 
 export const GET_PRODUCTS_BY_CATEGORIES = gql`
-	query getProducts($category: String!, $page: Int!, $tags: [String]) {
+	query getProducts($category: String!, $page: Int!, $tags: [String], $locale: I18NLocaleCode!) {
 		products(
 			pagination: { page: $page, pageSize: 8 }
 			sort: "createdAt:desc"
 			filters: { categories: { slug: { eq: $category } }, tags: { name: { in: $tags } } }
-			locale: "pl"
+			locale: $locale
 		) {
 			data {
 				id
 				attributes {
 					name
 					price
+					uuid
 					desc
 					salePrice
 					images {
@@ -80,15 +83,17 @@ export const GET_PRODUCTS_BY_CATEGORIES = gql`
 `;
 
 export const GET_SALE_PRODUCTS = gql`
-	query getSaleProducts($sex: [String!], $page: Int) {
+	query getSaleProducts($sex: [String!], $page: Int, $locale: I18NLocaleCode!) {
 		products(
 			pagination: { page: $page, pageSize: 8 }
 			filters: { onSale: { eq: true }, sexes: { sex: { in: $sex } } }
+			locale: $locale
 		) {
 			data {
 				id
 				attributes {
 					name
+					uuid
 					price
 					onSale
 					salePrice

@@ -15,14 +15,15 @@ export const metadata: Metadata = {
 	title: "Search results | Ephonix"
 };
 
-async function fetchProducts(query: string, page: number) {
+async function fetchProducts(query: string, page: number, locale: string) {
 	try {
 		const client = createApolloClient();
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_SEARCH_PRODUCTS,
 			variables: {
 				name: query,
-				page: Number(page)
+				page: Number(page),
+				locale: locale
 			}
 		});
 
@@ -32,20 +33,17 @@ async function fetchProducts(query: string, page: number) {
 	}
 }
 
-async function loadCount(query: string, page: number) {
+async function loadCount(query: string, page: number, locale: string) {
 	try {
 		const client = createApolloClient();
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_SEARCH_PRODUCTS_COUNT,
 			variables: {
 				name: query,
-				page: Number(page)
+				page: Number(page),
+				locale: locale
 			}
 		});
-
-		if (data.products.meta.pagination.total === 0) {
-			return "No ";
-		}
 
 		return data.products.meta.pagination.total;
 	} catch {
@@ -53,15 +51,15 @@ async function loadCount(query: string, page: number) {
 	}
 }
 
-async function loadProducts(category: string, page: number) {
-	const data = await fetchProducts(category, page);
+async function loadProducts(category: string, page: number, locale: string) {
+	const data = await fetchProducts(category, page, locale);
 	if (!data) return null;
 
 	return (
 		<>
 			{data.data.map((product) => (
 				<ProductDisplay
-					id={product.id}
+					uuid={product.attributes.uuid}
 					name={product.attributes.name}
 					desc={product.attributes.desc}
 					price={product.attributes.price}
@@ -75,8 +73,8 @@ async function loadProducts(category: string, page: number) {
 	);
 }
 
-async function loadPagination(category: string, page: number) {
-	const data = await fetchProducts(category, page);
+async function loadPagination(category: string, page: number, locale: string) {
+	const data = await fetchProducts(category, page, locale);
 	if (!data) return null;
 
 	return (
@@ -85,11 +83,15 @@ async function loadPagination(category: string, page: number) {
 }
 
 export default function SearchPage({
-	searchParams
+	searchParams,
+	params: { locale }
 }: {
 	searchParams?: {
 		query?: string;
 		page?: number;
+	};
+	params: {
+		locale: string;
 	};
 }) {
 	revalidatePath("/[locale]/search", "page");
@@ -105,7 +107,7 @@ export default function SearchPage({
 			<h1 className="flex items-center justify-center text-3xl font-bold text-red-600 lg:justify-start lg:pl-6 lg:text-4xl">
 				<Suspense>
 					<span className="mr-2 rounded-full border-4 border-red-600 px-3 text-xl text-white lg:px-[0.75rem] lg:text-2xl">
-						{loadCount(query, page)}
+						{loadCount(query, page, locale)}
 					</span>
 				</Suspense>
 
@@ -124,10 +126,10 @@ export default function SearchPage({
 						</>
 					}
 				>
-					{loadProducts(query, page)}
+					{loadProducts(query, page, locale)}
 				</Suspense>
 			</Grid>
-			<Suspense>{loadPagination(query, page)}</Suspense>
+			<Suspense>{loadPagination(query, page, locale)}</Suspense>
 		</main>
 	);
 }

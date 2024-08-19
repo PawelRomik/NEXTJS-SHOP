@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_SEARCH_PRODUCTS = gql`
-	query getProducts($name: String!, $page: Int) {
+	query getProducts($name: String!, $page: Int, $locale: I18NLocaleCode!) {
 		products(
 			pagination: { page: $page, pageSize: 8 }
 			sort: "createdAt:desc"
@@ -12,12 +12,14 @@ export const GET_SEARCH_PRODUCTS = gql`
 					{ categories: { name: { eqi: $name } } }
 				]
 			}
+			locale: $locale
 		) {
 			data {
 				id
 				attributes {
 					name
 					price
+					uuid
 					desc
 					salePrice
 					images {
@@ -46,7 +48,7 @@ export const GET_SEARCH_PRODUCTS = gql`
 `;
 
 export const GET_SEARCH_PRODUCTS_COUNT = gql`
-	query getSearchProducts($name: String!, $page: Int) {
+	query getSearchProducts($name: String!, $page: Int, $locale: I18NLocaleCode!) {
 		products(
 			pagination: { page: $page, pageSize: 8 }
 			sort: "createdAt:desc"
@@ -57,6 +59,7 @@ export const GET_SEARCH_PRODUCTS_COUNT = gql`
 					{ categories: { name: { eqi: $name } } }
 				]
 			}
+			locale: $locale
 		) {
 			data {
 				id
@@ -64,6 +67,7 @@ export const GET_SEARCH_PRODUCTS_COUNT = gql`
 					name
 					price
 					desc
+					uuid
 					salePrice
 					images {
 						data {
@@ -91,8 +95,12 @@ export const GET_SEARCH_PRODUCTS_COUNT = gql`
 `;
 
 export const GET_KEYWORDS = gql`
-	query getFancyWords($name: String!) {
-		fancywords(pagination: { limit: 5 }, filters: { name: { startsWith: $name } }) {
+	query getFancyWords($name: String!, $locale: I18NLocaleCode!) {
+		fancywords(
+			pagination: { limit: 5 }
+			filters: { name: { startsWith: $name } }
+			locale: $locale
+		) {
 			data {
 				id
 				attributes {
@@ -104,8 +112,12 @@ export const GET_KEYWORDS = gql`
 `;
 
 export const GET_CATEGORY = gql`
-	query getCategory($name: String!) {
-		categories(pagination: { limit: 5 }, filters: { name: { startsWith: $name } }) {
+	query getCategory($name: String!, $locale: I18NLocaleCode!) {
+		categories(
+			pagination: { limit: 5 }
+			filters: { name: { startsWith: $name } }
+			locale: $locale
+		) {
 			data {
 				id
 				attributes {

@@ -14,7 +14,7 @@ type FilterProps = {
 	};
 };
 
-export default function FilterComponent({ filter }: FilterProps) {
+export default function Filter({ filter }: FilterProps) {
 	return (
 		<div className="flex w-full flex-[49%] flex-col bg-black px-10 py-2">
 			<h2 className="mb-2 w-full border-b-2 border-zinc-800 text-center">

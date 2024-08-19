@@ -7,6 +7,7 @@ type ProductData = {
 		salePrice: number;
 		onSale: boolean;
 		technical: string;
+		uuid: string;
 		images: {
 			data: {
 				attributes: {

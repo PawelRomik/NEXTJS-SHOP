@@ -2,7 +2,7 @@ import Link from "next/link";
 import ShopLogo from "./ShopLogo";
 import { useTranslations } from "next-intl";
 
-export default async function InformationHeader() {
+export default function InformationHeader() {
 	const t = useTranslations("information");
 
 	return (

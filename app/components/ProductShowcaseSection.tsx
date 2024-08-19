@@ -5,9 +5,10 @@ import { useTranslations } from "next-intl";
 
 type ProductShowcaseSectionProps = {
 	productId: string;
+	locale: string;
 };
 
-export default async function ProductShowcaseSection({ productId }: ProductShowcaseSectionProps) {
+export default function ProductShowcaseSection({ productId, locale }: ProductShowcaseSectionProps) {
 	const t = useTranslations("product");
 	return (
 		<section id="product" className=" relative flex w-full flex-col lg:flex-row  lg:gap-3">
@@ -19,8 +20,8 @@ export default async function ProductShowcaseSection({ productId }: ProductShowc
 			</div>
 
 			<div className="flex flex-[40%] flex-col justify-between  bg-black px-6 py-6 text-white lg:px-20 lg:py-32">
-				<ProductShowcaseDesc productId={productId} />
-				<ProductShowcasePrice productId={productId} />
+				<ProductShowcaseDesc productId={productId} locale={locale} />
+				<ProductShowcasePrice productId={productId} locale={locale} />
 			</div>
 		</section>
 	);

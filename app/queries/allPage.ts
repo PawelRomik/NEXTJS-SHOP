@@ -1,12 +1,13 @@
 import { gql } from "@apollo/client";
 
 export const GET_PRODUCTS = gql`
-	query {
-		products(pagination: { limit: 100 }, sort: "createdAt:desc") {
+	query getAllProducts($locale: I18NLocaleCode!) {
+		products(pagination: { limit: 100 }, sort: "createdAt:desc", locale: $locale) {
 			data {
 				id
 				attributes {
 					name
+					uuid
 					price
 					desc
 					salePrice

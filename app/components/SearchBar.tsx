@@ -7,7 +7,7 @@ import { ApolloQueryResult } from "@apollo/client";
 import { CategoriesData, KeywordsData } from "../queries/productType";
 import { GET_CATEGORY, GET_KEYWORDS } from "../queries/search";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 type searchWordsType = {
 	id: string;
@@ -17,6 +17,7 @@ type searchWordsType = {
 };
 
 export default function SearchBar() {
+	const locale = useLocale();
 	const searchParams = useSearchParams();
 	const router = useRouter();
 	const [inputValue, setInputValue] = useState("");
@@ -63,13 +64,15 @@ export default function SearchBar() {
 				const keywords: ApolloQueryResult<KeywordsData> = await client.query({
 					query: GET_KEYWORDS,
 					variables: {
-						name: inputValue
+						name: inputValue,
+						locale: locale
 					}
 				});
 				const categories: ApolloQueryResult<CategoriesData> = await client.query({
 					query: GET_CATEGORY,
 					variables: {
-						name: inputValue
+						name: inputValue,
+						locale: locale
 					}
 				});
 
@@ -79,7 +82,7 @@ export default function SearchBar() {
 			}
 		};
 		getKeywords();
-	}, [inputValue]);
+	}, [inputValue, locale]);
 
 	return (
 		<div className="flex h-full items-center justify-center overflow-hidden">

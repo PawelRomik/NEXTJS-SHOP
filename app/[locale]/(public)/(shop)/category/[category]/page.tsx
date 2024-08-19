@@ -3,7 +3,7 @@ import ProductDisplay from "../../../../../components/ProductDisplay";
 import { ApolloQueryResult } from "@apollo/client";
 import createApolloClient from "../../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
-import { QueryResult } from "../../../../../queries/productType";
+import { FiltersData, QueryResult } from "../../../../../queries/productType";
 import { Metadata } from "next";
 import Pagination from "../../../../../components/Pagination";
 import { Suspense } from "react";
@@ -11,13 +11,14 @@ import SkeletonProductDisplay from "../../../../../components/SkeletonProductDis
 import ProductFIlters from "../../../../../components/ProductFilters";
 import { gql } from "@apollo/client";
 import ErrorText from "../../../../../components/ErrorText";
+import { GET_FILTERS } from "../../../../../queries/filters";
+import ProductFilters from "../../../../../components/ProductFilters";
 
 export async function generateMetadata({
-	params
+	params: { category }
 }: {
 	params: { category: string };
 }): Promise<Metadata> {
-	const { category } = params;
 	return {
 		title: `${category.charAt(0).toUpperCase() + category.slice(1)} | Ephonix`
 	};
@@ -26,6 +27,7 @@ export async function generateMetadata({
 async function fetchProducts(
 	category: string,
 	page: number,
+	locale: string,
 	tags?: string[],
 	sort: string = "latest"
 ) {
@@ -49,11 +51,12 @@ async function fetchProducts(
 	};
 
 	const newQuery = `
-		query getProducts($category: String!, $page: Int!${tags ? ", $tags: [String]" : ""}) {
+		query getProducts($category: String!, $page: Int!${tags ? ", $tags: [String]" : ""}, $locale: I18NLocaleCode!) {
 			products(
 				pagination: { page: $page, pageSize: 8 }
 				sort: "${getSortOrder(sort)}"
 				filters: { categories: { slug: { eq: $category } }${tags ? ", tags: { name: { in: $tags } } " : ""} }
+				locale: $locale
 			) {
 				data {
 					id
@@ -61,6 +64,7 @@ async function fetchProducts(
 						name
 						price
 						desc
+						uuid
 						salePrice
 						images {
 							data {
@@ -90,7 +94,8 @@ async function fetchProducts(
 	try {
 		const variables: Record<string, any> = {
 			category,
-			page: Number(page)
+			page: Number(page),
+			locale: locale
 		};
 
 		if (tags) {
@@ -108,15 +113,21 @@ async function fetchProducts(
 	}
 }
 
-async function loadProducts(category: string, page: number, tags?: string[], sort?: string) {
-	const data = await fetchProducts(category, page, tags, sort);
+async function loadProducts(
+	category: string,
+	page: number,
+	locale: string,
+	tags?: string[],
+	sort?: string
+) {
+	const data = await fetchProducts(category, page, locale, tags, sort);
 	if (!data) return <ErrorText />;
 
 	return (
 		<>
 			{data.data.map((product) => (
 				<ProductDisplay
-					id={product.id}
+					uuid={product.attributes.uuid}
 					name={product.attributes.name}
 					desc={product.attributes.desc}
 					price={product.attributes.price}
@@ -130,8 +141,8 @@ async function loadProducts(category: string, page: number, tags?: string[], sor
 	);
 }
 
-async function loadPagination(category: string, page: number, tags?: string[]) {
-	const data = await fetchProducts(category, page, tags);
+async function loadPagination(category: string, page: number, locale: string, tags?: string[]) {
+	const data = await fetchProducts(category, page, locale, tags);
 	if (!data) return null;
 
 	return (
@@ -139,12 +150,33 @@ async function loadPagination(category: string, page: number, tags?: string[]) {
 	);
 }
 
+async function LoadFilters(category: string, locale: string) {
+	try {
+		const client = createApolloClient();
+		const { data }: ApolloQueryResult<FiltersData> = await client.query({
+			query: GET_FILTERS,
+			variables: {
+				category: category,
+				locale: locale
+			}
+		});
+
+		if (!data) return null;
+
+		const filters = data.filters.data;
+		return <ProductFilters filters={filters} />;
+	} catch {
+		return null;
+	}
+}
+
 export default function ShopPage({
-	params: { category },
+	params: { category, locale },
 	searchParams
 }: {
 	params: {
 		category: string;
+		locale: string;
 	};
 	searchParams?: {
 		page?: number;
@@ -163,7 +195,7 @@ export default function ShopPage({
 			<h1 className="flex items-center justify-center text-4xl font-bold capitalize text-red-600 lg:justify-start lg:pl-6">
 				<span>{category + "s"}</span>
 			</h1>
-			<ProductFIlters />
+			<Suspense>{LoadFilters(category, locale)}</Suspense>
 			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
 				<Suspense
 					fallback={
@@ -174,10 +206,10 @@ export default function ShopPage({
 						</>
 					}
 				>
-					{loadProducts(category, page, tags, sort)}
+					{loadProducts(category, page, locale, tags, sort)}
 				</Suspense>
 			</Grid>
-			<Suspense>{loadPagination(category, page, tags)}</Suspense>
+			<Suspense>{loadPagination(category, page, locale, tags)}</Suspense>
 		</main>
 	);
 }

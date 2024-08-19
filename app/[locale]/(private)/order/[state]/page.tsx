@@ -43,7 +43,7 @@ async function loadProducts() {
 				<div className="flex max-w-[100%] gap-6 overflow-x-auto">
 					{data.data.map((product) => (
 						<ProductDisplay
-							id={product.id}
+							uuid={product.attributes.uuid}
 							name={product.attributes.name}
 							desc={product.attributes.desc}
 							price={product.attributes.price}

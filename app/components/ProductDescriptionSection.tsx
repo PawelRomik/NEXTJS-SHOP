@@ -3,29 +3,32 @@ import createApolloClient from "../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
 import { GET_PRODUCT_DESC } from "../queries/productPage";
 import { Suspense } from "react";
-import { QueryResultSingle } from "../queries/productType";
+import { QueryResult } from "../queries/productType";
 import { useTranslations } from "next-intl";
 
 type ProductDescriptionSectionProps = {
 	productId: string;
+	locale: string;
 };
 
-export default async function ProductDescriptionSection({
-	productId
+export default function ProductDescriptionSection({
+	productId,
+	locale
 }: ProductDescriptionSectionProps) {
 	const t = useTranslations("product");
 
 	async function getProductDesc() {
 		try {
 			const client = createApolloClient();
-			const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
+			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_DESC,
 				variables: {
-					productId: productId
+					productId: productId,
+					locale: locale
 				}
 			});
 
-			const currProduct = data.product.data.attributes;
+			const currProduct = data.products.data[0].attributes;
 			const sections = currProduct.desc
 				.replace("--START--", "--SECTION--")
 				.replace("--END--", "--SECTION--")
