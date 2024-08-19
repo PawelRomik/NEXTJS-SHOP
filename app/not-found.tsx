@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import ShopHeader from "./components/ShopHeader";
