@@ -73,11 +73,6 @@ export type CategoriesData = {
 	};
 };
 
-export type QueryResultSingle = {
-	product: {
-		data: ProductData;
-	};
-};
 export type QueryResult = {
 	products: {
 		data: ProductData[];
