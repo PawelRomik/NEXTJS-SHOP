@@ -1,7 +1,6 @@
 import { ApolloQueryResult } from "@apollo/client";
 import createApolloClient from "../../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
-import { QueryResultSingle } from "../../../../../queries/productType";
 import { GET_PRODUCT_NAME } from "../../../../../queries/productPage";
 import { Metadata } from "next";
 import ProductNavigationButtons from "../../../../../components/ProductNavigationButtons";
@@ -9,12 +8,13 @@ import ProductShowcaseSection from "../../../../../components/ProductShowcaseSec
 import ProductDescriptionSection from "../../../../../components/ProductDescriptionSection";
 import ProductTechnicalSection from "../../../../../components/ProductTechnicalSection";
 import ProductOtherSection from "../../../../../components/ProductOtherSection";
+import { QueryResult } from "../../../../../queries/productType";
 
 async function fetchProduct(productId: string, locale: string) {
 	try {
 		const client = createApolloClient();
 
-		const { data }: ApolloQueryResult<QueryResultSingle> = await client.query({
+		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_PRODUCT_NAME,
 			variables: {
 				productId,
@@ -22,7 +22,7 @@ async function fetchProduct(productId: string, locale: string) {
 			}
 		});
 
-		const currProduct = data.product.data;
+		const currProduct = data.products.data[0];
 		return currProduct;
 	} catch {
 		return null;

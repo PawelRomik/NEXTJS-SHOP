@@ -1,6 +1,6 @@
 import { GET_PRODUCT_DESC } from "../queries/productPage";
 import { ApolloQueryResult } from "@apollo/client";
-import { QueryResult, QueryResultSingle } from "../queries/productType";
+import { QueryResult } from "../queries/productType";
 import { Suspense } from "react";
 import createApolloClient from "../../apollo-client";
 

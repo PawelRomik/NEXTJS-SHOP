@@ -5,7 +5,7 @@ import { addToCart } from "../redux/cardReducer";
 import { SignedIn } from "@clerk/nextjs";
 import { SignedOut } from "@clerk/nextjs";
 import { ApolloQueryResult } from "@apollo/client";
-import { QueryResult, QueryResultSingle } from "../queries/productType";
+import { QueryResult } from "../queries/productType";
 import createApolloClient from "../../apollo-client";
 import { GET_PRODUCT_ALLDATA } from "../queries/productPage";
 import LoginButton from "./LoginButton";
