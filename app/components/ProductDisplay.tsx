@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import BuyButton from "./BuyButton";
+import { useTranslations } from "next-intl";
 
 type ProductDisplayProps = {
 	uuid: string;
@@ -20,6 +21,8 @@ export default function ProductDisplay({
 	desc,
 	uuid
 }: ProductDisplayProps) {
+	const t = useTranslations("common");
+
 	const extractText = (text: string) => {
 		const startIndex = text.indexOf("--START--") + "--START--".length;
 		const endIndex = text.indexOf(".");
@@ -52,8 +55,10 @@ export default function ProductDisplay({
 						<div className="flex h-[80px] flex-col justify-end">
 							{salePrice ? (
 								<>
-									<div className="text-xl font-bold text-red-600">SALE</div>
-									<p className="text-sm text-zinc-300">FROM: PLN {price}</p>
+									<div className="text-xl font-bold text-red-600">{t("sale")}</div>
+									<p className="text-sm text-zinc-300">
+										{t("saleFrom")} PLN {price}
+									</p>
 									<p className="flex items-end gap-2 text-xl font-bold text-white">
 										{salePrice && <span>PLN {salePrice}</span>}
 									</p>

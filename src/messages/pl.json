@@ -1,24 +1,42 @@
 {
 	"common": {
 		"errorLoadingProducts": "Wystąpił błąd podczas ładowania produktów, spróbuj ponownie później.",
-		"footerCopyright": "Copyright © 2024 Ephonix Inc. Wszelkie prawa zastrzeżone.",
-		"footerTerms": "Regulamin",
-		"footerPrivacy": "Polityka Prywatności",
-		"footerContact": "Kontakt",
-		"footerFacebookHover": "Nasz profil na Facebooku",
-		"footerInstagramHover": "Nasz profil na Instagramie",
-		"footerTwitterHover": "Nasz profil na X",
-		"footerYoutubeHover": "Nasz kanał na Youtube",
-		"footerDiscordHover": "Nasz serwer Discord",
-		"hamburgerLoggedIn": "Witaj ",
-		"hamburgerNotLoggedIn": "Nie Zalogowany!",
-		"hamburgerSettings": "Ustawienia",
-		"hamburgerLogOut": "Wyloguj się",
 		"scrollButtonTitle": "Idź na górę",
-		"shopLogo": "Logo sklepu"
+		"shopLogo": "Logo sklepu",
+		"sale": "Przecena",
+		"saleFrom": "Z"
+	},
+	"hamburger": {
+		"avatar": "Twoje zdjęcie profilowe",
+		"loggedIn": "Witaj ",
+		"notLoggedIn": "Nie Zalogowany!",
+		"settings": "Ustawienia",
+		"logOut": "Wyloguj się"
+	},
+	"filters": {
+		"filters": "Filtry",
+		"apply": "Zastosuj",
+		"reset": "Resetuj",
+		"sort": "Sortuj",
+		"sortPriceToHigh": "Cena: od najniższej",
+		"sortPriceToLow": "Cena: od najwyższej",
+		"sortNewest": "Najnowsze",
+		"sortNameToZ": "Nazwa: od A do Z",
+		"sortNameToA": "Nazwa: od Z do A"
+	},
+	"footer": {
+		"copyright": "Copyright © 2024 Ephonix Inc. Wszelkie prawa zastrzeżone.",
+		"terms": "Regulamin",
+		"privacy": "Polityka Prywatności",
+		"contact": "Kontakt",
+		"facebookHover": "Nasz profil na Facebooku",
+		"instagramHover": "Nasz profil na Instagramie",
+		"twitterHover": "Nasz profil na X",
+		"youtubeHover": "Nasz kanał na Youtube",
+		"discordHover": "Nasz serwer Discord"
 	},
 	"information": {
-		"navShop": "SKLEP",
+		"shop": "Sklep",
 		"contact": "Kontakt",
 		"terms": "Warunki Korzystania z Usług",
 		"privacy": "Polityka Prywatności"
@@ -29,9 +47,7 @@
 	"product": {
 		"product": "Produkt",
 		"description": "Opis",
-		"filters": "Filtry",
-		"filtersApply": "Zastosuj",
-		"filtersReset": "Resetuj",
+
 		"productSection": "Produkt",
 		"descriptionSection": "Opis",
 		"technicalSection": "Techniczne",
@@ -40,6 +56,7 @@
 		"productImage": "Zdjęcie produktu"
 	},
 	"search": {
+		"results": "Wyniki wyszukiwania",
 		"search": "Szukaj",
 		"matches": "Dopasowania dla"
 	},
@@ -47,41 +64,40 @@
 		"shop": "Sklep",
 		"buyButtonText": "Dodaj do koszyka",
 		"loginButton": "Zaloguj się",
-		"sale": "Wyprzedaż",
-		"cartSubtotal": "Suma:",
-		"cartCheckout": "Zamówienie",
-		"cartResetBtn": "Resetuj koszyk",
-		"cartProductImage": "Zdjęcie produktu",
-		"cartNoProducts": "Brak produktów w koszyku.",
-		"sortPriceToHigh": "Cena: od najniższej",
-		"sortPriceToLow": "Cena: od najwyższej",
-		"sortNewest": "Najnowsze",
-		"sortNameToZ": "Nazwa: od A do Z",
-		"sortNameToA": "Nazwa: od Z do A"
+		"sale": "Wyprzedaż"
+	},
+	"cart": {
+		"content": "Produkty w koszyku",
+		"subtotal": "Suma:",
+		"checkout": "Zamówienie",
+		"resetBtn": "Resetuj koszyk",
+		"productImage": "Zdjęcie produktu",
+		"noProducts": "Brak produktów w koszyku.",
+		"sale": "Przecena"
 	},
 	"categories": {
-		"Shop": "Sklep",
-		"New": "Nowości",
-		"Sale": "Wyprzedaż",
-		"Bundles": "Pakiety",
-		"Components": "Komponenty",
-		"Processor (CPU)": "Procesor (CPU)",
-		"Motherboard": "Płyta główna",
-		"Memory (RAM)": "Pamięć (RAM)",
-		"Storage (HDD/SSD)": "Magazyn (HDD/SSD)",
-		"Graphics Card (GPU)": "Karta graficzna (GPU)",
-		"Power Supply Unit": "Zasilacz",
-		"Cooling System": "System chłodzenia",
-		"Case": "Obudowa",
-		"Accessories": "Akcesoria",
-		"Keyboard": "Klawiatura",
-		"Mouse": "Myszka",
-		"Mousepad": "Podkładka pod mysz",
-		"Headphones": "Słuchawki",
-		"Microphone": "Mikrofon",
-		"Monitor": "Monitor",
-		"Webcam": "Kamera internetowa",
-		"Speakers": "Głośniki",
-		"Support": "Wsparcie"
+		"shop": "Sklep",
+		"new": "Nowości",
+		"sale": "Wyprzedaż",
+		"bundles": "Pakiety",
+		"components": "Komponenty",
+		"processor": "Procesor (CPU)",
+		"motherboard": "Płyta główna",
+		"memory": "Pamięć (RAM)",
+		"storage": "Magazyn (HDD/SSD)",
+		"graphics": "Karta graficzna (GPU)",
+		"power": "Zasilacz",
+		"cooling": "System chłodzenia",
+		"case": "Obudowa",
+		"accessories": "Akcesoria",
+		"keyboard": "Klawiatura",
+		"mouse": "Myszka",
+		"mousepad": "Podkładka pod mysz",
+		"headphones": "Słuchawki",
+		"microphone": "Mikrofon",
+		"monitor": "Monitor",
+		"webcam": "Kamera internetowa",
+		"speakers": "Głośniki",
+		"support": "Wsparcie"
 	}
 }

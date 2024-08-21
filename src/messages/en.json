@@ -1,24 +1,42 @@
 {
 	"common": {
 		"errorLoadingProducts": "An error occurred while loading products, please try again later.",
-		"footerCopyright": "Copyright © 2024 Ephonix Inc. All rights reserved.",
-		"footerTerms": "Terms and Conditions",
-		"footerPrivacy": "Privacy Policy",
-		"footerContact": "Contact",
-		"footerFacebookHover": "Our Facebook profile",
-		"footerInstagramHover": "Our Instagram profile",
-		"footerTwitterHover": "Our X profile",
-		"footerYoutubeHover": "Our Youtube Channel",
-		"footerDiscordHover": "OurDiscordChannel",
-		"hamburgerLoggedIn": "Hello ",
-		"hamburgerNotLoggedIn": "Not Logged In!",
-		"hamburgerSettings": "Settings",
-		"hamburgerLogOut": "Log out",
 		"scrollButtonTitle": "Go to Top",
-		"shopLogo": "Shop Logo"
+		"shopLogo": "Shop Logo",
+		"sale": "Sale",
+		"saleFrom": "From"
+	},
+	"hamburger": {
+		"avatar": "Your avatar picture",
+		"loggedIn": "Hello ",
+		"notLoggedIn": "Not Logged In!",
+		"settings": "Settings",
+		"logOut": "Log out"
+	},
+	"filters": {
+		"filters": "Filters",
+		"apply": "Apply",
+		"reset": "Reset",
+		"sort": "Sort",
+		"sortPriceToHigh": "Price: Low to High",
+		"sortPriceToLow": "Price: High to Low",
+		"sortNewest": "Newest",
+		"sortNameToZ": "Name: A to Z",
+		"sortNameToA": "Name: Z to A"
+	},
+	"footer": {
+		"copyright": "Copyright © 2024 Ephonix Inc. All rights reserved.",
+		"terms": "Terms and Conditions",
+		"privacy": "Privacy Policy",
+		"contact": "Contact",
+		"facebookHover": "Our Facebook profile",
+		"instagramHover": "Our Instagram profile",
+		"twitterHover": "Our X profile",
+		"youtubeHover": "Our Youtube Channel",
+		"discordHover": "OurDiscordChannel"
 	},
 	"information": {
-		"navShop": "SHOP",
+		"shop": "Shop",
 		"contact": "Contact",
 		"terms": "Terms And Conditions",
 		"privacy": "Privacy Policy"
@@ -29,9 +47,7 @@
 	"product": {
 		"product": "Product",
 		"description": "Description",
-		"filters": "Filters",
-		"filtersApply": "Apply",
-		"filtersReset": "Reset",
+
 		"productSection": "Product",
 		"descriptionSection": "Description",
 		"technicalSection": "Technical",
@@ -40,6 +56,7 @@
 		"productImage": "Product image"
 	},
 	"search": {
+		"results": "Search results",
 		"search": "Search",
 		"matches": "Matches for"
 	},
@@ -47,41 +64,40 @@
 		"shop": "Shop",
 		"buyButtonText": "Add to Cart",
 		"loginButton": "Login",
-		"sale": "Sale",
-		"cartSubtotal": "Subtotal",
-		"cartCheckout": "Checkout",
-		"cartResetBtn": "Reset Cart",
-		"cartProductImage": "Product Image",
-		"cartNoProducts": "No products in cart.",
-		"sortPriceToHigh": "Price: Low to High",
-		"sortPriceToLow": "Price: High to Low",
-		"sortNewest": "Newest",
-		"sortNameToZ": "Name: A to Z",
-		"sortNameToA": "Name: Z to A"
+		"sale": "Sale"
+	},
+	"cart": {
+		"content": "Products in cart",
+		"subtotal": "Subtotal",
+		"checkout": "Checkout",
+		"resetBtn": "Reset Cart",
+		"productImage": "Product Image",
+		"noProducts": "No products in cart.",
+		"sale": "Sale"
 	},
 	"categories": {
-		"Shop": "Shop",
-		"New": "New",
-		"Sale": "Sale",
-		"Bundles": "Bundles",
-		"Components": "Components",
-		"Processor (CPU)": "Processor (CPU)",
-		"Motherboard": "Motherboard",
-		"Memory (RAM)": "Memory (RAM)",
-		"Storage (HDD/SSD)": "Storage (HDD/SSD)",
-		"Graphics Card (GPU)": "Graphics Card (GPU)",
-		"Power Supply Unit": "Power Supply Unit",
-		"Cooling System": "Cooling System",
-		"Case": "Case",
-		"Accessories": "Accessories",
-		"Keyboard": "Keyboard",
-		"Mouse": "Mouse",
-		"Mousepad": "Mousepad",
-		"Headphones": "Headphones",
-		"Microphone": "Microphone",
-		"Monitor": "Monitor",
-		"Webcam": "Webcam",
-		"Speakers": "Speakers",
-		"Support": "Support"
+		"shop": "Shop",
+		"new": "New",
+		"sale": "Sale",
+		"bundles": "Bundles",
+		"components": "Components",
+		"processor": "Processor (CPU)",
+		"motherboard": "Motherboard",
+		"memory": "Memory (RAM)",
+		"storage": "Storage (HDD/SSD)",
+		"graphics": "Graphics Card (GPU)",
+		"power": "Power Supply Unit",
+		"cooling": "Cooling System",
+		"case": "Case",
+		"accessories": "Accessories",
+		"keyboard": "Keyboard",
+		"mouse": "Mouse",
+		"mousepad": "Mousepad",
+		"headphones": "Headphones",
+		"microphone": "Microphone",
+		"monitor": "Monitor",
+		"webcam": "Webcam",
+		"speakers": "Speakers",
+		"support": "Support"
 	}
 }

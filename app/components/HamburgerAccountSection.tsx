@@ -6,32 +6,32 @@ import { useTranslations } from "next-intl";
 
 export default async function HamburgerAccountSection() {
 	const { user } = useUser();
-	const t = useTranslations("common");
+	const t = useTranslations("hamburger");
 
 	return (
 		<>
 			<Image
 				src={user?.imageUrl || nextLogo}
-				alt="avatar"
+				alt={t("avatar")}
 				className="rounded-full border-2 border-red-600"
 				width={100}
 				height={100}
 			/>
 			<h1 className="text-xl">
 				<SignedIn>
-					{t("hamburgerLoggedIn")}
+					{t("loggedIn")}
 					{user?.username}!
 				</SignedIn>
-				<SignedOut>{t("hamburgerNotLoggedIn")}</SignedOut>
+				<SignedOut>{t("notLoggedIn")}</SignedOut>
 			</h1>
 			<div className="flex w-full items-center justify-center gap-3">
 				<SignedIn>
 					<button className="flex w-[30%] items-center justify-center rounded-full border-2 border-red-600 bg-black px-3 py-2 text-sm">
-						{t("hamburgerSettings")}
+						{t("settings")}
 					</button>
 					<SignOutButton>
 						<button className="flex w-[30%] items-center justify-center rounded-full border-2 border-red-600 bg-black px-3 py-2 text-sm">
-							{t("hamburgerLogOut")}
+							{t("logOut")}
 						</button>
 					</SignOutButton>
 				</SignedIn>

@@ -20,7 +20,7 @@ type ProductFiltersProps = {
 	}[];
 };
 export default function ProductFilters({ filters }: ProductFiltersProps) {
-	const t = useTranslations("product");
+	const t = useTranslations("filters");
 	const router = useRouter();
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -63,7 +63,7 @@ export default function ProductFilters({ filters }: ProductFiltersProps) {
 					type="submit"
 					className="border-[3px] border-zinc-800 bg-black p-2 px-6 text-white hover:border-red-600 hover:bg-red-600"
 				>
-					{t("filtersApply")}
+					{t("apply")}
 				</button>
 			</form>
 		</div>

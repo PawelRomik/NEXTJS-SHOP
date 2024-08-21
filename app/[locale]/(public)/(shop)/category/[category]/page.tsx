@@ -8,19 +8,24 @@ import { Metadata } from "next";
 import Pagination from "../../../../../components/Pagination";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../../components/SkeletonProductDisplay";
-import ProductFIlters from "../../../../../components/ProductFilters";
 import { gql } from "@apollo/client";
 import ErrorText from "../../../../../components/ErrorText";
 import { GET_FILTERS } from "../../../../../queries/filters";
 import ProductFilters from "../../../../../components/ProductFilters";
+import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
+
+type CategoryKeys = keyof IntlMessages["categories"];
 
 export async function generateMetadata({
-	params: { category }
+	params: { category, locale }
 }: {
-	params: { category: string };
+	params: { category: CategoryKeys; locale: string };
 }): Promise<Metadata> {
+	const t = await getTranslations({ locale, namespace: "categories" });
+
 	return {
-		title: `${category.charAt(0).toUpperCase() + category.slice(1)} | Ephonix`
+		title: `${t(category).split(" ")[0]} | Ephonix`
 	};
 }
 
@@ -175,7 +180,7 @@ export default function ShopPage({
 	searchParams
 }: {
 	params: {
-		category: string;
+		category: CategoryKeys;
 		locale: string;
 	};
 	searchParams?: {
@@ -189,11 +194,12 @@ export default function ShopPage({
 	const tagsFromUrl = searchParams?.tags;
 	const tags = tagsFromUrl ? tagsFromUrl.split(",") : undefined;
 	const sort = searchParams?.sort || "latest";
+	const t = useTranslations("categories");
 
 	return (
 		<main className=" w-full bg-zinc-950 p-6">
 			<h1 className="flex items-center justify-center text-4xl font-bold capitalize text-red-600 lg:justify-start lg:pl-6">
-				<span>{category + "s"}</span>
+				<span>{`${t(category).split(" ")[0]}`}</span>
 			</h1>
 			<Suspense>{LoadFilters(category, locale)}</Suspense>
 			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">

@@ -45,7 +45,7 @@ export default function Hamburger() {
 							>
 								<NavigationMenu.Trigger className="w-full">
 									<b className="flex w-full justify-between">
-										<span className="pl-2">{t(category.name).toUpperCase()}</span>
+										<span className="pl-2">{t(category.slug).toUpperCase()}</span>
 										{category.subCategories && (
 											<span>
 												<i className="ri-arrow-right-double-line text-red-600"></i>
@@ -70,7 +70,7 @@ export default function Hamburger() {
 											<NavigationMenu.List className="w-full">
 												<NavigationMenu.Item>
 													<h2 className="border-b-2 border-red-600 px-2 py-2 pl-4 text-red-600">
-														{t(category.name)}
+														{t(category.slug)}
 													</h2>
 												</NavigationMenu.Item>
 												{category.subCategories.map((subCategory) => {
@@ -83,10 +83,10 @@ export default function Hamburger() {
 															<Link
 																onClick={() => setMenuOn(false)}
 																href={`/category/${href}`}
-																title={t(subCategory.name)}
+																title={t(subCategory.slug)}
 																className=" pl-2"
 															>
-																<b>{t(subCategory.name)}</b>
+																<b>{t(subCategory.slug)}</b>
 															</Link>
 														</NavigationMenu.Item>
 													);

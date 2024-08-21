@@ -1,12 +1,12 @@
 export type SubCategory = {
-	name: keyof IntlMessages["categories"];
-	slug: string;
+	name: string;
+	slug: keyof IntlMessages["categories"];
 };
 
 export type Category = {
 	id: number;
-	name: keyof IntlMessages["categories"];
-	slug: string;
+	name: string;
+	slug: keyof IntlMessages["categories"];
 	subCategories: SubCategory[] | null;
 };
 

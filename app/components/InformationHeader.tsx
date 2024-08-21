@@ -8,7 +8,7 @@ export default function InformationHeader() {
 	return (
 		<header className="sticky top-0 z-10 mx-auto box-border flex h-full w-full items-center justify-between border-b-[3px] border-b-red-600 bg-black p-4 text-white lg:px-[6rem]">
 			<div className="flex items-center justify-start">
-				<Link href="/" title="Shop">
+				<Link href="/" title={t("shop")}>
 					<button className="flex lg:hidden">
 						<i className="ri-home-2-line text-2xl"></i>
 					</button>
@@ -16,9 +16,9 @@ export default function InformationHeader() {
 			</div>
 			<ShopLogo />
 			<div className="hidden h-full w-1/3 items-center justify-center lg:flex">
-				<Link href="/" title="Shop">
-					<p className="hover:border-b-2 hover:border-red-600 hover:text-red-600 ">
-						{t("navShop")}
+				<Link href="/" title={t("shop")}>
+					<p className="uppercase hover:border-b-2 hover:border-red-600 hover:text-red-600 ">
+						{t("shop")}
 					</p>
 				</Link>
 			</div>

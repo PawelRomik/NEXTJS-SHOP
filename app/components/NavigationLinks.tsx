@@ -13,8 +13,8 @@ export default function NavigationLinks() {
 				{categories.map((category) => (
 					<NavigationMenu.Item key={category.id}>
 						<NavigationMenu.Trigger className="text-white hover:text-red-600 data-[state=open]:text-red-600">
-							<Link href={`/${category.slug}`} title={t(category.name)}>
-								{t(category.name).toUpperCase()}
+							<Link href={`/${category.slug}`} title={t(category.slug)}>
+								{t(category.slug).toUpperCase()}
 							</Link>
 							{category.subCategories && <i className="ri-arrow-drop-down-line"></i>}
 						</NavigationMenu.Trigger>
@@ -22,7 +22,7 @@ export default function NavigationLinks() {
 							<NavigationMenu.Content className="fixed left-0 top-[5rem] flex w-screen origin-top animate-showNav items-start justify-center gap-6 overflow-hidden overflow-x-hidden border-b-[3px] border-b-red-600 bg-zinc-900">
 								<div className="m-0 flex w-1/3 flex-col gap-2 p-[22px] ">
 									<div className="relative">
-										<h2 className="w-auto text-zinc-400">{t(category.name)}</h2>
+										<h2 className="w-auto text-zinc-400">{t(category.slug)}</h2>
 										<NavigationMenu.Trigger
 											className="absolute right-2 top-0 text-2xl"
 											onPointerMove={(event) => event.preventDefault()}
@@ -38,11 +38,11 @@ export default function NavigationLinks() {
 											<li key={subCategory.slug} className="">
 												<Link
 													href={`/category/${subCategory.slug}`}
-													title={t(subCategory.name)}
+													title={t(subCategory.slug)}
 													className="group"
 												>
 													<span className="group-hover:border-b-2 group-hover:border-red-600 group-hover:text-red-600">
-														{t(subCategory.name)}
+														{t(subCategory.slug)}
 													</span>
 													<i className="ri-arrow-drop-right-line group-hover:text-red-600"></i>
 												</Link>
