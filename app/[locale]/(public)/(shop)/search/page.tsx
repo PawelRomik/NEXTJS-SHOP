@@ -10,10 +10,16 @@ import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
 import { GET_SEARCH_PRODUCTS, GET_SEARCH_PRODUCTS_COUNT } from "../../../../queries/search";
 import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import ErrorText from "../../../../components/ErrorText";
 
-export const metadata: Metadata = {
-	title: "Search results | Ephonix"
-};
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+	const t = await getTranslations({ locale, namespace: "search" });
+
+	return {
+		title: `${t("results")} | Ephonix`
+	};
+}
 
 async function fetchProducts(query: string, page: number, locale: string) {
 	try {
@@ -47,13 +53,13 @@ async function loadCount(query: string, page: number, locale: string) {
 
 		return data.products.meta.pagination.total;
 	} catch {
-		return null;
+		return "0";
 	}
 }
 
 async function loadProducts(category: string, page: number, locale: string) {
 	const data = await fetchProducts(category, page, locale);
-	if (!data) return null;
+	if (!data) return <ErrorText />;
 
 	return (
 		<>

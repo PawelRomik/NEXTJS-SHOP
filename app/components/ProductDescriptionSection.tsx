@@ -78,7 +78,7 @@ export default function ProductDescriptionSection({
 											width={600}
 											height={600}
 											src={imageUrl}
-											alt="Processor"
+											alt={t("productImage")}
 											className="h-full max-h-[300px] object-contain p-6"
 										/>
 									)}
@@ -93,7 +93,7 @@ export default function ProductDescriptionSection({
 											width={600}
 											height={600}
 											src={imageUrl}
-											alt="Processor"
+											alt={t("productImage")}
 											className="h-full max-h-[300px] object-contain p-6"
 										/>
 									)}
