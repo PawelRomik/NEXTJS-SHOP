@@ -39,7 +39,29 @@
 		"shop": "Sklep",
 		"contact": "Kontakt",
 		"terms": "Warunki Korzystania z Usług",
-		"privacy": "Polityka Prywatności"
+		"privacy": "Polityka Prywatności",
+		"generalInformation": "Informacje ogólne",
+		"personalDataAdministrator": "Administrator danych osobowych",
+		"personalData": "Dane osobowe",
+		"basisForDataProcessing": "Podstawa przetwarzania danych",
+		"dataRecipients": "Odbiorcy danych",
+		"userRights": "Prawa użytkownika",
+		"dataSecurity": "Bezpieczeństwo danych",
+		"dataRetentionPeriod": "Okres przechowywania danych",
+		"changesToPrivacyPolicy": "Zmiany w polityce prywatności",
+		"lastUpdate": "Ostatnia aktualizacja:",
+		"generalProvisions": "Postanowienia ogólne",
+		"definitions": "Definicje",
+		"rulesOfUsingTheStore": "Zasady korzystania ze sklepu",
+		"placingOrders": "Składanie zamówień",
+		"payments": "Płatności",
+		"delivery": "Dostawa",
+		"complaintsAndReturns": "Reklamacje i zwroty",
+		"personalDataProtection": "Ochrona danych osobowych",
+		"finalProvisions": "Postanowienia końcowe",
+		"store": "Sklep",
+		"customer": "Klient",
+		"goods": "Towary"
 	},
 	"order": {
 		"order": "Zamówienie"
@@ -47,7 +69,6 @@
 	"product": {
 		"product": "Produkt",
 		"description": "Opis",
-
 		"productSection": "Produkt",
 		"descriptionSection": "Opis",
 		"technicalSection": "Techniczne",
