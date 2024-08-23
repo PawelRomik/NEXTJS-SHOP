@@ -1,16 +1,19 @@
 import { revalidatePath } from "next/cache";
 import { Metadata } from "next";
 import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
-type ContactProps = {
-	params: {
-		locale: string;
+export async function generateMetadata({
+	params: { locale }
+}: {
+	params: { locale: string };
+}): Promise<Metadata> {
+	const t = await getTranslations({ locale, namespace: "information" });
+
+	return {
+		title: `${t("contact")} | Ephonix`
 	};
-};
-
-export const metadata: Metadata = {
-	title: "Contact | Ephonix"
-};
+}
 
 export default function ContactPage() {
 	const t = useTranslations("information");
