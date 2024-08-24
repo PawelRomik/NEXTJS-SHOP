@@ -1,0 +1,124 @@
+{
+	"common": {
+		"errorLoadingProducts": "Une erreur s'est produite lors du chargement des produits, veuillez réessayer plus tard.",
+		"scrollButtonTitle": "Aller en haut",
+		"shopLogo": "Logo du magasin",
+		"sale": "Vente",
+		"saleFrom": "À partir de"
+	},
+	"hamburger": {
+		"avatar": "Votre photo de profil",
+		"loggedIn": "Bonjour ",
+		"notLoggedIn": "Non connecté!",
+		"settings": "Paramètres",
+		"logOut": "Se déconnecter"
+	},
+	"filters": {
+		"filters": "Filtres",
+		"apply": "Appliquer",
+		"reset": "Réinitialiser",
+		"sort": "Trier",
+		"sortPriceToHigh": "Prix : Croissant",
+		"sortPriceToLow": "Prix : Décroissant",
+		"sortNewest": "Les plus récents",
+		"sortNameToZ": "Nom : A à Z",
+		"sortNameToA": "Nom : Z à A"
+	},
+	"footer": {
+		"copyright": "Copyright © 2024 Ephonix Inc. Tous droits réservés.",
+		"terms": "Conditions générales",
+		"privacy": "Politique de confidentialité",
+		"contact": "Contact",
+		"facebookHover": "Notre profil Facebook",
+		"instagramHover": "Notre profil Instagram",
+		"twitterHover": "Notre profil X",
+		"youtubeHover": "Notre chaîne Youtube",
+		"discordHover": "Notre chaîne Discord"
+	},
+	"information": {
+		"shop": "Boutique",
+		"contact": "Contact",
+		"terms": "Conditions générales",
+		"privacy": "Politique de confidentialité",
+		"generalInformation": "Informations générales",
+		"personalDataAdministrator": "Administrateur des données personnelles",
+		"personalData": "Données personnelles",
+		"basisForDataProcessing": "Base du traitement des données",
+		"dataRecipients": "Destinataires des données",
+		"userRights": "Droits de l'utilisateur",
+		"dataSecurity": "Sécurité des données",
+		"dataRetentionPeriod": "Durée de conservation des données",
+		"changesToPrivacyPolicy": "Modifications de la politique de confidentialité",
+		"lastUpdate": "Dernière mise à jour :",
+		"generalProvisions": "Dispositions générales",
+		"definitions": "Définitions",
+		"rulesOfUsingTheStore": "Règles d'utilisation du magasin",
+		"placingOrders": "Passer des commandes",
+		"payments": "Paiements",
+		"delivery": "Livraison",
+		"complaintsAndReturns": "Réclamations et retours",
+		"personalDataProtection": "Protection des données personnelles",
+		"finalProvisions": "Dispositions finales",
+		"store": "Boutique",
+		"customer": "Client",
+		"goods": "Produits"
+	},
+	"order": {
+		"order": "commande"
+	},
+	"product": {
+		"product": "Produit",
+		"description": "Description",
+		"productSection": "Produit",
+		"descriptionSection": "Description",
+		"technicalSection": "Technique",
+		"otherSection": "Autres produits",
+		"mainImage": "Image principale du produit",
+		"productImage": "Image du produit"
+	},
+	"search": {
+		"results": "Résultats de recherche",
+		"search": "Rechercher",
+		"matches": "Correspondances pour"
+	},
+	"shop": {
+		"shop": "Boutique",
+		"buyButtonText": "Ajouter au panier",
+		"loginButton": "Connexion",
+		"sale": "Vente"
+	},
+	"cart": {
+		"content": "Produits dans le panier",
+		"subtotal": "Sous-total",
+		"checkout": "Passer à la caisse",
+		"resetBtn": "Réinitialiser le panier",
+		"productImage": "Image du produit",
+		"noProducts": "Aucun produit dans le panier.",
+		"sale": "Vente"
+	},
+	"categories": {
+		"shop": "Boutique",
+		"new": "Nouveau",
+		"sale": "Vente",
+		"bundles": "Lots",
+		"components": "Composants",
+		"processor": "Processeur (CPU)",
+		"motherboard": "Carte mère",
+		"memory": "Mémoire (RAM)",
+		"storage": "Stockage (HDD/SSD)",
+		"graphics": "Carte graphique (GPU)",
+		"power": "Alimentation",
+		"cooling": "Système de refroidissement",
+		"case": "Boîtier",
+		"accessories": "Accessoires",
+		"keyboard": "Clavier",
+		"mouse": "Souris",
+		"mousepad": "Tapis de souris",
+		"headphones": "Casque",
+		"microphone": "Microphone",
+		"monitor": "Moniteur",
+		"webcam": "Webcam",
+		"speakers": "Haut-parleurs",
+		"support": "Support"
+	}
+}
