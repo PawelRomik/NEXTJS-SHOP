@@ -9,7 +9,7 @@ const clerkAuthMiddleware = clerkMiddleware((auth, req) => {
 });
 
 const nextIntlMiddleware = createMiddleware({
-	locales: ["en", "pl"],
+	locales: ["en", "pl", "de", "fr", "es"],
 	defaultLocale: "en"
 });
 
