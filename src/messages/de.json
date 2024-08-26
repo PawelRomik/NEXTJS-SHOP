@@ -3,8 +3,7 @@
 		"errorLoadingProducts": "Beim Laden der Produkte ist ein Fehler aufgetreten, bitte versuchen Sie es später erneut.",
 		"scrollButtonTitle": "Nach oben",
 		"shopLogo": "Shop-Logo",
-		"sale": "Verkauf",
-		"saleFrom": "Ab"
+		"sale": "Verkauf"
 	},
 	"hamburger": {
 		"avatar": "Ihr Profilbild",
@@ -74,7 +73,9 @@
 		"technicalSection": "Technisch",
 		"otherSection": "Andere Produkte",
 		"mainImage": "Hauptproduktbild",
-		"productImage": "Produktbild"
+		"productImage": "Produktbild",
+		"price": "{amount} €",
+		"sale": "Verkauf"
 	},
 	"search": {
 		"results": "Suchergebnisse",

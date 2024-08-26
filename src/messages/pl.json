@@ -3,8 +3,7 @@
 		"errorLoadingProducts": "Wystąpił błąd podczas ładowania produktów, spróbuj ponownie później.",
 		"scrollButtonTitle": "Idź na górę",
 		"shopLogo": "Logo sklepu",
-		"sale": "Przecena",
-		"saleFrom": "Z"
+		"sale": "Przecena"
 	},
 	"hamburger": {
 		"avatar": "Twoje zdjęcie profilowe",
@@ -74,7 +73,9 @@
 		"technicalSection": "Techniczne",
 		"otherSection": "Inne produkty",
 		"mainImage": "Główne zdjęcie produktu",
-		"productImage": "Zdjęcie produktu"
+		"productImage": "Zdjęcie produktu",
+		"price": "PLN {amount}",
+		"sale": "Przecena"
 	},
 	"search": {
 		"results": "Wyniki wyszukiwania",
