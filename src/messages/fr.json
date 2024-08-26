@@ -3,8 +3,7 @@
 		"errorLoadingProducts": "Une erreur s'est produite lors du chargement des produits, veuillez réessayer plus tard.",
 		"scrollButtonTitle": "Aller en haut",
 		"shopLogo": "Logo du magasin",
-		"sale": "Vente",
-		"saleFrom": "À partir de"
+		"sale": "Vente"
 	},
 	"hamburger": {
 		"avatar": "Votre photo de profil",
@@ -74,7 +73,9 @@
 		"technicalSection": "Technique",
 		"otherSection": "Autres produits",
 		"mainImage": "Image principale du produit",
-		"productImage": "Image du produit"
+		"productImage": "Image du produit",
+		"price": "{amount} €",
+		"sale": "Vente"
 	},
 	"search": {
 		"results": "Résultats de recherche",

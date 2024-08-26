@@ -21,7 +21,7 @@ export default function ProductDisplay({
 	desc,
 	uuid
 }: ProductDisplayProps) {
-	const t = useTranslations("common");
+	const t = useTranslations("product");
 
 	const extractText = (text: string) => {
 		const startIndex = text.indexOf("--START--") + "--START--".length;
@@ -56,15 +56,17 @@ export default function ProductDisplay({
 							{salePrice ? (
 								<>
 									<div className="text-xl font-bold text-red-600">{t("sale")}</div>
-									<p className="text-sm text-zinc-300">
-										{t("saleFrom")} PLN {price}
+									<p className="text-sm text-red-600 line-through">
+										{t("price", { amount: price })}
 									</p>
 									<p className="flex items-end gap-2 text-xl font-bold text-white">
-										{salePrice && <span>PLN {salePrice}</span>}
+										{salePrice && <span>{t("price", { amount: salePrice })}</span>}
 									</p>
 								</>
 							) : (
-								<p className="flex items-end gap-2 text-xl font-bold text-white">PLN {price}</p>
+								<p className="flex items-end gap-2 text-xl font-bold text-white">
+									{t("price", { amount: price })}
+								</p>
 							)}
 						</div>
 						<div className="flex w-[50%] items-end justify-end">

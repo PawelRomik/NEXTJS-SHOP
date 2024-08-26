@@ -4,6 +4,7 @@ import { QueryResult } from "../queries/productType";
 import { Suspense } from "react";
 import createApolloClient from "../../apollo-client";
 import BuyButton from "./BuyButton";
+import { useTranslations } from "next-intl";
 
 type ProductShowcasePriceProps = {
 	productId: string;
@@ -11,6 +12,7 @@ type ProductShowcasePriceProps = {
 };
 
 export default function ProductShowcasePrice({ productId, locale }: ProductShowcasePriceProps) {
+	const t = useTranslations("product");
 	async function getProductPrice() {
 		try {
 			const client = createApolloClient();
@@ -25,7 +27,7 @@ export default function ProductShowcasePrice({ productId, locale }: ProductShowc
 			const currProduct = data.products.data[0].attributes;
 			return (
 				<div className="mr-4 flex flex-col items-end justify-center gap-3 lg:items-start">
-					<p className="text-3xl font-bold">PLN {currProduct.price}</p>
+					<p className="text-3xl font-bold">{t("price", { amount: currProduct.price })}</p>
 					<BuyButton productId={productId} />
 				</div>
 			);
