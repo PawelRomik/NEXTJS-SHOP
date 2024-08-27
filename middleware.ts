@@ -4,10 +4,6 @@ import createMiddleware from "next-intl/middleware";
 
 const isProtectedRoute = createRouteMatcher(["/dashboard(.*)", "/order(.*)"]);
 
-const clerkAuthMiddleware = clerkMiddleware((auth, req) => {
-	if (isProtectedRoute(req)) auth().protect();
-});
-
 const nextIntlMiddleware = createMiddleware({
 	locales: ["en", "pl", "de", "fr", "es"],
 	defaultLocale: "en"
