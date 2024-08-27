@@ -1,6 +1,7 @@
 import { Separator } from "@radix-ui/themes";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Footer() {
 	const t = useTranslations("footer");
@@ -64,6 +65,9 @@ export default function Footer() {
 						>
 							<i className="ri-discord-fill"></i>
 						</Link>
+					</li>
+					<li>
+						<LanguageSwitcher />
 					</li>
 				</ul>
 			</div>

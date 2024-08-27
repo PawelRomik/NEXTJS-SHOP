@@ -32,7 +32,8 @@
 		"instagramHover": "Our Instagram profile",
 		"twitterHover": "Our X profile",
 		"youtubeHover": "Our Youtube Channel",
-		"discordHover": "OurDiscordChannel"
+		"discordHover": "Our Discord Channel",
+		"changeLanguage": "Change language"
 	},
 	"information": {
 		"shop": "Shop",
