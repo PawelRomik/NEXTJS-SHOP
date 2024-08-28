@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import Image from "next/image";
 import { loadStripe } from "@stripe/stripe-js";
 import { useTranslations } from "next-intl";
+import useCurrency from "../hooks/useCurrency";
 
 type RootState = {
 	cart: {
@@ -16,9 +17,10 @@ type RootState = {
 };
 
 export default function CartPopover() {
-	const t = useTranslations("cart");
+	const t = useTranslations();
 	const products = useSelector((state: RootState) => state.cart.products);
 	const dispatch = useDispatch();
+	const currency = useCurrency();
 
 	const totalPrice = () => {
 		let total = 0;
@@ -41,7 +43,8 @@ export default function CartPopover() {
 					}
 				})
 				.post("/api/orders", {
-					products
+					products,
+					currency
 				});
 
 			await stripe?.redirectToCheckout({
@@ -73,7 +76,7 @@ export default function CartPopover() {
 			<Popover.Portal>
 				<Popover.Content className="relative top-[0.9rem] flex w-[100vw] origin-top animate-showNav rounded border-[3px] border-r-0 border-zinc-900 border-b-red-600  bg-zinc-900 p-5 lg:top-10 lg:w-full lg:origin-right lg:animate-showSearchbar lg:border-red-600 ">
 					<div className="z-50 p-5 uppercase text-white">
-						<h1 className="mb-7 text-2xl font-bold text-red-600">{t("content")}</h1>
+						<h1 className="mb-7 text-2xl font-bold text-red-600">{t("cart.content")}</h1>
 						{products?.slice(0, 3).map((item) => (
 							<div
 								className="item mb-7 flex w-full items-center justify-between gap-5"
@@ -84,17 +87,17 @@ export default function CartPopover() {
 									src={process.env.NEXT_PUBLIC_PROD_PATH + item.image}
 									width={80}
 									height={100}
-									alt={t("productImage")}
+									alt={t("cart.productImage")}
 								/>
 								<div className="details">
 									<h1 className="text-lg font-medium">{item.name}</h1>
 									<div className="flex items-center justify-between gap-2">
 										<p className={item.onSale ? "text-red-600" : "text-zinc-400"}>
-											{item.quantity} x {item.price}zł
+											{item.quantity} x {t("product.price", { amount: item.price })}
 										</p>
 										{item.onSale && (
 											<div className="flex items-center justify-center px-2 font-bold uppercase text-red-600">
-												{t("sale")}
+												{t("cart.sale")}
 											</div>
 										)}
 									</div>
@@ -113,24 +116,24 @@ export default function CartPopover() {
 						{products.length > 0 ? (
 							<>
 								<div className="total mb-5 flex justify-between text-lg font-medium uppercase">
-									<span>{t("subtotal")}</span>
-									<span>{totalPrice()}zł</span>
+									<span>{t("cart.subtotal")}</span>
+									<span>{t("product.price", { amount: totalPrice() })}</span>
 								</div>
 								<button
 									onClick={handlePayment}
 									className="mx-auto mb-5 flex w-full cursor-pointer items-center justify-center gap-5 border-none bg-zinc-950 p-2.5 font-medium uppercase text-white transition hover:bg-red-600"
 								>
-									{t("checkout")}
+									{t("cart.checkout")}
 								</button>
 								<p
 									className=" cursor-pointer text-xs font-bold text-red-600 hover:text-red-400"
 									onClick={() => dispatch(resetCart())}
 								>
-									{t("resetBtn")}
+									{t("cart.resetBtn")}
 								</p>
 							</>
 						) : (
-							<p>{t("noProducts")}</p>
+							<p>{t("cart.noProducts")}</p>
 						)}
 					</div>
 					<Popover.Close
