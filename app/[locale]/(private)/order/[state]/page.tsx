@@ -7,20 +7,20 @@ import { ApolloQueryResult } from "@apollo/client";
 import { QueryResult } from "../../../../queries/productType";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
-import { GET_NEW_PRODUCTS_ORDER } from "../../../../queries/order";
 import { useTranslations } from "next-intl";
+import { GET_OTHER_PRODUCTS } from "../../../../queries/productPage";
 
 export const metadata: Metadata = {
 	title: "Order Status | Ephonix"
 };
 
-async function fetchProducts() {
+async function fetchProducts(locale: string) {
 	const client = createApolloClient();
 	try {
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
-			query: GET_NEW_PRODUCTS_ORDER,
+			query: GET_OTHER_PRODUCTS,
 			variables: {
-				sex: ["male", "female"]
+				locale: locale
 			}
 		});
 
@@ -30,8 +30,8 @@ async function fetchProducts() {
 	}
 }
 
-async function loadProducts() {
-	const data = await fetchProducts();
+async function loadProducts(locale: string) {
+	const data = await fetchProducts(locale);
 	if (!data) return null;
 
 	return (
@@ -59,7 +59,11 @@ async function loadProducts() {
 	);
 }
 
-export default function OrderPage({ params: { state } }: { params: { state: string } }) {
+export default function OrderPage({
+	params: { state, locale }
+}: {
+	params: { state: string; locale: string };
+}) {
 	revalidatePath("/[locale]/order/[state]", "page");
 	const t = useTranslations();
 
@@ -84,7 +88,7 @@ export default function OrderPage({ params: { state } }: { params: { state: stri
 						</>
 					}
 				>
-					{loadProducts()}
+					{loadProducts(locale)}
 				</Suspense>
 			</div>
 		</div>
