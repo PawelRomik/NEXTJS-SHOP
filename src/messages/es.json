@@ -64,7 +64,11 @@
 		"goods": "Productos"
 	},
 	"order": {
-		"order": "pedido"
+		"orderStatus": "Estado del pedido",
+		"otherProducts": "¡Revisa otros productos!",
+		"home": "Inicio",
+		"orderFail": "Ocurrió un error al realizar el pedido, por favor inténtelo de nuevo más tarde.",
+		"orderSuccess": "Su pedido ha sido procesado con éxito."
 	},
 	"product": {
 		"product": "Producto",
