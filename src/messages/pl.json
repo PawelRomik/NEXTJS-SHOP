@@ -64,7 +64,11 @@
 		"goods": "Towary"
 	},
 	"order": {
-		"order": "Zamówienie"
+		"orderStatus": "Status zamówienia",
+		"otherProducts": "Sprawdź inne produkty!",
+		"home": "Strona główna",
+		"orderFail": "Wystąpił błąd podczas składania zamówienia, spróbuj ponownie później.",
+		"orderSuccess": "Twoje zamówienie zostało pomyślnie przetworzone."
 	},
 	"product": {
 		"product": "Produkt",

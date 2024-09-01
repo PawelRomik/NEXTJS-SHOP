@@ -64,7 +64,11 @@
 		"goods": "Goods"
 	},
 	"order": {
-		"order": "order"
+		"status": "Order Status",
+		"otherProducts": "Check other products!",
+		"home": "Home",
+		"orderFail": "An error occurred while placing order, please try again later.",
+		"orderSuccess": "Your order has been successfully processed."
 	},
 	"product": {
 		"product": "Product",
