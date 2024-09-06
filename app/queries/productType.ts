@@ -62,6 +62,18 @@ export type FiltersData = {
 	};
 };
 
+export type RatesData = {
+	convertionrates: {
+		data: {
+			id: string;
+			attributes: {
+				currency: string;
+				rate: number;
+			};
+		}[];
+	};
+};
+
 export type CategoriesData = {
 	categories: {
 		data: {

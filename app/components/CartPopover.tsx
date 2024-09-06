@@ -8,7 +8,8 @@ import { useDispatch } from "react-redux";
 import Image from "next/image";
 import { loadStripe } from "@stripe/stripe-js";
 import { useTranslations } from "next-intl";
-import useCurrency from "../hooks/useCurrency";
+import { formatPrice } from "../lib/utils/formatPrice";
+import { useCurrency } from "../context/CurrencyProvider";
 
 type RootState = {
 	cart: {
@@ -20,12 +21,12 @@ export default function CartPopover() {
 	const t = useTranslations();
 	const products = useSelector((state: RootState) => state.cart.products);
 	const dispatch = useDispatch();
-	const currency = useCurrency();
+	const { exchangeRate, currency } = useCurrency();
 
 	const totalPrice = () => {
 		let total = 0;
 		products.forEach((item) => {
-			total += item.quantity * item.price;
+			total += item.quantity * parseFloat(formatPrice(item.price, exchangeRate));
 		});
 		return total.toFixed(2);
 	};
@@ -44,7 +45,8 @@ export default function CartPopover() {
 				})
 				.post("/api/orders", {
 					products,
-					currency
+					currency,
+					exchangeRate
 				});
 
 			await stripe?.redirectToCheckout({
@@ -93,7 +95,8 @@ export default function CartPopover() {
 									<h1 className="text-lg font-medium">{item.name}</h1>
 									<div className="flex items-center justify-between gap-2">
 										<p className={item.onSale ? "text-red-600" : "text-zinc-400"}>
-											{item.quantity} x {t("product.price", { amount: item.price })}
+											{item.quantity} x{" "}
+											{t("product.price", { amount: formatPrice(item.price, exchangeRate) })}
 										</p>
 										{item.onSale && (
 											<div className="flex items-center justify-center px-2 font-bold uppercase text-red-600">

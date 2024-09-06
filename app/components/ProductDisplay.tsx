@@ -1,7 +1,10 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import BuyButton from "./BuyButton";
 import { useTranslations } from "next-intl";
+import { formatPrice } from "../lib/utils/formatPrice";
+import { useCurrency } from "../context/CurrencyProvider";
 
 type ProductDisplayProps = {
 	uuid: string;
@@ -22,6 +25,7 @@ export default function ProductDisplay({
 	uuid
 }: ProductDisplayProps) {
 	const t = useTranslations("product");
+	const { exchangeRate, currency } = useCurrency();
 
 	const extractText = (text: string) => {
 		const startIndex = text.indexOf("--START--") + "--START--".length;
@@ -57,15 +61,17 @@ export default function ProductDisplay({
 								<>
 									<div className="text-xl font-bold text-red-600">{t("sale")}</div>
 									<p className="text-sm text-red-600 line-through">
-										{t("price", { amount: price })}
+										{t("price", { amount: formatPrice(price, exchangeRate) })}
 									</p>
 									<p className="flex items-end gap-2 text-xl font-bold text-white">
-										{salePrice && <span>{t("price", { amount: salePrice })}</span>}
+										{salePrice && (
+											<span>{t("price", { amount: formatPrice(salePrice, exchangeRate) })}</span>
+										)}
 									</p>
 								</>
 							) : (
 								<p className="flex items-end gap-2 text-xl font-bold text-white">
-									{t("price", { amount: price })}
+									{t("price", { amount: formatPrice(price, exchangeRate) })}
 								</p>
 							)}
 						</div>
