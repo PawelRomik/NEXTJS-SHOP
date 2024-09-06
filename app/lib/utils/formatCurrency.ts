@@ -1,8 +1,4 @@
-import { getLocale } from "next-intl/server";
-
-const formatCurrency = async () => {
-	const locale = await getLocale();
-
+const formatCurrency = (locale: string) => {
 	switch (locale) {
 		case "pl":
 			return "PLN";
