@@ -1,4 +1,4 @@
-const formatCurrency = (locale: string) => {
+export const getCurrency = (locale: string) => {
 	switch (locale) {
 		case "pl":
 			return "PLN";
@@ -8,5 +8,3 @@ const formatCurrency = (locale: string) => {
 			return "EUR";
 	}
 };
-
-export default formatCurrency;

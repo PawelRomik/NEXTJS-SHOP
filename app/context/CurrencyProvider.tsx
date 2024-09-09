@@ -1,10 +1,9 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import axios from "axios";
-import formatCurrency from "../lib/utils/formatCurrency";
+import { getCurrency } from "../lib/utils/getCurrency";
 import { useParams } from "next/navigation";
 import createApolloClient from "../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
-import { QueryResult, RatesData } from "../queries/productType";
+import { RatesData } from "../queries/productType";
 import { GET_RATES } from "../queries/rates";
 
 type CurrencyContextType = {
@@ -25,7 +24,7 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
 	useEffect(() => {
 		const locale = params.locale || "en";
 		const fetchExchangeRate = async () => {
-			let targetCurrency = formatCurrency(locale);
+			let targetCurrency = getCurrency(locale);
 
 			try {
 				const client = createApolloClient();
