@@ -1,10 +1,9 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import axios from "axios";
 import { getCurrency } from "../lib/utils/getCurrency";
 import { useParams } from "next/navigation";
 import createApolloClient from "../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
-import { QueryResult, RatesData } from "../queries/productType";
+import { RatesData } from "../queries/productType";
 import { GET_RATES } from "../queries/rates";
 
 type CurrencyContextType = {
