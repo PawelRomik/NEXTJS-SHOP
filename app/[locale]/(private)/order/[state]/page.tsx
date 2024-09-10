@@ -1,5 +1,4 @@
 import { revalidatePath } from "next/cache";
-import { Metadata } from "next";
 import Link from "next/link";
 import ProductDisplay from "../../../../components/ProductDisplay";
 import createApolloClient from "../../../../../apollo-client";
