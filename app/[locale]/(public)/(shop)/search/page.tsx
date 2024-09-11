@@ -4,7 +4,6 @@ import { ApolloQueryResult } from "@apollo/client";
 import createApolloClient from "../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
 import { QueryResult } from "../../../../queries/productType";
-import { Metadata } from "next";
 import Pagination from "../../../../components/Pagination";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";

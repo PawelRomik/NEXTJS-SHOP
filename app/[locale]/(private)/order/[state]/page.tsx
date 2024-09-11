@@ -75,12 +75,12 @@ export default function OrderPage({
 
 	return (
 		<div className="flex flex-1 flex-col items-center justify-center gap-6">
-			<p className="col-span-4 row-auto mt-6 w-full text-center text-3xl font-bold text-zinc-400">
+			<p className="col-span-4 row-auto mt-6 w-full text-center text-3xl font-bold text-white">
 				<i className="ri-error-warning-line"></i>
 				{t(state === "success" ? "orderSuccess" : "orderFail")}
 			</p>
 			<Link href="/" title={t("home")}>
-				<button className="rounded-full bg-zinc-950 px-10 py-4 text-white">{t("home")}</button>
+				<button className="rounded-full bg-black px-10 py-4 text-white">{t("home")}</button>
 			</Link>
 			<div className="flex w-[80%] flex-col items-center justify-center">
 				<Suspense
