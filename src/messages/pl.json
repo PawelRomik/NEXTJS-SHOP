@@ -23,6 +23,11 @@
 		"sortNameToZ": "Nazwa: od A do Z",
 		"sortNameToA": "Nazwa: od Z do A"
 	},
+	"notFound": {
+		"notFound": "Nie znaleziono!",
+		"notFoundAlt": "Nie udało się znaleźć żądanego zasobu",
+		"home": "Strona główna"
+	},
 	"footer": {
 		"copyright": "Copyright © 2024 Ephonix Inc. Wszelkie prawa zastrzeżone.",
 		"terms": "Regulamin",
