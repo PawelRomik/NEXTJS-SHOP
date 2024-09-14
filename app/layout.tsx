@@ -14,14 +14,14 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-	title: "N3XT",
-	description: "THE N3XT GENERATION SHOP ON THE INTERNET"
+	title: "Ephonix",
+	description: "THE BEST GAMING SHOP ON THE INTERNET"
 };
 
 type RootProps = {
 	children: React.ReactNode;
 	params: {
-		locale: "en" | "pl";
+		locale: string;
 	};
 };
 
