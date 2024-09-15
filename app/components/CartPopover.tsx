@@ -7,9 +7,10 @@ import { removeItem, resetCart } from "../redux/cardReducer";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 import { loadStripe } from "@stripe/stripe-js";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { formatPrice } from "../lib/utils/formatPrice";
 import { useCurrency } from "../context/CurrencyProvider";
+import { getLocale } from "next-intl/server";
 
 type RootState = {
 	cart: {
@@ -22,6 +23,8 @@ export default function CartPopover() {
 	const products = useSelector((state: RootState) => state.cart.products);
 	const dispatch = useDispatch();
 	const { exchangeRate, currency } = useCurrency();
+	const locale = useLocale();
+	console.log(locale);
 
 	const totalPrice = () => {
 		let total = 0;
@@ -46,7 +49,8 @@ export default function CartPopover() {
 				.post("/api/orders", {
 					products,
 					currency,
-					exchangeRate
+					exchangeRate,
+					locale
 				});
 
 			await stripe?.redirectToCheckout({
