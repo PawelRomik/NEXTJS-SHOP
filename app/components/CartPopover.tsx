@@ -10,7 +10,6 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useLocale, useTranslations } from "next-intl";
 import { formatPrice } from "../lib/utils/formatPrice";
 import { useCurrency } from "../context/CurrencyProvider";
-import { getLocale } from "next-intl/server";
 
 type RootState = {
 	cart: {
@@ -24,7 +23,6 @@ export default function CartPopover() {
 	const dispatch = useDispatch();
 	const { exchangeRate, currency } = useCurrency();
 	const locale = useLocale();
-	console.log(locale);
 
 	const totalPrice = () => {
 		let total = 0;
