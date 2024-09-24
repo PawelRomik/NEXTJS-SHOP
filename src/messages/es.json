@@ -69,7 +69,7 @@
 		"goods": "Productos"
 	},
 	"order": {
-		"orderStatus": "Estado del pedido",
+		"status": "Estado del pedido",
 		"otherProducts": "¡Revisa otros productos!",
 		"home": "Inicio",
 		"orderFail": "Ocurrió un error al realizar el pedido, por favor inténtelo de nuevo más tarde.",
