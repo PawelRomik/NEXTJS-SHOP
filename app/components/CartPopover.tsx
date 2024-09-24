@@ -10,6 +10,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useLocale, useTranslations } from "next-intl";
 import { formatPrice } from "../lib/utils/formatPrice";
 import { useCurrency } from "../context/CurrencyProvider";
+import { useUser } from "@clerk/nextjs";
 
 type RootState = {
 	cart: {
@@ -23,6 +24,7 @@ export default function CartPopover() {
 	const dispatch = useDispatch();
 	const { exchangeRate, currency } = useCurrency();
 	const locale = useLocale();
+	const { user } = useUser();
 
 	const totalPrice = () => {
 		let total = 0;
@@ -48,7 +50,8 @@ export default function CartPopover() {
 					products,
 					currency,
 					exchangeRate,
-					locale
+					locale,
+					user: user?.id
 				});
 
 			await stripe?.redirectToCheckout({
