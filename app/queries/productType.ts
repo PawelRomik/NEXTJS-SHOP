@@ -85,6 +85,17 @@ export type CategoriesData = {
 	};
 };
 
+export type OrderHistoryData = {
+	orders: {
+		data: {
+			id: string;
+			attributes: {
+				createdAt: string;
+			};
+		}[];
+	};
+};
+
 export type QueryResult = {
 	products: {
 		data: ProductData[];
