@@ -35,3 +35,34 @@ export const GET_NEW_PRODUCTS_ORDER = gql`
 		}
 	}
 `;
+
+export const GET_ORDER_HISTORY = gql`
+	query getOrders($user: String!, $page: Int!) {
+		orders(
+			pagination: { page: $page, pageSize: 10 }
+			sort: "createdAt:desc"
+			filters: { user: { eq: $user } }
+		) {
+			data {
+				id
+				attributes {
+					createdAt
+				}
+			}
+		}
+	}
+`;
+
+export const GET_ORDER = gql`
+	query getOrder($orderId: ID!) {
+		order(id: $orderId) {
+			data {
+				id
+				attributes {
+					createdAt
+					products
+				}
+			}
+		}
+	}
+`;
