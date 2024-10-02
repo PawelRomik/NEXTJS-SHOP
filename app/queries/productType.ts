@@ -93,6 +93,12 @@ export type OrderHistoryData = {
 				createdAt: string;
 			};
 		}[];
+		meta: {
+			pagination: {
+				pageCount: number;
+				total: number;
+			};
+		};
 	};
 };
 

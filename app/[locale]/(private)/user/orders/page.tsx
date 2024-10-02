@@ -7,25 +7,26 @@ import createApolloClient from "../../../../../apollo-client";
 import ErrorText from "../../../../components/ErrorText";
 import { Suspense } from "react";
 import { currentUser } from "@clerk/nextjs/server";
+import Pagination from "../../../../components/Pagination";
+import { useTranslations } from "next-intl";
 
-export function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
-	//const t = await getTranslations({ locale, namespace: "settings" });
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+	const t = await getTranslations({ locale, namespace: "order" });
 
 	return {
-		title: `Order History | Ephonix`
+		title: `${t("history")} | Ephonix`
 	};
 }
 
-async function fetchProducts() {
+async function fetchProducts(page: number) {
 	try {
 		const user = await currentUser();
-		console.log(user?.id);
 		const client = createApolloClient();
 		const { data }: ApolloQueryResult<OrderHistoryData> = await client.query({
 			query: GET_ORDER_HISTORY,
 			variables: {
 				user: user?.id,
-				page: 1
+				page: Number(page)
 			}
 		});
 
@@ -35,9 +36,8 @@ async function fetchProducts() {
 	}
 }
 
-async function loadProducts() {
-	const data = await fetchProducts();
-	console.log(data);
+async function loadProducts(page: number) {
+	const data = await fetchProducts(page);
 	if (!data) return <ErrorText />;
 
 	return (
@@ -45,12 +45,23 @@ async function loadProducts() {
 			{data.data.map((product) => (
 				<tr
 					key={product.id}
-					className="flex h-[80px] w-full items-center justify-between border-2 border-black bg-zinc-900 p-3 text-2xl  text-white"
+					className="flex h-[80px] w-full items-center justify-between  bg-zinc-800 text-2xl  text-white"
 				>
-					<td className="">#{product.id}</td>
-					<td>{product.attributes.createdAt}</td>
-					<td>
-						<button className="border-2 border-black bg-zinc-950 p-2">Check</button>
+					<td className="flex h-full gap-5 bg-zinc-900 p-3">
+						<div className="flex items-center justify-center bg-green-600 p-2">Success</div>
+						<p className="flex items-center justify-center">Order: #{product.id}</p>
+					</td>
+					<td className="flex h-full items-center justify-center bg-zinc-900 p-3">
+						{new Date(product.attributes.createdAt)
+							.toISOString()
+							.replace("T", " ")
+							.slice(0, 19)
+							.replaceAll("-", ".")}
+					</td>
+					<td className="flex h-full items-center justify-center bg-zinc-900 p-3">
+						<button>
+							<i className="ri-arrow-right-s-fill text-4xl"></i>
+						</button>
 					</td>
 				</tr>
 			))}
@@ -58,19 +69,46 @@ async function loadProducts() {
 	);
 }
 
-export default function ProductPage({
-	params: { locale, productId }
+async function loadPagination(page: number) {
+	const data = await fetchProducts(page);
+	if (!data) return null;
+
+	return (
+		<Pagination currentPage={Number(page)} pagesCount={Number(data.meta.pagination.pageCount)} />
+	);
+}
+
+export default function OrderHistoryPage({
+	searchParams,
+	params: { locale }
 }: {
-	params: { productId: string; locale: string };
+	searchParams?: {
+		query?: string;
+		page?: number;
+	};
+	params: { locale: string };
 }) {
 	revalidatePath("/[locale]/user/orders", "page");
+	const page = searchParams?.page || 1;
+	const t = useTranslations("order");
 
 	return (
 		<main className=" flex w-full flex-1 flex-col gap-3 bg-zinc-950 p-5">
-			<h1 className="text-3xl font-bold uppercase text-white">Order History</h1>
-			<table className="flex h-[700px] flex-grow-0 flex-col flex-wrap items-start justify-start gap-3 overflow-y-auto ">
-				<Suspense fallback={<p>Loading</p>}>{loadProducts()}</Suspense>
-			</table>
+			<h1 className="text-3xl font-bold uppercase text-white">{t("history")}</h1>
+			<div className="flex h-full flex-col items-center justify-around">
+				<table className="flex h-[600px] flex-row flex-wrap items-start justify-start gap-2 overflow-y-auto ">
+					<tr className="sticky top-0 flex h-[80px] w-full items-center justify-between border-b-2 border-red-600  bg-zinc-900 p-3 text-2xl  text-white">
+						<th className="flex gap-10">
+							<p>{t("statusShort")}</p>
+							<p>{t("order")}</p>
+						</th>
+						<th>{t("date")}</th>
+						<th>{t("details")}</th>
+					</tr>
+					<Suspense fallback={<p>Loading</p>}>{loadProducts(page)}</Suspense>
+				</table>
+				<Suspense>{loadPagination(page)}</Suspense>
+			</div>
 		</main>
 	);
 }

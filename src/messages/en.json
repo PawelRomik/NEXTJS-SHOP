@@ -73,7 +73,13 @@
 		"otherProducts": "Check other products!",
 		"home": "Home",
 		"orderFail": "An error occurred while placing order, please try again later.",
-		"orderSuccess": "Your order has been successfully processed."
+		"orderSuccess": "Your order has been successfully processed.",
+		"history": "Order History",
+		"statusShort": "Status",
+		"order": "Order",
+		"date": "Date",
+		"details": "Details",
+		"success": "Success"
 	},
 	"product": {
 		"product": "Product",

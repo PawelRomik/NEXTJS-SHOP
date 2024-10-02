@@ -13,10 +13,6 @@ export default function Pagination({ pagesCount, currentPage }: PaginationProps)
 	const searchParams = useSearchParams();
 	const params = new URLSearchParams(searchParams.toString());
 
-	if (pagesCount <= 1) {
-		return null;
-	}
-
 	const getPaginationRange = () => {
 		const middleIndex = Math.ceil(5 / 2);
 

@@ -73,7 +73,13 @@
 		"otherProducts": "Sprawdź inne produkty!",
 		"home": "Strona główna",
 		"orderFail": "Wystąpił błąd podczas składania zamówienia, spróbuj ponownie później.",
-		"orderSuccess": "Twoje zamówienie zostało pomyślnie przetworzone."
+		"orderSuccess": "Twoje zamówienie zostało pomyślnie przetworzone.",
+		"history": "Historia zamówień",
+		"statusShort": "Status",
+		"order": "Zamówienie",
+		"date": "Data",
+		"details": "Szczegóły",
+		"success": "Sukces"
 	},
 	"product": {
 		"product": "Produkt",

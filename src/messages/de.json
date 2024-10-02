@@ -73,7 +73,13 @@
 		"otherProducts": "Weitere Produkte ansehen!",
 		"home": "Startseite",
 		"orderFail": "Bei der Bestellung ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.",
-		"orderSuccess": "Ihre Bestellung wurde erfolgreich bearbeitet."
+		"orderSuccess": "Ihre Bestellung wurde erfolgreich bearbeitet.",
+		"history": "Bestellverlauf",
+		"statusShort": "Status",
+		"order": "Bestellung",
+		"date": "Datum",
+		"details": "Details",
+		"success": "Erfolg"
 	},
 	"product": {
 		"product": "Produkt",
