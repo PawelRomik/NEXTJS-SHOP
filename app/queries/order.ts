@@ -39,7 +39,7 @@ export const GET_NEW_PRODUCTS_ORDER = gql`
 export const GET_ORDER_HISTORY = gql`
 	query getOrders($user: String!, $page: Int!) {
 		orders(
-			pagination: { page: $page, pageSize: 10 }
+			pagination: { page: $page, pageSize: 8 }
 			sort: "createdAt:desc"
 			filters: { user: { eq: $user } }
 		) {
@@ -47,6 +47,12 @@ export const GET_ORDER_HISTORY = gql`
 				id
 				attributes {
 					createdAt
+				}
+			}
+			meta {
+				pagination {
+					pageCount
+					total
 				}
 			}
 		}

@@ -73,7 +73,13 @@
 		"otherProducts": "¡Revisa otros productos!",
 		"home": "Inicio",
 		"orderFail": "Ocurrió un error al realizar el pedido, por favor inténtelo de nuevo más tarde.",
-		"orderSuccess": "Su pedido ha sido procesado con éxito."
+		"orderSuccess": "Su pedido ha sido procesado con éxito.",
+		"history": "Historial de pedidos",
+		"statusShort": "Estado",
+		"order": "Pedido",
+		"date": "Fecha",
+		"details": "Detalles",
+		"success": "Éxito"
 	},
 	"product": {
 		"product": "Producto",
