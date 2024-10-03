@@ -25,7 +25,7 @@ export default function ProductDisplay({
 	uuid
 }: ProductDisplayProps) {
 	const t = useTranslations("product");
-	const { exchangeRate, currency } = useCurrency();
+	const { exchangeRate } = useCurrency();
 
 	const extractText = (text: string) => {
 		const startIndex = text.indexOf("--START--") + "--START--".length;

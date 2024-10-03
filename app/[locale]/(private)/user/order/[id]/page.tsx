@@ -1,10 +1,11 @@
+import { getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
 
-export function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
-	//const t = await getTranslations({ locale, namespace: "settings" });
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+	const t = await getTranslations({ locale, namespace: "order" });
 
 	return {
-		title: `Order | Ephonix`
+		title: `${t("order")} | Ephonix`
 	};
 }
 
