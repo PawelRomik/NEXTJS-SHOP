@@ -10,6 +10,11 @@ export type Category = {
 	subCategories: SubCategory[] | null;
 };
 
+export const userCategories: SubCategory[] = [
+	{ name: "Settings", slug: "settings" },
+	{ name: "Order History", slug: "orders" }
+];
+
 export const categories: Category[] = [
 	{
 		id: 0,

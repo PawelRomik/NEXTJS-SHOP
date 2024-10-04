@@ -136,6 +136,8 @@
 		"monitor": "Moniteur",
 		"webcam": "Webcam",
 		"speakers": "Haut-parleurs",
-		"support": "Support"
+		"support": "Support",
+		"settings": "Paramètres",
+		"orders": "Historique des commandes"
 	}
 }

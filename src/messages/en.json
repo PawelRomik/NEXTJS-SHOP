@@ -136,6 +136,8 @@
 		"monitor": "Monitor",
 		"webcam": "Webcam",
 		"speakers": "Speakers",
-		"support": "Support"
+		"support": "Support",
+		"settings": "Settings",
+		"orders": "Order History"
 	}
 }
