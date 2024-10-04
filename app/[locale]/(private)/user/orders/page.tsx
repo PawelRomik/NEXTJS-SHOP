@@ -36,8 +36,9 @@ async function fetchProducts(page: number) {
 	}
 }
 
-async function loadProducts(page: number) {
+async function loadProducts(page: number, locale: string) {
 	const data = await fetchProducts(page);
+	const t = await getTranslations({ locale, namespace: "order" });
 	if (!data) return <ErrorText />;
 
 	return (
@@ -48,8 +49,10 @@ async function loadProducts(page: number) {
 					className="flex h-[80px] w-full items-center justify-between  bg-zinc-800 text-2xl  text-white"
 				>
 					<td className="flex h-full gap-5 bg-zinc-900 p-3">
-						<div className="flex items-center justify-center bg-green-600 p-2">Success</div>
-						<p className="flex items-center justify-center">Order: #{product.id}</p>
+						<div className="flex items-center justify-center bg-green-600 p-2">{t("success")}</div>
+						<p className="flex items-center justify-center">
+							{t("order")}: #{product.id}
+						</p>
 					</td>
 					<td className="flex h-full items-center justify-center bg-zinc-900 p-3">
 						{new Date(product.attributes.createdAt)
@@ -105,7 +108,7 @@ export default function OrderHistoryPage({
 						<th>{t("date")}</th>
 						<th>{t("details")}</th>
 					</tr>
-					<Suspense fallback={<p>Loading</p>}>{loadProducts(page)}</Suspense>
+					<Suspense fallback={<p>Loading</p>}>{loadProducts(page, locale)}</Suspense>
 				</table>
 				<Suspense>{loadPagination(page)}</Suspense>
 			</div>
