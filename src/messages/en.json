@@ -3,7 +3,8 @@
 		"errorLoadingProducts": "An error occurred while loading products, please try again later.",
 		"scrollButtonTitle": "Go to Top",
 		"shopLogo": "Shop Logo",
-		"sale": "Sale"
+		"sale": "Sale",
+		"back": "Back"
 	},
 	"hamburger": {
 		"avatar": "Your avatar picture",
@@ -79,7 +80,9 @@
 		"order": "Order",
 		"date": "Date",
 		"details": "Details",
-		"success": "Success"
+		"success": "Success",
+		"totalPrice": "Total price",
+		"total": "Total"
 	},
 	"product": {
 		"product": "Product",
@@ -91,7 +94,8 @@
 		"mainImage": "Main product image",
 		"productImage": "Product image",
 		"price": "${amount}",
-		"sale": "Sale"
+		"sale": "Sale",
+		"products": "Products"
 	},
 	"search": {
 		"results": "Search results",
@@ -139,5 +143,9 @@
 		"support": "Support",
 		"settings": "Settings",
 		"orders": "Order History"
+	},
+	"support": {
+		"contact": "Contact us",
+		"gotProblem": "Got any problems?"
 	}
 }

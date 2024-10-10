@@ -60,13 +60,32 @@ export const GET_ORDER_HISTORY = gql`
 `;
 
 export const GET_ORDER = gql`
-	query getOrder($orderId: ID!) {
-		order(id: $orderId) {
+	query getOrder($user: String!, $orderId: ID!) {
+		orders(filters: { user: { eq: $user }, id: { eq: $orderId } }) {
 			data {
 				id
 				attributes {
 					createdAt
 					products
+				}
+			}
+		}
+	}
+`;
+
+export const GET_ORDER_PRODUCT = gql`
+	query getProducts($productId: String!, $locale: I18NLocaleCode!) {
+		products(filters: { uuid: { eq: $productId } }, locale: $locale) {
+			data {
+				attributes {
+					name
+					images {
+						data {
+							attributes {
+								url
+							}
+						}
+					}
 				}
 			}
 		}

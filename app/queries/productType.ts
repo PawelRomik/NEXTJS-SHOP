@@ -102,6 +102,23 @@ export type OrderHistoryData = {
 	};
 };
 
+export type OrderData = {
+	orders: {
+		data: {
+			id: string;
+			attributes: {
+				createdAt: string;
+				products: {
+					id: string;
+					name: string;
+					price: number;
+					quantity: number;
+				}[];
+			};
+		}[];
+	};
+};
+
 export type QueryResult = {
 	products: {
 		data: ProductData[];
