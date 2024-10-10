@@ -3,7 +3,8 @@
 		"errorLoadingProducts": "Se produjo un error al cargar los productos, por favor intente de nuevo más tarde.",
 		"scrollButtonTitle": "Ir al principio",
 		"shopLogo": "Logo de la tienda",
-		"sale": "Venta"
+		"sale": "Venta",
+		"back": "Atrás"
 	},
 	"hamburger": {
 		"avatar": "Tu foto de perfil",
@@ -79,7 +80,9 @@
 		"order": "Pedido",
 		"date": "Fecha",
 		"details": "Detalles",
-		"success": "Éxito"
+		"success": "Éxito",
+		"totalPrice": "Precio total",
+		"total": "Total"
 	},
 	"product": {
 		"product": "Producto",
@@ -91,7 +94,8 @@
 		"mainImage": "Imagen principal del producto",
 		"productImage": "Imagen del producto",
 		"price": "{amount} €",
-		"sale": "Venta"
+		"sale": "Venta",
+		"products": "Productos"
 	},
 	"search": {
 		"results": "Resultados de la búsqueda",
@@ -139,5 +143,9 @@
 		"support": "Soporte",
 		"settings": "Configuración",
 		"orders": "Historial de pedidos"
+	},
+	"support": {
+		"contact": "Contáctanos",
+		"gotProblem": "¿Tienes algún problema?"
 	}
 }

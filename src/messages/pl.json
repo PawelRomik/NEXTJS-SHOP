@@ -3,7 +3,8 @@
 		"errorLoadingProducts": "Wystąpił błąd podczas ładowania produktów, spróbuj ponownie później.",
 		"scrollButtonTitle": "Idź na górę",
 		"shopLogo": "Logo sklepu",
-		"sale": "Przecena"
+		"sale": "Przecena",
+		"back": "Wstecz"
 	},
 	"hamburger": {
 		"avatar": "Twoje zdjęcie profilowe",
@@ -79,7 +80,9 @@
 		"order": "Zamówienie",
 		"date": "Data",
 		"details": "Szczegóły",
-		"success": "Sukces"
+		"success": "Sukces",
+		"totalPrice": "Całkowita cena",
+		"total": "Razem"
 	},
 	"product": {
 		"product": "Produkt",
@@ -91,7 +94,8 @@
 		"mainImage": "Główne zdjęcie produktu",
 		"productImage": "Zdjęcie produktu",
 		"price": "PLN {amount}",
-		"sale": "Przecena"
+		"sale": "Przecena",
+		"products": "Produkty"
 	},
 	"search": {
 		"results": "Wyniki wyszukiwania",
@@ -139,5 +143,9 @@
 		"support": "Wsparcie",
 		"settings": "Ustawienia",
 		"orders": "Historia zamówień"
+	},
+	"support": {
+		"contact": "Skontaktuj się z nami",
+		"gotProblem": "Masz jakiś problem?"
 	}
 }

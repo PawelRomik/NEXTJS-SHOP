@@ -3,7 +3,8 @@
 		"errorLoadingProducts": "Beim Laden der Produkte ist ein Fehler aufgetreten, bitte versuchen Sie es später erneut.",
 		"scrollButtonTitle": "Nach oben",
 		"shopLogo": "Shop-Logo",
-		"sale": "Verkauf"
+		"sale": "Verkauf",
+		"back": "Zurück"
 	},
 	"hamburger": {
 		"avatar": "Ihr Profilbild",
@@ -79,7 +80,9 @@
 		"order": "Bestellung",
 		"date": "Datum",
 		"details": "Details",
-		"success": "Erfolg"
+		"success": "Erfolg",
+		"totalPrice": "Gesamtpreis",
+		"total": "Gesamt"
 	},
 	"product": {
 		"product": "Produkt",
@@ -91,7 +94,8 @@
 		"mainImage": "Hauptproduktbild",
 		"productImage": "Produktbild",
 		"price": "{amount} €",
-		"sale": "Verkauf"
+		"sale": "Verkauf",
+		"products": "Produkte"
 	},
 	"search": {
 		"results": "Suchergebnisse",
@@ -139,5 +143,9 @@
 		"support": "Unterstützung",
 		"settings": "Einstellungen",
 		"orders": "Bestellverlauf"
+	},
+	"support": {
+		"contact": "Kontaktieren Sie uns",
+		"gotProblem": "Haben Sie ein Problem?"
 	}
 }

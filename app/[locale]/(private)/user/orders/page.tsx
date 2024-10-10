@@ -9,6 +9,7 @@ import { Suspense } from "react";
 import { currentUser } from "@clerk/nextjs/server";
 import Pagination from "../../../../components/Pagination";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
 	const t = await getTranslations({ locale, namespace: "order" });
@@ -61,10 +62,12 @@ async function loadProducts(page: number, locale: string) {
 							.slice(0, 19)
 							.replaceAll("-", ".")}
 					</td>
-					<td className="flex h-full items-center justify-center bg-zinc-900 p-3">
-						<button>
-							<i className="ri-arrow-right-s-fill text-4xl"></i>
-						</button>
+					<td className="flex h-full items-center justify-center bg-zinc-900">
+						<Link href={`order/${product.id}`} className="transition-all hover:text-red-600">
+							<button className="h-full w-full p-3 ">
+								<i className="ri-arrow-right-s-fill text-4xl"></i>
+							</button>
+						</Link>
 					</td>
 				</tr>
 			))}
@@ -99,17 +102,19 @@ export default function OrderHistoryPage({
 		<main className=" flex w-full flex-1 flex-col gap-3 bg-zinc-950 p-5">
 			<h1 className="text-3xl font-bold uppercase text-white">{t("history")}</h1>
 			<div className="flex h-full flex-col items-center justify-around">
-				<table className="flex h-[600px] flex-row flex-wrap items-start justify-start gap-2 overflow-y-auto ">
-					<tr className="sticky top-0 flex h-[80px] w-full items-center justify-between border-b-2 border-red-600  bg-zinc-900 p-3 text-2xl  text-white">
-						<th className="flex gap-10">
-							<p>{t("statusShort")}</p>
-							<p>{t("order")}</p>
-						</th>
-						<th>{t("date")}</th>
-						<th>{t("details")}</th>
-					</tr>
-					<Suspense fallback={<p>Loading</p>}>{loadProducts(page, locale)}</Suspense>
-				</table>
+				<Suspense fallback={<p>Loading</p>}>
+					<table className="flex h-[600px] flex-row flex-wrap items-start justify-start gap-2 overflow-y-auto ">
+						<tr className="sticky top-0 flex h-[80px] w-full items-center justify-between border-b-2 border-red-600  bg-zinc-900 p-3 text-2xl  text-white">
+							<th className="flex gap-10">
+								<p>{t("statusShort")}</p>
+								<p>{t("order")}</p>
+							</th>
+							<th>{t("date")}</th>
+							<th>{t("details")}</th>
+						</tr>
+						{loadProducts(page, locale)}
+					</table>
+				</Suspense>
 				<Suspense>{loadPagination(page)}</Suspense>
 			</div>
 		</main>
