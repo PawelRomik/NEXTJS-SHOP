@@ -54,7 +54,7 @@ export default function ProductPage({
 	revalidatePath("/[locale]/product/[productId]", "page");
 
 	return (
-		<main className=" flex w-full flex-col gap-3 bg-zinc-950">
+		<main className=" flex w-full flex-col gap-3 overflow-x-hidden bg-zinc-950">
 			<ProductNavigationButtons />
 			<ProductShowcaseSection productId={productId} locale={locale} />
 			<ProductDescriptionSection productId={productId} locale={locale} />
