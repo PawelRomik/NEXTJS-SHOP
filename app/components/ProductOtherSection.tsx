@@ -5,6 +5,17 @@ import { Suspense } from "react";
 import ProductDisplay from "./ProductDisplay";
 import { QueryResult } from "../queries/productType";
 import { useTranslations } from "next-intl";
+import * as motion from "framer-motion/client";
+
+const list = {
+	visible: {},
+	hidden: {}
+};
+
+const item = {
+	visible: { y: 0 },
+	hidden: { y: "200%" }
+};
 
 type ProductOtherSectionProps = {
 	productId: string;
@@ -45,13 +56,23 @@ export default function ProductOtherSection({ productId, locale }: ProductOtherS
 			return (
 				<section
 					id="others"
-					className="relative flex w-full flex-col bg-black  p-3  pt-24 text-white "
+					className="relative flex w-full flex-col overflow-y-hidden bg-black  p-3  pt-24 text-white "
 				>
 					<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
 						{t("otherSection")}
 					</h2>
-					<div className="relative w-full overflow-hidden lg:static lg:flex-1">
-						<div className="flex gap-6 overflow-x-auto py-2 lg:static">
+					<motion.div
+						initial="hidden"
+						whileInView="visible"
+						variants={list}
+						viewport={{ once: true }}
+						className="relative w-full overflow-hidden lg:static lg:flex-1"
+					>
+						<motion.div
+							variants={item}
+							transition={{ duration: 0.5, delay: 0.25, ease: "easeInOut" }}
+							className="flex gap-6 overflow-x-auto py-2 lg:static"
+						>
 							{data.products.data.map((product) => (
 								<ProductDisplay
 									uuid={product.attributes.uuid}
@@ -64,8 +85,8 @@ export default function ProductOtherSection({ productId, locale }: ProductOtherS
 									key={product.id}
 								></ProductDisplay>
 							))}
-						</div>
-					</div>
+						</motion.div>
+					</motion.div>
 				</section>
 			);
 		} catch {

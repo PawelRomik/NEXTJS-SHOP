@@ -5,10 +5,26 @@ import { GET_PRODUCT_DESC } from "../queries/productPage";
 import { Suspense } from "react";
 import { QueryResult } from "../queries/productType";
 import { useTranslations } from "next-intl";
+import * as motion from "framer-motion/client";
 
 type ProductDescriptionSectionProps = {
 	productId: string;
 	locale: string;
+};
+
+const list = {
+	visible: {},
+	hidden: {}
+};
+
+const item = {
+	visible: { x: 0 },
+	hidden: { x: "-200%" }
+};
+
+const itemRight = {
+	visible: { x: 0 },
+	hidden: { x: "200%" }
 };
 
 export default function ProductDescriptionSection({
@@ -67,12 +83,20 @@ export default function ProductDescriptionSection({
 					});
 
 					return (
-						<div
+						<motion.div
+							initial="hidden"
+							whileInView="visible"
+							variants={list}
 							key={index}
+							viewport={{ once: true }}
 							className="flex flex-col items-center justify-between gap-20 px-6 py-4  text-xl lg:flex-row lg:px-32"
 						>
 							{imageFirst ? (
-								<>
+								<motion.div
+									variants={item}
+									transition={{ duration: 0.5, delay: 0.25, ease: "easeInOut" }}
+									className="flex w-full items-center justify-between"
+								>
 									{imageUrl && (
 										<Image
 											width={600}
@@ -84,9 +108,13 @@ export default function ProductDescriptionSection({
 									)}
 
 									<div className="description" dangerouslySetInnerHTML={{ __html: description }} />
-								</>
+								</motion.div>
 							) : (
-								<>
+								<motion.div
+									variants={itemRight}
+									transition={{ duration: 0.5, delay: 0.25, ease: "easeInOut" }}
+									className="flex w-full items-center justify-between"
+								>
 									<div className="description" dangerouslySetInnerHTML={{ __html: description }} />
 									{imageUrl && (
 										<Image
@@ -97,9 +125,9 @@ export default function ProductDescriptionSection({
 											className="h-full max-h-[300px] object-contain p-6"
 										/>
 									)}
-								</>
+								</motion.div>
 							)}
-						</div>
+						</motion.div>
 					);
 				});
 			};
