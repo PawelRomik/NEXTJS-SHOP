@@ -6,6 +6,7 @@ import "./globals.css";
 import Providers from "./providers";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import React from "react";
+import { getTranslations } from "next-intl/server";
 
 const roboto = Roboto({
 	weight: ["300", "400", "700"],
@@ -13,10 +14,18 @@ const roboto = Roboto({
 	variable: "--font-roboto"
 });
 
-export const metadata: Metadata = {
-	title: "Ephonix",
-	description: "THE BEST GAMING SHOP ON THE INTERNET"
-};
+export async function generateMetadata({
+	params: { locale }
+}: {
+	params: { locale: string };
+}): Promise<Metadata> {
+	const t = await getTranslations({ locale, namespace: "common" });
+
+	return {
+		title: "Ephonix",
+		description: t("desc")
+	};
+}
 
 type RootProps = {
 	children: React.ReactNode;
