@@ -7,12 +7,12 @@ export type Category = {
 	id: number;
 	name: string;
 	slug: keyof IntlMessages["categories"];
-	subCategories: SubCategory[] | null;
+	subCategories?: SubCategory[];
 };
 
-export const userCategories: SubCategory[] = [
-	{ name: "Settings", slug: "settings" },
-	{ name: "Order History", slug: "orders" }
+export const userCategories: Category[] = [
+	{ id: 0, name: "Settings", slug: "settings" },
+	{ id: 1, name: "Order History", slug: "orders" }
 ];
 
 export const categories: Category[] = [
@@ -59,7 +59,6 @@ export const categories: Category[] = [
 	{
 		id: 3,
 		name: "Support",
-		slug: "support",
-		subCategories: null
+		slug: "support"
 	}
 ];
