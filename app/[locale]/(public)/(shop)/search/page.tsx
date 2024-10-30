@@ -52,7 +52,7 @@ async function loadCount(query: string, page: number, locale: string) {
 
 		return data.products.meta.pagination.total;
 	} catch {
-		return "0";
+		return 0;
 	}
 }
 
