@@ -148,5 +148,9 @@
 	"support": {
 		"contact": "Contactez-nous",
 		"gotProblem": "Vous avez un problème ?"
+	},
+	"sign": {
+		"signIn": "Se connecter",
+		"signUp": "S'inscrire"
 	}
 }
