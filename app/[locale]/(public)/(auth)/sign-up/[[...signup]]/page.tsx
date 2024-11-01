@@ -1,9 +1,13 @@
 import { SignUp } from "@clerk/nextjs";
-import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-	title: "Sign Up | Ephonix"
-};
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+	const t = await getTranslations({ locale, namespace: "sign" });
+
+	return {
+		title: `${t("signUp")} | Ephonix`
+	};
+}
 
 export default function SignUpPage() {
 	return <SignUp />;
