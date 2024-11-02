@@ -1,9 +1,11 @@
 "use client";
 
-import { SignedOut, SignedIn, SignUpButton } from "@clerk/nextjs";
+import { SignedOut, SignedIn, SignInButton } from "@clerk/nextjs";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 export default function UserProfile() {
+	const t = useTranslations("sign");
 	return (
 		<div className="flex items-center justify-center">
 			<SignedIn>
@@ -13,7 +15,7 @@ export default function UserProfile() {
 			</SignedIn>
 			<SignedOut>
 				<div className="flex items-center justify-center font-bold">
-					<SignUpButton />
+					<SignInButton>{t("signIn")}</SignInButton>
 				</div>
 			</SignedOut>
 		</div>
