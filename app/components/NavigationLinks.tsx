@@ -12,7 +12,7 @@ export default function NavigationLinks() {
 			<NavigationMenu.List className="flex items-center justify-center gap-6 overflow-hidden">
 				{categories.map((category) => (
 					<NavigationMenu.Item key={category.id}>
-						<NavigationMenu.Trigger className="text-white hover:text-red-600 data-[state=open]:text-red-600">
+						<NavigationMenu.Trigger className="font-bold text-white hover:text-red-600 data-[state=open]:text-red-600">
 							<Link href={`/${category.slug}`} title={t(category.slug)}>
 								{t(category.slug).toUpperCase()}
 							</Link>
