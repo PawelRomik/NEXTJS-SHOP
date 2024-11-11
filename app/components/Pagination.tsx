@@ -10,8 +10,7 @@ type PaginationProps = {
 
 export default function Pagination({ pagesCount, currentPage }: PaginationProps) {
 	const pathname = usePathname();
-	const searchParams = useSearchParams();
-	const params = new URLSearchParams(searchParams.toString());
+	const params = new URLSearchParams(useSearchParams().toString());
 
 	const getPaginationRange = () => {
 		const middleIndex = Math.ceil(5 / 2);
