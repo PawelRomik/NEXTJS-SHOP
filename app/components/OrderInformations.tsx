@@ -18,7 +18,7 @@ export default function OrderInformations({ id }: { id: number | string }) {
 
 	async function fetchOrder(orderId: string | number) {
 		try {
-			const client = createApolloClient();
+			const client = await createApolloClient();
 			const { data }: ApolloQueryResult<OrderData> = await client.query({
 				query: GET_ORDER,
 				variables: {

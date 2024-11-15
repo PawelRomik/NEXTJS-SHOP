@@ -19,7 +19,6 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 	const t = useTranslations("shop");
 	const dispatch = useDispatch();
 	const locale = useLocale();
-	const client = createApolloClient();
 
 	const handleButtonClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
@@ -46,6 +45,7 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 
 	const getProductData = async (locale: string) => {
 		try {
+			const client = await createApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_ALLDATA,
 				variables: {

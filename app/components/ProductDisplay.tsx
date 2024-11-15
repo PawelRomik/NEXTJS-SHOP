@@ -42,7 +42,7 @@ export default function ProductDisplay({
 				<div className="flex h-full w-full flex-col justify-between bg-black p-6 ">
 					<div className="w-full">
 						<Image
-							src={imageUrl}
+							src={`${process.env.NEXT_PUBLIC_PROD_PATH}${imageUrl}`}
 							alt={name}
 							width={600}
 							height={600}

@@ -22,7 +22,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 async function fetchProducts(page: number) {
 	try {
 		const user = await currentUser();
-		const client = createApolloClient();
+		const client = await createApolloClient();
 		const { data }: ApolloQueryResult<OrderHistoryData> = await client.query({
 			query: GET_ORDER_HISTORY,
 			variables: {

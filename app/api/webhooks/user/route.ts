@@ -31,7 +31,7 @@ const MODIFY_USER = gql`
 	}
 `;
 
-const webhookSecret = process.env.NEXT_PUBLIC_WEBHOOK_SECRET || "";
+const webhookSecret = process.env.WEBHOOK_SECRET || "";
 
 async function handler(request: Request) {
 	const payload = await request.json();
@@ -53,7 +53,7 @@ async function handler(request: Request) {
 		console.error((err as Error).message);
 		return NextResponse.json({}, { status: 400 });
 	}
-	const client = createApolloClient();
+	const client = await createApolloClient();
 
 	const eventType = evt.type;
 	if (eventType === "user.created") {

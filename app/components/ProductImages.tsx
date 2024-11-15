@@ -17,7 +17,7 @@ function ProductImages({ productId, onImagesLoaded }: ProductImagesProps) {
 	useEffect(() => {
 		async function fetchProductImages() {
 			try {
-				const client = createApolloClient();
+				const client = await createApolloClient();
 				const { data }: ApolloQueryResult<QueryResult> = await client.query({
 					query: GET_PRODUCT_IMAGES,
 					variables: { productId, locale }

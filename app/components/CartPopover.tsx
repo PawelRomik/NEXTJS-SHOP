@@ -38,12 +38,14 @@ export default function CartPopover() {
 
 	const handlePayment = async () => {
 		try {
+			const resKey = await fetch("/api/authKey");
+			const data = await resKey.json();
 			const stripe = await stripePromise;
 			const res = await axios
 				.create({
 					baseURL: process.env.NEXT_PUBLIC_PROD_PATH,
 					headers: {
-						Authorization: "bearer " + process.env.NEXT_PUBLIC_APOLLO_AUTH_KEY
+						Authorization: "bearer " + data.apolloAuthKey
 					}
 				})
 				.post("/api/orders", {

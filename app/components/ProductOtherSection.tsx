@@ -27,7 +27,7 @@ export default function ProductOtherSection({ productId, locale }: ProductOtherS
 
 	async function getCategory() {
 		try {
-			const client = createApolloClient();
+			const client = await createApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_CATEGORY,
 				variables: {
@@ -44,7 +44,7 @@ export default function ProductOtherSection({ productId, locale }: ProductOtherS
 
 	async function getProducts() {
 		try {
-			const client = createApolloClient();
+			const client = await createApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_OTHER_PRODUCTS,
 				variables: {
@@ -81,7 +81,7 @@ export default function ProductOtherSection({ productId, locale }: ProductOtherS
 									price={product.attributes.price}
 									salePrice={product.attributes.salePrice}
 									category={product.attributes.categories.data[0].attributes.name}
-									imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.images.data[0].attributes.url}`}
+									imageUrl={product.attributes.images.data[0].attributes.url}
 									key={product.id}
 								></ProductDisplay>
 							))}

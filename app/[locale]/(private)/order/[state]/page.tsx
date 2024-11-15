@@ -19,7 +19,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 }
 
 async function fetchProducts(locale: string) {
-	const client = createApolloClient();
+	const client = await createApolloClient();
 	try {
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_OTHER_PRODUCTS,
