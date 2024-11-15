@@ -36,7 +36,7 @@ async function fetchProducts(
 	tags?: string[],
 	sort: string = "latest"
 ) {
-	const client = createApolloClient();
+	const client = await createApolloClient();
 
 	const getSortOrder = (sortKey: string) => {
 		switch (sortKey) {
@@ -157,7 +157,7 @@ async function loadPagination(category: string, page: number, locale: string, ta
 
 async function LoadFilters(category: string, locale: string) {
 	try {
-		const client = createApolloClient();
+		const client = await createApolloClient();
 		const { data }: ApolloQueryResult<FiltersData> = await client.query({
 			query: GET_FILTERS,
 			variables: {

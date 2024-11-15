@@ -16,16 +16,19 @@ export const metadata: Metadata = {
 
 async function fetchProducts(locale: string) {
 	try {
-		const client = createApolloClient();
+		const client = await createApolloClient();
+
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_PRODUCTS,
 			variables: {
 				locale: locale
 			}
 		});
+		console.log(data);
 
 		return data.products;
-	} catch {
+	} catch (err) {
+		console.log(err);
 		return null;
 	}
 }
@@ -45,7 +48,7 @@ async function loadProducts(locale: string) {
 					price={product.attributes.price}
 					salePrice={product.attributes.salePrice}
 					category={product.attributes.categories.data[0].attributes.name}
-					imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.images.data[0].attributes.url}`}
+					imageUrl={product.attributes.images.data[0].attributes.url}
 					key={product.id}
 				></ProductDisplay>
 			))}

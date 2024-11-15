@@ -22,7 +22,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 
 async function fetchProducts(query: string, page: number, locale: string) {
 	try {
-		const client = createApolloClient();
+		const client = await createApolloClient();
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_SEARCH_PRODUCTS,
 			variables: {
@@ -40,7 +40,7 @@ async function fetchProducts(query: string, page: number, locale: string) {
 
 async function loadCount(query: string, page: number, locale: string) {
 	try {
-		const client = createApolloClient();
+		const client = await createApolloClient();
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_SEARCH_PRODUCTS_COUNT,
 			variables: {
@@ -70,7 +70,7 @@ async function loadProducts(category: string, page: number, locale: string) {
 					price={product.attributes.price}
 					salePrice={product.attributes.salePrice}
 					category={product.attributes.categories.data[0].attributes.name}
-					imageUrl={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.attributes.images.data[0].attributes.url}`}
+					imageUrl={product.attributes.images.data[0].attributes.url}
 					key={product.id}
 				></ProductDisplay>
 			))}
