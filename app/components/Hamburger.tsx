@@ -20,14 +20,14 @@ export default function Hamburger() {
 
 	return (
 		<>
-			<div className="flex items-center justify-start">
+			<div className=" flex  items-center justify-start">
 				<button className="flex lg:hidden" onClick={() => setMenuOn((prev) => !prev)}>
 					<i className="ri-menu-line text-2xl"></i>
 				</button>
 			</div>
 			{menuOn && (
 				<NavigationMenu.Root className="fixed left-0 top-0 z-30 h-screen w-svw flex-1 origin-left animate-showSearchbar flex-col justify-center text-2xl lg:hidden">
-					<NavigationMenu.List className="m-0 flex h-screen  w-screen list-none flex-col items-start justify-start overflow-x-hidden border-2 border-zinc-900 bg-black">
+					<NavigationMenu.List className="z-30 m-0 flex h-screen  w-screen list-none flex-col items-start justify-start overflow-x-hidden border-2 border-zinc-900 bg-black">
 						<NavigationMenu.Item className="fixed right-2 top-2">
 							<button onClick={() => setMenuOn(false)}>
 								<i className="ri-close-circle-line text-red-600"></i>
@@ -56,11 +56,11 @@ export default function Hamburger() {
 								{category.subCategories && (
 									<NavigationMenu.Content className="fixed left-0 top-0 flex h-screen w-screen flex-col items-start justify-start overflow-x-hidden border-zinc-900 bg-black">
 										<NavigationMenu.Trigger>
-											<p className="absolute right-10 top-2 z-10 text-black">
-												<i className="ri-arrow-go-back-line z-20 text-red-600"></i>
+											<p className="absolute right-10 top-2 z-30 text-black">
+												<i className="ri-arrow-go-back-line z-40 text-red-600"></i>
 											</p>
 										</NavigationMenu.Trigger>
-										<NavigationMenu.Item className="fixed right-2 top-2 z-20">
+										<NavigationMenu.Item className="fixed right-2 top-2 z-30">
 											<button onClick={() => setMenuOn(false)}>
 												<i className="ri-close-circle-line text-red-600"></i>
 											</button>
