@@ -147,10 +147,10 @@ export default function CartPopover() {
 						)}
 					</div>
 					<Popover.Close
-						className="text-violet11 absolute right-[5px] top-[5px] z-50 inline-flex h-[25px] w-[25px] cursor-pointer items-center justify-center rounded-full text-white outline-none "
+						className="text-violet11 absolute right-[5px] top-[5px] z-50 inline-flex h-[25px] w-[25px] cursor-pointer items-center justify-center rounded-full text-red-600 outline-none hover:text-red-400 "
 						aria-label="Close"
 					>
-						X
+						<i className="ri-close-circle-line"></i>
 					</Popover.Close>
 				</Popover.Content>
 			</Popover.Portal>
