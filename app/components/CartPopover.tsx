@@ -83,7 +83,7 @@ export default function CartPopover() {
 				</div>
 			</Popover.Trigger>
 			<Popover.Portal>
-				<Popover.Content className="relative top-[0.9rem] flex w-[100vw] origin-top animate-showNav rounded border-[3px] border-r-0 border-zinc-900 border-b-red-600  bg-zinc-900 p-5 lg:top-10 lg:w-full lg:origin-right lg:animate-showSearchbar lg:border-red-600 ">
+				<Popover.Content className="flex w-[100vw] origin-top animate-showNav border-[3px] border-r-0 border-zinc-900 border-b-red-600  bg-zinc-900 p-5 lg:w-auto lg:border-red-600 ">
 					<div className="z-50 p-5 uppercase text-white">
 						<h1 className="mb-7 text-2xl font-bold text-red-600">{t("cart.content")}</h1>
 						{products?.slice(0, 3).map((item) => (
@@ -147,11 +147,12 @@ export default function CartPopover() {
 						)}
 					</div>
 					<Popover.Close
-						className="text-violet11 absolute right-[5px] top-[5px] z-50 inline-flex h-[25px] w-[25px] cursor-pointer items-center justify-center rounded-full text-red-600 outline-none hover:text-red-400 "
+						className="absolute right-[5px] top-[5px] z-50 inline-flex h-[25px] w-[25px] cursor-pointer items-center justify-center rounded-full text-red-600 outline-none hover:text-red-400 "
 						aria-label="Close"
 					>
 						<i className="ri-close-circle-line"></i>
 					</Popover.Close>
+					<Popover.Arrow width={20} height={10} className="fill-red-600" />
 				</Popover.Content>
 			</Popover.Portal>
 		</Popover.Root>

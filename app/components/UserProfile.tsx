@@ -14,7 +14,7 @@ export default function UserProfile() {
 			<SignedIn>
 				<DropdownMenu.Root>
 					<DropdownMenu.Trigger className="text-3xl outline-none">
-						<Avatar.Root className="inline-flex size-[38px] select-none items-center justify-center overflow-hidden rounded-full border-[2px] border-white  align-middle">
+						<Avatar.Root className="inline-flex size-[35px] select-none items-center justify-center overflow-hidden rounded-full border-[2px] border-red-600  align-middle">
 							<Avatar.Image
 								className="size-full rounded-[inherit] object-cover"
 								src={user?.imageUrl}
@@ -31,7 +31,7 @@ export default function UserProfile() {
 
 					<DropdownMenu.Portal>
 						<DropdownMenu.Content
-							className="min-w-[220px] origin-right animate-showSearchbar border-2 border-red-600 bg-zinc-900 p-[5px] text-white "
+							className="min-w-[220px] origin-top animate-showNav border-[3px] border-red-600 bg-zinc-900 p-5 text-white "
 							sideOffset={5}
 						>
 							<DropdownMenu.Item className="group relative flex select-none items-start rounded-[3px] p-[5px] px-[15px] text-[14px] leading-none outline-none ">
@@ -97,7 +97,7 @@ export default function UserProfile() {
 								</button>
 							</SignOutButton>
 
-							<DropdownMenu.Arrow className="fill-red-600" />
+							<DropdownMenu.Arrow width={20} height={10} className="fill-red-600" />
 						</DropdownMenu.Content>
 					</DropdownMenu.Portal>
 				</DropdownMenu.Root>
