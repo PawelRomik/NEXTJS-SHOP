@@ -60,5 +60,19 @@ export const categories: Category[] = [
 		id: 3,
 		name: "Support",
 		slug: "support"
+	},
+	{
+		id: 4,
+		name: "Settings",
+		slug: "settings",
+		subCategories: [
+			{ name: "Ustawienia", slug: "settings" },
+			{ name: "Zamowienia", slug: "zamowienia" }
+		]
+	},
+	{
+		id: 5,
+		name: "Log out",
+		slug: "logOut"
 	}
 ];

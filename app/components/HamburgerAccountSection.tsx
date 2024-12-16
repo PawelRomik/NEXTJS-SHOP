@@ -9,7 +9,7 @@ export default function HamburgerAccountSection() {
 
 	return (
 		<>
-			<Avatar.Root className="inline-flex size-[100px] select-none items-center justify-center overflow-hidden rounded-full border-[2px] border-white  align-middle">
+			<Avatar.Root className="inline-flex size-[120px] select-none items-center justify-center overflow-hidden rounded-full border-[3px] border-red-600   align-middle">
 				<Avatar.Image
 					className="size-full rounded-[inherit] object-cover"
 					src={user?.imageUrl}
@@ -22,30 +22,13 @@ export default function HamburgerAccountSection() {
 					{user?.username?.substring(0, 2).toUpperCase()}
 				</Avatar.Fallback>
 			</Avatar.Root>
-			<h1 className="text-xl">
+			<h1 className="my-3 text-2xl tracking-wider">
 				<SignedIn>
 					{t("loggedIn")}
-					{user?.username}!
+					<span className="capitalize">{user?.username}!</span>
 				</SignedIn>
 				<SignedOut>{t("notLoggedIn")}</SignedOut>
 			</h1>
-			<div className="flex w-full items-center justify-center gap-3">
-				<SignedIn>
-					<button className="flex w-[30%] items-center justify-center rounded-full border-2 border-red-600 bg-black px-3 py-2 text-sm">
-						{t("settings")}
-					</button>
-					<SignOutButton>
-						<button className="flex w-[30%] items-center justify-center rounded-full border-2 border-red-600 bg-black px-3 py-2 text-sm">
-							{t("logOut")}
-						</button>
-					</SignOutButton>
-				</SignedIn>
-				<SignedOut>
-					<div className="flex w-[30%] items-center justify-center rounded-full border-2 border-red-600 bg-black px-3 py-2 text-sm">
-						<SignUpButton />
-					</div>
-				</SignedOut>
-			</div>
 		</>
 	);
 }
