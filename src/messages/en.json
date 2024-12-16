@@ -143,7 +143,8 @@
 		"speakers": "Speakers",
 		"support": "Support",
 		"settings": "Settings",
-		"orders": "Order History"
+		"orders": "Order History",
+		"logOut": "Log out"
 	},
 	"support": {
 		"contact": "Contact us",

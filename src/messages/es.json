@@ -143,7 +143,8 @@
 		"speakers": "Altavoces",
 		"support": "Soporte",
 		"settings": "Configuración",
-		"orders": "Historial de pedidos"
+		"orders": "Historial de pedidos",
+		"logOut": "Cerrar sesión"
 	},
 	"support": {
 		"contact": "Contáctanos",

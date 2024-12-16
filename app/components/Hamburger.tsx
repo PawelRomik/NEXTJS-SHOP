@@ -26,35 +26,35 @@ export default function Hamburger() {
 				</button>
 			</div>
 			{menuOn && (
-				<NavigationMenu.Root className="fixed left-0 top-0 z-30 h-screen w-svw flex-1 origin-left animate-showSearchbar flex-col justify-center text-2xl lg:hidden">
-					<NavigationMenu.List className="z-30 m-0 flex h-screen  w-screen list-none flex-col items-start justify-start overflow-x-hidden border-2 border-zinc-900 bg-black">
+				<NavigationMenu.Root className="fixed left-0 top-0 z-30 h-screen w-svw flex-1 origin-left animate-showSearchbar flex-col justify-center  text-xl lg:hidden">
+					<NavigationMenu.List className="z-30 m-0 flex h-screen  w-screen list-none flex-col items-start justify-start overflow-x-hidden border-[2px] border-red-600 bg-zinc-900">
 						<NavigationMenu.Item className="fixed right-2 top-2">
 							<button onClick={() => setMenuOn(false)}>
 								<i className="ri-close-circle-line text-red-600"></i>
 							</button>
 						</NavigationMenu.Item>
 
-						<NavigationMenu.Item className="flex w-full flex-1 flex-col items-center justify-center gap-2 border-b-2 border-zinc-900 bg-black">
+						<NavigationMenu.Item className="flex w-full flex-1 flex-col items-center justify-center gap-2 border-b-2 border-red-800 bg-zinc-800">
 							<HamburgerAccountSection />
 						</NavigationMenu.Item>
 
 						{categories.map((category) => (
 							<NavigationMenu.Item
 								key={category.id}
-								className="w-full border-b-2 border-zinc-900 bg-black px-2 py-6"
+								className="w-full border-b-2 border-zinc-800 bg-zinc-900 px-2 py-5"
 							>
 								<NavigationMenu.Trigger className="w-full">
 									<b className="flex w-full justify-between">
 										<span className="pl-2">{t(category.slug).toUpperCase()}</span>
 										{category.subCategories && (
 											<span>
-												<i className="ri-arrow-right-double-line text-red-600"></i>
+												<i className="ri-arrow-right-s-line text-red-600"></i>
 											</span>
 										)}
 									</b>
 								</NavigationMenu.Trigger>
 								{category.subCategories && (
-									<NavigationMenu.Content className="fixed left-0 top-0 flex h-screen w-screen flex-col items-start justify-start overflow-x-hidden border-zinc-900 bg-black">
+									<NavigationMenu.Content className="fixed left-0 top-0 flex h-screen w-screen flex-col items-start justify-start overflow-x-hidden border-zinc-900 bg-zinc-800">
 										<NavigationMenu.Trigger>
 											<p className="absolute right-10 top-2 z-30 text-black">
 												<i className="ri-arrow-go-back-line z-40 text-red-600"></i>
@@ -78,7 +78,7 @@ export default function Hamburger() {
 													return (
 														<NavigationMenu.Item
 															key={subCategory.slug}
-															className="w-full border-b-2 border-zinc-900 bg-black px-2 py-[1.25rem]"
+															className="w-full border-b-2 border-zinc-900 bg-black px-2 py-[0.5rem]"
 														>
 															<Link
 																onClick={() => setMenuOn(false)}
