@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { categories } from "../data/categories";
 import HamburgerAccountSection from "./HamburgerAccountSection";
 import { useTranslations } from "next-intl";
+import { SignOutButton } from "@clerk/nextjs";
 
 export default function Hamburger() {
 	const [menuOn, setMenuOn] = useState(false);
@@ -26,77 +27,92 @@ export default function Hamburger() {
 				</button>
 			</div>
 			{menuOn && (
-				<NavigationMenu.Root className="fixed left-0 top-0 z-30 h-screen w-svw flex-1 origin-left animate-showSearchbar flex-col justify-center  text-xl lg:hidden">
-					<NavigationMenu.List className="z-30 m-0 flex h-screen  w-screen list-none flex-col items-start justify-start overflow-x-hidden border-[2px] border-red-600 bg-zinc-900">
+				<NavigationMenu.Root className="no-scrollbar fixed left-0 top-0 z-30  h-screen min-h-screen w-svw origin-left animate-showSearchbar flex-col justify-center  overflow-y-auto overflow-x-hidden  text-xl lg:hidden">
+					<NavigationMenu.Item className="height-fix flex w-screen flex-1 flex-col items-center justify-center  gap-2 overflow-auto border-b-4 border-red-800 bg-black">
+						<HamburgerAccountSection />
+					</NavigationMenu.Item>
+					<NavigationMenu.List className="z-30 m-0 w-screen list-none overflow-y-auto   overflow-x-hidden  bg-zinc-900">
 						<NavigationMenu.Item className="fixed right-2 top-2">
 							<button onClick={() => setMenuOn(false)}>
 								<i className="ri-close-circle-line text-red-600"></i>
 							</button>
 						</NavigationMenu.Item>
 
-						<NavigationMenu.Item className="flex w-full flex-1 flex-col items-center justify-center gap-2 border-b-2 border-red-800 bg-zinc-800">
-							<HamburgerAccountSection />
-						</NavigationMenu.Item>
-
 						{categories.map((category) => (
 							<NavigationMenu.Item
 								key={category.id}
-								className="w-full border-b-2 border-zinc-800 bg-zinc-900 px-2 py-5"
+								className="block w-full border-b-2 border-zinc-800 bg-zinc-900"
 							>
-								<NavigationMenu.Trigger className="w-full">
-									<b className="flex w-full justify-between">
-										<span className="pl-2">{t(category.slug).toUpperCase()}</span>
-										{category.subCategories && (
-											<span>
-												<i className="ri-arrow-right-s-line text-red-600"></i>
-											</span>
-										)}
-									</b>
-								</NavigationMenu.Trigger>
-								{category.subCategories && (
-									<NavigationMenu.Content className="fixed left-0 top-0 flex h-screen w-screen flex-col items-start justify-start overflow-x-hidden border-zinc-900 bg-zinc-800">
-										<NavigationMenu.Trigger>
-											<p className="absolute right-10 top-2 z-30 text-black">
-												<i className="ri-arrow-go-back-line z-40 text-red-600"></i>
-											</p>
-										</NavigationMenu.Trigger>
-										<NavigationMenu.Item className="fixed right-2 top-2 z-30">
-											<button onClick={() => setMenuOn(false)}>
-												<i className="ri-close-circle-line text-red-600"></i>
-											</button>
-										</NavigationMenu.Item>
-
-										<NavigationMenu.Sub className="h-full w-full origin-left animate-showSearchbar border-2 border-zinc-900">
-											<NavigationMenu.List className="w-full">
-												<NavigationMenu.Item>
-													<h2 className="border-b-2 border-red-600 px-2 py-2 pl-4 text-red-600">
-														{t(category.slug)}
-													</h2>
-												</NavigationMenu.Item>
-												{category.subCategories.map((subCategory) => {
-													const href = subCategory.slug;
-													return (
-														<NavigationMenu.Item
-															key={subCategory.slug}
-															className="w-full border-b-2 border-zinc-900 bg-black px-2 py-[0.5rem]"
+								{category.subCategories ? (
+									<details className=" group w-full bg-zinc-900  ">
+										<summary className=" cursor-pointer list-none px-2 pb-3 pt-5 text-red-600">
+											<b className="flex w-full justify-between">
+												<span className="pl-2">{t(category.slug).toUpperCase()}</span>
+												{category.subCategories && (
+													<span>
+														<i className="ri-arrow-right-s-line text-red-600 group-open:hidden"></i>
+														<i className="ri-arrow-down-s-line hidden text-red-600 group-open:block"></i>
+													</span>
+												)}
+											</b>
+										</summary>
+										<div className="flex flex-col gap-1">
+											{category.subCategories.map((subCategory) => {
+												const href = subCategory.slug;
+												return (
+													<div key={subCategory.slug} className="w-full bg-zinc-800 px-2 py-[1rem]">
+														<Link
+															onClick={() => setMenuOn(false)}
+															href={`/category/${href}`}
+															title={t(subCategory.slug)}
+															className="pl-2"
 														>
-															<Link
-																onClick={() => setMenuOn(false)}
-																href={`/category/${href}`}
-																title={t(subCategory.slug)}
-																className=" pl-2"
-															>
-																<b>{t(subCategory.slug)}</b>
-															</Link>
-														</NavigationMenu.Item>
-													);
-												})}
-											</NavigationMenu.List>
-										</NavigationMenu.Sub>
-									</NavigationMenu.Content>
+															<b>{t(subCategory.slug)}</b>
+														</Link>
+													</div>
+												);
+											})}
+										</div>
+									</details>
+								) : (
+									<div key={category.slug} className="w-full  bg-zinc-900 px-2 py-4">
+										<Link
+											href={`/category/${category.slug}`}
+											onClick={() => setMenuOn(false)}
+											title={t(category.slug)}
+											className="cursor-pointer list-none px-2  pb-3 pt-5 font-bold text-red-600"
+										>
+											{t(category.slug).toUpperCase()}
+										</Link>
+									</div>
 								)}
 							</NavigationMenu.Item>
 						))}
+						<NavigationMenu.Item className="w-full border-b-2 border-zinc-800 bg-zinc-900">
+							<div className="w-full  bg-zinc-900 px-2 py-4">
+								<Link
+									href={`/user/settings`}
+									onClick={() => setMenuOn(false)}
+									title={t("settings")}
+									className="cursor-pointer list-none px-2  py-5 font-bold text-red-600"
+								>
+									{t("settings").toUpperCase()}
+								</Link>
+							</div>
+						</NavigationMenu.Item>
+						<NavigationMenu.Item className="w-full bg-zinc-900">
+							<div className="w-full  bg-zinc-900 px-2">
+								<SignOutButton>
+									<button
+										onClick={() => setMenuOn(false)}
+										title={t("logOut")}
+										className="cursor-pointer list-none px-2  py-4 font-bold text-red-600"
+									>
+										{t("logOut").toUpperCase()}
+									</button>
+								</SignOutButton>
+							</div>
+						</NavigationMenu.Item>
 					</NavigationMenu.List>
 				</NavigationMenu.Root>
 			)}
