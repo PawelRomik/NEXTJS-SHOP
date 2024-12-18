@@ -9,7 +9,7 @@ export default function HamburgerAccountSection() {
 
 	return (
 		<>
-			<Avatar.Root className="inline-flex size-[120px] select-none items-center justify-center overflow-hidden rounded-full border-[3px] border-red-600   align-middle">
+			<Avatar.Root className="inline-flex size-[120px] select-none items-center justify-center overflow-hidden rounded-full   align-middle">
 				<Avatar.Image
 					className="size-full rounded-[inherit] object-cover"
 					src={user?.imageUrl}
