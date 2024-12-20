@@ -101,12 +101,12 @@ export default function Hamburger() {
 							</div>
 						</NavigationMenu.Item>
 						<NavigationMenu.Item className="w-full bg-zinc-900">
-							<div className="w-full  bg-zinc-900 px-2">
+							<div className="w-full  bg-zinc-900 px-2 py-4">
 								<SignOutButton>
 									<button
 										onClick={() => setMenuOn(false)}
 										title={t("logOut")}
-										className="cursor-pointer list-none px-2  py-4 font-bold text-red-600"
+										className="cursor-pointer list-none px-2  py-5 font-bold text-red-600"
 									>
 										{t("logOut").toUpperCase()}
 									</button>
