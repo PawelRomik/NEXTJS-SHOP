@@ -47,7 +47,7 @@ export default function OrderProducts({ id }: { id: number | string }) {
 			});
 			const product = data.products.data[0].attributes;
 			return (
-				<tr className="flex w-full items-center justify-center gap-[30%] bg-zinc-900 p-3 text-white">
+				<tr className="flex w-full items-center justify-center gap-[30%] bg-zinc-900 p-3  text-white">
 					<td className="flex items-center justify-center gap-3">
 						<div className="flex max-h-[100px] max-w-[100px] items-center justify-center">
 							<Link href={`/product/${id}`}>
@@ -97,7 +97,7 @@ export default function OrderProducts({ id }: { id: number | string }) {
 		);
 		return (
 			<div>
-				<h2 className="text-2xl text-white">{t("product.products")}: </h2>
+				<h2 className="mb-2 text-2xl text-white">{t("product.products")}: </h2>
 				<table className="flex flex-col gap-3">{productRows}</table>
 			</div>
 		);
