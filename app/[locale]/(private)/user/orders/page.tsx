@@ -47,26 +47,35 @@ async function loadProducts(page: number, locale: string) {
 			{data.data.map((product) => (
 				<tr
 					key={product.id}
-					className="flex h-[80px] w-full items-center justify-between  bg-zinc-800 text-2xl  text-white"
+					className="flex h-[80px] w-full items-center justify-between  bg-zinc-800 text-xl  text-white"
 				>
-					<td className="flex h-full gap-5 bg-zinc-900 p-3">
-						<div className="flex items-center justify-center bg-green-600 p-2">{t("success")}</div>
-						<p className="flex items-center justify-center">
-							{t("order")}: #{product.id}
-						</p>
+					<td className="flex h-full flex-1 items-center justify-start  pr-8">
+						<div className="flex h-full items-center justify-start gap-8 bg-zinc-900 px-8">
+							<div className="flex h-[10px] w-[10px] items-center justify-center rounded-full  bg-green-600 p-3"></div>
+							<p className="flex items-center justify-center">
+								{t("order")}: #{product.id}
+							</p>
+						</div>
 					</td>
-					<td className="flex h-full items-center justify-center bg-zinc-900 p-3">
-						{new Date(product.attributes.createdAt)
-							.toISOString()
-							.replace("T", " ")
-							.slice(0, 19)
-							.replaceAll("-", ".")}
+					<td className="flex h-full flex-1 items-center justify-center pl-8">
+						<div className="flex h-full items-center justify-center gap-8 bg-zinc-900 px-8">
+							{new Date(product.attributes.createdAt)
+								.toISOString()
+								.replace("T", " ")
+								.slice(0, 19)
+								.replaceAll("-", ".")}
+						</div>
 					</td>
-					<td className="flex h-full items-center justify-center bg-zinc-900">
-						<Link href={`order/${product.id}`} className="transition-all hover:text-red-600">
-							<button className="h-full w-full p-3 ">
-								<i className="ri-arrow-right-s-fill text-4xl"></i>
-							</button>
+					<td className="flex h-full flex-1 items-center justify-end ">
+						<Link
+							href={`order/${product.id}`}
+							className=" h-full transition-all hover:text-red-600"
+						>
+							<div className="flex h-full items-center justify-center gap-8 bg-zinc-900 px-2">
+								<button className="h-full w-full p-3 ">
+									<i className="ri-arrow-right-s-fill text-4xl"></i>
+								</button>
+							</div>
 						</Link>
 					</td>
 				</tr>
@@ -101,16 +110,13 @@ export default function OrderHistoryPage({
 	return (
 		<main className=" flex w-full flex-1 flex-col gap-3 bg-zinc-950 p-5">
 			<h1 className="text-3xl font-bold uppercase text-white">{t("history")}</h1>
-			<div className="flex h-full flex-col items-center justify-around">
+			<div className="flex h-full flex-col items-center justify-between">
 				<Suspense fallback={<p>Loading</p>}>
-					<table className="flex h-[600px] flex-row flex-wrap items-start justify-start gap-2 overflow-y-auto ">
+					<table className="flex max-h-[600px] w-full flex-row flex-wrap items-start justify-start  gap-2 overflow-y-auto ">
 						<tr className="sticky top-0 flex h-[80px] w-full items-center justify-between border-b-2 border-red-600  bg-zinc-900 p-3 text-2xl  text-white">
-							<th className="flex gap-10">
-								<p>{t("statusShort")}</p>
-								<p>{t("order")}</p>
-							</th>
-							<th>{t("date")}</th>
-							<th>{t("details")}</th>
+							<th className="flex-1  pl-8 text-start">{t("order")}</th>
+							<th className="flex-1  pl-8 text-center">{t("date")}</th>
+							<th className="flex-1 text-end">{t("details")}</th>
 						</tr>
 						{loadProducts(page, locale)}
 					</table>
