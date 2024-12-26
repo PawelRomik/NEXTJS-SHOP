@@ -165,3 +165,38 @@ export const GET_OTHER_PRODUCTS = gql`
 		}
 	}
 `;
+
+export const GET_RANDOM_PRODUCTS = gql`
+	query getProducts($startIndex: Int!, $category: String!, $locale: I18NLocaleCode!) {
+		products(
+			pagination: { limit: 4, start: $startIndex }
+			filters: { categories: { slug: { eq: $category } } }
+			locale: $locale
+		) {
+			data {
+				id
+				attributes {
+					name
+					price
+					uuid
+					salePrice
+					desc
+					images {
+						data {
+							attributes {
+								url
+							}
+						}
+					}
+					categories {
+						data {
+							attributes {
+								name
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+`;

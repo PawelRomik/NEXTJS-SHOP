@@ -9,6 +9,7 @@ import SkeletonProductDisplay from "../../../components/SkeletonProductDisplay";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import ErrorText from "../../../components/ErrorText";
+import CategorySection from "../../../components/CategorySection";
 
 export const metadata: Metadata = {
 	title: "Ephonix"
@@ -60,20 +61,10 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
 	revalidatePath("/[locale]/", "page");
 
 	return (
-		<main className=" w-full bg-black p-6">
-			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
-				<Suspense
-					fallback={
-						<>
-							{[...Array(8)].map((_, index) => (
-								<SkeletonProductDisplay key={index} />
-							))}
-						</>
-					}
-				>
-					{loadProducts(locale)}
-				</Suspense>
-			</Grid>
+		<main className=" w-full bg-black px-5">
+			<CategorySection locale={locale} category="processor"></CategorySection>
+			<CategorySection locale={locale} category="processor"></CategorySection>
+			<CategorySection locale={locale} category="processor"></CategorySection>
 		</main>
 	);
 }
