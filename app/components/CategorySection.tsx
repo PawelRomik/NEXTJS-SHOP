@@ -14,15 +14,13 @@ const list = {
 };
 
 export default function CategorySection({ category, locale }: ProductOtherSectionProps) {
-	const t = useTranslations("product");
-
 	return (
 		<motion.div
 			initial="hidden"
 			whileInView="visible"
 			variants={list}
 			viewport={{ once: true }}
-			className="w-full overflow-hidden pt-5"
+			className="w-full overflow-hidden"
 		>
 			<CategoryBanner category={category} />
 			<CategoryDisplay locale={locale} category={category} />

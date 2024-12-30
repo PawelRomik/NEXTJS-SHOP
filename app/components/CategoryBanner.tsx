@@ -19,14 +19,14 @@ export default async function CategoryBanner({ category }: ProductOtherSectionPr
 		<motion.div
 			variants={item}
 			transition={{ duration: 0.5, delay: 0.25, ease: "easeInOut" }}
-			className="shadow-inset flex h-[300px] w-full flex-col items-center justify-center gap-10 bg-red-600 lg:flex-row lg:gap-5"
+			className="shadow-inset flex h-[250px] w-full flex-col items-center justify-center gap-10 bg-red-600 lg:flex-row lg:gap-5"
 		>
-			<Image src={productImage} className="h-[40%] w-auto lg:h-full" alt={category}></Image>
-			<div className="relative bottom-[30px] flex flex-col items-center justify-center">
-				<h2 className="text-shadow text-2xl font-bold uppercase text-white lg:text-6xl">
+			<Image src={productImage} className="h-[40%] w-auto p-5 lg:h-full" alt={category}></Image>
+			<div className=" flex h-full flex-col items-center justify-center gap-5">
+				<h2 className="text-shadow text-2xl font-bold uppercase text-white lg:text-4xl">
 					{t(category)}
 				</h2>
-				<p className="text-shadow text-xl font-bold uppercase text-white lg:text-4xl">
+				<p className="text-shadow text-xl font-bold uppercase text-white lg:text-2xl">
 					Super Ceny!
 				</p>
 			</div>
