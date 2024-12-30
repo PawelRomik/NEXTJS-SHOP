@@ -36,10 +36,10 @@ export default function ProductDisplay({
 	return (
 		<Link
 			href={`/product/${uuid}`}
-			className={`min-w-[300px] max-w-[400px] border-4 border-zinc-900 transition hover:border-red-600`}
+			className={`min-w-[300px] max-w-[400px] border-4 border-zinc-900 bg-black transition hover:border-red-600 hover:bg-zinc-900`}
 		>
 			<div className="group flex h-full cursor-pointer flex-col items-center justify-start">
-				<div className="flex h-full w-full flex-col justify-between bg-black p-6 ">
+				<div className="flex h-full w-full flex-col justify-between  p-6 ">
 					<div className="w-full">
 						<Image
 							src={`${process.env.NEXT_PUBLIC_PROD_PATH}${imageUrl}`}

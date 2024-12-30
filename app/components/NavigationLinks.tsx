@@ -1,9 +1,11 @@
 "use client";
+import productImage from "../../public/i1.png";
 
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
 import { categories } from "../data/categories";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 export default function NavigationLinks() {
 	const t = useTranslations("categories");
@@ -20,6 +22,12 @@ export default function NavigationLinks() {
 						</NavigationMenu.Trigger>
 						{category.subCategories && (
 							<NavigationMenu.Content className="fixed left-0 top-[5rem] flex w-screen origin-top animate-showNav items-start justify-center gap-6 overflow-hidden overflow-x-hidden border-b-[3px] border-b-red-600 bg-zinc-900">
+								<Image
+									height={250}
+									className="my-auto p-5"
+									src={productImage}
+									alt={t(category.slug)}
+								></Image>
 								<div className="m-0 flex w-1/3 flex-col gap-2 p-[22px] ">
 									<div className="relative">
 										<h2 className="w-auto text-zinc-400">{t(category.slug)}</h2>
