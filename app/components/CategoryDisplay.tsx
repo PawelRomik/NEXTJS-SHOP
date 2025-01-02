@@ -35,9 +35,9 @@ export default function CategoryDisplay({ category, locale }: ProductOtherSectio
 			return (
 				<motion.section
 					variants={item}
-					transition={{ duration: 0.5, delay: 0.25, ease: "easeInOut" }}
+					transition={{ duration: 0.5, delay: 0.2, ease: "easeInOut" }}
 					id="others"
-					className="my-[50px] flex w-full flex-col overflow-y-hidden bg-black  p-3 text-white "
+					className="z-10 my-[50px] flex w-full flex-col overflow-y-hidden bg-black  p-3 text-white "
 				>
 					<div className="relative w-full overflow-hidden lg:static lg:flex-1">
 						<div className="flex gap-6 overflow-x-auto py-2 lg:static lg:grid lg:grid-cols-[1fr_1fr_1fr_1fr_0.5fr]">

@@ -4,7 +4,7 @@ import createMiddleware from "next-intl/middleware";
 const isProtectedRoute = createRouteMatcher(["/:locale/user(.*)", "/:locale/order(.*)"]);
 
 const nextIntlMiddleware = createMiddleware({
-	locales: ["en", "pl", "de", "fr", "es"],
+	locales: ["en", "pl"],
 	defaultLocale: "en"
 });
 

@@ -18,8 +18,8 @@ export default async function CategoryBanner({ category }: ProductOtherSectionPr
 	return (
 		<motion.div
 			variants={item}
-			transition={{ duration: 0.5, delay: 0.25, ease: "easeInOut" }}
-			className="shadow-inset flex h-[250px] w-full flex-col items-center justify-center gap-10 bg-red-600 lg:flex-row lg:gap-5"
+			transition={{ duration: 0.5, ease: "easeInOut" }}
+			className="shadow-inset relative z-[20] flex h-[250px] w-full flex-col items-center justify-center gap-10 bg-red-600 lg:flex-row lg:gap-5"
 		>
 			<Image src={productImage} className="h-[40%] w-auto p-5 lg:h-full" alt={category}></Image>
 			<div className=" flex h-full flex-col items-center justify-center gap-5">

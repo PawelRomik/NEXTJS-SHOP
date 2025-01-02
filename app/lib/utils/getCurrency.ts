@@ -5,6 +5,6 @@ export const getCurrency = (locale: string) => {
 		case "en":
 			return "USD";
 		default:
-			return "EUR";
+			return "USD";
 	}
 };
