@@ -119,6 +119,32 @@ export type OrderData = {
 	};
 };
 
+export type CategoryData = {
+	categories: {
+		data: {
+			id: string;
+			attributes: {
+				name: string;
+				slug: keyof IntlMessages["categories"];
+				image: {
+					data: {
+						attributes: {
+							url: string;
+						};
+					};
+				};
+				category_group: {
+					data: {
+						attributes: {
+							name: keyof IntlMessages["categories"];
+						};
+					};
+				};
+			};
+		}[];
+	};
+};
+
 export type QueryResult = {
 	products: {
 		data: ProductData[];
