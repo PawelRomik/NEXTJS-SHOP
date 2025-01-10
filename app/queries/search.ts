@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 export const GET_SEARCH_PRODUCTS = gql`
 	query getProducts($name: String!, $page: Int, $locale: I18NLocaleCode!) {
 		products(
-			pagination: { page: $page, pageSize: 8 }
+			pagination: { page: $page, pageSize: 12 }
 			sort: "createdAt:desc"
 			filters: {
 				or: [
@@ -50,7 +50,7 @@ export const GET_SEARCH_PRODUCTS = gql`
 export const GET_SEARCH_PRODUCTS_COUNT = gql`
 	query getSearchProducts($name: String!, $page: Int, $locale: I18NLocaleCode!) {
 		products(
-			pagination: { page: $page, pageSize: 8 }
+			pagination: { page: $page, pageSize: 12 }
 			sort: "createdAt:desc"
 			filters: {
 				or: [
