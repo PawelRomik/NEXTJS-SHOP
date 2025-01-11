@@ -5,10 +5,10 @@
 		"shopLogo": "Shop Logo",
 		"sale": "Sale",
 		"back": "Back",
-		"desc": "Best gaming store on the internet!"
+		"desc": "Best Gaming Store on the internet!"
 	},
 	"hamburger": {
-		"avatar": "Your avatar picture",
+		"avatar": "Your Avatar Picture",
 		"loggedIn": "Hello ",
 		"notLoggedIn": "Not Logged In!",
 		"settings": "Settings",
@@ -31,7 +31,7 @@
 		"home": "Home"
 	},
 	"footer": {
-		"copyright": "Copyright © 2024 Ephonix Inc. All rights reserved.",
+		"copyright": "Copyright © 2025 Ephonix Inc. All rights reserved.",
 		"terms": "Terms and Conditions",
 		"privacy": "Privacy Policy",
 		"contact": "Contact",
