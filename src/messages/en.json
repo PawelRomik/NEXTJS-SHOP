@@ -153,5 +153,15 @@
 	"sign": {
 		"signIn": "Sign In",
 		"signUp": "Sign Up"
+	},
+	"productSection": {
+		"newProductsTitle": "Gear Up & Game On!",
+		"newProductsDesc": "Explore the latest tech and gaming gear, featuring cutting-edge components and accessories designed to elevate your experience. Stay ahead with innovation at your fingertips.",
+		"saleTitle": "Unmissable Deals Await!",
+		"saleDesc": " Discover incredible discounts on top-quality gear and accessories. Don’t miss your chance to save big while upgrading your setup. These offers won’t last forever—act now!",
+		"bundlesTitle": "Complete Your Setup!",
+		"bundlesDesc": "Explore perfectly curated bundles designed to meet all your needs. From gaming essentials to productivity boosters, find the ideal combination of gear and accessories at unbeatable value.",
+		"check": "Check",
+		"checkLong": "Check more!"
 	}
 }

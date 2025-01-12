@@ -13,10 +13,12 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
 
 	return (
 		<main className=" w-full bg-black">
-			<NewProductsSection />
-			<CategorySection locale={locale} category="processor"></CategorySection>
-			<CategorySection locale={locale} category="processor"></CategorySection>
-			<CategorySection locale={locale} category="processor"></CategorySection>
+			{Array.from({ length: 3 }, (_, num) => (
+				<>
+					<NewProductsSection type={num + 1} />
+					<CategorySection num={num + 1} locale={locale} category="processor" />
+				</>
+			))}
 		</main>
 	);
 }

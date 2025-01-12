@@ -1,29 +1,17 @@
-import { useTranslations } from "next-intl";
 import CategoryDisplay from "./CategoryDisplay";
 import CategoryBanner from "./CategoryBanner";
-import * as motion from "framer-motion/client";
 
 type ProductOtherSectionProps = {
 	category: keyof IntlMessages["categories"];
 	locale: string;
+	num: number;
 };
 
-const list = {
-	visible: {},
-	hidden: {}
-};
-
-export default function CategorySection({ category, locale }: ProductOtherSectionProps) {
+export default function CategorySection({ category, locale, num }: ProductOtherSectionProps) {
 	return (
-		<motion.div
-			initial="hidden"
-			whileInView="visible"
-			variants={list}
-			viewport={{ once: true }}
-			className="my-5 w-full overflow-hidden"
-		>
-			<CategoryBanner category={category} />
+		<div className=" w-full overflow-hidden">
+			<CategoryBanner num={num} category={category} />
 			<CategoryDisplay locale={locale} category={category} />
-		</motion.div>
+		</div>
 	);
 }

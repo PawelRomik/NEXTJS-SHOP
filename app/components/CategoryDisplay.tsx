@@ -5,7 +5,6 @@ import { Suspense } from "react";
 import ProductDisplay from "./ProductDisplay";
 import { QueryResult } from "../queries/productType";
 import { useTranslations } from "next-intl";
-import * as motion from "framer-motion/client";
 import Link from "next/link";
 
 type ProductOtherSectionProps = {
@@ -13,13 +12,8 @@ type ProductOtherSectionProps = {
 	locale: string;
 };
 
-const item = {
-	visible: { y: 0 },
-	hidden: { y: "-200%" }
-};
-
 export default function CategoryDisplay({ category, locale }: ProductOtherSectionProps) {
-	const t = useTranslations("product");
+	const t = useTranslations("productSection");
 
 	async function getProducts() {
 		try {
@@ -33,14 +27,12 @@ export default function CategoryDisplay({ category, locale }: ProductOtherSectio
 				}
 			});
 			return (
-				<motion.section
-					variants={item}
-					transition={{ duration: 0.5, delay: 0.2, ease: "easeInOut" }}
+				<section
 					id="others"
-					className="z-10 flex w-full flex-col items-center justify-center overflow-y-hidden bg-zinc-950  p-3 text-white "
+					className="shadow-inset z-10 flex w-full flex-col items-center justify-center overflow-y-hidden bg-[rgb(20,20,20)]  p-3  py-8  text-white  "
 				>
 					<div className="flex w-full flex-col items-center gap-5 overflow-hidden lg:static lg:flex-1">
-						<div className="flex w-full gap-6 overflow-x-auto py-2 lg:static lg:grid lg:grid-cols-[1fr_1fr_1fr_1fr]">
+						<div className="flex w-full gap-6 overflow-x-auto px-8 py-2 lg:static lg:grid lg:grid-cols-[1fr_1fr_1fr_1fr]">
 							{data.products.data.map((product) => (
 								<ProductDisplay
 									uuid={product.attributes.uuid}
@@ -66,13 +58,13 @@ export default function CategoryDisplay({ category, locale }: ProductOtherSectio
 								></ProductDisplay>
 							))}
 						</div>
-						<Link href={`/category/${category}`} className="">
-							<button className="group flex h-full w-full flex-col items-center justify-center rounded-lg  bg-zinc-900 px-10 py-3  text-xl  font-bold uppercase transition  hover:bg-red-500">
-								CHECK MORE
+						<Link href={`/category/${category}`}>
+							<button className="group flex h-full w-full flex-col items-center justify-center rounded-lg  bg-zinc-950 px-10 py-4  text-xl  font-bold uppercase transition  hover:bg-red-600">
+								{t("checkLong")}
 							</button>
 						</Link>
 					</div>
-				</motion.section>
+				</section>
 			);
 		} catch {
 			return null;

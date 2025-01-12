@@ -153,5 +153,15 @@
 	"sign": {
 		"signIn": "Zaloguj się",
 		"signUp": "Zarejestruj się"
+	},
+	"productSection": {
+		"newProductsTitle": "Przygotuj się na grę!",
+		"newProductsDesc": "Odkrywaj najnowszą technologię i sprzęt gamingowy, wyposażony w najnowocześniejsze komponenty i akcesoria, które podniosą Twoje doświadczenia na wyższy poziom. Bądź na bieżąco z innowacjami na wyciągnięcie ręki.",
+		"saleTitle": "Nie przegap wyjątkowych okazji!",
+		"saleDesc": "Odkryj niesamowite rabaty na sprzęt i akcesoria najwyższej jakości. Nie przegap okazji, by zaoszczędzić i jednocześnie ulepszyć swój zestaw. Te oferty nie potrwają wiecznie – działaj teraz!",
+		"bundlesTitle": "Uzupełnij swój zestaw!",
+		"bundlesDesc": "Odkrywaj idealnie skomponowane zestawy stworzone, by spełnić wszystkie Twoje potrzeby. Od niezbędnych akcesoriów gamingowych po produkty zwiększające produktywność – znajdź idealne połączenie sprzętu i dodatków w niepowtarzalnej cenie.",
+		"check": "Sprawdź",
+		"checkLong": "Sprawdź więcej!"
 	}
 }
