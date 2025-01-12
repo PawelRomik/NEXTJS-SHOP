@@ -37,10 +37,10 @@ export default function CategoryDisplay({ category, locale }: ProductOtherSectio
 					variants={item}
 					transition={{ duration: 0.5, delay: 0.2, ease: "easeInOut" }}
 					id="others"
-					className="z-10 my-[50px] flex w-full flex-col overflow-y-hidden bg-black  p-3 text-white "
+					className="z-10 flex w-full flex-col items-center justify-center overflow-y-hidden bg-zinc-950  p-3 text-white "
 				>
-					<div className="relative w-full overflow-hidden lg:static lg:flex-1">
-						<div className="flex gap-6 overflow-x-auto py-2 lg:static lg:grid lg:grid-cols-[1fr_1fr_1fr_1fr_0.5fr]">
+					<div className="flex w-full flex-col items-center gap-5 overflow-hidden lg:static lg:flex-1">
+						<div className="flex w-full gap-6 overflow-x-auto py-2 lg:static lg:grid lg:grid-cols-[1fr_1fr_1fr_1fr]">
 							{data.products.data.map((product) => (
 								<ProductDisplay
 									uuid={product.attributes.uuid}
@@ -65,16 +65,12 @@ export default function CategoryDisplay({ category, locale }: ProductOtherSectio
 									key={product.id}
 								></ProductDisplay>
 							))}
-							<Link
-								href={`/category/${category}`}
-								className="lg:max-w- min-w-[300px] max-w-[400px] lg:min-w-0"
-							>
-								<button className="text-1xl group flex h-full  w-full flex-col items-center justify-center border-[4px] border-zinc-900 bg-zinc-950 font-bold uppercase transition hover:border-red-600 hover:bg-zinc-900">
-									<i className="ri-arrow-right-s-fill text-8xl transition group-hover:scale-110"></i>
-									Zobacz więcej
-								</button>
-							</Link>
 						</div>
+						<Link href={`/category/${category}`} className="">
+							<button className="group flex h-full w-full flex-col items-center justify-center rounded-lg  bg-zinc-900 px-10 py-3  text-xl  font-bold uppercase transition  hover:bg-red-500">
+								CHECK MORE
+							</button>
+						</Link>
 					</div>
 				</motion.section>
 			);

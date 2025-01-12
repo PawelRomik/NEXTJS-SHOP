@@ -20,7 +20,7 @@ export default function CategorySection({ category, locale }: ProductOtherSectio
 			whileInView="visible"
 			variants={list}
 			viewport={{ once: true }}
-			className="w-full overflow-hidden"
+			className="my-5 w-full overflow-hidden"
 		>
 			<CategoryBanner category={category} />
 			<CategoryDisplay locale={locale} category={category} />
