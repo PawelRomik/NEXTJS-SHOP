@@ -1,56 +1,65 @@
 import { getTranslations } from "next-intl/server";
 import productImage from "../../public/i1.png";
 import Image from "next/image";
-import * as motion from "framer-motion/client";
 import Link from "next/link";
-
-const item = {
-	visible: { x: 0 },
-	hidden: { x: "-200%" }
-};
 
 type ProductOtherSectionProps = {
 	category: keyof IntlMessages["categories"];
+	num: number;
 };
 
-export default async function CategoryBanner({ category }: ProductOtherSectionProps) {
+export default async function CategoryBanner({ category, num }: ProductOtherSectionProps) {
 	const t = await getTranslations("categories");
 
 	return (
-		<motion.div
-			variants={item}
-			transition={{ duration: 0.5, ease: "easeInOut" }}
-			className="shadow-inset glow-effect relative z-[20]   flex h-[400px] w-full flex-col items-center justify-between overflow-hidden bg-zinc-900 py-3 lg:flex-row lg:gap-5"
-		>
-			<div className=" ml-[10%] flex h-full w-[500px] flex-col items-start justify-around text-white">
-				<h2 className="text-5xl font-bold uppercase">{t(category)}</h2>
-				<p className="w-[50%]">
-					Explore the latest tech and gaming gear, featuring cutting-edge components and accessories
-					designed to elevate your experience. Stay ahead with innovation at your fingertips.
-				</p>
-				<Link href="/new">
-					<button className="w-[300px] rounded-lg bg-red-600 p-4 text-2xl font-bold text-white hover:bg-red-500">
-						Check now
-					</button>
-				</Link>
+		<div className="relative z-[20] h-[400px] w-full overflow-hidden bg-red-700 bg-[size:60%_100%]  bg-center ">
+			<div className=" flex h-full w-full flex-col items-center justify-center overflow-hidden bg-zinc-950  bg-center bg-no-repeat py-3 lg:flex-row lg:gap-5">
+				{num % 2 == 1 && (
+					<div className="absolute left-[5%] flex h-[200%] w-[200px] rotate-[20deg] items-center justify-center">
+						<div className="h-full w-full bg-white"></div>
+						<div className="h-full w-full"></div>
+						<div className="h-full w-full bg-red-500"></div>
+						<div className="h-full w-full"></div>
+						<div className="h-full w-full bg-red-600"></div>
+					</div>
+				)}
+				{num % 2 == 0 && (
+					<Image
+						src={productImage}
+						className="img mr-[50px]  flex h-[40%] w-auto  self-center p-5 lg:h-full"
+						alt={category}
+					></Image>
+				)}
+				<div className=" flex h-full w-[450px] flex-col items-start justify-around text-white">
+					<h2 className="text-5xl font-bold uppercase">{t(category)}</h2>
+					<p className="w-[50%]">
+						Explore the latest tech and gaming gear, featuring cutting-edge components and
+						accessories designed to elevate your experience. Stay ahead with innovation at your
+						fingertips.
+					</p>
+					<Link href="/new">
+						<button className="w-[300px] rounded-lg bg-red-600 p-4 text-2xl font-bold text-white hover:bg-red-500">
+							Check now
+						</button>
+					</Link>
+				</div>
+				{num % 2 == 1 && (
+					<Image
+						src={productImage}
+						className="img  flex h-[40%] w-auto  self-center p-5 lg:h-full"
+						alt={category}
+					></Image>
+				)}
+				{num % 2 == 0 && (
+					<div className="absolute right-[5%] flex h-[200%] w-[200px] rotate-[20deg] items-center justify-center">
+						<div className="h-full w-full bg-red-600"></div>
+						<div className="h-full w-full"></div>
+						<div className="h-full w-full bg-red-500"></div>
+						<div className="h-full w-full"></div>
+						<div className="h-full w-full bg-white"></div>
+					</div>
+				)}
 			</div>
-			<Image
-				src={productImage}
-				className="img absolute left-[50%] flex h-[40%] w-auto translate-x-[-50%] self-center p-5 lg:h-full"
-				alt={category}
-			></Image>
-			<div className=" mr-[10%] flex h-full w-[500px] flex-col items-end justify-around text-right text-white">
-				<p></p>
-				<p className="w-[50%]">
-					Explore the latest tech and gaming gear, featuring cutting-edge components and accessories
-					designed to elevate your experience. Stay ahead with innovation at your fingertips.
-				</p>
-				<Link href="/new">
-					<button className="w-[300px] rounded-lg bg-red-600 p-4 text-2xl font-bold text-white hover:bg-red-500">
-						Check now
-					</button>
-				</Link>
-			</div>
-		</motion.div>
+		</div>
 	);
 }

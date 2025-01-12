@@ -64,7 +64,7 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 		<>
 			<SignedIn>
 				<button
-					className="flex h-full w-full items-center justify-center bg-red-600 p-2 text-white hover:scale-105 hover:bg-red-500
+					className="flex h-full w-[80%] items-center justify-center rounded-full bg-red-600 p-3 font-bold text-white hover:scale-105 hover:bg-red-500
 "
 					title={t("buyButtonText")}
 					onClick={(e) => handleButtonClick(e)}
