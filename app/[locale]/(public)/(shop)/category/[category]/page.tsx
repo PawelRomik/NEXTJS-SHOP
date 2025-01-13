@@ -257,12 +257,15 @@ export default function ShopPage({
 	const t = useTranslations("categories");
 
 	return (
-		<main className=" w-full bg-zinc-950 p-6">
-			<h1 className="flex items-center justify-center text-4xl font-bold capitalize text-red-600 lg:justify-start lg:pl-6">
+		<main className=" flex w-full flex-col items-center justify-center bg-zinc-950 p-6">
+			<h1 className="flex w-full items-center justify-center text-4xl font-bold capitalize text-red-600 lg:items-start lg:justify-start lg:pl-6">
 				<span>{`${t(category).split(" ")[0]}`}</span>
 			</h1>
 			<Suspense>{LoadFilters(category, locale)}</Suspense>
-			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
+			<Grid
+				width="auto"
+				className=" grid-cols ro-1 gap-10 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6"
+			>
 				<Suspense
 					fallback={
 						<>
