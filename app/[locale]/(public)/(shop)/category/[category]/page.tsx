@@ -14,6 +14,7 @@ import { GET_FILTERS } from "../../../../../queries/filters";
 import ProductFilters from "../../../../../components/ProductFilters";
 import { getTranslations } from "next-intl/server";
 import { useTranslations } from "next-intl";
+import CategoryShowcase from "../../../../../components/CategoryShowcase";
 
 type CategoryKeys = keyof IntlMessages["categories"];
 
@@ -257,14 +258,12 @@ export default function ShopPage({
 	const t = useTranslations("categories");
 
 	return (
-		<main className=" flex w-full flex-col items-center justify-center bg-zinc-950 p-6">
-			<h1 className="flex w-full items-center justify-center text-4xl font-bold capitalize text-red-600 lg:items-start lg:justify-start lg:pl-6">
-				<span>{`${t(category).split(" ")[0]}`}</span>
-			</h1>
+		<main className=" w-full bg-black">
+			<CategoryShowcase category={category} />
 			<Suspense>{LoadFilters(category, locale)}</Suspense>
 			<Grid
 				width="auto"
-				className=" grid-cols ro-1 gap-10 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6"
+				className="shadow-inset grid-cols ro-1 gap-10 bg-zinc-950 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6"
 			>
 				<Suspense
 					fallback={
