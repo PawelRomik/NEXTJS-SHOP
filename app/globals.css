@@ -178,3 +178,76 @@ option:hover {
 	filter: drop-shadow(5px 0 0 rgb(255, 49, 49)) drop-shadow(0 5px 0 rgb(255, 49, 49))
 		drop-shadow(-5px 0 0 rgb(255, 49, 49)) drop-shadow(0 -5px 0 rgb(255, 49, 49));
 }
+
+.categoryImg {
+	filter: drop-shadow(5px 0 0 white) drop-shadow(0 5px 0 white) drop-shadow(-5px 0 0 white)
+		drop-shadow(0 -5px 0 white);
+}
+
+.bg3d {
+	background: linear-gradient(
+			180deg,
+			rgba(0, 0, 0, 1) 0%,
+			rgb(15, 14, 14) 62%,
+			rgba(0, 0, 0, 1) 100%,
+			rgba(255, 0, 0, 0) 100%
+		),
+		linear-gradient(180deg, rgba(0, 0, 0, 1) 50%, rgba(255, 0, 0, 0) 100%);
+	position: relative;
+	overflow: hidden;
+}
+
+.square3d {
+	position: relative;
+}
+
+.square3d:after {
+	content: "";
+	position: absolute;
+	background: rgba(0, 0, 0, 0.4);
+	width: 10%;
+	bottom: 0;
+	height: 200%;
+	transform: skewY(-80deg);
+	left: 100%;
+}
+
+.bg3d:after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 50%;
+	background: linear-gradient(
+		180deg,
+		rgba(255, 255, 255, 0.1) 0%,
+		rgba(0, 0, 0, 0.8) 80%,
+		rgba(0, 0, 0, 0) 100%
+	);
+	transform: scaleY(-1);
+	filter: blur(5px) opacity(0.5);
+	pointer-events: none;
+}
+
+.mirror {
+	position: relative;
+}
+
+.mirror:after {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 100%;
+	top: 80%;
+	z-index: -1;
+	background-image: inherit;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	transform: scaleY(-1);
+	filter: blur(10px) opacity(0.3);
+	mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+	-webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
