@@ -15,6 +15,7 @@ import ProductFilters from "../../../../../components/ProductFilters";
 import { getTranslations } from "next-intl/server";
 import { useTranslations } from "next-intl";
 import CategoryShowcase from "../../../../../components/CategoryShowcase";
+import CategoryProductDisplay from "../../../../../components/CategoryProductDisplay";
 
 type CategoryKeys = keyof IntlMessages["categories"];
 
@@ -132,7 +133,7 @@ async function loadProducts(
 	return (
 		<>
 			{data.data.map((product) => (
-				<ProductDisplay
+				<CategoryProductDisplay
 					uuid={product.attributes.uuid}
 					name={product.attributes.name}
 					desc={product.attributes.desc}
@@ -141,10 +142,10 @@ async function loadProducts(
 					category={product.attributes.categories.data[0].attributes.name}
 					imageUrl={`${product.attributes.images.data[0].attributes.url}`}
 					key={product.id}
-				></ProductDisplay>
+				></CategoryProductDisplay>
 			))}
 			{data.data.map((product) => (
-				<ProductDisplay
+				<CategoryProductDisplay
 					uuid={product.attributes.uuid}
 					name={product.attributes.name}
 					desc={product.attributes.desc}
@@ -153,10 +154,10 @@ async function loadProducts(
 					category={product.attributes.categories.data[0].attributes.name}
 					imageUrl={`${product.attributes.images.data[0].attributes.url}`}
 					key={product.id}
-				></ProductDisplay>
+				></CategoryProductDisplay>
 			))}
 			{data.data.map((product) => (
-				<ProductDisplay
+				<CategoryProductDisplay
 					uuid={product.attributes.uuid}
 					name={product.attributes.name}
 					desc={product.attributes.desc}
@@ -165,10 +166,10 @@ async function loadProducts(
 					category={product.attributes.categories.data[0].attributes.name}
 					imageUrl={`${product.attributes.images.data[0].attributes.url}`}
 					key={product.id}
-				></ProductDisplay>
+				></CategoryProductDisplay>
 			))}
 			{data.data.map((product) => (
-				<ProductDisplay
+				<CategoryProductDisplay
 					uuid={product.attributes.uuid}
 					name={product.attributes.name}
 					desc={product.attributes.desc}
@@ -177,10 +178,10 @@ async function loadProducts(
 					category={product.attributes.categories.data[0].attributes.name}
 					imageUrl={`${product.attributes.images.data[0].attributes.url}`}
 					key={product.id}
-				></ProductDisplay>
+				></CategoryProductDisplay>
 			))}
 			{data.data.map((product) => (
-				<ProductDisplay
+				<CategoryProductDisplay
 					uuid={product.attributes.uuid}
 					name={product.attributes.name}
 					desc={product.attributes.desc}
@@ -189,10 +190,10 @@ async function loadProducts(
 					category={product.attributes.categories.data[0].attributes.name}
 					imageUrl={`${product.attributes.images.data[0].attributes.url}`}
 					key={product.id}
-				></ProductDisplay>
+				></CategoryProductDisplay>
 			))}
 			{data.data.map((product) => (
-				<ProductDisplay
+				<CategoryProductDisplay
 					uuid={product.attributes.uuid}
 					name={product.attributes.name}
 					desc={product.attributes.desc}
@@ -201,7 +202,7 @@ async function loadProducts(
 					category={product.attributes.categories.data[0].attributes.name}
 					imageUrl={`${product.attributes.images.data[0].attributes.url}`}
 					key={product.id}
-				></ProductDisplay>
+				></CategoryProductDisplay>
 			))}
 		</>
 	);
@@ -258,12 +259,12 @@ export default function ShopPage({
 	const t = useTranslations("categories");
 
 	return (
-		<main className=" w-full bg-black">
+		<main className=" w-full bg-zinc-950">
 			<CategoryShowcase category={category} />
 			<Suspense>{LoadFilters(category, locale)}</Suspense>
 			<Grid
 				width="auto"
-				className="shadow-inset grid-cols ro-1 gap-10 bg-zinc-950 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6"
+				className="shadow-inset grid-cols  ro-1 gap-10  p-2 text-white md:grid-cols-2 lg:grid-cols-4 lg:p-6"
 			>
 				<Suspense
 					fallback={

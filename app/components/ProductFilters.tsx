@@ -47,21 +47,27 @@ export default function ProductFilters({ filters }: ProductFiltersProps) {
 	};
 
 	return (
-		<div className="relative z-[20] w-full overflow-hidden bg-[rgb(15,15,20)] bg-[size:60%_100%]  bg-center ">
-			<h2 className="w-[40%] text-xl text-white">{t("filters")}</h2>
+		<div className="relative z-[20] min-h-[200px] w-full overflow-hidden bg-[rgb(15,15,20)] bg-[size:60%_100%]  bg-center ">
+			<h2 className=" flex w-[40%] items-center gap-1 px-5 py-3 text-xl font-bold uppercase text-white">
+				<span className="block h-[20px] w-[5px] skew-x-[-25deg] bg-white"></span>
+				<span className="mr-2 block h-[20px] w-[5px] skew-x-[-25deg] bg-white"></span>
+				{t("filters")}
+			</h2>
+
 			<form
 				onSubmit={handleSubmit}
-				className=" flex w-full flex-col items-start justify-center gap-2"
+				className=" flex w-full flex-col items-start justify-start gap-2"
 			>
-				<div className="flex w-[40%] flex-wrap gap-[3px]  p-[3px] text-white">
+				<div className="grid w-full grid-cols-5 gap-5  p-[3px]  px-5 text-white">
 					{filters.map((filter) => (
 						<Filter key={filter.id} filter={filter} />
 					))}
+
 					<SortOptions />
 				</div>
 				<button
 					type="submit"
-					className="border-[3px] border-zinc-800 p-2 px-6 text-white hover:border-red-600 hover:bg-red-600"
+					className="mx-5 mb-3 h-full rounded-2xl border-4 border-zinc-950  border-l-zinc-800 border-t-zinc-800 bg-zinc-900 p-[3px] px-5 font-bold uppercase  text-white hover:border-red-700 hover:border-l-red-500 hover:border-t-red-500 hover:bg-red-600"
 				>
 					{t("apply")}
 				</button>

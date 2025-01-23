@@ -39,7 +39,7 @@ export default function Pagination({ pagesCount, currentPage }: PaginationProps)
 	};
 
 	return (
-		<div className=" flex w-full items-center justify-center gap-1 lg:gap-2">
+		<div className=" flex w-full items-center justify-center gap-1 pb-3 lg:gap-2">
 			<Link
 				key={"pageBefore"}
 				href={createPageLink(currentPage - 1 > 0 ? currentPage - 1 : 1)}
@@ -47,8 +47,8 @@ export default function Pagination({ pagesCount, currentPage }: PaginationProps)
 			>
 				<button
 					disabled={currentPage - 1 <= 0}
-					className={`flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center border-2
-						border-zinc-800 bg-black text-white hover:enabled:scale-105 disabled:cursor-default disabled:opacity-40
+					className={`flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full
+						border-2 border-zinc-800 bg-[rgb(15,15,20)] text-white hover:border-dashed hover:enabled:scale-105 disabled:cursor-default disabled:opacity-40
 				`}
 				>
 					<i className="ri-arrow-left-s-fill text-2xl"></i>
@@ -63,8 +63,8 @@ export default function Pagination({ pagesCount, currentPage }: PaginationProps)
 					className={`${page != currentPage ? "hidden lg:flex" : "flex"}`}
 				>
 					<button
-						className={`flex h-[3rem] w-[3rem] items-center justify-center border-2 bg-black text-white hover:scale-105 disabled:opacity-30 ${
-							currentPage === page ? " border-red-600 " : "border-zinc-800"
+						className={`flex h-[3rem] w-[3rem] items-center justify-center rounded-full border-2 bg-[rgb(15,15,20)] text-white hover:scale-105 hover:border-dashed disabled:opacity-30 ${
+							currentPage === page ? " border-double border-red-600 " : "border-zinc-800"
 						} `}
 					>
 						{page}
@@ -79,8 +79,8 @@ export default function Pagination({ pagesCount, currentPage }: PaginationProps)
 			>
 				<button
 					disabled={currentPage + 1 > pagesCount}
-					className={`flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center border-2
-						border-zinc-800 bg-black text-white hover:enabled:scale-105 disabled:cursor-default disabled:opacity-50
+					className={`flex h-[3rem] w-[3rem] cursor-pointer items-center justify-center rounded-full border-2
+						border-zinc-800 bg-[rgb(15,15,20)] text-white hover:border-dashed hover:enabled:scale-105 disabled:cursor-default disabled:opacity-50
 				`}
 				>
 					<i className="ri-arrow-right-s-fill text-2xl"></i>
