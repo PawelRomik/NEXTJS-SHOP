@@ -26,7 +26,7 @@ type ProductData = {
 			data: {
 				attributes: {
 					name: string;
-					slug: string;
+					slug: keyof IntlMessages["categories"];
 				};
 			}[];
 		};
