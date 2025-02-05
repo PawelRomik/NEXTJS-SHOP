@@ -6,6 +6,7 @@ export const GET_PRODUCT_DESC = gql`
 			data {
 				id
 				attributes {
+					name
 					desc
 					categories {
 						data {

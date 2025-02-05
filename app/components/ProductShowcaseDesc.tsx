@@ -32,10 +32,14 @@ export default function ProductShowcaseDesc({ productId, locale }: ProductShowca
 			const currProduct = data.products.data[0].attributes;
 			const category = currProduct.categories.data[0].attributes.slug;
 			return (
-				<div className="flex flex-col gap-3">
-					<h1 className="text-4xl font-bold uppercase">{currProduct.name}</h1>
-					<h2 className="uppercase text-red-600">{t(category)}</h2>
-					<p>{extractText(currProduct.desc)}</p>
+				<div className="flex w-full flex-col gap-5">
+					<div className="flex w-full flex-col items-end">
+						<h1 className="py-3 text-4xl font-bold">{currProduct.name}</h1>
+						<div className="w-full border-[5px] border-transparent border-t-red-600 "></div>
+						<div className="w-[90%] border-[3px] border-transparent border-t-red-700"></div>
+						<h2 className="uppercase text-red-600">{t(category)}</h2>
+					</div>
+					<p className="mt-auto">{extractText(currProduct.desc)}</p>
 				</div>
 			);
 		} catch {

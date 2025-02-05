@@ -5,26 +5,10 @@ import { GET_PRODUCT_DESC } from "../queries/productPage";
 import { Suspense } from "react";
 import { QueryResult } from "../queries/productType";
 import { useTranslations } from "next-intl";
-import * as motion from "framer-motion/client";
 
 type ProductDescriptionSectionProps = {
 	productId: string;
 	locale: string;
-};
-
-const list = {
-	visible: {},
-	hidden: {}
-};
-
-const item = {
-	visible: { x: 0 },
-	hidden: { x: "-200%" }
-};
-
-const itemRight = {
-	visible: { x: 0 },
-	hidden: { x: "200%" }
 };
 
 export default function ProductDescriptionSection({
@@ -82,52 +66,47 @@ export default function ProductDescriptionSection({
 						}
 					});
 
+					const bgClass = index % 2 === 0 ? "bg-[rgb(12,12,14)]" : "";
+
 					return (
-						<motion.div
-							initial="hidden"
-							whileInView="visible"
-							variants={list}
+						<div
 							key={index}
-							viewport={{ once: true }}
-							className="flex flex-col items-center justify-between gap-20 px-6 py-4  text-xl lg:flex-row lg:px-32"
+							className={`flex flex-col items-center justify-between text-xl lg:flex-row ${bgClass}`}
 						>
 							{imageFirst ? (
-								<motion.div
-									variants={item}
-									transition={{ duration: 0.5, delay: 0.25, ease: "easeInOut" }}
-									className="flex w-full items-center justify-between"
-								>
+								<div className="flex h-[200px] max-h-[200px] w-full items-center justify-between px-6 py-6 lg:px-32">
 									{imageUrl && (
 										<Image
 											width={600}
 											height={600}
 											src={imageUrl}
 											alt={t("productImage")}
-											className="h-full max-h-[300px] object-contain p-6"
+											className="h-full max-h-[300px] object-contain p-2"
 										/>
 									)}
-
-									<div className="description" dangerouslySetInnerHTML={{ __html: description }} />
-								</motion.div>
+									<div
+										className="description flex-1 "
+										dangerouslySetInnerHTML={{ __html: description }}
+									/>
+								</div>
 							) : (
-								<motion.div
-									variants={itemRight}
-									transition={{ duration: 0.5, delay: 0.25, ease: "easeInOut" }}
-									className="flex w-full items-center justify-between"
-								>
-									<div className="description" dangerouslySetInnerHTML={{ __html: description }} />
+								<div className="flex h-[200px] max-h-[200px] w-full items-center justify-between px-6 py-6 lg:px-32">
+									<div
+										className="description flex-1"
+										dangerouslySetInnerHTML={{ __html: description }}
+									/>
 									{imageUrl && (
 										<Image
 											width={600}
 											height={600}
 											src={imageUrl}
 											alt={t("productImage")}
-											className="h-full max-h-[300px] object-contain p-6"
+											className="h-full max-h-[300px] object-contain p-2"
 										/>
 									)}
-								</motion.div>
+								</div>
 							)}
-						</motion.div>
+						</div>
 					);
 				});
 			};
@@ -139,10 +118,10 @@ export default function ProductDescriptionSection({
 	}
 
 	return (
-		<section id="description" className="relative flex flex-col gap-3  bg-black  py-24  text-white">
-			<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
-				{t("description")}
-			</h2>
+		<section
+			id="description"
+			className="shadow-inset   relative flex flex-col  bg-zinc-950   text-white"
+		>
 			<Suspense>{getProductDesc()}</Suspense>
 		</section>
 	);

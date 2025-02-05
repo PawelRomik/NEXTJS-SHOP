@@ -31,7 +31,7 @@ export default function ProductShowcasePrice({ productId, locale }: ProductShowc
 			const currProduct = data.products.data[0].attributes;
 			return (
 				<div className="mr-4 flex flex-col items-end justify-center gap-3 lg:items-start">
-					<p className="text-3xl font-bold">
+					<p className="text-3xl font-bold text-white">
 						{t("price", { amount: formatPrice(currProduct.price, exchangeRate) })}
 					</p>
 					<BuyButton productId={productId} />
