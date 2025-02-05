@@ -54,11 +54,20 @@ export default function ProductPage({
 	revalidatePath("/[locale]/product/[productId]", "page");
 
 	return (
-		<main className=" flex w-full flex-col gap-3 overflow-x-hidden bg-zinc-950">
+		<main className=" flex w-full flex-col overflow-x-hidden bg-zinc-950">
 			<ProductNavigationButtons />
 			<ProductShowcaseSection productId={productId} locale={locale} />
+			<div className="flex h-[120px] items-center justify-center bg-[rgb(15,15,20)] text-4xl font-bold uppercase text-white">
+				<p>Opis</p>
+			</div>
 			<ProductDescriptionSection productId={productId} locale={locale} />
+			<div className="flex h-[120px] items-center justify-center bg-[rgb(15,15,20)] text-4xl font-bold uppercase text-white">
+				<p>Techniczne</p>
+			</div>
 			<ProductTechnicalSection productId={productId} locale={locale} />
+			<div className="flex h-[120px] items-center justify-center bg-[rgb(15,15,20)] text-4xl font-bold uppercase text-white">
+				<p>Inne Produkty</p>
+			</div>
 			<ProductOtherSection productId={productId} locale={locale} />
 		</main>
 	);

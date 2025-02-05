@@ -4,7 +4,6 @@ import { GET_PRODUCT_TECHNICAL } from "../queries/productPage";
 import { Suspense } from "react";
 import { QueryResult } from "../queries/productType";
 import { useTranslations } from "next-intl";
-import * as motion from "framer-motion/client";
 
 type ProductTechnicalSectionProps = {
 	productId: string;
@@ -45,33 +44,22 @@ export default function ProductTechnicalSection({
 				const parts = line.split(" | ");
 
 				return (
-					<tr key={index} className="w-full">
-						<td className=" w-[30%] border-2 border-red-600  p-2">{parts[0]}:</td>
-						<td className=" w-[70%] border-2 border-red-600  p-2">{parts[1]}</td>
+					<tr key={index} className="w-full bg-zinc-900">
+						<td className=" w-[30%] border-4 border-zinc-950  p-2">{parts[0]}:</td>
+						<td className=" w-[70%] border-4 border-zinc-950  p-2">{parts[1]}</td>
 					</tr>
 				);
 			});
 
 			return (
-				<motion.section
-					initial="hidden"
-					whileInView="visible"
-					variants={list}
-					viewport={{ once: true }}
+				<section
 					id="technical"
-					className="relative flex w-full flex-col bg-black   p-3 pt-24 text-white "
+					className="shadow-inset relative flex w-full flex-col bg-zinc-950   p-3 text-white "
 				>
-					<h2 className="absolute left-5 top-5 border-b-2 border-r-2 border-red-600 p-3 px-10 text-2xl font-bold text-red-600">
-						{t("technicalSection")}
-					</h2>
-					<motion.table
-						variants={item}
-						transition={{ duration: 0.5, delay: 0.25, ease: "easeInOut" }}
-						className=" w-full"
-					>
-						<tbody className="w-full">{tableRows}</tbody>
-					</motion.table>
-				</motion.section>
+					<table className=" w-full">
+						<tbody className="w-full  border-4  ">{tableRows}</tbody>
+					</table>
+				</section>
 			);
 		} catch {
 			return null;

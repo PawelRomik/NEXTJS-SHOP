@@ -34,14 +34,11 @@ export default function ProductShowcaseGallery({ productId }: ProductShowcaseGal
 		<Suspense>
 			<ProductImages productId={productId} onImagesLoaded={handleImagesLoaded} />
 			<div className="flex h-[500px] w-full flex-col items-center justify-end lg:h-[700px]">
-				<div className="flex max-h-[300px] items-center justify-center lg:max-h-[500px]">
-					<Image
-						width={600}
-						height={600}
-						src={`${process.env.NEXT_PUBLIC_PROD_PATH}${mainPhotoSrc}`}
-						alt={t("mainImage")}
-						className="h-[100%] object-contain p-6"
-					/>
+				<div className="flex h-full max-h-[300px] w-full items-center  justify-start p-5 lg:max-h-[500px]">
+					<div
+						style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_PROD_PATH + mainPhotoSrc})` }}
+						className="mirror after:z-3 h-full w-full bg-contain bg-center bg-no-repeat"
+					></div>
 				</div>
 
 				{productImages.length > 1 && (
