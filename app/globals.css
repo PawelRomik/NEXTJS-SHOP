@@ -172,6 +172,14 @@ option:hover {
 		inset 0px -13px 16px -9px rgb(10, 10, 10);
 }
 
+.shadow-top {
+	box-shadow: inset 0px 13px 16px -9px rgb(0, 0, 0);
+}
+
+.shadow-bottom {
+	box-shadow: inset 0px -13px 16px -9px rgb(0, 0, 0);
+}
+
 .img {
 	filter: drop-shadow(5px 0 0 rgb(255, 49, 49)) drop-shadow(0 5px 0 rgb(255, 49, 49))
 		drop-shadow(-5px 0 0 rgb(255, 49, 49)) drop-shadow(0 -5px 0 rgb(255, 49, 49));

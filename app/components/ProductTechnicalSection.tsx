@@ -44,7 +44,7 @@ export default function ProductTechnicalSection({
 				const parts = line.split(" | ");
 
 				return (
-					<tr key={index} className="w-full bg-zinc-900">
+					<tr key={index} className="w-full bg-[rgb(32,32,32)]">
 						<td className=" w-[30%] border-4 border-zinc-950  p-2">{parts[0]}:</td>
 						<td className=" w-[70%] border-4 border-zinc-950  p-2">{parts[1]}</td>
 					</tr>
@@ -54,7 +54,7 @@ export default function ProductTechnicalSection({
 			return (
 				<section
 					id="technical"
-					className="shadow-inset relative flex w-full flex-col bg-zinc-950   p-3 text-white "
+					className="shadow-inset relative flex w-full flex-col bg-[rgb(20,20,20)]   p-3 text-white "
 				>
 					<table className=" w-full">
 						<tbody className="w-full  border-4  ">{tableRows}</tbody>

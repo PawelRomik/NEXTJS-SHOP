@@ -45,7 +45,7 @@ export default function ProductOtherSection({ productId, locale }: ProductOtherS
 			return (
 				<section
 					id="others"
-					className="shadow-inset relative flex w-full flex-col overflow-y-hidden bg-zinc-900  p-3 text-white "
+					className="shadow-inset relative flex w-full flex-col overflow-y-hidden bg-[rgb(20,20,20)]  p-3 text-white "
 				>
 					<div className="relative w-full overflow-hidden lg:static lg:flex-1">
 						<div className="flex gap-6 overflow-x-auto py-2 lg:static">
