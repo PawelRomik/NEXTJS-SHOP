@@ -47,7 +47,7 @@ export default function ProductFilters({ filters }: ProductFiltersProps) {
 	};
 
 	return (
-		<div className="relative z-[20] min-h-[200px] w-full overflow-hidden bg-[rgb(15,15,20)] bg-[size:60%_100%]  bg-center ">
+		<div className="relative z-[20] min-h-[200px] w-full overflow-hidden bg-[rgb(11,11,11)] bg-[size:60%_100%]  bg-center ">
 			<h2 className=" flex w-[40%] items-center gap-1 px-5 py-3 text-xl font-bold uppercase text-white">
 				<span className="block h-[20px] w-[5px] skew-x-[-25deg] bg-white"></span>
 				<span className="mr-2 block h-[20px] w-[5px] skew-x-[-25deg] bg-white"></span>
@@ -67,7 +67,7 @@ export default function ProductFilters({ filters }: ProductFiltersProps) {
 				</div>
 				<button
 					type="submit"
-					className="mx-5 mb-3 h-full rounded-2xl border-4 border-zinc-950  border-l-zinc-800 border-t-zinc-800 bg-zinc-900 p-[3px] px-5 font-bold uppercase  text-white hover:border-red-700 hover:border-l-red-500 hover:border-t-red-500 hover:bg-red-600"
+					className="mx-5 mb-3 h-full rounded-2xl border-4 border-zinc-950  border-l-[rgb(32,32,32)] border-t-[rgb(32,32,32)] bg-[rgb(24,24,24)] p-[3px] px-5 font-bold uppercase  text-white hover:border-red-700 hover:border-l-red-500 hover:border-t-red-500 hover:bg-red-600"
 				>
 					{t("apply")}
 				</button>

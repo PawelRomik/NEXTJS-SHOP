@@ -66,46 +66,41 @@ export default function ProductDescriptionSection({
 						}
 					});
 
-					const bgClass = index % 2 === 0 ? "bg-[rgb(12,12,14)]" : "";
+					const bgClass = index % 2 === 0 ? "bg-[rgb(16,16,16)]" : "";
 
 					return (
 						<div
 							key={index}
 							className={`flex flex-col items-center justify-between text-xl lg:flex-row ${bgClass}`}
 						>
-							{imageFirst ? (
-								<div className="flex h-[200px] max-h-[200px] w-full items-center justify-between px-6 py-6 lg:px-32">
-									{imageUrl && (
+							<div className="flex h-[250px] max-h-[250px] w-full items-center justify-between gap-5 px-6 lg:px-32">
+								{imageFirst && imageUrl && (
+									<div className="relative h-full w-[250px]">
 										<Image
-											width={600}
-											height={600}
+											layout="fill"
+											objectFit="contain"
 											src={imageUrl}
+											className="p-4"
 											alt={t("productImage")}
-											className="h-full max-h-[300px] object-contain p-2"
 										/>
-									)}
-									<div
-										className="description flex-1 "
-										dangerouslySetInnerHTML={{ __html: description }}
-									/>
-								</div>
-							) : (
-								<div className="flex h-[200px] max-h-[200px] w-full items-center justify-between px-6 py-6 lg:px-32">
-									<div
-										className="description flex-1"
-										dangerouslySetInnerHTML={{ __html: description }}
-									/>
-									{imageUrl && (
+									</div>
+								)}
+								<div
+									className="description flex-1 "
+									dangerouslySetInnerHTML={{ __html: description }}
+								/>
+								{!imageFirst && imageUrl && (
+									<div className="relative h-full w-[250px]">
 										<Image
-											width={600}
-											height={600}
+											layout="fill"
+											objectFit="contain"
 											src={imageUrl}
+											className="p-4"
 											alt={t("productImage")}
-											className="h-full max-h-[300px] object-contain p-2"
 										/>
-									)}
-								</div>
-							)}
+									</div>
+								)}
+							</div>
 						</div>
 					);
 				});
@@ -120,7 +115,7 @@ export default function ProductDescriptionSection({
 	return (
 		<section
 			id="description"
-			className="shadow-inset   relative flex flex-col  bg-zinc-950   text-white"
+			className="shadow-inset   relative flex flex-col  bg-[rgb(20,20,20)]  text-white"
 		>
 			<Suspense>{getProductDesc()}</Suspense>
 		</section>
