@@ -1,14 +1,15 @@
 import { revalidatePath } from "next/cache";
 import { Metadata } from "next";
-
 import CategorySection from "../../../components/CategorySection";
 import NewProductsSection from "../../../components/NewProductsSection";
+import createApolloClient from "../../../../apollo-client";
+import { GET_RANDOM_PRODUCTS } from "../../../queries/productPage";
 
 export const metadata: Metadata = {
 	title: "Ephonix"
 };
 
-export default function HomePage({ params: { locale } }: { params: { locale: string } }) {
+export default async function HomePage({ params: { locale } }: { params: { locale: string } }) {
 	revalidatePath("/[locale]/", "page");
 
 	return (

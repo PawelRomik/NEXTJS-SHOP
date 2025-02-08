@@ -37,7 +37,7 @@ async function fetchProducts(
 	tags?: string[],
 	sort: string = "latest"
 ) {
-	const client = await createApolloClient();
+	const client = createApolloClient();
 
 	const getSortOrder = (sortKey: string) => {
 		switch (sortKey) {
@@ -127,6 +127,7 @@ async function loadProducts(
 	sort?: string
 ) {
 	const data = await fetchProducts(category, page, locale, tags, sort);
+	console.log(data);
 	if (!data || data.data.length == 0) return <ErrorText />;
 
 	return (
