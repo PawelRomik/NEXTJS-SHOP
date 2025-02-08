@@ -22,7 +22,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 
 async function fetchProducts(query: string, page: number, locale: string) {
 	try {
-		const client = await createApolloClient();
+		const client = createApolloClient();
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_SEARCH_PRODUCTS,
 			variables: {
@@ -40,7 +40,7 @@ async function fetchProducts(query: string, page: number, locale: string) {
 
 async function loadCount(query: string, page: number, locale: string) {
 	try {
-		const client = await createApolloClient();
+		const client = createApolloClient();
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_SEARCH_PRODUCTS_COUNT,
 			variables: {

@@ -45,7 +45,7 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 
 	const getProductData = async (locale: string) => {
 		try {
-			const client = await createApolloClient();
+			const client = createApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_ALLDATA,
 				variables: {

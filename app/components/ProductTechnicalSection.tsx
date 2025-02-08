@@ -28,7 +28,7 @@ export default function ProductTechnicalSection({
 
 	async function getTechnical() {
 		try {
-			const client = await createApolloClient();
+			const client = createApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_TECHNICAL,
 				variables: {

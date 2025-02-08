@@ -13,7 +13,7 @@ import ProductSectionTitle from "../../../../../components/ProductSectionTitle";
 
 async function fetchProduct(productId: string, locale: string) {
 	try {
-		const client = await createApolloClient();
+		const client = createApolloClient();
 
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_PRODUCT_NAME,

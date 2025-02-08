@@ -60,7 +60,7 @@ export default function SearchBar() {
 	useEffect(() => {
 		const getKeywords = async () => {
 			if (inputValue) {
-				const client = await createApolloClient();
+				const client = createApolloClient();
 				const keywords: ApolloQueryResult<KeywordsData> = await client.query({
 					query: GET_KEYWORDS,
 					variables: {

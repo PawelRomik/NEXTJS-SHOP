@@ -17,7 +17,7 @@ export default function CategoryDisplay({ category, locale }: ProductOtherSectio
 
 	async function getProducts() {
 		try {
-			const client = await createApolloClient();
+			const client = createApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_RANDOM_PRODUCTS,
 				variables: {

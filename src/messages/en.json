@@ -144,7 +144,8 @@
 		"support": "Support",
 		"settings": "Settings",
 		"orders": "Order History",
-		"logOut": "Log out"
+		"logOut": "Log out",
+		"bundles": "Bundles"
 	},
 	"support": {
 		"contact": "Contact us",
