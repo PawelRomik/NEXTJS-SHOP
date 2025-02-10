@@ -80,6 +80,7 @@ export type CategoriesData = {
 			id: string;
 			attributes: {
 				name: string;
+				slug: keyof IntlMessages["categories"];
 			};
 		}[];
 	};

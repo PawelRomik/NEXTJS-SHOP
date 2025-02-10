@@ -37,7 +37,7 @@ async function fetchProducts(
 	tags?: string[],
 	sort: string = "latest"
 ) {
-	const client = createApolloClient();
+	const client = await createApolloClient();
 
 	const getSortOrder = (sortKey: string) => {
 		switch (sortKey) {

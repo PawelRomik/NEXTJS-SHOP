@@ -22,7 +22,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 
 async function fetchProducts(query: string, page: number, locale: string) {
 	try {
-		const client = createApolloClient();
+		const client = await createApolloClient();
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_SEARCH_PRODUCTS,
 			variables: {
@@ -40,7 +40,7 @@ async function fetchProducts(query: string, page: number, locale: string) {
 
 async function loadCount(query: string, page: number, locale: string) {
 	try {
-		const client = createApolloClient();
+		const client = await createApolloClient();
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_SEARCH_PRODUCTS_COUNT,
 			variables: {
@@ -108,20 +108,27 @@ export default function SearchPage({
 	if (!query) return null;
 
 	return (
-		<main className=" w-full bg-zinc-950 p-6">
-			<h1 className="flex items-center justify-center text-3xl font-bold text-red-600 lg:justify-start lg:pl-6 lg:text-4xl">
-				<Suspense>
-					<span className="mr-2 rounded-full border-4 border-red-600 px-3 text-xl text-white lg:px-[0.75rem] lg:text-2xl">
-						{loadCount(query, page, locale)}
+		<main className=" w-full bg-[rgb(20,20,20)]">
+			<div className="flex h-[120px] items-center justify-center bg-[rgb(11,11,11)] text-4xl font-bold uppercase text-white">
+				<h2 className=" flex items-center gap-1   text-3xl font-bold uppercase text-white">
+					<Suspense>
+						<span className="flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-full border-4 border-red-600 bg-red-600 text-xl text-white lg:text-2xl">
+							{loadCount(query, page, locale)}
+						</span>
+					</Suspense>
+					<span className="ml-2 block h-[20px] w-[5px] skew-x-[-25deg] bg-white"></span>
+					<span className="mr-2 block h-[20px] w-[5px] skew-x-[-25deg] bg-white"></span>
+					<span>
+						{t("matches")}
+						<span className="text-red-600">{" " + query}</span>
 					</span>
-				</Suspense>
+				</h2>
+			</div>
 
-				<span>
-					{t("matches")}
-					<span className="text-white">{" " + query}</span>
-				</span>
-			</h1>
-			<Grid gap="4" width="auto" className="grid-cols-1 p-2 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
+			<Grid
+				width="auto"
+				className="shadow-top grid-cols ro-1  gap-10 bg-[rgb(20,20,20)]  p-2 text-white md:grid-cols-2 lg:grid-cols-4 lg:p-6"
+			>
 				<Suspense
 					fallback={
 						<>

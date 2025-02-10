@@ -15,7 +15,7 @@ export default async function ProductShowcaseGalleryServer({
 	productId,
 	locale
 }: ProductShowcaseGalleryServerProps) {
-	const client = createApolloClient();
+	const client = await createApolloClient();
 	const { data }: ApolloQueryResult<QueryResult> = await client.query({
 		query: GET_PRODUCT_IMAGES,
 		variables: { productId, locale }

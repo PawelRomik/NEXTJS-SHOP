@@ -68,8 +68,8 @@ export const GET_PRODUCT_IMAGES = gql`
 `;
 
 export const GET_PRODUCT_PRICE = gql`
-	query getProduct($productId: String!, $locale: I18NLocaleCode!) {
-		products(filters: { uuid: { eq: $productId } }, locale: $locale) {
+	query getProduct($productId: String!) {
+		products(filters: { uuid: { eq: $productId } }) {
 			data {
 				id
 				attributes {

@@ -9,20 +9,27 @@ import nextLogo from "../../public/logo.png";
 import { useTranslations } from "next-intl";
 import { categories } from "../data/categories";
 import createApolloClient from "../../apollo-client";
+import { CategoryData } from "../queries/productType";
+import { ApolloQueryResult } from "@apollo/client";
 
 export default function NavigationLinks() {
 	const t = useTranslations("categories");
 	const [imageSrc, setImageSrc] = useState<string>("");
 
 	const changeImageSrc = async (category: string) => {
-		const client = createApolloClient();
-		const { data } = await client.query({
-			query: GET_CATEGORY_IMAGE,
-			variables: { slug: category }
-		});
-
-		const dataUrl = data?.categories?.data?.[0]?.attributes?.image?.data?.attributes?.url;
-		setImageSrc(dataUrl ? `${process.env.NEXT_PUBLIC_PROD_PATH}${dataUrl}` : "");
+		try {
+			const client = await createApolloClient();
+			const { data }: ApolloQueryResult<CategoryData> = await client.query({
+				query: GET_CATEGORY_IMAGE,
+				variables: {
+					slug: category
+				}
+			});
+			const dataUrl = data.categories.data[0]?.attributes.image.data.attributes.url;
+			setImageSrc(`${process.env.NEXT_PUBLIC_PROD_PATH}${dataUrl}`);
+		} catch (err) {
+			setImageSrc("");
+		}
 	};
 
 	return (
@@ -38,6 +45,15 @@ export default function NavigationLinks() {
 						</NavigationMenu.Trigger>
 						{category.subCategories && (
 							<NavigationMenu.Content className="fixed left-0 top-[5rem] flex w-screen origin-top animate-showNav items-start justify-center gap-6 overflow-hidden overflow-x-hidden border-b-[3px] border-b-red-600 bg-zinc-900">
+								<div className="my-auto h-[250px] w-[300px]">
+									<Image
+										height={250}
+										width={300}
+										className={` h-full w-full object-contain  p-5 `}
+										src={imageSrc ? imageSrc : nextLogo}
+										alt={"category Image"}
+									/>
+								</div>
 								<div className="m-0 flex w-1/3 flex-col gap-2 p-[22px] ">
 									<div className="relative">
 										<h2 className="w-auto text-zinc-400">{t(category.slug)}</h2>
@@ -53,7 +69,11 @@ export default function NavigationLinks() {
 									</div>
 									<ul className="text-md relative flex w-full flex-col items-start justify-start gap-2">
 										{category.subCategories.map((subCategory) => (
-											<li key={subCategory.slug} className="">
+											<li
+												key={subCategory.slug}
+												onMouseEnter={() => changeImageSrc(subCategory.slug)}
+												className=""
+											>
 												<Link
 													href={`/category/${subCategory.slug}`}
 													title={t(subCategory.slug)}

@@ -27,7 +27,7 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
 			let targetCurrency = getCurrency(locale);
 
 			try {
-				const client = createApolloClient();
+				const client = await createApolloClient();
 				const { data }: ApolloQueryResult<RatesData> = await client.query({
 					query: GET_RATES,
 					variables: {

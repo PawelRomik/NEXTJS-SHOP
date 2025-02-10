@@ -19,7 +19,7 @@ export default function ProductDescriptionSection({
 
 	async function getProductDesc() {
 		try {
-			const client = createApolloClient();
+			const client = await createApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_DESC,
 				variables: {
