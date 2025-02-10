@@ -1,7 +1,6 @@
 import ProductShowcaseGallery from "./ProductShowcaseGallery";
 import ProductShowcaseDesc from "./ProductShowcaseDesc";
-import ProductShowcasePrice from "./ProductShowcasePrice";
-import { useTranslations } from "next-intl";
+import ProductPrice from "./ProductPrice";
 
 type ProductShowcaseSectionProps = {
 	productId: string;
@@ -9,7 +8,6 @@ type ProductShowcaseSectionProps = {
 };
 
 export default function ProductShowcaseSection({ productId, locale }: ProductShowcaseSectionProps) {
-	const t = useTranslations("product");
 	return (
 		<section
 			id="product"
@@ -21,7 +19,7 @@ export default function ProductShowcaseSection({ productId, locale }: ProductSho
 
 			<div className="z-[4] flex flex-[40%] flex-col justify-between bg-[rgba(0,0,0,0.6)] px-6 py-6 text-white lg:px-20 lg:py-32">
 				<ProductShowcaseDesc productId={productId} locale={locale} />
-				<ProductShowcasePrice productId={productId} locale={locale} />
+				<ProductPrice productId={productId} locale={locale} />
 			</div>
 		</section>
 	);

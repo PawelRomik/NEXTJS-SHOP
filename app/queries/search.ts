@@ -112,16 +112,13 @@ export const GET_KEYWORDS = gql`
 `;
 
 export const GET_CATEGORY = gql`
-	query getCategory($name: String!, $locale: I18NLocaleCode!) {
-		categories(
-			pagination: { limit: 5 }
-			filters: { name: { startsWith: $name } }
-			locale: $locale
-		) {
+	query getCategory($name: String!) {
+		categories(pagination: { limit: 5 }, filters: { name: { startsWith: $name } }) {
 			data {
 				id
 				attributes {
 					name
+					slug
 				}
 			}
 		}

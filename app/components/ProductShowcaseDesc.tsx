@@ -20,7 +20,7 @@ export default function ProductShowcaseDesc({ productId, locale }: ProductShowca
 
 	async function getProductDesc() {
 		try {
-			const client = createApolloClient();
+			const client = await createApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_DESC,
 				variables: {
