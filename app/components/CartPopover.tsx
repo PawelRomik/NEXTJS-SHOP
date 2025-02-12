@@ -3,7 +3,7 @@
 import axios from "axios";
 import * as Popover from "@radix-ui/react-popover";
 import { useSelector } from "react-redux";
-import { removeItem, resetCart } from "../redux/cardReducer";
+import { removeItem, increaseQuantity, resetCart, removeAllOfItem } from "../redux/cardReducer";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 import { loadStripe } from "@stripe/stripe-js";
@@ -15,12 +15,14 @@ import { useUser } from "@clerk/nextjs";
 type RootState = {
 	cart: {
 		products: any[];
+		count: number;
 	};
 };
 
 export default function CartPopover() {
 	const t = useTranslations();
 	const products = useSelector((state: RootState) => state.cart.products);
+	const count = useSelector((state: RootState) => state.cart.count);
 	const dispatch = useDispatch();
 	const { exchangeRate, currency } = useCurrency();
 	const locale = useLocale();
@@ -73,9 +75,9 @@ export default function CartPopover() {
 						aria-label="Update dimensions"
 					>
 						<i className="ri-shopping-cart-2-line relative text-3xl">
-							{products.length > 0 && (
-								<span className="z-3 absolute left-[10px] top-0 flex h-[15px] w-[30px] items-center justify-center rounded-full bg-red-700 py-2 font-sans text-sm font-bold text-white">
-									{products.length}
+							{count > 0 && (
+								<span className="z-3 absolute left-[10px]  top-0 flex h-[15px] w-[30px] items-center justify-center rounded-full bg-red-700 py-2 font-sans text-sm font-bold text-white">
+									{count < 10 ? count : "9+"}
 								</span>
 							)}
 						</i>
@@ -112,12 +114,26 @@ export default function CartPopover() {
 										)}
 									</div>
 								</div>
-								<button
-									className="delete cursor-pointer text-2xl"
-									onClick={() => dispatch(removeItem(item.id))}
-								>
-									<i className="ri-close-circle-line text-red-600 hover:text-red-400"></i>
-								</button>
+								<div className="flex items-center justify-center gap-2">
+									<button
+										className="delete cursor-pointer text-2xl"
+										onClick={() => dispatch(removeItem(item.id))}
+									>
+										<i className="ri-indeterminate-circle-line text-red-600 hover:text-red-400"></i>
+									</button>
+									<button
+										className="delete cursor-pointer text-2xl"
+										onClick={() => dispatch(increaseQuantity(item.id))}
+									>
+										<i className="ri-add-circle-line text-red-600 hover:text-red-400"></i>
+									</button>
+									<button
+										className="delete cursor-pointer text-2xl"
+										onClick={() => dispatch(removeAllOfItem(item.id))}
+									>
+										<i className="ri-delete-bin-line text-red-600 hover:text-red-400"></i>
+									</button>
+								</div>
 							</div>
 						))}
 						{products.length > 3 && (
