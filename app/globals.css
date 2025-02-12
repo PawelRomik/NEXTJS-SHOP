@@ -241,6 +241,15 @@ option:hover {
 	pointer-events: none;
 }
 
+.removeArrowInput::-webkit-outer-spin-button,
+.removeArrowInput::-webkit-inner-spin-button,
+.removeArrowInput {
+	-webkit-appearance: none;
+	margin: 0;
+	-moz-appearance: textfield;
+	appearance: none;
+}
+
 .mirror:after {
 	pointer-events: none;
 	content: "";
