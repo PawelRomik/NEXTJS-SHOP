@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import axios from "axios";
 import * as Popover from "@radix-ui/react-popover";
 import { useSelector } from "react-redux";
@@ -11,6 +12,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { formatPrice } from "../lib/utils/formatPrice";
 import { useCurrency } from "../context/CurrencyProvider";
 import { useUser } from "@clerk/nextjs";
+import { useEffect, useState } from "react";
 
 type RootState = {
 	cart: {
@@ -21,6 +23,7 @@ type RootState = {
 
 export default function CartPopover() {
 	const t = useTranslations();
+	const [isOpen, setIsOpen] = useState(false);
 	const products = useSelector((state: RootState) => state.cart.products);
 	const count = useSelector((state: RootState) => state.cart.count);
 	const dispatch = useDispatch();
@@ -35,6 +38,18 @@ export default function CartPopover() {
 		});
 		return total.toFixed(2);
 	};
+
+	const prevTotalQuantity = useRef(products.reduce((sum, item) => sum + item.quantity, 0));
+
+	useEffect(() => {
+		const currentTotalQuantity = products.reduce((sum, item) => sum + item.quantity, 0);
+
+		if (currentTotalQuantity > prevTotalQuantity.current) {
+			setIsOpen(true);
+		}
+
+		prevTotalQuantity.current = currentTotalQuantity;
+	}, [products]);
 
 	const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PROD_KEY || "");
 
@@ -67,7 +82,7 @@ export default function CartPopover() {
 	};
 
 	return (
-		<Popover.Root>
+		<Popover.Root open={isOpen} defaultOpen={false} onOpenChange={(open) => setIsOpen(open)}>
 			<Popover.Trigger asChild>
 				<div className="flex items-center justify-center">
 					<button
@@ -85,7 +100,14 @@ export default function CartPopover() {
 				</div>
 			</Popover.Trigger>
 			<Popover.Portal>
-				<Popover.Content className="flex w-[100vw] origin-top animate-showNav border-[3px] border-r-0 border-zinc-900 border-b-red-600  bg-zinc-900 p-5 lg:w-auto lg:border-red-600 ">
+				<Popover.Content
+					onInteractOutside={(event) => {
+						if ((event.target as HTMLElement).closest(".ignore-popover-close")) {
+							event.preventDefault();
+						}
+					}}
+					className="flex w-[100vw] origin-top animate-showNav border-[3px] border-r-0 border-zinc-900 border-b-red-600  bg-zinc-900 p-5 lg:w-auto lg:border-red-600 "
+				>
 					<div className="z-50 p-5 uppercase text-white">
 						<h1 className="mb-7 text-2xl font-bold text-red-600">{t("cart.content")}</h1>
 						{products?.slice(0, 3).map((item) => (

@@ -76,7 +76,7 @@ function CartCounter({ productId }: { productId: string }) {
 
 	return (
 		<div className="mr-2 flex h-full items-end justify-center gap-3">
-			<div className="flex h-[2rem] w-[4.5rem] items-center justify-center">
+			<div className="ignore-popover-close flex h-[2rem] w-[4.5rem] items-center justify-center">
 				<button
 					onClick={(e) => handleAddToCart(false)}
 					className="flex h-full w-1/4 items-center  justify-center rounded-l-lg bg-red-600 text-white hover:scale-105 hover:bg-red-500 "
@@ -102,7 +102,7 @@ function CartCounter({ productId }: { productId: string }) {
 			<button
 				title={t("shop.buyButtonText")}
 				onClick={handleButtonClick}
-				className=" h-[2rem] w-[2rem] rounded-lg bg-red-600 text-white hover:scale-105 hover:bg-red-500 "
+				className="ignore-popover-close h-[2rem] w-[2rem] rounded-lg bg-red-600 text-white hover:scale-105 hover:bg-red-500 "
 			>
 				<i className="ri-shopping-cart-2-line "></i>
 			</button>
