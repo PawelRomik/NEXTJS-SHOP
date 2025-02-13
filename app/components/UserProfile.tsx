@@ -5,26 +5,40 @@ import { useTranslations } from "next-intl";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as Avatar from "@radix-ui/react-avatar";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function UserProfile() {
 	const t = useTranslations();
 	const { user } = useClerk();
+	const [username, setUsername] = useState("");
+	const [image, setImage] = useState("");
+
+	const refreshData = async (open?: boolean) => {
+		if (open) {
+			await user?.reload();
+			if (user?.imageUrl) setImage(user?.imageUrl);
+			if (user?.username) setUsername(user?.username);
+		}
+	};
+
+	refreshData(true);
+
 	return (
 		<div className="flex items-center justify-center">
 			<SignedIn>
-				<DropdownMenu.Root>
+				<DropdownMenu.Root onOpenChange={(open) => refreshData(open)}>
 					<DropdownMenu.Trigger className="text-3xl outline-none">
 						<Avatar.Root className="inline-flex size-[34px] select-none items-center justify-center overflow-hidden rounded-full border-[3px]  align-middle">
 							<Avatar.Image
 								className="size-full rounded-[inherit] object-cover"
-								src={user?.imageUrl}
+								src={image}
 								alt="avatar"
 							/>
 							<Avatar.Fallback
 								className="leading-1 flex size-full items-center justify-center bg-zinc-800 text-[15px] font-medium text-white"
 								delayMs={600}
 							>
-								{user?.username?.substring(0, 2).toUpperCase()}
+								{username.substring(0, 2).toUpperCase()}
 							</Avatar.Fallback>
 						</Avatar.Root>
 					</DropdownMenu.Trigger>
@@ -46,12 +60,12 @@ export default function UserProfile() {
 											className="leading-1 flex size-full items-center justify-center bg-zinc-800 text-[15px] font-medium text-white"
 											delayMs={600}
 										>
-											{user?.username?.substring(0, 2).toUpperCase()}
+											{username.substring(0, 2).toUpperCase()}
 										</Avatar.Fallback>
 									</Avatar.Root>
 									<p className="text-[18px]">
 										{t("hamburger.loggedIn")}
-										<span className="font-bold capitalize">{user?.username}!</span>
+										<span className="font-bold capitalize">{username}!</span>
 									</p>
 								</div>
 							</DropdownMenu.Item>
