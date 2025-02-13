@@ -10,6 +10,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import Pagination from "../../../../components/Pagination";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import ProductSectionTitle from "../../../../components/ProductSectionTitle";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
 	const t = await getTranslations({ locale, namespace: "order" });
@@ -47,10 +48,10 @@ async function loadProducts(page: number, locale: string) {
 			{data.data.map((product) => (
 				<tr
 					key={product.id}
-					className="flex h-[80px] w-full items-center justify-between  bg-zinc-800 text-xl  text-white"
+					className="flex h-[80px] w-full items-center justify-between bg-[rgb(20,20,20)]   text-xl  text-white"
 				>
 					<td className="flex h-full flex-1 items-center justify-start  pr-8">
-						<div className="flex h-full items-center justify-start gap-8 bg-zinc-900 px-8">
+						<div className="flex h-full items-center justify-start gap-8 px-8">
 							<div className="flex h-[10px] w-[10px] items-center justify-center rounded-full  bg-green-600 p-3"></div>
 							<p className="flex items-center justify-center">
 								{t("order")}: #{product.id}
@@ -58,7 +59,7 @@ async function loadProducts(page: number, locale: string) {
 						</div>
 					</td>
 					<td className="flex h-full flex-1 items-center justify-center pl-8">
-						<div className="flex h-full items-center justify-center gap-8 bg-zinc-900 px-8">
+						<div className="flex h-full items-center justify-center px-8">
 							{new Date(product.attributes.createdAt)
 								.toISOString()
 								.replace("T", " ")
@@ -71,7 +72,7 @@ async function loadProducts(page: number, locale: string) {
 							href={`order/${product.id}`}
 							className=" h-full transition-all hover:text-red-600"
 						>
-							<div className="flex h-full items-center justify-center gap-8 bg-zinc-900 px-2">
+							<div className="flex h-full items-center justify-center  px-2">
 								<button className="h-full w-full p-3 ">
 									<i className="ri-arrow-right-s-fill text-4xl"></i>
 								</button>
@@ -108,17 +109,18 @@ export default function OrderHistoryPage({
 	const t = useTranslations("order");
 
 	return (
-		<main className=" flex w-full flex-1 flex-col gap-3 bg-zinc-950 p-5">
-			<h1 className="text-3xl font-bold uppercase text-white">{t("history")}</h1>
-			<div className="flex h-full flex-col items-center justify-between">
+		<main className=" flex w-full flex-1 flex-col bg-[rgb(20,20,20)]">
+			<ProductSectionTitle title={t("history")} />
+			<div className="shadow-inset flex h-full flex-col items-center justify-between pt-5">
 				<Suspense fallback={<p>Loading</p>}>
-					<table className="flex max-h-[600px] w-full flex-row flex-wrap items-start justify-start  gap-2 overflow-y-auto ">
-						<tr className="sticky top-0 flex h-[80px] w-full items-center justify-between border-b-2 border-red-600  bg-zinc-900 p-3 text-2xl  text-white">
+					<table className="flex  w-[95%] flex-row flex-wrap items-start justify-start gap-2 overflow-y-auto  bg-[rgb(12,12,12)] px-2 ">
+						<tr className="sticky top-0 flex h-[80px] w-full items-center justify-between border-b-2 border-red-600  bg-[rgb(12,12,12)] p-3 text-2xl uppercase  text-white">
 							<th className="flex-1  pl-8 text-start">{t("order")}</th>
 							<th className="flex-1  pl-8 text-center">{t("date")}</th>
 							<th className="flex-1 text-end">{t("details")}</th>
 						</tr>
 						{loadProducts(page, locale)}
+						<tr className="h=[80px] bg-[rgb(12,12,12)"></tr>
 					</table>
 				</Suspense>
 				<Suspense>{loadPagination(page)}</Suspense>

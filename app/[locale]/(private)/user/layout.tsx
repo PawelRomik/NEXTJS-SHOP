@@ -5,6 +5,7 @@ import Link from "next/link";
 import { SignOutButton } from "@clerk/nextjs";
 import { userCategories } from "../../../data/categories";
 import { useTranslations } from "next-intl";
+import UserCategoryLink from "../../../components/UserCategoryLink";
 
 type PrivateLayoutProps = {
 	children: React.ReactNode;
@@ -15,22 +16,15 @@ export default function UserLayout({ children }: PrivateLayoutProps) {
 	return (
 		<div className={`roboto flex min-h-screen flex-col`}>
 			<ShopHeader />
-			<main className="flex flex-1 bg-zinc-950">
-				<div className="flex  min-w-[250px] flex-[10%] border-r-2 border-zinc-800 bg-black">
-					<ul className="flex w-full flex-col items-center">
+			<main className="flex flex-1  ">
+				<div className="flex  min-w-[250px] flex-[10%] border-r-4 border-red-600  bg-[rgb(12,12,12)]">
+					<ul className="flex w-full flex-col items-center gap-3 pt-1">
 						{userCategories.map((category) => (
-							<Link className="w-full" key={category.name} href={`/user/${category.slug}`}>
-								<li className="w-full border-b-2 border-zinc-800 p-[1rem] pl-[2rem] text-right text-white">
-									{t(`categories.${category.slug}`)}
-									<i className="ri-arrow-right-s-line"></i>
-								</li>
-							</Link>
+							<UserCategoryLink key={category.slug} category={category} />
 						))}
-						<li className="mt-auto w-full border-t-2 border-zinc-800 p-[1rem] pl-[2rem] text-right text-red-600">
+						<li className="mt-auto w-full border-t-4 border-[rgb(20,20,20)] bg-[rgb(20,20,20)] p-[1rem] pl-[2rem] text-center font-bold uppercase text-white  transition hover:bg-red-600 hover:text-white">
 							<SignOutButton>
-								<button>
-									{t("hamburger.logOut")} <i className="ri-arrow-right-s-line "></i>
-								</button>
+								<button className="uppercase">{t("hamburger.logOut")}</button>
 							</SignOutButton>
 						</li>
 					</ul>
