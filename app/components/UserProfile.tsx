@@ -28,18 +28,8 @@ export default function UserProfile() {
 			<SignedIn>
 				<DropdownMenu.Root onOpenChange={(open) => refreshData(open)}>
 					<DropdownMenu.Trigger className="text-3xl outline-none">
-						<Avatar.Root className="inline-flex size-[34px] select-none items-center justify-center overflow-hidden rounded-full border-[3px]  align-middle">
-							<Avatar.Image
-								className="size-full rounded-[inherit] object-cover"
-								src={image}
-								alt="avatar"
-							/>
-							<Avatar.Fallback
-								className="leading-1 flex size-full items-center justify-center bg-zinc-800 text-[15px] font-medium text-white"
-								delayMs={600}
-							>
-								{username.substring(0, 2).toUpperCase()}
-							</Avatar.Fallback>
+						<Avatar.Root className="inline-flex size-[34px] select-none items-center justify-center overflow-hidden  align-middle">
+							<i className="ri-user-line"></i>
 						</Avatar.Root>
 					</DropdownMenu.Trigger>
 

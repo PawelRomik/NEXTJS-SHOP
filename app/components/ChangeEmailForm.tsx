@@ -8,7 +8,6 @@ const ChangeEmailForm = () => {
 	const [email, setEmail] = useState("");
 	const [code, setCode] = useState("");
 	const [isVerifying, setIsVerifying] = useState(false);
-	const [successful, setSuccessful] = useState(false);
 	const [emailObj, setEmailObj] = useState<EmailAddressResource | undefined>(undefined);
 	const [passwordCurrent, setPasswordCurrent] = useState("");
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -44,10 +43,15 @@ const ChangeEmailForm = () => {
 			} else {
 				setErrorMessage("Incorrect password. Please try again.");
 			}
-		} catch (err) {
-			setErrorMessage("An error occurred while verifying your password.");
-			console.error(JSON.stringify(err, null, 2));
+		} catch (err: any) {
+			if (err.errors[0].code == "form_identifier_exists") {
+				setErrorMessage("This Email is taken.");
+			} else setErrorMessage("An error occurred while verifying your password.");
 		}
+		setTimeout(() => {
+			setErrorMessage(null);
+			setSuccessMessage(null);
+		}, 3000);
 	};
 
 	const verifyCode = async (e: React.FormEvent) => {
@@ -67,6 +71,10 @@ const ChangeEmailForm = () => {
 			setErrorMessage("An error occurred while verifying your email.");
 			console.error(JSON.stringify(err, null, 2));
 		}
+		setTimeout(() => {
+			setErrorMessage(null);
+			setSuccessMessage(null);
+		}, 3000);
 	};
 
 	const updateOldEmail = async () => {
@@ -80,81 +88,76 @@ const ChangeEmailForm = () => {
 			});
 
 			await response.json();
-			setSuccessful(true);
 			setSuccessMessage("Email successfully changed!");
 		} catch (err) {
 			setErrorMessage("An error occurred while updating your email.");
 			console.log(err);
 		}
+		setTimeout(() => {
+			setErrorMessage(null);
+			setSuccessMessage(null);
+			setIsVerifying(false);
+		}, 3000);
 	};
-
-	if (successful) {
-		return (
-			<>
-				<h1>Email added!</h1>
-				{successMessage && <p className="text-green-500">{successMessage}</p>}
-			</>
-		);
-	}
 
 	if (isVerifying) {
 		return (
-			<>
-				<h1>Verify email</h1>
+			<div className="flex flex-col items-center gap-4 text-white">
+				<h1 className="w-full text-center text-3xl font-bold uppercase">Verify Email</h1>
 				{errorMessage && <p className="text-red-500">{errorMessage}</p>}
-				<div>
-					<form onSubmit={(e) => verifyCode(e)}>
-						<div>
-							<label htmlFor="code">Enter code</label>
-							<input
-								onChange={(e) => setCode(e.target.value)}
-								id="code"
-								name="code"
-								type="text"
-								value={code}
-							/>
-						</div>
-						<div>
-							<button type="submit">Verify</button>
-						</div>
-					</form>
-				</div>
-			</>
+				{successMessage && <p className="text-green-500">{successMessage}</p>}
+				<form onSubmit={(e) => verifyCode(e)} className="flex flex-col gap-4">
+					<div className="flex items-center justify-between gap-5">
+						<label htmlFor="code">Enter Code</label>
+						<input
+							id="code"
+							name="code"
+							type="text"
+							value={code}
+							onChange={(e) => setCode(e.target.value)}
+							className="rounded p-2 text-black"
+						/>
+					</div>
+					<button type="submit" className="rounded bg-red-600 px-4 py-2 text-white">
+						Verify
+					</button>
+				</form>
+			</div>
 		);
 	}
 
 	return (
-		<div className="text-white">
-			<h1>Change Email</h1>
-			<div>
-				{errorMessage && <p className="text-red-500">{errorMessage}</p>}
-				{successMessage && <p className="text-green-500">{successMessage}</p>}
-				<form autoComplete="false" onSubmit={(e) => handleSubmit(e)}>
-					<div>
-						<label htmlFor="email">Enter email address</label>
-						<input
-							onChange={(e) => setEmail(e.target.value)}
-							id="email"
-							name="email"
-							type="email"
-							value={email}
-						/>
-					</div>
-					<div>
-						<label htmlFor="passwordCurrent">Enter current password</label>
-						<input
-							onChange={(e) => setPasswordCurrent(e.target.value)}
-							id="passwordCurrent"
-							name="passwordCurrent"
-							type="password"
-							value={passwordCurrent}
-						/>
-					</div>
-					<div>
-						<button type="submit">Change</button>
-					</div>
-				</form>
-			</div>
+		<div className="flex flex-col items-center gap-4 text-white">
+			<h1 className="w-full text-center text-3xl font-bold uppercase">Change Email</h1>
+			{errorMessage && <p className="text-red-500">{errorMessage}</p>}
+			{successMessage && <p className="text-green-500">{successMessage}</p>}
+			<form autoComplete="off" onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-4">
+				<div className="flex items-center justify-between gap-5">
+					<label htmlFor="email">Enter Email Address</label>
+					<input
+						id="email"
+						name="email"
+						type="email"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						className="rounded p-2 text-black"
+					/>
+				</div>
+				<div className="flex items-center justify-between gap-5">
+					<label htmlFor="passwordCurrent">Enter Current Password</label>
+					<input
+						id="passwordCurrent"
+						name="passwordCurrent"
+						type="password"
+						value={passwordCurrent}
+						onChange={(e) => setPasswordCurrent(e.target.value)}
+						className="rounded p-2 text-black"
+					/>
+				</div>
+				<button type="submit" className="rounded bg-red-600 px-4 py-2 text-white">
+					Change Email
+				</button>
+			</form>
 		</div>
 	);
 };
