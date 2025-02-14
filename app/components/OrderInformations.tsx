@@ -7,63 +7,78 @@ import ErrorText from "./ErrorText";
 import { formatPrice } from "../lib/utils/formatPrice";
 import { useCurrency } from "../context/CurrencyProvider";
 import { OrderData } from "../queries/productType";
-import { Suspense } from "react";
 import { useUser } from "@clerk/nextjs";
+import { useEffect, useState } from "react";
 
 export default function OrderInformations({ id }: { id: number | string }) {
 	const t = useTranslations();
-	const locale = useLocale();
 	const { exchangeRate } = useCurrency();
 	const { user } = useUser();
+	const [order, setOrder] = useState<any>(null);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
 
-	async function fetchOrder(orderId: string | number) {
-		try {
-			const client = await createApolloClient();
-			const { data }: ApolloQueryResult<OrderData> = await client.query({
-				query: GET_ORDER,
-				variables: {
-					user: user?.id,
-					orderId: Number(orderId)
+	useEffect(() => {
+		async function fetchOrder(orderId: string | number) {
+			try {
+				const client = await createApolloClient();
+				const { data }: ApolloQueryResult<OrderData> = await client.query({
+					query: GET_ORDER,
+					variables: {
+						user: user?.id,
+						orderId: Number(orderId)
+					}
+				});
+
+				if (data?.orders?.data.length) {
+					setOrder(data.orders.data[0].attributes);
+				} else {
+					setError(true);
 				}
-			});
-
-			return data.orders;
-		} catch (err) {
-			console.log(err);
+			} catch (err) {
+				console.error(err);
+				setError(true);
+			} finally {
+				setLoading(false);
+			}
 		}
-	}
 
-	async function loadProducts(orderId: string | number, locale: string) {
-		const data = await fetchOrder(orderId);
+		if (user?.id) {
+			fetchOrder(id);
+		}
+	}, [id, user?.id]);
 
-		if (!data) return <ErrorText />;
-		const order = data.data[0].attributes;
-		const totalPrice = order.products.reduce((sum, item) => sum + item.price * item.quantity, 0);
-		return (
-			<div className="flex flex-col justify-center gap-3 text-white">
-				<p className="flex items-center gap-3">
-					{t("order.date")}:
-					<span className="rounded bg-zinc-800 p-2">
-						{new Date(order.createdAt)
-							.toISOString()
-							.replace("T", " ")
-							.slice(0, 19)
-							.replaceAll("-", ".")}
-					</span>
-				</p>
+	if (loading) return <p>Loading...</p>;
+	if (error || !order) return <ErrorText />;
 
-				<p className="flex items-center gap-3">
-					{t("order.totalPrice")}:
-					<span className="rounded bg-zinc-800 p-2">
-						{t("product.price", { amount: formatPrice(totalPrice, exchangeRate) })}
-					</span>
-				</p>
-				<p className="flex items-center gap-3">
-					{t("order.status")}:<span className="rounded bg-green-500 p-2">{t("order.success")}</span>
-				</p>
-			</div>
-		);
-	}
+	const totalPrice = order.products.reduce(
+		(sum: number, item: { price: number; quantity: number }) => sum + item.price * item.quantity,
+		0
+	);
 
-	return <Suspense fallback={<p>Loading</p>}>{loadProducts(id, locale)}</Suspense>;
+	return (
+		<div className="flex flex-col justify-center gap-3 font-bold uppercase text-white">
+			<p className="flex items-center gap-3 bg-[rgb(12,12,12)] p-3">
+				{t("order.date")}:
+				<span className="rounded bg-red-600 p-2">
+					{new Date(order.createdAt)
+						.toISOString()
+						.replace("T", " ")
+						.slice(0, 19)
+						.replaceAll("-", ".")}
+				</span>
+			</p>
+
+			<p className="flex items-center gap-3 bg-[rgb(12,12,12)] p-3">
+				{t("order.totalPrice")}:
+				<span className="rounded bg-red-600  p-2">
+					{t("product.price", { amount: formatPrice(totalPrice, exchangeRate) })}
+				</span>
+			</p>
+
+			<p className="flex items-center gap-3 bg-[rgb(12,12,12)] p-3">
+				{t("order.status")}: <span className="rounded bg-green-500 p-2">{t("order.success")}</span>
+			</p>
+		</div>
+	);
 }

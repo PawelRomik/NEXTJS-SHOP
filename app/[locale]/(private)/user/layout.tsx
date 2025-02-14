@@ -22,6 +22,7 @@ export default function UserLayout({ children }: PrivateLayoutProps) {
 						{userCategories.map((category) => (
 							<UserCategoryLink key={category.slug} category={category} />
 						))}
+						<UserCategoryLink key={"order"} category={{ name: "Order", slug: "orders" }} />
 						<li className="mt-auto w-full border-t-4 border-[rgb(20,20,20)] bg-[rgb(20,20,20)] p-[1rem] pl-[2rem] text-center font-bold uppercase text-white  transition hover:bg-red-600 hover:text-white">
 							<SignOutButton>
 								<button className="uppercase">{t("hamburger.logOut")}</button>

@@ -5,6 +5,7 @@ import OrderInformations from "../../../../../components/OrderInformations";
 import OrderProducts from "../../../../../components/OrderProducts";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import ProductSectionTitle from "../../../../../components/ProductSectionTitle";
 
 export async function generateMetadata({
 	params: { locale, id }
@@ -27,23 +28,18 @@ export default function OrderPage({
 	const t = useTranslations();
 
 	return (
-		<main className=" flex w-full flex-1 flex-col gap-3 bg-zinc-950 p-5">
-			<Link href={"/user/orders"} className="text-red-600 hover:text-red-700">
-				{t("common.back")}
-			</Link>
-			<h1 className="text-3xl font-bold text-white">
-				{t("order.order")} #{id}
-			</h1>
-			<div className="flex h-full flex-1 flex-col gap-10">
+		<main className=" flex w-full flex-1 flex-col bg-[rgb(20,20,20)]">
+			<ProductSectionTitle title={`${t("order.order")} #${id} `} />
+			<div className="shadow-inset flex h-full w-full flex-1 flex-col gap-10 bg-[rgb(20,20,20)] px-[5%] pt-[5%]">
 				<OrderInformations id={id} />
 				<OrderProducts id={id} />
+				<p className="mt-auto flex w-full items-center justify-end gap-3  text-right text-white">
+					{t("support.gotProblem")}
+					<Link href="/support" className="text-red-600 hover:text-red-700">
+						{t("support.contact")}!
+					</Link>
+				</p>
 			</div>
-			<p className="flex gap-3 text-white">
-				{t("support.gotProblem")}
-				<Link href="/support" className="text-red-600 hover:text-red-700">
-					{t("support.contact")}!
-				</Link>
-			</p>
 		</main>
 	);
 }

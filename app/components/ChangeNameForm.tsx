@@ -27,26 +27,31 @@ function ChangeNameForm() {
 		} catch (err) {
 			setErrorMessage("An error occurred while changing your username.");
 		}
+		setTimeout(() => {
+			setErrorMessage(null);
+			setSuccessMessage(null);
+		}, 3000);
 	};
 
 	return (
-		<div className="text-white">
-			<h1>Change Username</h1>
+		<div className="flex flex-col items-center gap-4 text-white">
+			<h1 className="w-full text-center text-3xl font-bold uppercase">Change Username</h1>
 			{errorMessage && <p className="text-red-500">{errorMessage}</p>}
 			{successMessage && <p className="text-green-500">{successMessage}</p>}
-			<form onSubmit={handleSubmit}>
-				<div>
+			<form onSubmit={handleSubmit} className="flex flex-col gap-4">
+				<div className="flex items-center justify-between gap-5">
 					<label htmlFor="username">New Username</label>
 					<input
-						onChange={(e) => setUsername(e.target.value)}
 						id="username"
 						type="text"
 						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+						className="rounded p-2 text-black"
 					/>
 				</div>
-				<div>
-					<button type="submit">Change</button>
-				</div>
+				<button type="submit" className="rounded bg-red-600 px-4 py-2 text-white">
+					Change Username
+				</button>
 			</form>
 		</div>
 	);

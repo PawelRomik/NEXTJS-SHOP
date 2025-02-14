@@ -4,6 +4,8 @@ import { revalidatePath } from "next/cache";
 import ChangeEmailForm from "../../../../components/ChangeEmailForm";
 import ProductSectionTitle from "../../../../components/ProductSectionTitle";
 import ChangeNameForm from "../../../../components/ChangeNameForm";
+import ChangeAvatarForm from "../../../../components/ChangeAvatarForm";
+import ChangePasswordForm from "../../../../components/ChangePasswordForm";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
 	const t = await getTranslations({ locale, namespace: "categories" });
@@ -27,13 +29,16 @@ export default function ProductPage({
 
 			<div className="shadow-inset flex h-full flex-col gap-5 px-[5%] pt-[5%] lg:pb-[4rem]">
 				<div className="w-full bg-[rgb(12,12,12)] p-3 text-white">
+					<ChangeAvatarForm />
+				</div>
+				<div className="w-full bg-[rgb(12,12,12)] p-3 text-white">
 					<ChangeNameForm />
 				</div>
 				<div className="w-full bg-[rgb(12,12,12)] p-3 text-white">
 					<ChangeEmailForm />
 				</div>
 				<div className="w-full bg-[rgb(12,12,12)] p-3 text-white">
-					<ChangeEmailForm />
+					<ChangePasswordForm />
 				</div>
 			</div>
 		</main>
