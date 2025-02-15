@@ -144,66 +144,6 @@ async function loadProducts(
 					key={product.id}
 				></ProductDisplay>
 			))}
-			{data.data.map((product) => (
-				<ProductDisplay
-					uuid={product.attributes.uuid}
-					name={product.attributes.name}
-					desc={product.attributes.desc}
-					price={product.attributes.price}
-					salePrice={product.attributes.salePrice}
-					category={product.attributes.categories.data[0].attributes.name}
-					imageUrl={`${product.attributes.images.data[0].attributes.url}`}
-					key={product.id}
-				></ProductDisplay>
-			))}
-			{data.data.map((product) => (
-				<ProductDisplay
-					uuid={product.attributes.uuid}
-					name={product.attributes.name}
-					desc={product.attributes.desc}
-					price={product.attributes.price}
-					salePrice={product.attributes.salePrice}
-					category={product.attributes.categories.data[0].attributes.name}
-					imageUrl={`${product.attributes.images.data[0].attributes.url}`}
-					key={product.id}
-				></ProductDisplay>
-			))}
-			{data.data.map((product) => (
-				<ProductDisplay
-					uuid={product.attributes.uuid}
-					name={product.attributes.name}
-					desc={product.attributes.desc}
-					price={product.attributes.price}
-					salePrice={product.attributes.salePrice}
-					category={product.attributes.categories.data[0].attributes.name}
-					imageUrl={`${product.attributes.images.data[0].attributes.url}`}
-					key={product.id}
-				></ProductDisplay>
-			))}
-			{data.data.map((product) => (
-				<ProductDisplay
-					uuid={product.attributes.uuid}
-					name={product.attributes.name}
-					desc={product.attributes.desc}
-					price={product.attributes.price}
-					salePrice={product.attributes.salePrice}
-					category={product.attributes.categories.data[0].attributes.name}
-					imageUrl={`${product.attributes.images.data[0].attributes.url}`}
-					key={product.id}
-				></ProductDisplay>
-			))}
-			{data.data.map((product) => (
-				<ProductDisplay
-					uuid={product.attributes.uuid}
-					name={product.attributes.name}
-					desc={product.attributes.desc}
-					price={product.attributes.price}
-					salePrice={product.attributes.salePrice}
-					category={product.attributes.categories.data[0].attributes.name}
-					imageUrl={`${product.attributes.images.data[0].attributes.url}`}
-					key={product.id}
-				></ProductDisplay>
-			))}
 		</>
 	);
 }
