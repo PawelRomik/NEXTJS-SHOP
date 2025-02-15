@@ -9,6 +9,7 @@ import SkeletonProductDisplay from "../../../../components/SkeletonProductDispla
 import { useTranslations } from "next-intl";
 import { GET_OTHER_PRODUCTS } from "../../../../queries/productPage";
 import { getTranslations } from "next-intl/server";
+import ResetCartHandler from "../../../../components/ResetCartHandler";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
 	const t = await getTranslations({ locale, namespace: "order" });
@@ -65,6 +66,13 @@ async function loadProducts(locale: string) {
 	);
 }
 
+type RootState = {
+	cart: {
+		products: any[];
+		count: number;
+	};
+};
+
 export default function OrderPage({
 	params: { state, locale }
 }: {
@@ -75,6 +83,7 @@ export default function OrderPage({
 
 	return (
 		<div className="flex flex-1 flex-col items-center justify-center gap-6">
+			{state === "success" && <ResetCartHandler />}
 			<p className="col-span-4 row-auto mt-6 w-full text-center text-3xl font-bold text-white">
 				<i className="ri-error-warning-line"></i>
 				{t(state === "success" ? "orderSuccess" : "orderFail")}

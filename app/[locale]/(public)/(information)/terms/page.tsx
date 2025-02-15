@@ -23,7 +23,7 @@ export default function TermsPage() {
 				<i className="ri-arrow-right-double-fill"></i>
 				<h1>{t("terms")}</h1>
 			</div>
-			(
+
 			<ul>
 				<li>
 					<h2 className="p-3 font-bold">1. {t("generalProvisions")}</h2>
