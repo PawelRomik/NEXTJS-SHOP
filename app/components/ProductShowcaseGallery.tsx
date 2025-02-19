@@ -1,5 +1,3 @@
-// app/productShowcaseGalleryServer.tsx
-
 import { ApolloQueryResult } from "@apollo/client";
 import { QueryResult } from "../queries/productType";
 import { GET_PRODUCT_IMAGES } from "../queries/productPage";

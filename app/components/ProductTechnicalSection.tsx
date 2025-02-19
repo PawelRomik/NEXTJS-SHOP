@@ -10,16 +10,6 @@ type ProductTechnicalSectionProps = {
 	locale: string;
 };
 
-const list = {
-	visible: {},
-	hidden: {}
-};
-
-const item = {
-	visible: { x: 0 },
-	hidden: { x: "-200%" }
-};
-
 export default function ProductTechnicalSection({
 	productId,
 	locale
