@@ -105,83 +105,86 @@ export default function CartPopover() {
 							event.preventDefault();
 						}
 					}}
-					className="flex w-[100vw] origin-top animate-showNav border-[3px] border-r-0 border-zinc-900 border-b-red-600  bg-zinc-900 p-5 lg:w-auto lg:border-red-600 "
+					className="flex w-[100vw] origin-top animate-showNav border-[3px] border-r-0 border-zinc-900 border-b-red-600  bg-[rgb(20,20,20)]  lg:w-auto lg:border-red-600 "
 				>
-					<div className="z-50 p-5 uppercase text-white">
-						<h1 className="mb-7 text-2xl font-bold text-red-600">{t("cart.content")}</h1>
-						{products?.slice(0, 3).map((item) => (
-							<div
-								className="item mb-7 flex w-full items-center justify-between gap-5"
-								key={item.id}
-							>
-								<Image
-									className="h-[100px] max-h-[100px] w-[80px] max-w-[80px] object-contain"
-									src={process.env.NEXT_PUBLIC_PROD_PATH + item.image}
-									width={80}
-									height={100}
-									alt={t("cart.productImage")}
-								/>
-								<div className="details">
-									<h1 className="text-lg font-medium">{item.name}</h1>
-									<div className="flex items-center justify-between gap-2">
-										<p className={item.onSale ? "text-red-600" : "text-zinc-400"}>
-											{item.quantity} x{" "}
-											{t("product.price", { amount: formatPrice(item.price, exchangeRate) })}
-										</p>
-										{item.onSale && (
-											<div className="flex items-center justify-center px-2 font-bold uppercase text-red-600">
-												{t("cart.sale")}
-											</div>
-										)}
+					<div className="z-50 uppercase text-white">
+						<h1 className="mb-7 bg-[rgb(12,12,12)] p-3 text-center text-2xl font-bold">
+							{t("cart.content")}
+						</h1>
+						<div className=" px-5">
+							{products?.slice(0, 3).map((item) => (
+								<div
+									className="item mb-7 flex w-full items-center justify-between gap-5 bg-[rgb(12,12,12)] px-5"
+									key={item.id}
+								>
+									<Image
+										className="h-[100px] max-h-[100px] w-[80px] max-w-[80px] object-contain"
+										src={process.env.NEXT_PUBLIC_PROD_PATH + item.image}
+										width={80}
+										height={100}
+										alt={t("cart.productImage")}
+									/>
+									<div className="details">
+										<h1 className="text-lg font-medium">{item.name}</h1>
+										<div className="flex items-center justify-between gap-2">
+											<p className="text-red-600">
+												{item.quantity} x{" "}
+												{t("product.price", { amount: formatPrice(item.price, exchangeRate) })}
+											</p>
+											{item.onSale && (
+												<div className="ml-2 flex items-center justify-center bg-red-600 px-2 font-bold uppercase">
+													{t("cart.sale")}
+												</div>
+											)}
+										</div>
+									</div>
+									<div className="flex items-center justify-center gap-2">
+										<button
+											className="delete cursor-pointer text-2xl"
+											onClick={() => dispatch(removeItem(item.id))}
+										>
+											<i className="ri-indeterminate-circle-line text-[rgb(100,100,100)]  transition hover:text-red-600"></i>
+										</button>
+										<button
+											className="delete cursor-pointer text-2xl"
+											onClick={() => dispatch(increaseQuantity(item.id))}
+										>
+											<i className="ri-add-circle-line text-[rgb(100,100,100)] transition hover:text-red-600"></i>
+										</button>
+										<button
+											className="delete cursor-pointer text-2xl"
+											onClick={() => dispatch(removeAllOfItem(item.id))}
+										>
+											<i className="ri-delete-bin-line text-[rgb(100,100,100)] transition hover:text-red-600"></i>
+										</button>
 									</div>
 								</div>
-								<div className="flex items-center justify-center gap-2">
+							))}
+							{products.length > 0 ? (
+								<>
+									<div className="total mb-5 flex justify-end gap-3 text-lg font-medium uppercase">
+										<span>{t("cart.subtotal")}</span>
+										<span className="text-red-600">
+											{t("product.price", { amount: totalPrice() })}
+										</span>
+									</div>
 									<button
-										className="delete cursor-pointer text-2xl"
-										onClick={() => dispatch(removeItem(item.id))}
+										onClick={handlePayment}
+										className="mx-auto mb-5 flex w-full cursor-pointer items-center justify-center gap-5 border-none bg-red-600 p-3 font-medium uppercase text-white transition hover:bg-red-500"
 									>
-										<i className="ri-indeterminate-circle-line text-red-600 hover:text-red-400"></i>
+										{t("cart.checkout")}
 									</button>
-									<button
-										className="delete cursor-pointer text-2xl"
-										onClick={() => dispatch(increaseQuantity(item.id))}
+									<p
+										className="cursor-pointer py-3 text-xs font-bold text-red-600 hover:text-red-400"
+										onClick={() => dispatch(resetCart())}
 									>
-										<i className="ri-add-circle-line text-red-600 hover:text-red-400"></i>
-									</button>
-									<button
-										className="delete cursor-pointer text-2xl"
-										onClick={() => dispatch(removeAllOfItem(item.id))}
-									>
-										<i className="ri-delete-bin-line text-red-600 hover:text-red-400"></i>
-									</button>
-								</div>
-							</div>
-						))}
-						{products.length > 3 && (
-							<p className="mb-8 mt-4 font-bold text-zinc-400">+{`${products.length - 3}`} more</p>
-						)}
-						{products.length > 0 ? (
-							<>
-								<div className="total mb-5 flex justify-between text-lg font-medium uppercase">
-									<span>{t("cart.subtotal")}</span>
-									<span>{t("product.price", { amount: totalPrice() })}</span>
-								</div>
-								<button
-									onClick={handlePayment}
-									className="mx-auto mb-5 flex w-full cursor-pointer items-center justify-center gap-5 border-none bg-zinc-950 p-2.5 font-medium uppercase text-white transition hover:bg-red-600"
-								>
-									{t("cart.checkout")}
-								</button>
-								<p
-									className=" cursor-pointer text-xs font-bold text-red-600 hover:text-red-400"
-									onClick={() => dispatch(resetCart())}
-								>
-									{t("cart.resetBtn")}
-								</p>
-							</>
-						) : (
-							<p>{t("cart.noProducts")}</p>
-						)}
+										{t("cart.resetBtn")}
+									</p>
+								</>
+							) : (
+								<p>{t("cart.noProducts")}</p>
+							)}
+						</div>
 					</div>
 					<Popover.Close
 						className="absolute right-[5px] top-[5px] z-50 inline-flex h-[25px] w-[25px] cursor-pointer items-center justify-center rounded-full text-red-600 outline-none hover:text-red-400 "

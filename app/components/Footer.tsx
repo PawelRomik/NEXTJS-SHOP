@@ -66,7 +66,7 @@ export default function Footer() {
 							<i className="ri-discord-fill"></i>
 						</Link>
 					</li>
-					<li>
+					<li className="relative overflow-hidden">
 						<LanguageSwitcher />
 					</li>
 				</ul>

@@ -250,6 +250,11 @@ option:hover {
 	appearance: none;
 }
 
+html body {
+	width: 100vw;
+	overflow-x: hidden;
+	padding-right: calc(0 - var(--removed-body-scroll-bar-size)) !important;
+}
 .mirror:after {
 	pointer-events: none;
 	content: "";
