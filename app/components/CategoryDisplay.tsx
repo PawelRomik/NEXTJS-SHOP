@@ -59,7 +59,7 @@ export default function CategoryDisplay({ category, locale }: ProductOtherSectio
 							))}
 						</div>
 						<Link href={`/category/${category}`}>
-							<button className="group flex h-full w-full flex-col items-center justify-center rounded-lg  bg-zinc-950 px-10 py-4  text-xl  font-bold uppercase transition  hover:bg-red-600">
+							<button className="group flex h-full w-full flex-col items-center justify-center rounded-lg  bg-red-600  px-10 py-4  text-xl  font-bold uppercase transition  hover:bg-red-500">
 								{t("checkLong")}
 							</button>
 						</Link>
