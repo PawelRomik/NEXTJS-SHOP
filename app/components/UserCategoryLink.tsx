@@ -10,7 +10,7 @@ type UserCategoryLinkProps = {
 	};
 };
 
-const UserCategoryLink = ({ category }: UserCategoryLinkProps) => {
+function UserCategoryLink({ category }: UserCategoryLinkProps) {
 	const pathname = usePathname();
 	const locale = useLocale();
 	const isActive = pathname === `/pl/user/${category.slug}`;
