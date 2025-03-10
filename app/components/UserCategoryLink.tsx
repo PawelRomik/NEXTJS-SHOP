@@ -35,6 +35,6 @@ function UserCategoryLink({ category }: UserCategoryLinkProps) {
 			</li>
 		</Link>
 	);
-};
+}
 
 export default UserCategoryLink;
