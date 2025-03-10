@@ -12,7 +12,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 			<PersistGate loading={null} persistor={persistor}>
 				<ClerkProvider>
 					<Theme
-						accentColor="mint"
+						accentColor="red"
 						grayColor="gray"
 						panelBackground="solid"
 						scaling="100%"
