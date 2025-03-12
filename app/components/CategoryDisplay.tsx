@@ -45,18 +45,6 @@ export default function CategoryDisplay({ category, locale }: ProductOtherSectio
 									key={product.id}
 								></ProductDisplay>
 							))}
-							{data.products.data.map((product) => (
-								<ProductDisplay
-									uuid={product.attributes.uuid}
-									name={product.attributes.name}
-									desc={product.attributes.desc}
-									price={product.attributes.price}
-									salePrice={product.attributes.salePrice}
-									category={product.attributes.categories.data[0].attributes.name}
-									imageUrl={product.attributes.images.data[0].attributes.url}
-									key={product.id}
-								></ProductDisplay>
-							))}
 						</div>
 						<Link href={`/category/${category}`}>
 							<button className="group flex h-full w-full flex-col items-center justify-center rounded-lg  bg-red-600  px-10 py-4  text-xl  font-bold uppercase transition  hover:bg-red-500">
