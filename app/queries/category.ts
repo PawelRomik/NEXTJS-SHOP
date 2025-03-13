@@ -19,31 +19,3 @@ export const GET_CATEGORY_IMAGE = gql`
 		}
 	}
 `;
-
-export const GET_CATEGORIES = gql`
-	query getCategories {
-		categories(pagination: { limit: 30 }) {
-			data {
-				id
-				attributes {
-					name
-					slug
-					image {
-						data {
-							attributes {
-								url
-							}
-						}
-					}
-					category_group {
-						data {
-							attributes {
-								name
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-`;
