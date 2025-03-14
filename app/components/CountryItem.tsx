@@ -10,7 +10,7 @@ export default function CountryItem({ country }: { country: string }) {
 		<DropdownMenuItem className="p-0">
 			<a
 				href={`/${country}${pathname}`}
-				className="flex w-full cursor-pointer items-center justify-center gap-2 p-1  transition hover:bg-red-600"
+				className="flex w-full cursor-pointer items-center justify-center gap-2 p-1 font-bold  transition hover:bg-red-600 hover:text-white"
 			>
 				<Flag country={country} />
 				<p className="bold uppercase">{country}</p>

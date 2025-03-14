@@ -22,7 +22,7 @@ export default async function LanguageSwitcher() {
 				<Flag country={locale} />
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="m-0 rounded-none border-[3px] border-red-600 bg-zinc-900 p-0 text-white">
-				<DropdownMenuLabel className="w-full bg-[rgb(12,12,12)] px-3 py-2 text-center uppercase ">
+				<DropdownMenuLabel className="text-md w-full bg-[rgb(12,12,12)] px-3 py-2 text-center uppercase ">
 					{t("changeLanguage")}
 				</DropdownMenuLabel>
 

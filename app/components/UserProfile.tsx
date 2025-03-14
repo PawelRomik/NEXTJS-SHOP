@@ -35,11 +35,11 @@ export default function UserProfile() {
 
 					<DropdownMenu.Portal>
 						<DropdownMenu.Content
-							className="min-w-[220px] origin-top animate-showNav border-[3px] border-red-600 bg-zinc-900 p-5 text-white "
+							className="min-w-[220px] origin-top animate-showNav border-[3px] border-red-600 bg-[rgb(20,20,20)] text-white "
 							sideOffset={5}
 						>
-							<DropdownMenu.Item className="group relative flex select-none items-start rounded-[3px] p-[5px] px-[15px] text-[14px] leading-none outline-none ">
-								<div className="flex w-full flex-col items-center justify-center gap-3">
+							<DropdownMenu.Item className="group relative flex select-none items-start rounded-[3px] bg-[rgb(12,12,12)]  p-5 text-[14px] leading-none outline-none ">
+								<div className="flex w-full flex-col items-center justify-center gap-3 ">
 									<Avatar.Root className="inline-flex size-[70px] select-none items-center justify-center overflow-hidden rounded-full border-2 border-red-600 align-middle">
 										<Avatar.Image
 											className="size-full rounded-[inherit] object-cover"
@@ -53,19 +53,17 @@ export default function UserProfile() {
 											{username.substring(0, 2).toUpperCase()}
 										</Avatar.Fallback>
 									</Avatar.Root>
-									<p className="text-[18px]">
-										{t("hamburger.loggedIn")}
-										<span className="font-bold capitalize">{username}!</span>
+									<p className="text-[12px]">
+										<span className="font-bold uppercase italic">{username}</span>
 									</p>
 								</div>
 							</DropdownMenu.Item>
 
-							<DropdownMenu.Separator className="m-[5px] h-px bg-zinc-700" />
 							<Link
 								href={"/user/settings"}
-								className="group relative flex  w-full items-center justify-center gap-1"
+								className="group relative mt-3 flex w-full items-center justify-center gap-1 bg-[rgb(12,12,12)]   "
 							>
-								<DropdownMenu.Item className="flex h-[25px] w-full cursor-pointer select-none items-start rounded-[3px] p-[5px] px-[15px] text-[14px] leading-none outline-none hover:bg-zinc-800 ">
+								<DropdownMenu.Item className="flex h-[25px] w-full cursor-pointer select-none items-center justify-start rounded-[3px] bg-[rgb(12,12,12)] py-5 pl-3 text-[14px]   leading-none outline-none transition hover:bg-red-600 ">
 									<div className="flex items-center justify-center gap-1">
 										<i className="ri-settings-2-line"></i> {t("hamburger.settings")}
 									</div>
@@ -74,26 +72,25 @@ export default function UserProfile() {
 
 							<Link
 								href={"/user/orders"}
-								className="group relative flex  w-full items-center justify-center gap-1"
+								className="group relative mt-1 flex w-full items-center justify-center gap-1 bg-[rgb(12,12,12)] "
 							>
-								<DropdownMenu.Item className="flex h-[25px] w-full cursor-pointer select-none items-start rounded-[3px] p-[5px] px-[15px] text-[14px] leading-none outline-none hover:bg-zinc-800 ">
+								<DropdownMenu.Item className="flex h-[25px] w-full cursor-pointer select-none  items-center justify-start rounded-[3px] py-5 pl-3 text-[14px] leading-none outline-none transition hover:bg-red-600 ">
 									<div className="flex items-center justify-center gap-1">
 										<i className="ri-file-list-3-line"></i> {t("order.history")}
 									</div>
 								</DropdownMenu.Item>
 							</Link>
 
-							<DropdownMenu.Separator className="m-[5px] h-px bg-zinc-700" />
 							<DropdownMenu.Item
-								className="group absolute right-0 top-2 flex h-[25px] cursor-pointer select-none items-start rounded-[3px] p-[5px] px-[15px] text-[18px] leading-none text-red-600 outline-none hover:text-red-400"
+								className="group absolute right-0 top-2 flex h-[25px] cursor-pointer select-none items-start rounded-[3px] p-[5px] px-[15px] text-[18px] leading-none text-red-600 outline-none transition hover:text-red-400"
 								aria-label="Close"
 							>
 								<i className="ri-close-circle-line"></i>
 							</DropdownMenu.Item>
 
 							<SignOutButton>
-								<button className="group relative flex  w-full items-center justify-center gap-1">
-									<DropdownMenu.Item className="flex h-[25px] w-full cursor-pointer select-none items-start rounded-[3px] p-[5px] px-[15px] text-[14px] leading-none outline-none hover:bg-zinc-800 ">
+								<button className="group relative mt-3 flex w-full items-center  justify-center bg-[rgb(12,12,12)] ">
+									<DropdownMenu.Item className="flex h-[25px] w-full cursor-pointer select-none justify-start rounded-[3px] py-5  pl-3 text-[14px]  leading-none outline-none transition hover:bg-red-600 ">
 										<div className="flex items-center justify-center gap-1">
 											<i className="ri-logout-box-r-line"></i> {t("hamburger.logOut")}
 										</div>

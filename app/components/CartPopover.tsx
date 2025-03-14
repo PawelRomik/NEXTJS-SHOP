@@ -105,7 +105,7 @@ export default function CartPopover() {
 							event.preventDefault();
 						}
 					}}
-					className="flex w-[100vw] origin-top animate-showNav rounded-lg border-2 border-red-600 bg-[rgb(20,20,20)]  lg:w-auto  "
+					className="flex w-[100vw] origin-top animate-showNav border-[3px] border-red-600 bg-[rgb(20,20,20)]  lg:w-auto  "
 				>
 					<div className="z-50 uppercase text-white">
 						<h1 className="mb-7 bg-[rgb(12,12,12)] p-3 text-center text-2xl font-bold">
@@ -162,11 +162,19 @@ export default function CartPopover() {
 							))}
 							{products.length > 0 ? (
 								<>
-									<div className="total mb-5 flex justify-end gap-3 text-lg font-medium uppercase">
-										<span>{t("cart.subtotal")}</span>
-										<span className="text-red-600">
-											{t("product.price", { amount: totalPrice() })}
-										</span>
+									<div className="total mb-5 flex justify-end gap-3   text-lg font-medium uppercase">
+										{products.length > 3 && (
+											<p className="mr-auto flex items-center justify-end gap-1 bg-[rgb(12,12,12)] p-2 px-4 py-2 text-sm font-bold text-white">
+												<span>{products.length - 1}+</span>
+												<span> More</span>
+											</p>
+										)}
+										<div className="flex items-center justify-center gap-3 bg-[rgb(12,12,12)] px-4 py-2">
+											<span>{t("cart.subtotal")}</span>
+											<span className="text-red-600">
+												{t("product.price", { amount: totalPrice() })}
+											</span>
+										</div>
 									</div>
 									<button
 										onClick={handlePayment}
@@ -174,12 +182,17 @@ export default function CartPopover() {
 									>
 										{t("cart.checkout")}
 									</button>
-									<p
-										className="cursor-pointer py-3 text-xs font-bold text-red-600 hover:text-red-400"
-										onClick={() => dispatch(resetCart())}
-									>
-										{t("cart.resetBtn")}
-									</p>
+									<div className="my-3 flex items-center justify-end gap-3">
+										<p className=" cursor-pointer bg-[rgb(12,12,12)] px-4 py-3 text-xs font-bold transition hover:bg-red-600">
+											View all
+										</p>
+										<p
+											className=" cursor-pointer bg-[rgb(12,12,12)] px-4 py-3 text-xs font-bold transition hover:bg-red-600"
+											onClick={() => dispatch(resetCart())}
+										>
+											{t("cart.resetBtn")}
+										</p>
+									</div>
 								</>
 							) : (
 								<p>{t("cart.noProducts")}</p>

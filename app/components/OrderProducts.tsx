@@ -93,16 +93,16 @@ export default function OrderProducts({ id }: { id: number | string }) {
 
 	return (
 		<div className="bg-[rgb(12,12,12)] p-5">
-			<h2 className="mb-2 text-2xl font-bold uppercase text-white">{t("product.products")}:</h2>
+			<h2 className="mb-2 text-2xl font-bold uppercase text-white">{t("product.products")}</h2>
 			<table className="flex flex-col gap-3">
 				{products.map((product) => (
 					<tr
 						key={product.id}
-						className="flex w-full items-center justify-center gap-[30%] bg-red-600 p-3 text-white"
+						className="flex h-[200px] w-full items-center justify-between gap-5 bg-[rgb(32,32,32)] p-3 font-bold uppercase text-white"
 					>
-						<td className="flex items-center justify-center gap-3">
-							<div className="flex max-h-[100px] max-w-[100px] items-center justify-center">
-								<Link href={`/product/${product.id}`}>
+						<td className="flex h-full flex-col items-center justify-center gap-3 bg-[rgb(20,20,20)] px-4 py-2">
+							<div className="flex  items-center justify-center">
+								<Link href={`/product/${product.id}`} className="max-h-[200px] max-w-[200px] p-3">
 									<Image
 										src={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.imageUrl}`}
 										alt="Product image"
@@ -111,27 +111,45 @@ export default function OrderProducts({ id }: { id: number | string }) {
 									/>
 								</Link>
 							</div>
-							{product.name}
 						</td>
 
-						<td className="flex flex-col items-center justify-center">
-							<p className="w-full">
-								{t("product.price", { amount: formatPrice(product.price, exchangeRate) })} x{" "}
-								{product.quantity}
-							</p>
-							<p className="w-full">
-								{t("order.total")}:{" "}
-								{t("product.price", {
-									amount: formatPrice(product.price * product.quantity, exchangeRate)
-								})}
-							</p>
+						<td className="flex h-full flex-[1] items-center justify-between gap-5   font-bold uppercase">
+							<div className="flex h-full flex-[2] flex-col  bg-[rgb(20,20,20)] ">
+								<p className="w-full border-b-2 border-red-600 p-2 text-center text-xl">
+									{product.name}
+								</p>
+								<p className="p-3">
+									<span>Price: </span>
+									<span className="text-red-600">
+										{t("product.price", { amount: formatPrice(product.price, exchangeRate) })}
+									</span>
+								</p>
+								<p className="px-3">
+									<span>Amount: </span>
+									<span className="text-red-600">{product.quantity}</span>
+								</p>
+								<p className="p-3">
+									<span>{t("order.total")}: </span>
+									<span className="text-red-600">
+										{t("product.price", {
+											amount: formatPrice(product.price * product.quantity, exchangeRate)
+										})}
+									</span>
+								</p>
+							</div>
 						</td>
-						<td>
-							<Link className="transition-all" href={`/product/${product.id}`}>
-								<button>
-									<i className="ri-arrow-right-s-fill text-6xl "></i>
-								</button>
-							</Link>
+
+						<td className="flex h-full items-center justify-between gap-5   font-bold uppercase">
+							<div className="flex h-full flex-1 items-center justify-center bg-[rgb(20,20,20)] ">
+								<Link
+									className="flex h-full w-full items-center justify-center px-4 py-2 transition-all hover:bg-red-600"
+									href={`/product/${product.id}`}
+								>
+									<button>
+										<i className="ri-arrow-right-s-fill text-6xl "></i>
+									</button>
+								</Link>
+							</div>
 						</td>
 					</tr>
 				))}
