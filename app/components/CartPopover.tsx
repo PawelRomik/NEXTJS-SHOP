@@ -105,7 +105,7 @@ export default function CartPopover() {
 							event.preventDefault();
 						}
 					}}
-					className="flex w-[100vw] origin-top animate-showNav rounded-lg border-2 border-red-600 bg-[rgb(20,20,20)]  lg:w-auto  "
+					className="flex w-[100vw] origin-top animate-showNav border-[3px] border-red-600 bg-[rgb(20,20,20)]  lg:w-auto  "
 				>
 					<div className="z-50 uppercase text-white">
 						<h1 className="mb-7 bg-[rgb(12,12,12)] p-3 text-center text-2xl font-bold">
