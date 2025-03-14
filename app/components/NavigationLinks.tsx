@@ -45,7 +45,7 @@ export default function NavigationLinks() {
 							{category.subCategories && <i className="ri-arrow-drop-down-line"></i>}
 						</NavigationMenu.Trigger>
 						{category.subCategories && (
-							<NavigationMenu.Content className="fixed left-0 top-[5rem] flex w-screen origin-top animate-showNav items-start justify-center gap-6 overflow-hidden overflow-x-hidden border-b-[3px] border-b-red-600 bg-zinc-900">
+							<NavigationMenu.Content className="fixed left-0 top-[5rem] flex w-screen origin-top animate-showNav items-start justify-center gap-6 overflow-hidden overflow-x-hidden border-b-[3px] border-b-red-600 bg-[rgb(20,20,20)]">
 								<div className="my-auto h-[250px] w-[300px]">
 									<Image
 										height={250}
