@@ -127,7 +127,6 @@ async function loadProducts(
 	sort?: string
 ) {
 	const data = await fetchProducts(category, page, locale, tags, sort);
-	console.log(data);
 	if (!data || data.data.length == 0) return <ErrorText />;
 
 	return (
