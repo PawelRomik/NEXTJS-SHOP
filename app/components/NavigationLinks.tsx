@@ -25,13 +25,14 @@ export default function NavigationLinks() {
 					slug: category
 				}
 			});
-			console.log(data);
 			const dataUrl = data.categories.data[0]?.attributes.image.data.attributes.url;
 			setImageSrc(`${process.env.NEXT_PUBLIC_PROD_PATH}${dataUrl}`);
 		} catch (err) {
 			setImageSrc("");
 		}
 	};
+
+	const isDirectSlug = ["new", "sale", "bundles"];
 
 	return (
 		<NavigationMenu.Root className="relative z-[1] hidden w-svw flex-1 justify-center lg:flex">
@@ -76,7 +77,11 @@ export default function NavigationLinks() {
 												className=""
 											>
 												<Link
-													href={`/category/${subCategory.slug}`}
+													href={
+														isDirectSlug.includes(subCategory.slug)
+															? `/${subCategory.slug}`
+															: `/category/${subCategory.slug}`
+													}
 													title={t(subCategory.slug)}
 													className="group"
 												>
