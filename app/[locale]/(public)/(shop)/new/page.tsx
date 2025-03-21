@@ -39,7 +39,6 @@ async function fetchProducts(locale: string) {
 			variables
 		});
 
-		console.log(data);
 		return data.products;
 	} catch {
 		return null;
