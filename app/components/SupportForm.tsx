@@ -1,0 +1,166 @@
+"use client";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+
+type FormData = {
+	email: string;
+	subject: string;
+	description: string;
+	attachments: File[];
+};
+
+export default function SupportForm() {
+	const [formData, setFormData] = useState<FormData>({
+		email: "",
+		subject: "",
+		description: "",
+		attachments: []
+	});
+	const [errors, setErrors] = useState<{ email: string; subject: string; description: string }>({
+		email: "",
+		subject: "",
+		description: ""
+	});
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value } = e.target;
+		setFormData((prev) => ({ ...prev, [name]: value }));
+	};
+
+	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		let files = Array.from(e.target.files || []);
+
+		if (formData.attachments.length + files.length > 5) {
+			alert("Można dodać tylko maksymalnie 5 plików.");
+			e.target.value = "";
+			return;
+		}
+
+		setFormData((prev) => ({ ...prev, attachments: [...prev.attachments, ...files] }));
+
+		e.target.value = "";
+	};
+
+	const removeAttachment = (index: number) => {
+		setFormData((prev) => ({
+			...prev,
+			attachments: prev.attachments.filter((_, i) => i !== index)
+		}));
+	};
+
+	const validateForm = () => {
+		let newErrors = { email: "", subject: "", description: "" };
+		let isValid = true;
+
+		if (!formData.email.includes("@")) {
+			newErrors.email = "Podaj poprawny adres e-mail";
+			isValid = false;
+		}
+		if (formData.subject.trim() === "") {
+			newErrors.subject = "Temat nie może być pusty";
+			isValid = false;
+		}
+		if (formData.description.trim() === "") {
+			newErrors.description = "Opis problemu nie może być pusty";
+			isValid = false;
+		}
+		setErrors(newErrors);
+		return isValid;
+	};
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		if (!validateForm()) return;
+
+		console.log("Wysłano formularz:", formData);
+		alert("Formularz został wysłany!");
+	};
+
+	return (
+		<form
+			onSubmit={handleSubmit}
+			className="mx-auto flex-[2] rounded-lg bg-[rgb(12,12,12)] p-6 text-white"
+		>
+			<h2 className="mb-6 text-center text-4xl font-bold">SEND A TICKET</h2>
+
+			<div className="mb-4 flex items-center justify-center gap-3">
+				<label className="block w-[8rem] text-xl font-bold uppercase">Email</label>
+				<input
+					type="email"
+					name="email"
+					value={formData.email}
+					onChange={handleChange}
+					required
+					className="flex-1 rounded-lg bg-white p-3 text-white"
+				/>
+				{errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
+			</div>
+
+			<div className="mb-4 flex items-center justify-center gap-3">
+				<label className="block w-[8rem] text-xl font-bold uppercase">Temat</label>
+				<input
+					type="text"
+					name="subject"
+					value={formData.subject}
+					onChange={handleChange}
+					required
+					className="flex-1 rounded-lg bg-white p-3 text-white"
+				/>
+				{errors.subject && <p className="text-sm text-red-500">{errors.subject}</p>}
+			</div>
+
+			<div className="mb-4 flex items-center justify-between gap-3">
+				<label className="block w-[8rem] text-xl font-bold uppercase">Opis</label>
+				<textarea
+					name="description"
+					value={formData.description}
+					onChange={handleChange}
+					required
+					className="flex-1 rounded-lg bg-white p-3 text-white"
+				/>
+				{errors.description && <p className="text-sm text-red-500">{errors.description}</p>}
+			</div>
+
+			<div className="mb-4 flex flex-col items-start justify-center gap-3">
+				<div className="flex w-full items-center justify-center gap-3">
+					<label className="block w-[8rem] text-xl font-bold uppercase">Załączniki</label>
+					<input
+						type="file"
+						multiple
+						onChange={handleFileChange}
+						className="flex-1 rounded-lg bg-white p-3 text-white"
+					/>
+				</div>
+				<ul className="mt-2 flex min-h-[60px] gap-3">
+					{formData.attachments.map((file, index) => (
+						<li
+							key={index}
+							className="flex items-center justify-between gap-3 rounded-md border-2 border-red-600 bg-red-600 p-2 text-white"
+						>
+							<a
+								href={URL.createObjectURL(file)}
+								download={file.name}
+								className="max-w-xs truncate underline"
+							>
+								{file.name.length > 15 ? `${file.name.slice(0, 15)}...` : file.name}
+							</a>
+							<button
+								className="h-[2rem] w-[2rem] rounded-lg border-2 border-red-700 bg-red-500"
+								onClick={() => removeAttachment(index)}
+							>
+								X
+							</button>
+						</li>
+					))}
+				</ul>
+			</div>
+
+			<Button
+				type="submit"
+				className="w-full rounded bg-red-600 px-4 py-6 text-2xl font-bold uppercase text-white hover:bg-red-700"
+			>
+				Wyślij
+			</Button>
+		</form>
+	);
+}
