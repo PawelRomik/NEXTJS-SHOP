@@ -1,19 +1,19 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import createApolloClient from "../../../../../apollo-client";
+import createApolloClient from "../../../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
-import { QueryResult } from "../../../../queries/productType";
-import ErrorText from "../../../../components/ErrorText";
-import ProductDisplay from "../../../../components/ProductDisplay";
+import { QueryResult } from "../../../queries/productType";
+import ErrorText from "../../../components/ErrorText";
+import ProductDisplay from "../../../components/ProductDisplay";
 import { revalidatePath } from "next/cache";
 import { Grid } from "@radix-ui/themes";
 import { Suspense } from "react";
-import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
-import { GET_NEW_PRODUCTS } from "../../../../queries/shopPage";
-import CategoryShowcase from "../../../../components/CategoryShowcase";
+import SkeletonProductDisplay from "../../../components/SkeletonProductDisplay";
+import { GET_NEW_PRODUCTS } from "../../../queries/shopPage";
+import CategoryShowcase from "../../../components/CategoryShowcase";
 import Image from "next/image";
-import { formatPrice } from "../../../../lib/utils/formatPrice";
-import CartContent from "../../../../components/CartContent";
+import { formatPrice } from "../../../lib/utils/formatPrice";
+import CartContent from "../../../components/CartContent";
 
 type CategoryKeys = keyof IntlMessages["categories"];
 
