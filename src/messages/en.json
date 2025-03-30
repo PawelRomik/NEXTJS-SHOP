@@ -110,6 +110,7 @@
 		"sale": "Sale"
 	},
 	"cart": {
+		"cart": "Cart",
 		"content": "Products in cart",
 		"subtotal": "Subtotal",
 		"checkout": "Checkout",

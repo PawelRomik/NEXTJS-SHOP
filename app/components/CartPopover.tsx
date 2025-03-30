@@ -13,6 +13,8 @@ import { formatPrice } from "../lib/utils/formatPrice";
 import { useCurrency } from "../context/CurrencyProvider";
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 type RootState = {
 	cart: {
@@ -27,9 +29,8 @@ export default function CartPopover() {
 	const products = useSelector((state: RootState) => state.cart.products);
 	const count = useSelector((state: RootState) => state.cart.count);
 	const dispatch = useDispatch();
-	const { exchangeRate, currency } = useCurrency();
-	const locale = useLocale();
-	const { user } = useUser();
+	const { exchangeRate } = useCurrency();
+	const pathname = usePathname();
 
 	const totalPrice = () => {
 		let total = 0;
@@ -44,41 +45,12 @@ export default function CartPopover() {
 	useEffect(() => {
 		const currentTotalQuantity = products.reduce((sum, item) => sum + item.quantity, 0);
 
-		if (currentTotalQuantity > prevTotalQuantity.current) {
+		if (currentTotalQuantity > prevTotalQuantity.current && !pathname.endsWith("/cart")) {
 			setIsOpen(true);
 		}
 
 		prevTotalQuantity.current = currentTotalQuantity;
-	}, [products]);
-
-	const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PROD_KEY || "");
-
-	const handlePayment = async () => {
-		try {
-			const stripe = await stripePromise;
-			const res = await axios
-				.create({
-					baseURL: process.env.NEXT_PUBLIC_PROD_PATH,
-					headers: {
-						Authorization:
-							"bearer 15f3bbedadd97c183126ac913ec2bd519b72f40e3c2a085f54529f0e9a75866a31e93fe949997c737dfe1948793ca961de6d345ef0aa384ac67d5bdae4fe86e00667c327e0ab204a5ee06f1b8a2b6f488f6357d992c665586c4d065528b4c70c34f27b3df7701a6490304e5641bc9744d3ed7e56f578ba10b9d73516605e506f"
-					}
-				})
-				.post("/api/orders", {
-					products,
-					currency,
-					exchangeRate,
-					locale,
-					user: user?.id
-				});
-
-			await stripe?.redirectToCheckout({
-				sessionId: res.data.stripeSession.id
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	};
+	}, [products, pathname]);
 
 	return (
 		<Popover.Root open={isOpen} defaultOpen={false} onOpenChange={(open) => setIsOpen(open)}>
@@ -108,7 +80,7 @@ export default function CartPopover() {
 					className="flex w-[100vw] origin-top animate-showNav border-[3px] border-red-600 bg-[rgb(20,20,20)]  lg:w-auto  "
 				>
 					<div className="z-50 uppercase text-white">
-						<h1 className="mb-7 bg-[rgb(12,12,12)] p-3 text-center text-2xl font-bold">
+						<h1 className="mb-7 bg-[rgb(12,12,12)] p-3 text-center text-2xl font-bold lg:px-10">
 							{t("cart.content")}
 						</h1>
 						<div className=" px-5">
@@ -176,16 +148,12 @@ export default function CartPopover() {
 											</span>
 										</div>
 									</div>
-									<button
-										onClick={handlePayment}
-										className="mx-auto mb-5 flex w-full cursor-pointer items-center justify-center gap-5 border-none bg-red-600 p-3 font-medium uppercase text-white transition hover:bg-red-500"
-									>
-										{t("cart.checkout")}
-									</button>
+									<Link href="/cart">
+										<button className="mx-auto mb-5 flex w-full cursor-pointer items-center justify-center gap-5 border-none bg-red-600 p-3 font-bold uppercase text-white transition hover:bg-red-500">
+											{t("cart.checkout")}
+										</button>
+									</Link>
 									<div className="my-3 flex items-center justify-end gap-3">
-										<p className=" cursor-pointer bg-[rgb(12,12,12)] px-4 py-3 text-xs font-bold transition hover:bg-red-600">
-											View all
-										</p>
 										<p
 											className=" cursor-pointer bg-[rgb(12,12,12)] px-4 py-3 text-xs font-bold transition hover:bg-red-600"
 											onClick={() => dispatch(resetCart())}
@@ -195,7 +163,7 @@ export default function CartPopover() {
 									</div>
 								</>
 							) : (
-								<p>{t("cart.noProducts")}</p>
+								<p className="w-full pb-5 text-center font-bold">{t("cart.noProducts")}</p>
 							)}
 						</div>
 					</div>
