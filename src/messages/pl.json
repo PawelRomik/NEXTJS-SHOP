@@ -110,6 +110,7 @@
 		"sale": "Wyprzedaż"
 	},
 	"cart": {
+		"cart": "Koszyk",
 		"content": "Produkty w koszyku",
 		"subtotal": "Suma:",
 		"checkout": "Zamówienie",
