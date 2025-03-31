@@ -118,7 +118,7 @@ export default function CartContent() {
 			{products.length > 0 ? (
 				<>
 					{products?.map((item) => (
-						<div className="mx-auto flex max-h-[500px] w-[90%] flex-col gap-3 overflow-y-auto rounded-lg border-2 border-[rgb(32,32,32)] bg-[rgb(32,32,32)]">
+						<div key={item.id} className="mx-auto flex max-h-[500px] w-[90%] flex-col gap-3 overflow-y-auto rounded-lg border-2 border-[rgb(32,32,32)] bg-[rgb(32,32,32)]">
 							<div
 								className="item flex w-full items-center justify-between gap-5 bg-[rgb(12,12,12)] px-5"
 								key={item.id}

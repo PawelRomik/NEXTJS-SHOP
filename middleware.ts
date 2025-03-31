@@ -1,7 +1,11 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import createMiddleware from "next-intl/middleware";
 
-const isProtectedRoute = createRouteMatcher(["/:locale/user(.*)", "/:locale/order(.*)"]);
+const isProtectedRoute = createRouteMatcher([
+	"/:locale/user(.*)",
+	"/:locale/order(.*)",
+	"/:locale/cart(.*)"
+]);
 
 const nextIntlMiddleware = createMiddleware({
 	locales: ["en", "pl"],
