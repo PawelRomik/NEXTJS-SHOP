@@ -37,9 +37,9 @@ export default async function supportPage({
 			<div className="mt-2 flex w-full items-center justify-center bg-red-600 py-5 text-4xl font-bold uppercase text-white">
 				GOT A PROBLEM?
 			</div>
-			<div className="my-auto flex w-[100%] items-center justify-around gap-5 px-12">
+			<div className="shadow-inset my-auto flex h-full w-[100%] items-center justify-around gap-5 px-12">
 				<SupportForm />
-				<Image src={nextLogo} className="h-full w-[25%]" alt={t("shopLogo")} />
+				<Image src={nextLogo} className="h-[500px] w-[25%]" alt={t("shopLogo")} />
 			</div>
 		</main>
 	);
