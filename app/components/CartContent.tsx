@@ -12,6 +12,7 @@ import { formatPrice } from "../lib/utils/formatPrice";
 import { useCurrency } from "../context/CurrencyProvider";
 import { useUser } from "@clerk/nextjs";
 import { useEffect } from "react";
+import Link from "next/link";
 
 type RootState = {
 	cart: {
@@ -127,13 +128,15 @@ export default function CartContent() {
 									className="item flex w-full items-center justify-between gap-5 bg-[rgb(12,12,12)] px-5"
 									key={item.id}
 								>
-									<Image
-										className="h-[100px] max-h-[100px] w-[80px] max-w-[80px] object-contain"
-										src={process.env.NEXT_PUBLIC_PROD_PATH + item.image}
-										width={80}
-										height={100}
-										alt={t("cart.productImage")}
-									/>
+									<Link title="Product" href={`/product/${item.id}`}>
+										<Image
+											className="h-[100px] max-h-[100px] w-[80px] max-w-[80px] object-contain"
+											src={process.env.NEXT_PUBLIC_PROD_PATH + item.image}
+											width={80}
+											height={100}
+											alt={t("cart.productImage")}
+										/>
+									</Link>
 									<div className="details flex flex-1 flex-col items-center justify-center">
 										<h1 className="text-lg font-medium">{item.name}</h1>
 										<div className="flex items-center justify-between gap-2">
