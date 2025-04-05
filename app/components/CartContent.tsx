@@ -12,6 +12,7 @@ import { formatPrice } from "../lib/utils/formatPrice";
 import { useCurrency } from "../context/CurrencyProvider";
 import { useUser } from "@clerk/nextjs";
 import { useEffect } from "react";
+import Link from "next/link";
 
 type RootState = {
 	cart: {
@@ -53,7 +54,7 @@ export default function CartContent() {
 		});
 		total = total - (total * discount) / 100;
 		setPrice(total.toFixed(2));
-	}, [products, discount]);
+	}, [products, discount, exchangeRate]);
 
 	const prevTotalQuantity = useRef(products.reduce((sum, item) => sum + item.quantity, 0));
 
@@ -111,62 +112,69 @@ export default function CartContent() {
 
 	return (
 		<div className="z-50 flex h-full flex-col  uppercase text-white">
-			<h1 className="mb-7 bg-[rgb(12,12,12)] p-6 text-center text-2xl font-bold">
+			<h1 className=" bg-[rgb(12,12,12)] p-6 text-center text-2xl font-bold">
 				<span className="rounded-lg bg-red-600 px-2">{count}</span> {t("cart.content")}
 			</h1>
 
 			{products.length > 0 ? (
 				<>
-					{products?.map((item) => (
-						<div key={item.id} className="mx-auto flex max-h-[500px] w-[90%] flex-col gap-3 overflow-y-auto rounded-lg border-2 border-[rgb(32,32,32)] bg-[rgb(32,32,32)]">
+					<div className="shadow-inset flex h-full w-full flex-1 flex-col pt-7">
+						{products?.map((item) => (
 							<div
-								className="item flex w-full items-center justify-between gap-5 bg-[rgb(12,12,12)] px-5"
 								key={item.id}
+								className="mx-auto flex max-h-[500px] w-[90%] flex-col gap-3 overflow-y-auto rounded-lg bg-[rgb(32,32,32)]"
 							>
-								<Image
-									className="h-[100px] max-h-[100px] w-[80px] max-w-[80px] object-contain"
-									src={process.env.NEXT_PUBLIC_PROD_PATH + item.image}
-									width={80}
-									height={100}
-									alt={t("cart.productImage")}
-								/>
-								<div className="details flex flex-1 flex-col items-center justify-center">
-									<h1 className="text-lg font-medium">{item.name}</h1>
-									<div className="flex items-center justify-between gap-2">
-										<p className="text-red-600">
-											{item.quantity} x{" "}
-											{t("product.price", { amount: formatPrice(item.price, exchangeRate) })}
-										</p>
-										{item.onSale && (
-											<div className="ml-2 flex items-center justify-center bg-red-600 px-2 font-bold uppercase">
-												{t("cart.sale")}
-											</div>
-										)}
+								<div
+									className="item flex w-full items-center justify-between gap-5 bg-[rgb(12,12,12)] px-5"
+									key={item.id}
+								>
+									<Link title="Product" href={`/product/${item.id}`}>
+										<Image
+											className="h-[100px] max-h-[100px] w-[80px] max-w-[80px] object-contain"
+											src={process.env.NEXT_PUBLIC_PROD_PATH + item.image}
+											width={80}
+											height={100}
+											alt={t("cart.productImage")}
+										/>
+									</Link>
+									<div className="details flex flex-1 flex-col items-center justify-center">
+										<h1 className="text-lg font-medium">{item.name}</h1>
+										<div className="flex items-center justify-between gap-2">
+											<p className="text-red-600">
+												{item.quantity} x{" "}
+												{t("product.price", { amount: formatPrice(item.price, exchangeRate) })}
+											</p>
+											{item.onSale && (
+												<div className="ml-2 flex items-center justify-center bg-red-600 px-2 font-bold uppercase">
+													{t("cart.sale")}
+												</div>
+											)}
+										</div>
+									</div>
+									<div className="flex items-center justify-center gap-2">
+										<button
+											className="delete cursor-pointer text-2xl"
+											onClick={() => dispatch(removeItem(item.id))}
+										>
+											<i className="ri-indeterminate-circle-line text-[rgb(100,100,100)]  transition hover:text-red-600"></i>
+										</button>
+										<button
+											className="delete cursor-pointer text-2xl"
+											onClick={() => dispatch(increaseQuantity(item.id))}
+										>
+											<i className="ri-add-circle-line text-[rgb(100,100,100)] transition hover:text-red-600"></i>
+										</button>
+										<button
+											className="delete cursor-pointer text-2xl"
+											onClick={() => dispatch(removeAllOfItem(item.id))}
+										>
+											<i className="ri-delete-bin-line text-[rgb(100,100,100)] transition hover:text-red-600"></i>
+										</button>
 									</div>
 								</div>
-								<div className="flex items-center justify-center gap-2">
-									<button
-										className="delete cursor-pointer text-2xl"
-										onClick={() => dispatch(removeItem(item.id))}
-									>
-										<i className="ri-indeterminate-circle-line text-[rgb(100,100,100)]  transition hover:text-red-600"></i>
-									</button>
-									<button
-										className="delete cursor-pointer text-2xl"
-										onClick={() => dispatch(increaseQuantity(item.id))}
-									>
-										<i className="ri-add-circle-line text-[rgb(100,100,100)] transition hover:text-red-600"></i>
-									</button>
-									<button
-										className="delete cursor-pointer text-2xl"
-										onClick={() => dispatch(removeAllOfItem(item.id))}
-									>
-										<i className="ri-delete-bin-line text-[rgb(100,100,100)] transition hover:text-red-600"></i>
-									</button>
-								</div>
 							</div>
-						</div>
-					))}
+						))}
+					</div>
 					<div className="mt-auto flex w-full bg-[rgb(12,12,12)] p-3 px-8">
 						<div className="relative flex w-[300px] flex-col items-center justify-center">
 							<label className="block w-full text-xl font-bold uppercase">Discount code</label>
