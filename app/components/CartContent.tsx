@@ -140,9 +140,7 @@ export default function CartContent() {
 									<div className="details flex flex-1 flex-col items-center justify-center">
 										<h1 className="text-lg font-medium">{item.name}</h1>
 										<div className="flex items-center justify-between gap-2">
-											<p className="text-red-600">
-												{item.quantity} x{" "}
-												{t("product.price", { amount: formatPrice(item.price, exchangeRate) })}
+										<p className="text-red-600">{`${item.quantity} x ${t("product.price", { amount: formatPrice(item.price, exchangeRate) })}`}
 											</p>
 											{item.onSale && (
 												<div className="ml-2 flex items-center justify-center bg-red-600 px-2 font-bold uppercase">
