@@ -21,7 +21,7 @@ export async function generateMetadata({
 	};
 }
 
-export default async function supportPage({
+export default async function SupportPage({
 	params: { locale }
 }: {
 	params: {

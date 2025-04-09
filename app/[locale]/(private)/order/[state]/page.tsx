@@ -66,14 +66,7 @@ async function loadProducts(locale: string) {
 	);
 }
 
-type RootState = {
-	cart: {
-		products: any[];
-		count: number;
-	};
-};
-
-export default function OrderPage({
+export default function OrderStatusPage({
 	params: { state, locale }
 }: {
 	params: { state: string; locale: string };

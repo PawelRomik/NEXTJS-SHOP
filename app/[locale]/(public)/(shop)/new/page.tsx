@@ -67,7 +67,7 @@ async function loadProducts(locale: string) {
 	);
 }
 
-export default function newPage({
+export default function NewPage({
 	params: { locale }
 }: {
 	params: {
