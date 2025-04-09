@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
-import { Suspense } from "react";
 import OrderInformations from "../../../../../components/OrderInformations";
 import OrderProducts from "../../../../../components/OrderProducts";
 import Link from "next/link";
@@ -19,11 +18,7 @@ export async function generateMetadata({
 	};
 }
 
-export default function OrderPage({
-	params: { locale, id }
-}: {
-	params: { id: string; locale: string };
-}) {
+export default function OrderInfoPage({ params: { id } }: { params: { id: string } }) {
 	revalidatePath("/[locale]/user/order/[id]", "page");
 	const t = useTranslations();
 

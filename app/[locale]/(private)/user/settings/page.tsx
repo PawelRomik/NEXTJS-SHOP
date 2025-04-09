@@ -15,11 +15,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 	};
 }
 
-export default function ProductPage({
-	params: { locale, productId }
-}: {
-	params: { productId: string; locale: string };
-}) {
+export default function SettingsPage() {
 	revalidatePath("/[locale]/user/settings", "page");
 	const t = useTranslations("categories");
 

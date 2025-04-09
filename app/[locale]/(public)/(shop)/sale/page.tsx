@@ -9,7 +9,7 @@ import { revalidatePath } from "next/cache";
 import { Grid } from "@radix-ui/themes";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
-import { GET_NEW_PRODUCTS, GET_SALE_PRODUCTS } from "../../../../queries/shopPage";
+import { GET_SALE_PRODUCTS } from "../../../../queries/shopPage";
 import CategoryShowcase from "../../../../components/CategoryShowcase";
 import Pagination from "../../../../components/Pagination";
 
@@ -76,7 +76,7 @@ async function loadPagination(page: number, locale: string) {
 	);
 }
 
-export default function salePage({
+export default function SalePage({
 	params: { locale },
 	searchParams
 }: {
