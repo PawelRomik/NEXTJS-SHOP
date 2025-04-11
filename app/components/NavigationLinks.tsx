@@ -35,7 +35,10 @@ export default function NavigationLinks() {
 	const isDirectSlug = ["new", "sale", "bundles"];
 
 	return (
-		<NavigationMenu.Root className="relative z-[1] hidden w-svw flex-1 justify-center lg:flex">
+		<NavigationMenu.Root
+			onValueChange={() => setImageSrc("")}
+			className="relative z-[1] hidden w-svw flex-1 justify-center lg:flex"
+		>
 			<NavigationMenu.List className="flex items-center justify-center gap-6 overflow-hidden">
 				{categories.map((category) => (
 					<NavigationMenu.Item key={category.id}>
