@@ -9,7 +9,7 @@ export default async function CategoryShowcase({
 	const t = await getTranslations();
 
 	return (
-		<div className="bg3d relative mt-3 grid h-[500px] w-full grid-cols-[2fr_6fr] gap-4 overflow-hidden bg-cover  bg-center bg-no-repeat  shadow-[inset_0_20px_20px_-10px_rgba(0,0,0,0.6),inset_0_-20px_20px_-10px_rgba(0,0,0,0.6)]">
+		<div className="bg3d relative grid h-[500px] w-full grid-cols-[2fr_6fr] gap-4 overflow-hidden bg-cover  bg-center bg-no-repeat  shadow-[inset_0_20px_20px_-10px_rgba(0,0,0,0.6),inset_0_-20px_20px_-10px_rgba(0,0,0,0.6)]">
 			<div className=" z-[4] flex flex-col justify-center gap-2  px-5  text-white">
 				<div className="flex w-full flex-col">
 					<h1 className="py-3 text-4xl font-bold">{t(`categories.${category}`)}</h1>
