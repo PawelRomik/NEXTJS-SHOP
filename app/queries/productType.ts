@@ -1,4 +1,4 @@
-type ProductData = {
+export type ProductData = {
 	id: string;
 	attributes: {
 		name: string;
@@ -149,6 +149,34 @@ export type CategoryData = {
 export type QueryResult = {
 	products: {
 		data: ProductData[];
+		meta: {
+			pagination: {
+				pageCount: number;
+				total: number;
+			};
+		};
+	};
+};
+
+type BundlesData = {
+	id: string;
+	attributes: {
+		name: string;
+		price: number;
+		display: {
+			data: {
+				attributes: {
+					url: string;
+				};
+			};
+		};
+		products: { data: ProductData[] };
+	};
+};
+
+export type BundlesResult = {
+	bundles: {
+		data: BundlesData[];
 		meta: {
 			pagination: {
 				pageCount: number;

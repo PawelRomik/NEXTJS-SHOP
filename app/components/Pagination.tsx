@@ -38,6 +38,8 @@ export default function Pagination({ pagesCount, currentPage }: PaginationProps)
 		return `${pathname}?${params.toString()}`;
 	};
 
+	if (pagesCount <= 1) return null;
+
 	return (
 		<div className="shadow-bottom flex w-full items-center justify-center gap-1 pb-3   lg:gap-2">
 			<Link
