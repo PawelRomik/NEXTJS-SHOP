@@ -25,29 +25,29 @@ export default function BundleDisplay({ name, display, price, products }: Bundle
 	products.data.map((product) => (productPrice += product.attributes.price));
 
 	return (
-		<div className="flex  flex-col rounded-lg border-2 border-red-600 bg-[rgb(8,8,8)]">
-			<div className="shadow-bottom h-[250px] w-full">
+		<div className="flex  flex-col overflow-hidden rounded-2xl border-[3px] border-red-600 bg-[rgb(8,8,8)]">
+			<h2 className="w-full bg-red-600  py-3 text-center text-3xl font-bold uppercase">
+				{name ? name : "Bundle"}
+			</h2>
+			<div className="shadow-inset h-[300px] w-full  bg-[rgb(26,26,26)]">
 				<Image
 					src={`${process.env.NEXT_PUBLIC_PROD_PATH}${display}`}
 					width={200}
 					height={100}
 					alt="bundle image"
-					className=" mx-auto h-[250px]"
+					className=" mx-auto h-[300px] object-contain"
 				></Image>
 			</div>
 
-			<h2 className="w-full bg-red-600 py-3 text-center text-3xl font-bold uppercase">
-				{name ? name : "Bundle"}
-			</h2>
-			<div className="shadow-top flex flex-col justify-center gap-1 py-6">
+			<div className=" flex flex-col justify-center gap-1 py-6">
 				{products.data.map((product, index) => (
 					<Link
 						href={`/product/${product.attributes.uuid}`}
-						className="overflow-hidden  bg-[rgb(20,20,20)] transition  hover:bg-[rgb(32,32,32)]"
+						className="overflow-hidden  bg-[rgb(26,26,26)] transition  hover:bg-[rgb(32,32,32)]"
 						title="product page"
 						key={index}
 					>
-						<div key={`productImage-${index}`} className="h-full w-full p-1    text-center ">
+						<div key={`productImage-${index}`} className="h-full w-full p-2    text-center ">
 							{product.attributes.name}
 						</div>
 					</Link>

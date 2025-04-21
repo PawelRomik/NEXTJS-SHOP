@@ -89,7 +89,7 @@ export default function BundlePage({
 			<div className="relative z-[20] min-h-[50px] w-full overflow-hidden bg-[rgb(11,11,11)] bg-[size:60%_100%]  bg-center "></div>
 			<Grid
 				width="auto"
-				className="shadow-top grid-cols bg-[rgb(20,20,20)] p-2 text-white md:grid-cols-2 lg:grid-cols-4 lg:gap-[8%] lg:px-[8%] lg:py-12"
+				className="shadow-top grid-cols bg-[rgb(20,20,20)] p-2 text-white md:grid-cols-2 lg:grid-cols-4 lg:gap-[5%] lg:px-[5%] lg:py-12"
 			>
 				<Suspense
 					fallback={
