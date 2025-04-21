@@ -86,9 +86,10 @@ export default function BundlePage({
 	return (
 		<main className=" w-full bg-[rgb(20,20,20)]">
 			<CategoryShowcase category={"bundles"} />
+			<div className="relative z-[20] min-h-[50px] w-full overflow-hidden bg-[rgb(11,11,11)] bg-[size:60%_100%]  bg-center "></div>
 			<Grid
 				width="auto"
-				className="shadow-top grid-cols ro-1  gap-10 bg-[rgb(20,20,20)]  p-2 text-white md:grid-cols-2 lg:grid-cols-2 lg:p-6"
+				className="shadow-top grid-cols bg-[rgb(20,20,20)] p-2 text-white md:grid-cols-2 lg:grid-cols-4 lg:gap-[8%] lg:px-[8%] lg:py-12"
 			>
 				<Suspense
 					fallback={
@@ -99,6 +100,9 @@ export default function BundlePage({
 						</>
 					}
 				>
+					{loadProducts(page, locale)}
+					{loadProducts(page, locale)}
+					{loadProducts(page, locale)}
 					{loadProducts(page, locale)}
 				</Suspense>
 			</Grid>
