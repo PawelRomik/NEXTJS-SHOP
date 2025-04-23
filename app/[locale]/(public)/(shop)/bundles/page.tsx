@@ -50,6 +50,7 @@ async function loadProducts(page: number, locale: string) {
 			{data.data.map((bundle) => (
 				<BundleDisplay
 					key={bundle.id}
+					uuid={bundle.id}
 					display={bundle.attributes.display.data.attributes.url}
 					name={bundle.attributes.name}
 					price={bundle.attributes.price}
@@ -89,7 +90,7 @@ export default function BundlePage({
 			<div className="relative z-[20] min-h-[50px] w-full overflow-hidden bg-[rgb(11,11,11)] bg-[size:60%_100%]  bg-center "></div>
 			<Grid
 				width="auto"
-				className="shadow-top grid-cols bg-[rgb(20,20,20)] p-2 text-white md:grid-cols-2 lg:grid-cols-4 lg:gap-[5%] lg:px-[5%] lg:py-12"
+				className="shadow-top grid-cols ro-1  gap-10 bg-[rgb(20,20,20)]  p-2 text-white md:grid-cols-2 lg:grid-cols-4 lg:p-6"
 			>
 				<Suspense
 					fallback={
@@ -100,9 +101,6 @@ export default function BundlePage({
 						</>
 					}
 				>
-					{loadProducts(page, locale)}
-					{loadProducts(page, locale)}
-					{loadProducts(page, locale)}
 					{loadProducts(page, locale)}
 				</Suspense>
 			</Grid>
