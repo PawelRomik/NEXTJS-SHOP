@@ -42,7 +42,7 @@ export default function ProductDisplay({
 			<div className="group flex h-full  flex-col  items-center justify-start">
 				<div className="flex h-full w-full flex-col justify-between   ">
 					<Link href={`/product/${uuid}`} title="Check" className="w-full">
-						<div className="relative w-full bg-[rgb(17,17,17)]    ">
+						<div className="relative w-full bg-[rgb(12,12,12)]    ">
 							{salePrice && (
 								<div className="absolute left-[-30%] top-[10%] z-[2] flex w-full rotate-[-30deg] items-center justify-center bg-red-700 p-2 text-2xl font-bold  uppercase tracking-widest">
 									{t("product.sale")}

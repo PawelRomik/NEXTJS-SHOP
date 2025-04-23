@@ -6,8 +6,10 @@ import { formatPrice } from "../lib/utils/formatPrice";
 import { useCurrency } from "../context/CurrencyProvider";
 import { SignedIn } from "@clerk/nextjs";
 import { ProductData } from "../queries/productType";
+import CartCounter from "./CartCounter";
 
 type BundleDisplayProps = {
+	uuid: string;
 	name: string;
 	price: number;
 	display: string;
@@ -16,7 +18,13 @@ type BundleDisplayProps = {
 	};
 };
 
-export default function BundleDisplay({ name, display, price, products }: BundleDisplayProps) {
+export default function BundleDisplay({
+	uuid,
+	name,
+	display,
+	price,
+	products
+}: BundleDisplayProps) {
 	const t = useTranslations();
 	const { exchangeRate } = useCurrency();
 	const productCount = products.data.length;
@@ -25,53 +33,57 @@ export default function BundleDisplay({ name, display, price, products }: Bundle
 	products.data.map((product) => (productPrice += product.attributes.price));
 
 	return (
-		<div className="flex  flex-col overflow-hidden rounded-2xl border-[3px] border-red-600 bg-[rgb(8,8,8)]">
-			<h2 className="w-full bg-red-600  py-3 text-center text-3xl font-bold uppercase">
-				{name ? name : "Bundle"}
-			</h2>
-			<div className="shadow-inset h-[300px] w-full  bg-[rgb(26,26,26)]">
-				<Image
-					src={`${process.env.NEXT_PUBLIC_PROD_PATH}${display}`}
-					width={200}
-					height={100}
-					alt="bundle image"
-					className=" mx-auto h-[300px] object-contain"
-				></Image>
-			</div>
-
-			<div className=" flex flex-col justify-center gap-1 py-6">
-				{products.data.map((product, index) => (
-					<Link
-						href={`/product/${product.attributes.uuid}`}
-						className="overflow-hidden  bg-[rgb(26,26,26)] transition  hover:bg-[rgb(32,32,32)]"
-						title="product page"
-						key={index}
-					>
-						<div key={`productImage-${index}`} className="h-full w-full p-2    text-center ">
-							{product.attributes.name}
+		<div
+			className={`max-w-[400px] overflow-hidden rounded-[40px] border-4 border-red-600 bg-[rgb(12,12,12)] transition hover:border-red-500 `}
+		>
+			<div className="group flex h-full  flex-col  items-center justify-start">
+				<div className="flex h-full w-full flex-col justify-between   ">
+					<Link href={`/product/${uuid}`} title="Check" className="w-full">
+						<div className="relative w-full bg-[rgb(12,12,12)]    ">
+							<Image
+								src={`${process.env.NEXT_PUBLIC_PROD_PATH}${display}`}
+								alt={name}
+								width={600}
+								height={600}
+								className="h-[300px]  object-contain p-6  transition group-hover:scale-105"
+							/>
 						</div>
 					</Link>
-				))}
-			</div>
-			<div className="z-10 mx-2 flex  items-center justify-between pb-3 ">
-				<div className="flex gap-3 rounded-lg bg-red-600 px-2 py-1">
-					<span className="text-red-300 line-through">
-						{t("product.price", { amount: formatPrice(productPrice, exchangeRate) })}
-					</span>
-					<span className="font-bold">
-						{t("product.price", { amount: formatPrice(price, exchangeRate) })}
-					</span>
-				</div>
-				<SignedIn>
-					<div className="flex gap-3">
-						<button
-							title={t("shop.buyButtonText")}
-							className="ignore-popover-close h-[2rem] rounded-lg bg-red-600 px-3 font-bold uppercase text-white hover:scale-105 hover:bg-red-500 "
-						>
-							BUY <i className="ri-shopping-cart-2-line "></i>
-						</button>
+
+					<div className="flex h-full w-full flex-col justify-between shadow-[0px_13px_16px_-3px_rgba(0,0,0,0.6)_inset]">
+						<div className="flex w-full  flex-col bg-red-600 py-4 pl-6 text-2xl font-bold uppercase text-white">
+							<h2>{name}</h2>
+						</div>
+						<div className=" flex flex-1 flex-col  text-white">
+							<ul className="flex w-full flex-col bg-[rgb(8,8,8)] uppercase">
+								{products.data.slice(0, 4).map((prod, i) => (
+									<Link key={i} href={`/product/${prod.attributes.uuid}`}>
+										<li
+											className={`${i % 2 === 0 ? "bg-[rgb(16,16,16)]" : ""} py-2 pl-6 pr-2 transition-all hover:scale-105 hover:bg-[rgb(24,24,24)]`}
+										>
+											{products.data.length > 4 && i == 3 ? "And More!" : prod.attributes.name}
+										</li>
+									</Link>
+								))}
+							</ul>
+							<div className="h-[5px] bg-[rgb(27,27,27)]"></div>
+						</div>
+
+						<div className="my-4 flex w-full flex-col items-center justify-end p-2 pl-6 pt-4">
+							<div className="flex w-full items-center justify-center ">
+								<p className="flex w-full items-end gap-3 text-2xl font-bold text-white">
+									<span className="text-lg text-red-600 line-through">
+										{t("product.price", { amount: formatPrice(productPrice, exchangeRate) })}
+									</span>
+									<span>{t("product.price", { amount: formatPrice(price, exchangeRate) })}</span>
+								</p>
+								<SignedIn>
+									<CartCounter productId={uuid}></CartCounter>
+								</SignedIn>
+							</div>
+						</div>
 					</div>
-				</SignedIn>
+				</div>
 			</div>
 		</div>
 	);
