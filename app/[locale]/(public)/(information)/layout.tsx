@@ -14,7 +14,7 @@ type informationLayoutProps = {
 
 export default async function InformationLayout({ children }: informationLayoutProps) {
 	return (
-		<div className={`${inter.className} flex min-h-screen flex-col bg-[rgb(8,8,8)] text-white`}>
+		<div className={` roboto flex min-h-screen flex-col bg-[rgb(8,8,8)] text-white`}>
 			<ShopHeader />
 			<div className="flex flex-1 items-stretch">
 				{children}

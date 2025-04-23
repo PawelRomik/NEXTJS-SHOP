@@ -56,19 +56,14 @@ export default function BundleDisplay({
 						</div>
 						<div className=" flex flex-1 flex-col  text-white">
 							<ul className="flex w-full flex-col bg-[rgb(8,8,8)] uppercase">
-								{(products.data.length > 4
-									? [
-											...products.data.slice(0, 3),
-											{ attributes: { name: "And more" }, isExtra: true }
-										]
-									: products.data
-								).map((prod, i) => (
-									<li
-										key={i}
-										className={`${i % 2 === 0 ? "bg-[rgb(16,16,16)]" : ""} py-2 pl-6 pr-2`}
-									>
-										{prod.attributes.name}
-									</li>
+								{products.data.slice(0, 4).map((prod, i) => (
+									<Link key={i} href={`/product/${prod.attributes.uuid}`}>
+										<li
+											className={`${i % 2 === 0 ? "bg-[rgb(16,16,16)]" : ""} py-2 pl-6 pr-2 transition-all hover:scale-105 hover:bg-[rgb(24,24,24)]`}
+										>
+											{products.data.length > 4 && i == 3 ? "And More!" : prod.attributes.name}
+										</li>
+									</Link>
 								))}
 							</ul>
 							<div className="h-[5px] bg-[rgb(27,27,27)]"></div>
