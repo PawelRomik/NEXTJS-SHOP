@@ -33,7 +33,7 @@ export default function ContactPage() {
 							<i className="ri-phone-fill"></i> 123 456 789
 						</p>
 						<p className="bg-[rgb(8,8,8)] p-2  px-6">
-							<i className="ri-mail-fill"></i> N3xt@gmail.com
+							<i className="ri-mail-fill"></i> Ephonix@gmail.com
 						</p>
 						<p className="bg-[rgb(16,16,16)] p-2  px-6">
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vehicula ex eu
