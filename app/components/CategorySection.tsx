@@ -10,7 +10,7 @@ type ProductOtherSectionProps = {
 export default function CategorySection({ category, locale, num }: ProductOtherSectionProps) {
 	return (
 		<div className=" w-full overflow-hidden">
-			<CategoryBanner num={num} category={category} />
+			<CategoryBanner locale={locale} num={num} category={category} />
 			<CategoryDisplay locale={locale} category={category} />
 		</div>
 	);

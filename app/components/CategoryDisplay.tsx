@@ -26,6 +26,7 @@ export default function CategoryDisplay({ category, locale }: ProductOtherSectio
 					locale: locale
 				}
 			});
+			if (data.products.data.length < 1) return;
 			return (
 				<section
 					id="others"

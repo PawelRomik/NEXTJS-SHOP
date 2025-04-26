@@ -1,21 +1,21 @@
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import ProductsSectionIcons from "./ProductsSectionIcons";
 
-export default async function NewProductsSection() {
+export default async function BundlesSection() {
 	const t = await getTranslations("productSection");
+
 	return (
 		<div
-			style={{ backgroundImage: `url('/bg1.jpeg')` }}
+			style={{ backgroundImage: `url('/bg3.jpeg')` }}
 			className="relative mt-3 h-[600px] w-full  bg-cover bg-center bg-no-repeat shadow-[inset_0_20px_20px_-10px_rgba(0,0,0,0.6),inset_0_-20px_20px_-10px_rgba(0,0,0,0.6)]"
 		>
 			<div className="h-full w-full bg-[rgba(0,0,0,0.85)]">
 				<div
-					className={`flex h-full flex-col items-center justify-center gap-3 text-2xl text-white lg:ml-[10%] lg:items-start`}
+					className={`flex h-full flex-col items-center justify-center gap-3 text-2xl text-white lg:mr-[10%] lg:items-end`}
 				>
-					<h2 className="text-shadow-lg text-4xl font-bold lg:text-5xl">{t("newProductsTitle")}</h2>
+					<h2 className="text-shadow-lg text-4xl font-bold lg:text-5xl">{t("bundlesTitle")}</h2>
 					<h4 className="text-shadow-lg w-[300px] py-3 text-center text-lg text-zinc-200 lg:w-[500px] lg:text-left lg:text-xl">
-						{t("newProductsDesc")}
+						{t("bundlesDesc")}
 					</h4>
 					<Link href="/new">
 						<button className="w-[200px] rounded-lg bg-red-600 p-3 font-bold text-white hover:bg-red-500">
@@ -23,9 +23,6 @@ export default async function NewProductsSection() {
 						</button>
 					</Link>
 				</div>
-			</div>
-			<div className="absolute right-0 top-0 h-full w-[100px] ">
-				<ProductsSectionIcons />
 			</div>
 		</div>
 	);

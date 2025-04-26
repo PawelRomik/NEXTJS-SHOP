@@ -127,6 +127,14 @@ export type CategoryData = {
 			attributes: {
 				name: string;
 				slug: keyof IntlMessages["categories"];
+				showcase: {
+					data: {
+						attributes: {
+							url: string;
+						};
+					}[];
+				};
+				desc: string;
 				image: {
 					data: {
 						attributes: {
