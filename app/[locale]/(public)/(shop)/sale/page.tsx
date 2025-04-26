@@ -93,7 +93,7 @@ export default function SalePage({
 
 	return (
 		<main className=" w-full bg-[rgb(20,20,20)]">
-			<CategoryShowcase category="sale" />
+			<CategoryShowcase locale={locale} category="sale" />
 			<Grid
 				width="auto"
 				className="shadow-top grid-cols ro-1  gap-10 bg-[rgb(20,20,20)]  p-2 text-white md:grid-cols-2 lg:grid-cols-4 lg:p-6"

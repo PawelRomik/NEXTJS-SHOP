@@ -195,11 +195,10 @@ export default function ShopPage({
 	const tagsFromUrl = searchParams?.tags;
 	const tags = tagsFromUrl ? tagsFromUrl.split(",") : undefined;
 	const sort = searchParams?.sort || "latest";
-	const t = useTranslations("categories");
 
 	return (
 		<main className=" w-full bg-[rgb(20,20,20)]">
-			<CategoryShowcase category={category} />
+			<CategoryShowcase category={category} locale={locale} />
 			<Suspense>{LoadFilters(category, locale)}</Suspense>
 			<Grid
 				width="auto"
