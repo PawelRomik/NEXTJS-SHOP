@@ -1,11 +1,12 @@
 {
 	"common": {
-		"errorLoadingProducts": "Wystąpił błąd podczas ładowania produktów, spróbuj ponownie później.",
+		"errorLoadingProducts": "Wystąpił błąd, spróbuj ponownie później.",
 		"scrollButtonTitle": "Idź na górę",
 		"shopLogo": "Logo sklepu",
 		"sale": "Przecena",
 		"back": "Wstecz",
-		"desc": "Najlepszy Sklep Gamingowy w internecie"
+		"desc": "Najlepszy Sklep Gamingowy w internecie",
+		"retry": "Odśwież"
 	},
 	"hamburger": {
 		"avatar": "Twoje Zdjęcie Profilowe",

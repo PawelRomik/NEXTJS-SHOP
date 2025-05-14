@@ -37,7 +37,7 @@ export default function ProductDisplay({
 
 	return (
 		<div
-			className={`max-w-[400px] overflow-hidden rounded-[40px] border-4 border-red-600 bg-[rgb(12,12,12)] transition hover:border-red-500 `}
+			className={`h-[680px] max-w-[400px] overflow-hidden rounded-[40px] border-4 border-red-600 bg-[rgb(12,12,12)] transition hover:border-red-500 `}
 		>
 			<div className="group flex h-full  flex-col  items-center justify-start">
 				<div className="flex h-full w-full flex-col justify-between   ">

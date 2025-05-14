@@ -16,6 +16,7 @@ export default function CategoryDisplay({ category, locale }: ProductOtherSectio
 	const t = useTranslations("productSection");
 
 	async function getProducts() {
+		await new Promise((resolve) => setTimeout(resolve, 10000));
 		try {
 			const client = await createApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
