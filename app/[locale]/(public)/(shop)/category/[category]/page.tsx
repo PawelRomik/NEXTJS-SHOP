@@ -126,11 +126,15 @@ async function loadProducts(
 	tags?: string[],
 	sort?: string
 ) {
+	await new Promise((resolve) => setTimeout(resolve, 10000));
 	const data = await fetchProducts(category, page, locale, tags, sort);
 	if (!data || data.data.length == 0) return <ErrorText />;
 
 	return (
-		<>
+		<Grid
+			width="auto"
+			className="shadow-top grid-cols ro-1  gap-10 bg-[rgb(20,20,20)]  p-2 text-white md:grid-cols-2 lg:grid-cols-4 lg:p-6"
+		>
 			{data.data.map((product) => (
 				<ProductDisplay
 					uuid={product.attributes.uuid}
@@ -143,7 +147,7 @@ async function loadProducts(
 					key={product.id}
 				></ProductDisplay>
 			))}
-		</>
+		</Grid>
 	);
 }
 
@@ -200,22 +204,11 @@ export default function ShopPage({
 		<main className=" w-full bg-[rgb(20,20,20)]">
 			<CategoryShowcase category={category} locale={locale} />
 			<Suspense>{LoadFilters(category, locale)}</Suspense>
-			<Grid
-				width="auto"
-				className="shadow-top grid-cols ro-1  gap-10 bg-[rgb(20,20,20)]  p-2 text-white md:grid-cols-2 lg:grid-cols-4 lg:p-6"
-			>
-				<Suspense
-					fallback={
-						<>
-							{[...Array(8)].map((_, index) => (
-								<SkeletonProductDisplay key={index} />
-							))}
-						</>
-					}
-				>
-					{loadProducts(category, page, locale, tags, sort)}
-				</Suspense>
-			</Grid>
+
+			<Suspense fallback={<SkeletonProductDisplay />}>
+				{loadProducts(category, page, locale, tags, sort)}
+			</Suspense>
+
 			<Suspense>{loadPagination(category, page, locale, tags)}</Suspense>
 		</main>
 	);

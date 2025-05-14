@@ -1,11 +1,12 @@
 {
 	"common": {
-		"errorLoadingProducts": "An error occurred while loading products, please try again later.",
+		"errorLoadingProducts": "An error occurred, please try again later.",
 		"scrollButtonTitle": "Go to Top",
 		"shopLogo": "Shop Logo",
 		"sale": "Sale",
 		"back": "Back",
-		"desc": "Best Gaming Store on the internet!"
+		"desc": "Best Gaming Store on the internet!",
+		"retry": "Retry"
 	},
 	"hamburger": {
 		"avatar": "Your Avatar Picture",

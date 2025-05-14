@@ -50,7 +50,10 @@ async function loadProducts(locale: string) {
 	if (!data || data.data.length == 0) return <ErrorText />;
 
 	return (
-		<>
+		<Grid
+			width="auto"
+			className="shadow-top grid-cols ro-1  gap-10 bg-[rgb(20,20,20)]  p-2 text-white md:grid-cols-2 lg:grid-cols-4 lg:p-6"
+		>
 			{data.data.map((product) => (
 				<ProductDisplay
 					uuid={product.attributes.uuid}
@@ -63,7 +66,7 @@ async function loadProducts(locale: string) {
 					key={product.id}
 				></ProductDisplay>
 			))}
-		</>
+		</Grid>
 	);
 }
 
@@ -85,22 +88,8 @@ export default function NewPage({
 	return (
 		<main className=" w-full bg-[rgb(20,20,20)]">
 			<CategoryShowcase locale={locale} category="new" />
-			<Grid
-				width="auto"
-				className="shadow-top grid-cols ro-1  gap-10 bg-[rgb(20,20,20)]  p-2 text-white md:grid-cols-2 lg:grid-cols-4 lg:p-6"
-			>
-				<Suspense
-					fallback={
-						<>
-							{[...Array(24)].map((_, index) => (
-								<SkeletonProductDisplay key={index} />
-							))}
-						</>
-					}
-				>
-					{loadProducts(locale)}
-				</Suspense>
-			</Grid>
+
+			<Suspense fallback={<SkeletonProductDisplay />}>{loadProducts(locale)}</Suspense>
 		</main>
 	);
 }

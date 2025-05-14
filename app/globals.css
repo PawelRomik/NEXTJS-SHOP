@@ -236,6 +236,21 @@ option:hover {
 	pointer-events: none;
 }
 
+@keyframes fadePulse {
+	0%,
+	100% {
+		opacity: 0.4;
+	}
+	50% {
+		opacity: 1;
+	}
+}
+
+.skeleton {
+	background-color: rgb(12, 12, 12);
+	animation: fadePulse 2s ease-in-out infinite;
+}
+
 .mirror {
 	position: relative;
 	pointer-events: none;

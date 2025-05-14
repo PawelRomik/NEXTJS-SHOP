@@ -61,7 +61,10 @@ async function loadProducts(category: string, page: number, locale: string) {
 	if (!data) return <ErrorText />;
 
 	return (
-		<>
+		<Grid
+			width="auto"
+			className="shadow-top grid-cols ro-1  gap-10 bg-[rgb(20,20,20)]  p-2 text-white md:grid-cols-2 lg:grid-cols-4 lg:p-6"
+		>
 			{data.data.map((product) => (
 				<ProductDisplay
 					uuid={product.attributes.uuid}
@@ -74,7 +77,7 @@ async function loadProducts(category: string, page: number, locale: string) {
 					key={product.id}
 				></ProductDisplay>
 			))}
-		</>
+		</Grid>
 	);
 }
 
@@ -125,22 +128,7 @@ export default function SearchPage({
 				</h2>
 			</div>
 
-			<Grid
-				width="auto"
-				className="shadow-top grid-cols ro-1  gap-10 bg-[rgb(20,20,20)]  p-2 text-white md:grid-cols-2 lg:grid-cols-4 lg:p-6"
-			>
-				<Suspense
-					fallback={
-						<>
-							{[...Array(8)].map((_, index) => (
-								<SkeletonProductDisplay key={index} />
-							))}
-						</>
-					}
-				>
-					{loadProducts(query, page, locale)}
-				</Suspense>
-			</Grid>
+			<Suspense fallback={<SkeletonProductDisplay />}>{loadProducts(query, page, locale)}</Suspense>
 			<Suspense>{loadPagination(query, page, locale)}</Suspense>
 		</main>
 	);

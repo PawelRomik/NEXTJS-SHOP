@@ -5,25 +5,32 @@ import ScrollToTopButton from "./components/ScrollToTopButton";
 import ShopHeader from "./components/ShopHeader";
 import Footer from "./components/Footer";
 import { useTranslations } from "next-intl";
+import nextLogo from "../public/logo.png";
+import Image from "next/image";
 
 export default function NotFound() {
-	const t = useTranslations("notFound");
+	const t = useTranslations();
 
 	return (
 		<div className={` roboto flex min-h-screen flex-col`}>
 			<ShopHeader />
-			<div className="flex flex-1 items-stretch">
-				<main className=" flex w-full flex-col items-center justify-center gap-6 bg-black p-6 text-2xl text-white">
-					<h2 className="text-4xl font-bold text-white">{t("notFound")}</h2>
-					<p className="text-xl text-zinc-300">{t("notFoundAlt")}</p>
-					<Link
-						href="/"
-						title={t("home")}
-						className=" rounded-full border-2 border-zinc-800 bg-black p-3 text-2xl font-bold text-zinc-300"
-					>
-						{t("home")}
-					</Link>
-				</main>
+			<div className="flex flex-1 items-stretch bg-[rgb(20,20,20)]">
+				<div className="flex w-full items-center justify-center py-20">
+					<p className="flex h-full w-full flex-col items-center justify-center gap-8 text-center text-3xl font-bold text-white ">
+						<Image
+							src={nextLogo}
+							width={220}
+							height={300}
+							className="hidden w-[220px] lg:block"
+							alt={t("common.shopLogo")}
+						/>
+						<h2 className="-rotate-3 text-4xl text-red-600">ERROR 404!</h2>
+						<p className="rotate-3">{t("notFound.notFoundAlt")}</p>
+						<button className="-rotate-3 rounded-lg bg-red-600 px-6 py-3 transition hover:bg-red-500">
+							{t("notFound.home")}
+						</button>
+					</p>
+				</div>
 				<ScrollToTopButton />
 			</div>
 			<Footer />
