@@ -17,7 +17,7 @@ export async function generateMetadata({
 	const t = await getTranslations({ locale, namespace: "categories" });
 
 	return {
-		title: `Support | Ephonix`
+		title: `${t('support')} | Ephonix`
 	};
 }
 
