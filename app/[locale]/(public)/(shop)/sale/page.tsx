@@ -23,7 +23,7 @@ export async function generateMetadata({
 	const t = await getTranslations({ locale, namespace: "categories" });
 
 	return {
-		title: `Products on sale | Ephonix`
+		title: `${t("sale")} | Ephonix`
 	};
 }
 
