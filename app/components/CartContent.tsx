@@ -33,6 +33,7 @@ export default function CartContent() {
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 	const [discountMessage, setDiscountMessage] = useState(false);
 	const [price, setPrice] = useState<number | string>(0);
+	const [oldPrice, setOldPrice] = useState<number | string>(0);
 	const [formData, setFormData] = useState<inputData>({
 		discount: ""
 	});
@@ -52,6 +53,7 @@ export default function CartContent() {
 		products.forEach((item) => {
 			total += item.quantity * parseFloat(formatPrice(item.price, exchangeRate));
 		});
+		setOldPrice(total.toFixed(2));
 		total = total - (total * discount) / 100;
 		setPrice(total.toFixed(2));
 	}, [products, discount, exchangeRate]);
@@ -67,19 +69,11 @@ export default function CartContent() {
 	const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PROD_KEY || "");
 
 	const addCode = () => {
+		setDiscountMessage(false);
 		if (formData.discount == "Rabat123") {
 			setDiscount(30);
-		} else {
-			setDiscount(0);
 		}
 		setDiscountMessage(true);
-		if (timeoutRef.current) {
-			clearTimeout(timeoutRef.current);
-		}
-
-		timeoutRef.current = setTimeout(() => {
-			setDiscountMessage(false);
-		}, 3000);
 	};
 
 	const handlePayment = async () => {
@@ -113,12 +107,12 @@ export default function CartContent() {
 	return (
 		<div className="z-50 flex h-full flex-col  uppercase text-white">
 			<h1 className=" bg-[rgb(12,12,12)] p-6 text-center text-2xl font-bold">
-				<span className="rounded-lg bg-red-600 px-2">{count}</span> {t("cart.content")}
+				<span className="mr-2 rounded-full bg-red-600 px-3 py-1">{count}</span> {t("cart.content")}
 			</h1>
 
 			{products.length > 0 ? (
 				<>
-					<div className="shadow-inset flex h-full w-full flex-1 flex-col pt-7">
+					<div className="shadow-inset flex h-full w-full flex-1 flex-col gap-3 pt-7">
 						{products?.map((item) => (
 							<div
 								key={item.id}
@@ -140,7 +134,8 @@ export default function CartContent() {
 									<div className="details flex flex-1 flex-col items-center justify-center">
 										<h1 className="text-lg font-medium">{item.name}</h1>
 										<div className="flex items-center justify-between gap-2">
-										<p className="text-red-600">{`${item.quantity} x ${t("product.price", { amount: formatPrice(item.price, exchangeRate) })}`}
+											<p className="text-red-600">
+												{`${item.quantity} x ${t("product.price", { amount: formatPrice(item.price, exchangeRate) })}`}
 											</p>
 											{item.onSale && (
 												<div className="ml-2 flex items-center justify-center bg-red-600 px-2 font-bold uppercase">
@@ -175,32 +170,41 @@ export default function CartContent() {
 					</div>
 					<div className="mt-auto flex w-full bg-[rgb(12,12,12)] p-3 px-8">
 						<div className="relative flex w-[300px] flex-col items-center justify-center">
-							<label className="block w-full text-xl font-bold uppercase">Discount code</label>
+							<label className="block w-full text-xl font-bold uppercase">
+								{t("cart.discountCode")}
+							</label>
 							<div className="flex gap-3">
 								<input
 									type="text"
 									value={formData.discount}
 									onChange={handleChange}
 									name="discount"
-									className="w-full rounded-lg bg-white p-3 text-black"
+									className="w-full bg-white p-3 text-black"
 								/>
 								<button
 									onClick={addCode}
-									className="rounded-lg bg-red-600 p-2 font-bold text-white transition hover:bg-red-500"
+									className=" bg-red-600 p-2 font-bold text-white transition hover:bg-red-500"
 								>
-									Add
+									{t("cart.add")}
 								</button>
 							</div>
 							{discountMessage && (
 								<p className="absolute bottom-2 w-full cursor-default font-bold text-red-600 ">
-									{discount == 0 ? `Wrong code!` : `Added -${discount}% discount!`}
+									{discount == 0
+										? t("cart.wrongCode")
+										: t("cart.addedDiscount", { discount: discount })}
 								</p>
 							)}
 						</div>
 
 						<div className=" flex w-full flex-col items-end justify-center ">
-							<div className="total flex justify-end gap-3   text-lg font-medium uppercase">
-								<div className="flex items-center justify-center gap-3 bg-[rgb(12,12,12)] px-4 py-2 font-bold">
+							<div className="total flex flex-col justify-end  px-4 py-2   text-lg font-medium uppercase">
+								<div className="flex items-end justify-end ">
+									<span className="text-sm text-red-900   line-through">
+										{t("product.price", { amount: oldPrice })}
+									</span>
+								</div>
+								<div className="flex items-center justify-center gap-3 bg-[rgb(12,12,12)] font-bold">
 									{discount != 0 && (
 										<span className="rounded-lg bg-red-600 px-3">-{discount}%</span>
 									)}
@@ -210,13 +214,13 @@ export default function CartContent() {
 							</div>
 							<button
 								onClick={handlePayment}
-								className="mb-5 flex w-[400px] cursor-pointer items-center justify-center gap-5 border-none bg-red-600 p-3 font-bold  uppercase text-white transition hover:bg-red-500"
+								className="mb-3 flex w-[400px] cursor-pointer items-center justify-center gap-5 border-none bg-red-600 p-3 font-bold  uppercase text-white transition hover:bg-red-500"
 							>
 								{t("cart.checkout")}
 							</button>
 							<div className="flex  items-center justify-end gap-3 font-bold">
 								<p
-									className=" cursor-pointer bg-[rgb(12,12,12)] px-4 py-3 text-xs font-bold transition hover:bg-red-600"
+									className=" cursor-pointer bg-[rgb(26,26,26)] px-4 py-3 text-xs font-bold transition hover:bg-red-600"
 									onClick={() => dispatch(resetCart())}
 								>
 									{t("cart.resetBtn")}
@@ -227,7 +231,7 @@ export default function CartContent() {
 				</>
 			) : (
 				<div className="flex h-full w-full flex-col items-center justify-center">
-					<h1 className="w-full text-center text-3xl font-bold">The cart is empty!</h1>
+					<h1 className="w-full text-center text-3xl font-bold">{t("cart.noProducts")}</h1>
 					<i className="ri-shopping-cart-line w-full text-center text-[20rem]"></i>
 				</div>
 			)}

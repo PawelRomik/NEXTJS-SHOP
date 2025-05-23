@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
+import { useTranslations } from "next-intl";
 
 function ChangeNameForm() {
+	const t = useTranslations("settings");
 	const { isLoaded, user } = useUser();
 	const [username, setUsername] = useState("");
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -16,16 +18,16 @@ function ChangeNameForm() {
 		setSuccessMessage(null);
 
 		if (username.length < 4) {
-			setErrorMessage("Username must be at least 4 characters long!");
+			setErrorMessage(t("shortName"));
 			return;
 		}
 
 		try {
 			await user.update({ username });
 			await user.reload();
-			setSuccessMessage("Username successfully changed!");
+			setSuccessMessage(t("usernameSuccess"));
 		} catch (err) {
-			setErrorMessage("An error occurred while changing your username.");
+			setErrorMessage(t("usernameError"));
 		}
 		setTimeout(() => {
 			setErrorMessage(null);
@@ -35,12 +37,12 @@ function ChangeNameForm() {
 
 	return (
 		<div className="flex flex-col items-center gap-4 text-white">
-			<h1 className="w-full text-center text-3xl font-bold uppercase">Change Username</h1>
+			<h1 className="w-full text-center text-3xl font-bold uppercase">{t("changeUsername")}</h1>
 			{errorMessage && <p className="text-red-500">{errorMessage}</p>}
 			{successMessage && <p className="text-green-500">{successMessage}</p>}
 			<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 				<div className="flex items-center justify-between gap-5">
-					<label htmlFor="username">New Username</label>
+					<label htmlFor="username">{t("newUsername")}</label>
 					<input
 						id="username"
 						type="text"
@@ -50,7 +52,7 @@ function ChangeNameForm() {
 					/>
 				</div>
 				<button type="submit" className="rounded bg-red-600 px-4 py-2 text-white">
-					Change Username
+					{t("changeUsername")}
 				</button>
 			</form>
 		</div>

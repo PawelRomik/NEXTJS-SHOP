@@ -84,7 +84,9 @@
 		"details": "Details",
 		"success": "Success",
 		"totalPrice": "Total price",
-		"total": "Total"
+		"total": "Total",
+		"price": "Price",
+		"amount": "Amount"
 	},
 	"product": {
 		"product": "Product",
@@ -118,7 +120,12 @@
 		"resetBtn": "Reset Cart",
 		"productImage": "Product Image",
 		"noProducts": "No products in cart.",
-		"sale": "Sale"
+		"sale": "Sale",
+		"discountCode": "Discount code",
+		"add": "Add",
+		"wrongCode": "Invalid code",
+		"addedDiscount": "Added -{discount}% discount!",
+		"payAndOrder": "Pay and Order"
 	},
 	"categories": {
 		"shop": "Shop",
@@ -150,6 +157,7 @@
 		"bundles": "Bundles"
 	},
 	"support": {
+		"sendTicket": "Send a ticket",
 		"contact": "Contact us",
 		"gotProblem": "Got any problems?"
 	},
@@ -166,5 +174,32 @@
 		"bundlesDesc": "Explore perfectly curated bundles designed to meet all your needs. From gaming essentials to productivity boosters, find the ideal combination of gear and accessories at unbeatable value.",
 		"check": "Check",
 		"checkLong": "Check more!"
+	},
+	"settings": {
+		"changeAvatar": "Change Avatar",
+		"changeUsername": "Change Username",
+		"usernameError": "An error occured while changing your username",
+		"avatarError": "An error occured while changing your avatar",
+		"avatarSuccess": "Avatar succesfully changed",
+		"newUsername": "New Username",
+		"usernameSuccess": "Username succesfully changed",
+		"changeEmail": "Change Email",
+		"newEmail": "Enter new Email Address",
+		"emailTaken": "This email is taken",
+		"changePassword": "Change password",
+		"currentPassword": "Enter Current Password",
+		"incorrectPassword": "Incorrect password",
+		"newPassword": "Enter new Password",
+		"confirmNewPassword": "Confirm new Password",
+		"verifyEmail": "Verify email",
+		"enterCode": "Enter code",
+		"verify": "Verify",
+		"wrongCode": "Wrong code",
+		"shortPassword": "Password must be at least 8 characters long!",
+		"emailSuccess": "Email successfully changed",
+		"passwordsNoMatch": "Passwords do not match!",
+		"passwordSuccess": "Password succesfully changed!",
+		"error": "An unknown error occured",
+		"shortName": "Username must be at least 4 characters long"
 	}
 }

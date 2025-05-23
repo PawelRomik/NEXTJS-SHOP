@@ -84,7 +84,9 @@
 		"details": "Szczegóły",
 		"success": "Sukces",
 		"totalPrice": "Całkowita cena",
-		"total": "Razem"
+		"total": "Razem",
+		"price": "Cena",
+		"amount": "Ilość"
 	},
 	"product": {
 		"product": "Produkt",
@@ -118,7 +120,12 @@
 		"resetBtn": "Resetuj koszyk",
 		"productImage": "Zdjęcie produktu",
 		"noProducts": "Brak produktów w koszyku.",
-		"sale": "Przecena"
+		"sale": "Przecena",
+		"discountCode": "Kod rabatowy",
+		"add": "Dodaj",
+		"wrongCode": "Niepoprawny kod",
+		"addedDiscount": "Dodano -{discount}% rabatu!",
+		"payAndOrder": "Zapłać i zamów"
 	},
 	"categories": {
 		"shop": "Sklep",
@@ -150,6 +157,7 @@
 		"bundles": "Zestawy"
 	},
 	"support": {
+		"sendTicket": "Wyślij wiadomość",
 		"contact": "Skontaktuj się z nami",
 		"gotProblem": "Masz jakiś problem?"
 	},
@@ -166,5 +174,32 @@
 		"bundlesDesc": "Odkrywaj idealnie skomponowane zestawy stworzone, by spełnić wszystkie Twoje potrzeby. Od niezbędnych akcesoriów gamingowych po produkty zwiększające produktywność – znajdź idealne połączenie sprzętu i dodatków w niepowtarzalnej cenie.",
 		"check": "Sprawdź",
 		"checkLong": "Sprawdź więcej!"
+	},
+	"settings": {
+		"changeAvatar": "Zmień awatar",
+		"changeUsername": "Zmień nazwę użytkownika",
+		"usernameError": "Wystąpił błąd podczas zmiany nazwy użytkownika",
+		"avatarError": "Wystąpił błąd podczas zmiany awatara",
+		"avatarSuccess": "Awatar został pomyślnie zmieniony",
+		"newUsername": "Nowa nazwa użytkownika",
+		"usernameSuccess": "Nazwa użytkownika została pomyślnie zmieniona",
+		"changeEmail": "Zmień adres e-mail",
+		"newEmail": "Wprowadź nowy adres e-mail",
+		"emailTaken": "Ten adres e-mail jest już zajęty",
+		"changePassword": "Zmień hasło",
+		"currentPassword": "Wprowadź aktualne hasło",
+		"incorrectPassword": "Nieprawidłowe hasło",
+		"newPassword": "Wprowadź nowe hasło",
+		"confirmNewPassword": "Potwierdź nowe hasło",
+		"verifyEmail": "Zweryfikuj adres e-mail",
+		"enterCode": "Wprowadź kod",
+		"verify": "Zweryfikuj",
+		"wrongCode": "Nieprawidłowy kod",
+		"shortPassword": "Hasło musi mieć co najmniej 8 znaków!",
+		"emailSuccess": "Adres e-mail został pomyślnie zmieniony",
+		"passwordsNoMatch": "Hasła nie są zgodne!",
+		"passwordSuccess": "Hasło zostało pomyślnie zmienione!",
+		"error": "Wystąpił nieznany błąd",
+		"shortName": "Nazwa użytkownika musi mieć co najmniej 4 znaki"
 	}
 }

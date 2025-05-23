@@ -113,14 +113,13 @@ export default function SearchPage({
 	return (
 		<main className=" w-full bg-[rgb(20,20,20)]">
 			<div className="flex h-[120px] items-center justify-center bg-[rgb(11,11,11)] text-4xl font-bold uppercase text-white">
-				<h2 className=" flex items-center gap-1   text-3xl font-bold uppercase text-white">
+				<h2 className=" flex items-center gap-3   text-3xl font-bold uppercase text-white">
 					<Suspense>
 						<span className="flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-full border-4 border-red-600 bg-red-600 text-xl text-white lg:text-2xl">
 							{loadCount(query, page, locale)}
 						</span>
 					</Suspense>
-					<span className="ml-2 block h-[20px] w-[5px] skew-x-[-25deg] bg-white"></span>
-					<span className="mr-2 block h-[20px] w-[5px] skew-x-[-25deg] bg-white"></span>
+
 					<span>
 						{t("matches")}
 						<span className="text-red-600">{" " + query}</span>

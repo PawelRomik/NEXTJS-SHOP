@@ -10,6 +10,7 @@ import ProductTechnicalSection from "../../../../../components/ProductTechnicalS
 import ProductOtherSection from "../../../../../components/ProductOtherSection";
 import { QueryResult } from "../../../../../queries/productType";
 import ProductSectionTitle from "../../../../../components/ProductSectionTitle";
+import { getTranslations } from "next-intl/server";
 
 async function fetchProduct(productId: string, locale: string) {
 	try {
@@ -47,22 +48,23 @@ export async function generateMetadata({
 	};
 }
 
-export default function ProductPage({
+export default async function ProductPage({
 	params: { locale, productId }
 }: {
 	params: { productId: string; locale: string };
 }) {
 	revalidatePath("/[locale]/product/[productId]", "page");
+	const t = await getTranslations("product");
 
 	return (
 		<main className=" flex w-full flex-col overflow-x-hidden bg-zinc-950">
 			<ProductNavigationButtons />
 			<ProductShowcaseSection productId={productId} locale={locale} />
-			<ProductSectionTitle title="Opis" />
+			<ProductSectionTitle title={t("descriptionSection")} />
 			<ProductDescriptionSection productId={productId} locale={locale} />
-			<ProductSectionTitle title="Techniczne" />
+			<ProductSectionTitle title={t("technicalSection")} />
 			<ProductTechnicalSection productId={productId} locale={locale} />
-			<ProductSectionTitle title="Podobne produkty" />
+			<ProductSectionTitle title={t("otherSection")} />
 			<ProductOtherSection productId={productId} locale={locale} />
 		</main>
 	);

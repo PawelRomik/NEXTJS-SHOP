@@ -17,7 +17,7 @@ export async function generateMetadata({
 	const t = await getTranslations({ locale, namespace: "categories" });
 
 	return {
-		title: `${t('support')} | Ephonix`
+		title: `${t("support")} | Ephonix`
 	};
 }
 
@@ -30,16 +30,16 @@ export default async function SupportPage({
 	};
 }) {
 	revalidatePath("/[locale]/support", "page");
-	const t = await getTranslations("common");
+	const t = await getTranslations();
 
 	return (
 		<main className=" flex w-full flex-col bg-[rgb(20,20,20)]">
 			<div className="mt-2 flex w-full items-center justify-center bg-red-600 py-5 text-4xl font-bold uppercase text-white">
-				GOT A PROBLEM?
+				{t("support.gotProblem")}
 			</div>
 			<div className="shadow-inset my-auto flex h-full w-[100%] items-center justify-around gap-5 px-12">
 				<SupportForm />
-				<Image src={nextLogo} className="h-[500px] w-[25%]" alt={t("shopLogo")} />
+				<Image src={nextLogo} className="h-[500px] w-[25%]" alt={t("common.shopLogo")} />
 			</div>
 		</main>
 	);
