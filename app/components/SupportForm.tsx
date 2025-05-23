@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 type FormData = {
 	email: string;
@@ -22,6 +23,8 @@ export default function SupportForm() {
 		description: ""
 	});
 
+	const t = useTranslations("support");
+
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = e.target;
 		setFormData((prev) => ({ ...prev, [name]: value }));
@@ -37,7 +40,6 @@ export default function SupportForm() {
 		}
 
 		setFormData((prev) => ({ ...prev, attachments: [...prev.attachments, ...files] }));
-
 		e.target.value = "";
 	};
 
@@ -74,6 +76,12 @@ export default function SupportForm() {
 
 		console.log("Wysłano formularz:", formData);
 		alert("Formularz został wysłany!");
+		setFormData({
+			email: "",
+			subject: "",
+			description: "",
+			attachments: []
+		});
 	};
 
 	return (
@@ -81,7 +89,7 @@ export default function SupportForm() {
 			onSubmit={handleSubmit}
 			className="mx-auto flex-[2] rounded-lg bg-[rgb(12,12,12)] p-6 text-white"
 		>
-			<h2 className="mb-6 text-center text-4xl font-bold">SEND A TICKET</h2>
+			<h2 className="mb-6 text-center text-4xl font-bold uppercase">{t("sendTicket")}</h2>
 
 			<div className="mb-4 flex items-center justify-center gap-3">
 				<label className="block w-[8rem] text-xl font-bold uppercase">Email</label>
@@ -91,7 +99,7 @@ export default function SupportForm() {
 					value={formData.email}
 					onChange={handleChange}
 					required
-					className="flex-1 rounded-lg bg-white p-3 text-white"
+					className="flex-1 rounded-lg bg-white p-3 text-black "
 				/>
 				{errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
 			</div>
@@ -104,7 +112,7 @@ export default function SupportForm() {
 					value={formData.subject}
 					onChange={handleChange}
 					required
-					className="flex-1 rounded-lg bg-white p-3 text-white"
+					className="flex-1 rounded-lg bg-white p-3 text-black"
 				/>
 				{errors.subject && <p className="text-sm text-red-500">{errors.subject}</p>}
 			</div>
@@ -116,7 +124,7 @@ export default function SupportForm() {
 					value={formData.description}
 					onChange={handleChange}
 					required
-					className="flex-1 rounded-lg bg-white p-3 text-white"
+					className="flex-1 rounded-lg bg-white p-3 text-black"
 				/>
 				{errors.description && <p className="text-sm text-red-500">{errors.description}</p>}
 			</div>

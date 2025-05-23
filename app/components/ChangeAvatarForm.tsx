@@ -2,9 +2,11 @@
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 function ChangeAvatarForm() {
 	const { isLoaded, user } = useUser();
+	const t = useTranslations("settings");
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
@@ -23,9 +25,9 @@ function ChangeAvatarForm() {
 		try {
 			await user.setProfileImage({ file });
 			await user.reload();
-			setSuccessMessage("Avatar successfully changed!");
+			setSuccessMessage(t("avatarSuccess"));
 		} catch (err) {
-			setErrorMessage("An error occurred while changing your avatar.");
+			setErrorMessage(t("avatarError"));
 		}
 		setTimeout(() => {
 			setErrorMessage(null);
@@ -35,7 +37,7 @@ function ChangeAvatarForm() {
 
 	return (
 		<div className="flex flex-col items-center gap-4 text-white">
-			<h1 className="w-full text-center text-3xl font-bold uppercase">Change Avatar</h1>
+			<h1 className="w-full text-center text-3xl font-bold uppercase">{t("changeAvatar")}</h1>
 			{errorMessage && <p className="text-red-500">{errorMessage}</p>}
 			{successMessage && <p className="text-green-500">{successMessage}</p>}
 			<label className="relative cursor-pointer">

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { EmailAddressResource } from "@clerk/types";
+import { useTranslations } from "next-intl";
 
 const ChangeEmailForm = () => {
 	const { isLoaded, user } = useUser();
@@ -12,6 +13,7 @@ const ChangeEmailForm = () => {
 	const [passwordCurrent, setPasswordCurrent] = useState("");
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 	const [successMessage, setSuccessMessage] = useState<string | null>(null);
+	const t = useTranslations("settings");
 
 	if (!isLoaded || !user?.id) return null;
 
@@ -41,12 +43,12 @@ const ChangeEmailForm = () => {
 				emailAddress?.prepareVerification({ strategy: "email_code" });
 				setIsVerifying(true);
 			} else {
-				setErrorMessage("Incorrect password. Please try again.");
+				setErrorMessage(t("incorrectPassword"));
 			}
 		} catch (err: any) {
 			if (err.errors[0].code == "form_identifier_exists") {
-				setErrorMessage("This Email is taken.");
-			} else setErrorMessage("An error occurred while verifying your password.");
+				setErrorMessage(t("emailTaken"));
+			} else setErrorMessage("error");
 		}
 		setTimeout(() => {
 			setErrorMessage(null);
@@ -65,10 +67,10 @@ const ChangeEmailForm = () => {
 			if (emailVerifyAttempt?.verification.status === "verified") {
 				await updateOldEmail();
 			} else {
-				setErrorMessage("Invalid verification code. Please try again.");
+				setErrorMessage(t("wrongCode"));
 			}
 		} catch (err) {
-			setErrorMessage("An error occurred while verifying your email.");
+			setErrorMessage(t("error"));
 			console.error(JSON.stringify(err, null, 2));
 		}
 		setTimeout(() => {
@@ -88,9 +90,9 @@ const ChangeEmailForm = () => {
 			});
 
 			await response.json();
-			setSuccessMessage("Email successfully changed!");
+			setSuccessMessage(t("emailSuccess"));
 		} catch (err) {
-			setErrorMessage("An error occurred while updating your email.");
+			setErrorMessage(t("error"));
 			console.log(err);
 		}
 		setTimeout(() => {
@@ -103,12 +105,12 @@ const ChangeEmailForm = () => {
 	if (isVerifying) {
 		return (
 			<div className="flex flex-col items-center gap-4 text-white">
-				<h1 className="w-full text-center text-3xl font-bold uppercase">Verify Email</h1>
+				<h1 className="w-full text-center text-3xl font-bold uppercase">{t("verifyEmail")}</h1>
 				{errorMessage && <p className="text-red-500">{errorMessage}</p>}
 				{successMessage && <p className="text-green-500">{successMessage}</p>}
 				<form onSubmit={(e) => verifyCode(e)} className="flex flex-col gap-4">
 					<div className="flex items-center justify-between gap-5">
-						<label htmlFor="code">Enter Code</label>
+						<label htmlFor="code">{t("enterCode")}</label>
 						<input
 							id="code"
 							name="code"
@@ -119,7 +121,7 @@ const ChangeEmailForm = () => {
 						/>
 					</div>
 					<button type="submit" className="rounded bg-red-600 px-4 py-2 text-white">
-						Verify
+						{t("verify")}
 					</button>
 				</form>
 			</div>
@@ -128,12 +130,12 @@ const ChangeEmailForm = () => {
 
 	return (
 		<div className="flex flex-col items-center gap-4 text-white">
-			<h1 className="w-full text-center text-3xl font-bold uppercase">Change Email</h1>
+			<h1 className="w-full text-center text-3xl font-bold uppercase">{t("changeEmail")}</h1>
 			{errorMessage && <p className="text-red-500">{errorMessage}</p>}
 			{successMessage && <p className="text-green-500">{successMessage}</p>}
 			<form autoComplete="off" onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-4">
 				<div className="flex items-center justify-between gap-5">
-					<label htmlFor="email">Enter Email Address</label>
+					<label htmlFor="email">{t("newEmail")}</label>
 					<input
 						id="email"
 						name="email"
@@ -144,7 +146,7 @@ const ChangeEmailForm = () => {
 					/>
 				</div>
 				<div className="flex items-center justify-between gap-5">
-					<label htmlFor="passwordCurrent">Enter Current Password</label>
+					<label htmlFor="passwordCurrent">{t("currentPassword")}</label>
 					<input
 						id="passwordCurrent"
 						name="passwordCurrent"
@@ -155,7 +157,7 @@ const ChangeEmailForm = () => {
 					/>
 				</div>
 				<button type="submit" className="rounded bg-red-600 px-4 py-2 text-white">
-					Change Email
+					{t("changeEmail")}
 				</button>
 			</form>
 		</div>

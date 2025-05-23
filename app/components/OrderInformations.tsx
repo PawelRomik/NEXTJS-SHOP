@@ -51,6 +51,8 @@ export default function OrderInformations({ id }: { id: number | string }) {
 	if (loading) return <p>Loading...</p>;
 	if (error || !order) return <ErrorText />;
 
+	console.log(order.products);
+
 	const totalPrice = order.products.reduce(
 		(sum: number, item: { price: number; quantity: number }) => sum + item.price * item.quantity,
 		0
@@ -74,10 +76,6 @@ export default function OrderInformations({ id }: { id: number | string }) {
 				<span className="rounded bg-red-600  p-2">
 					{t("product.price", { amount: formatPrice(totalPrice, exchangeRate) })}
 				</span>
-			</p>
-
-			<p className="flex items-center gap-3 bg-[rgb(12,12,12)] p-3">
-				{t("order.status")}: <span className="rounded bg-green-500 p-2">{t("order.success")}</span>
 			</p>
 		</div>
 	);
