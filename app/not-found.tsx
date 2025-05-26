@@ -26,9 +26,18 @@ export default function NotFound() {
 						/>
 						<h2 className="-rotate-3 text-4xl text-red-600">ERROR 404!</h2>
 						<p className="rotate-3">{t("notFound.notFoundAlt")}</p>
-						<button className="-rotate-3 rounded-lg bg-red-600 px-6 py-3 transition hover:bg-red-500">
-							{t("notFound.home")}
-						</button>
+						<div className="flex gap-3">
+							<Link href="/support" title={t("order.home")}>
+								<button className="-rotate-3 rounded-lg bg-red-600 px-6 py-3 transition hover:bg-red-500">
+									{t("categories.support")}
+								</button>
+							</Link>
+							<Link href="/" title={t("order.home")}>
+								<button className="rotate-3 rounded-lg bg-red-600 px-6 py-3 transition hover:bg-red-500">
+									{t("order.home")}
+								</button>
+							</Link>
+						</div>
 					</p>
 				</div>
 				<ScrollToTopButton />

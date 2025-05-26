@@ -86,7 +86,8 @@
 		"totalPrice": "Całkowita cena",
 		"total": "Razem",
 		"price": "Cena",
-		"amount": "Ilość"
+		"amount": "Ilość",
+		"estimatedDelivery": "Przewidywana dostawa: 3-5 dni roboczych"
 	},
 	"product": {
 		"product": "Produkt",

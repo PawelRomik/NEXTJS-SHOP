@@ -91,3 +91,34 @@ export const GET_ORDER_PRODUCT = gql`
 		}
 	}
 `;
+
+export const GET_OTHER_PRODUCTS = gql`
+	query getProducts($locale: I18NLocaleCode!) {
+		products(pagination: { limit: 5 }, locale: $locale) {
+			data {
+				id
+				attributes {
+					name
+					price
+					uuid
+					salePrice
+					desc
+					images {
+						data {
+							attributes {
+								url
+							}
+						}
+					}
+					categories {
+						data {
+							attributes {
+								name
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+`;
