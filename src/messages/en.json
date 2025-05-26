@@ -86,7 +86,8 @@
 		"totalPrice": "Total price",
 		"total": "Total",
 		"price": "Price",
-		"amount": "Amount"
+		"amount": "Amount",
+		"estimatedDelivery": "Estimated delivery time: 3–5 working days"
 	},
 	"product": {
 		"product": "Product",

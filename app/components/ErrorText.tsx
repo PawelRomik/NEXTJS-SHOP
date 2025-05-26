@@ -2,9 +2,10 @@
 import { useTranslations } from "next-intl";
 import nextLogo from "../../public/logo.png";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ErrorText() {
-	const t = useTranslations("common");
+	const t = useTranslations();
 
 	return (
 		<div className="flex w-full items-center justify-center py-20">
@@ -14,16 +15,24 @@ export default function ErrorText() {
 					width={220}
 					height={300}
 					className="hidden w-[220px] lg:block"
-					alt={t("shopLogo")}
+					alt={t("common.shopLogo")}
 				/>
 				<h2 className="-rotate-3 text-4xl text-red-600">ERROR 500!</h2>
-				<p className="rotate-3">{t("errorLoadingProducts")}</p>
-				<button
-					onClick={() => window.location.reload()}
-					className=" -rotate-3 rounded-lg bg-red-600 px-6 py-3 transition hover:bg-red-500"
-				>
-					{t("retry")}
-				</button>
+				<p className="rotate-3">{t("common.errorLoadingProducts")}</p>
+				<div className="flex gap-3">
+					<Link href="/support" title={t("order.home")}>
+						<button className="-rotate-3 rounded-lg bg-red-600 px-6 py-3 transition hover:bg-red-500">
+							{t("categories.support")}
+						</button>
+					</Link>
+
+					<button
+						onClick={() => window.location.reload()}
+						className="rotate-3 rounded-lg bg-red-600 px-6 py-3 transition hover:bg-red-500"
+					>
+						{t("common.retry")}
+					</button>
+				</div>
 			</p>
 		</div>
 	);
