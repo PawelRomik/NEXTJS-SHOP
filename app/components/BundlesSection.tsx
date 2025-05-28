@@ -11,10 +11,10 @@ export default async function BundlesSection() {
 		>
 			<div className="h-full w-full bg-[rgba(0,0,0,0.85)]">
 				<div
-					className={`flex h-full flex-col items-center justify-center gap-3 text-2xl text-white lg:mr-[10%] lg:items-end`}
+					className={`flex h-full flex-col items-center justify-center gap-3 text-center text-2xl text-white lg:mr-[10%] lg:items-end lg:text-right`}
 				>
 					<h2 className="text-shadow-lg text-4xl font-bold lg:text-5xl">{t("bundlesTitle")}</h2>
-					<h4 className="text-shadow-lg w-[300px] py-3 text-center text-lg text-zinc-200 lg:w-[500px] lg:text-left lg:text-xl">
+					<h4 className="text-shadow-lg w-[300px] py-3 text-lg text-zinc-200 lg:w-[500px] lg:text-xl">
 						{t("bundlesDesc")}
 					</h4>
 					<Link href="/new">
