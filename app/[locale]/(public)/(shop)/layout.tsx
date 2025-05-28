@@ -7,7 +7,7 @@ type shopLayoutProps = {
 
 export default async function ShopLayout({ children }: shopLayoutProps) {
 	return (
-		<div className={` roboto flex min-h-screen flex-col`}>
+		<div className={` roboto flex min-h-screen max-w-[100vw] flex-col overflow-x-hidden`}>
 			<ShopHeader />
 			<div className="flex flex-1 items-stretch">
 				{children}

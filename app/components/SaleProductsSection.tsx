@@ -11,7 +11,7 @@ export default async function SaleProductsSection() {
 		>
 			<div className="h-full w-full bg-[rgba(0,0,0,0.85)]">
 				<div
-					className={`flex h-full flex-col items-center justify-center gap-3 text-2xl text-white lg:items-center`}
+					className={`flex h-full flex-col items-center justify-center gap-3 text-center text-2xl text-white lg:items-center`}
 				>
 					<h2 className="text-shadow-lg text-4xl font-bold lg:text-5xl">{t("saleTitle")}</h2>
 					<h4 className="text-shadow-lg w-[300px] py-3 text-center text-lg text-zinc-200 lg:w-[500px] lg:text-left lg:text-xl">

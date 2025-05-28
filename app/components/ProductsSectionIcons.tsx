@@ -5,7 +5,7 @@ export default async function ProductsSectionIcons() {
 	const t = await getTranslations("footer");
 
 	return (
-		<ul className="absolute flex h-full flex-col items-end justify-around gap-2 text-5xl">
+		<ul className="absolute bottom-5 flex h-full w-full items-end  justify-around gap-2 text-3xl md:bottom-0 md:w-auto md:flex-col md:text-5xl">
 			<li>
 				<Link
 					href={"https://www.facebook.com"}

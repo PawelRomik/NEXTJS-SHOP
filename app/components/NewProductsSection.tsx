@@ -11,7 +11,7 @@ export default async function NewProductsSection() {
 		>
 			<div className="h-full w-full bg-[rgba(0,0,0,0.85)]">
 				<div
-					className={`flex h-full flex-col items-center justify-center gap-3 text-2xl text-white lg:ml-[10%] lg:items-start`}
+					className={`flex h-full flex-col items-center justify-center gap-3 text-center text-2xl text-white lg:ml-[10%] lg:items-start`}
 				>
 					<h2 className="text-shadow-lg text-4xl font-bold lg:text-5xl">{t("newProductsTitle")}</h2>
 					<h4 className="text-shadow-lg w-[300px] py-3 text-center text-lg text-zinc-200 lg:w-[500px] lg:text-left lg:text-xl">
@@ -24,7 +24,7 @@ export default async function NewProductsSection() {
 					</Link>
 				</div>
 			</div>
-			<div className="absolute right-0 top-0 h-full w-[100px] ">
+			<div className="absolute top-0 h-full w-full md:right-0 md:w-[100px] ">
 				<ProductsSectionIcons />
 			</div>
 		</div>
