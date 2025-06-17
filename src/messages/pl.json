@@ -11,7 +11,7 @@
 	"hamburger": {
 		"avatar": "Twoje Zdjęcie Profilowe",
 		"loggedIn": "Witaj ",
-		"notLoggedIn": "Nie Zalogowany!",
+		"notLoggedIn": "Gość",
 		"settings": "Ustawienia",
 		"logOut": "Wyloguj się"
 	},

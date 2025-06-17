@@ -14,14 +14,12 @@ export default function UserProfile() {
 	const [image, setImage] = useState("");
 
 	const refreshData = async (open?: boolean) => {
-		if (open) {
+		if (open && user) {
 			await user?.reload();
 			if (user?.imageUrl) setImage(user?.imageUrl);
 			if (user?.username) setUsername(user?.username);
 		}
 	};
-
-	refreshData(true);
 
 	return (
 		<div className="flex items-center justify-center">
