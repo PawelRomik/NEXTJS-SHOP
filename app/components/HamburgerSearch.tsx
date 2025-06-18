@@ -40,7 +40,7 @@ export default function HamburgerSearch() {
 				id="search"
 				name="search"
 				placeholder={t("search.search")}
-				className=" h-full w-full bg-zinc-900  p-2 text-xl outline-none"
+				className=" h-full w-full bg-zinc-900 p-2  text-xl outline-none"
 				maxLength={100}
 				value={inputValue}
 				onChange={(e) => {
@@ -49,7 +49,7 @@ export default function HamburgerSearch() {
 				onKeyUp={handleKeyPress}
 			></input>
 			<button onClick={handleSearch} className="h-full  bg-zinc-900 p-2 outline-none">
-				<i className="ri-search-line pl-1 text-xl"></i>
+				<i className="ri-search-line pl-1 text-xl md:text-2xl"></i>
 			</button>
 		</div>
 	);

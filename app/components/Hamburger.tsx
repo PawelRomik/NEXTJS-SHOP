@@ -33,23 +33,25 @@ export default function Hamburger() {
 				</button>
 			</div>
 			{menuOn && (
-				<NavigationMenu.Root className="no-scrollbar fixed left-0 top-0 z-30 flex h-screen w-svw origin-left animate-showSearchbar flex-col overflow-y-auto bg-[rgb(20,20,20)] text-xl lg:hidden">
-					<NavigationMenu.Item className="flex h-[60px] w-full list-none items-center justify-between bg-[rgb(11,11,11)] px-3 ">
-						<button onClick={() => setMenuOn(false)}>
-							<i className="ri-close-circle-line text-3xl text-red-600"></i>
-						</button>
-						<HamburgerSearch />
-					</NavigationMenu.Item>
-					<NavigationMenu.Item className="shadow-inset flex w-full flex-1 flex-col items-center justify-center border-b-4 border-red-800 pt-5">
-						<HamburgerAccountSection />
-					</NavigationMenu.Item>
-					<NavigationMenu.List className="relative flex w-full  list-none flex-col gap-1 ">
+				<NavigationMenu.Root className="no-scrollbar fixed left-0 top-0 z-30 flex h-screen w-svw origin-left animate-showSearchbar flex-col justify-between overflow-y-auto bg-[rgb(20,20,20)] text-xl lg:hidden">
+					<div className="flex h-full flex-col">
+						<NavigationMenu.Item className="flex h-[60px] w-full list-none items-center justify-between bg-[rgb(11,11,11)] px-3 md:h-[100px] ">
+							<button onClick={() => setMenuOn(false)}>
+								<i className="ri-close-circle-line text-3xl text-red-600 md:text-4xl"></i>
+							</button>
+							<HamburgerSearch />
+						</NavigationMenu.Item>
+						<NavigationMenu.Item className="shadow-inset flex h-full min-h-[300px] w-full flex-col items-center justify-center border-b-4 border-red-800 pt-5 md:min-h-[700px]">
+							<HamburgerAccountSection />
+						</NavigationMenu.Item>
+					</div>
+					<NavigationMenu.List className="relative flex w-full  list-none flex-col gap-1  md:text-3xl ">
 						{categories.map((category) => (
 							<NavigationMenu.Item key={category.id}>
 								{category.subCategories ? (
 									<div className="group w-full bg-[rgb(11,11,11)]">
 										<button
-											className={`w-full cursor-pointer bg-[rgb(11,11,11)] px-4 py-4 transition ${
+											className={`w-full cursor-pointer items-center justify-center bg-[rgb(11,11,11)] px-4 py-4 transition md:py-6 ${
 												openCategoryId === category.id ? "bg-red-600" : ""
 											}`}
 											onClick={() =>
@@ -78,7 +80,7 @@ export default function Hamburger() {
 													return (
 														<div
 															key={slug}
-															className="bg-[rgb(20,20,20)]  px-6 py-3 transition hover:text-red-600 focus:text-red-600"
+															className="bg-[rgb(20,20,20)]  px-6 py-3 transition hover:text-red-600 focus:text-red-600 md:py-6"
 														>
 															<Link
 																href={href}
@@ -86,6 +88,7 @@ export default function Hamburger() {
 																onClick={() => setMenuOn(false)}
 																className="text-white"
 															>
+																<i className="ri-arrow-right-s-fill"></i>
 																<b>{t(slug)}</b>
 															</Link>
 														</div>
@@ -95,7 +98,7 @@ export default function Hamburger() {
 										)}
 									</div>
 								) : (
-									<div className="bg-[rgb(11,11,11)] px-4 py-4">
+									<div className="bg-[rgb(11,11,11)] px-4 py-4 md:py-6">
 										<Link
 											href={`/category/${category.slug}`}
 											onClick={() => setMenuOn(false)}
