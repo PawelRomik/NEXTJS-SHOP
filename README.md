@@ -33,8 +33,11 @@
 
 ## 📸 Screenshots
 
-<!-- Add screenshots in the `/public/screenshots` folder or via external URLs -->
-*To be added soon.*
+![image](https://github.com/user-attachments/assets/9dd485a6-291e-4c45-ae60-5b5b36483383)
+![image](https://github.com/user-attachments/assets/cf9a34f9-2893-4c24-9eee-f99171693cd3)
+![image](https://github.com/user-attachments/assets/b653db45-78c4-40df-b307-8705b2a7a957)
+![image](https://github.com/user-attachments/assets/1698c969-90d9-4b81-8009-213dcdd6ba6e)
+
 
 ---
 
