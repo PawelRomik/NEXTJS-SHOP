@@ -56,8 +56,8 @@ npm run develop
 ```
 Copy `.env.example` and rename it to `.env`, then fill in your own API keys:
 ```
-CLIENT_URL=shop_url (default: http://localhost:3000)
-STRIPE_KEY=stripe_secret_key
+SHOP_URL=shop_url (default: http://localhost:3000)
+STRIPE_SECRET_KEY=stripe_secret_key
 ```
 ### 3. Start the Next.js Frontend
 ```bash
@@ -67,9 +67,8 @@ npm run dev
 ```
 Copy `.env.example` and rename it to `.env.local`, then fill in your own API keys:
 ```
-APOLLO_AUTH_KEY=your_strapi_api_token
-NEXT_PUBLIC_STRIPE_PROD_KEY=stripe_publishable_key
-STRIPE_KEY=stripe_secret_key
+NEXT_PUBLIC_STRAPI_AUTH_KEY=your_strapi_api_token
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=stripe_publishable_key
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=clerk_publishable_key
 CLERK_SECRET_KEY=clerk_secret_key
 ```
