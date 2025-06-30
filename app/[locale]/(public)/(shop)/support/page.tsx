@@ -34,12 +34,12 @@ export default async function SupportPage({
 
 	return (
 		<main className=" flex w-full flex-col bg-[rgb(20,20,20)]">
-			<div className="mt-2 flex w-full items-center justify-center bg-red-600 py-5 text-4xl font-bold uppercase text-white">
+			<div className="mt-2 flex w-full items-center justify-center bg-red-600 py-5 text-xl md:text-4xl font-bold uppercase text-white">
 				{t("support.gotProblem")}
 			</div>
-			<div className="shadow-inset my-auto flex h-full w-[100%] items-center justify-around gap-5 px-12">
+			<div className="shadow-inset my-auto flex h-full w-[100%] items-center justify-around gap-5 md:px-12">
 				<SupportForm />
-				<Image src={nextLogo} className="h-[500px] w-[25%]" alt={t("common.shopLogo")} />
+				<Image src={nextLogo} className="hidden lg:block h-[500px] w-[25%]" alt={t("common.shopLogo")} />
 			</div>
 		</main>
 	);

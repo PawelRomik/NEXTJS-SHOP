@@ -13,7 +13,7 @@ import { formatPrice } from "../lib/utils/formatPrice";
 import { useCurrency } from "../context/CurrencyProvider";
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 
 type RootState = {
@@ -31,6 +31,7 @@ export default function CartPopover() {
 	const dispatch = useDispatch();
 	const { exchangeRate } = useCurrency();
 	const pathname = usePathname();
+	  const router = useRouter();
 
 	const totalPrice = () => {
 		let total = 0;
@@ -39,6 +40,18 @@ export default function CartPopover() {
 		});
 		return total.toFixed(2);
 	};
+
+	  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1024);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
 	const prevTotalQuantity = useRef(products.reduce((sum, item) => sum + item.quantity, 0));
 
@@ -52,10 +65,16 @@ export default function CartPopover() {
 		prevTotalQuantity.current = currentTotalQuantity;
 	}, [products, pathname]);
 
+	  const handleClick = () => {
+    if (isMobile) {
+       router.push('/cart');
+    }
+  };
+
 	return (
 		<Popover.Root open={isOpen} defaultOpen={false} onOpenChange={(open) => setIsOpen(open)}>
 			<Popover.Trigger asChild>
-				<div className="flex items-center justify-center">
+				<div   onClick={handleClick} className="flex items-center justify-center">
 					<button
 						className="inline-flex h-[35px] w-[35px] cursor-pointer items-center justify-center rounded-full outline-none"
 						aria-label="Update dimensions"
@@ -77,7 +96,7 @@ export default function CartPopover() {
 							event.preventDefault();
 						}
 					}}
-					className="flex w-[100vw] origin-top animate-showNav border-[3px] border-red-600 bg-[rgb(20,20,20)]  lg:w-auto  "
+					className="hidden w-[100vw] origin-top animate-showNav border-[3px] border-red-600 bg-[rgb(20,20,20)] lg:flex  lg:w-auto  "
 				>
 					<div className="z-50 uppercase text-white">
 						<h1 className="mb-7 bg-[rgb(12,12,12)] p-3 text-center text-2xl font-bold lg:px-10">

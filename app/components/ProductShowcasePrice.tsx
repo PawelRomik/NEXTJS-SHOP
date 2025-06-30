@@ -15,8 +15,8 @@ export default function ProductShowcasePrice({ price, productId }: ProductShowca
 	console.log(exchangeRate);
 
 	return (
-		<div className="mr-4 flex flex-col items-end justify-center gap-3 lg:items-start">
-			<p className="text-3xl font-bold text-white">
+		<div className="mr-4 flex items-center justify-end lg:justify-center gap-3 lg:flex-col lg:items-start ">
+			<p className="text-2xl font-bold text-white">
 				{t("price", { amount: formatPrice(price, exchangeRate) })}
 			</p>
 			<BuyButton productId={productId} />

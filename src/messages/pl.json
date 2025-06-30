@@ -160,7 +160,13 @@
 	"support": {
 		"sendTicket": "Wyślij wiadomość",
 		"contact": "Skontaktuj się z nami",
-		"gotProblem": "Masz jakiś problem?"
+		"gotProblem": "Masz jakiś problem?",
+		"email": "Email",
+		"topic": "Temat",
+		"desc": "Opis",
+		"attachments": "Załączniki",
+		"optional": "(opcjonalnie)",
+		"send": "Wyślij"
 	},
 	"sign": {
 		"signIn": "Zaloguj się",

@@ -84,7 +84,7 @@ export default function CartContent() {
 					baseURL: process.env.NEXT_PUBLIC_PROD_PATH,
 					headers: {
 						Authorization:
-							"bearer 15f3bbedadd97c183126ac913ec2bd519b72f40e3c2a085f54529f0e9a75866a31e93fe949997c737dfe1948793ca961de6d345ef0aa384ac67d5bdae4fe86e00667c327e0ab204a5ee06f1b8a2b6f488f6357d992c665586c4d065528b4c70c34f27b3df7701a6490304e5641bc9744d3ed7e56f578ba10b9d73516605e506f"
+							"bearer " + process.env.NEXT_PUBLIC_STRIPE_TOKEN
 					}
 				})
 				.post("/api/orders", {
@@ -214,7 +214,7 @@ export default function CartContent() {
 							</div>
 							<button
 								onClick={handlePayment}
-								className="mb-3 flex w-[400px] cursor-pointer items-center justify-center gap-5 border-none bg-red-600 p-3 font-bold  uppercase text-white transition hover:bg-red-500"
+								className="mb-3 flex md:w-[400px] cursor-pointer items-center justify-center gap-5 border-none bg-red-600 p-3 font-bold  uppercase text-white transition hover:bg-red-500"
 							>
 								{t("cart.checkout")}
 							</button>

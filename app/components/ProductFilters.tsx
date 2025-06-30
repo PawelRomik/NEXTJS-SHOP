@@ -58,7 +58,7 @@ export default function ProductFilters({ filters }: ProductFiltersProps) {
 				onSubmit={handleSubmit}
 				className=" flex w-full flex-col items-start justify-start gap-2"
 			>
-				<div className="grid w-full grid-cols-5 gap-5  p-[3px]  px-5 text-white">
+				<div className="flex w-full grid-cols-5 flex-col flex-wrap items-center justify-center gap-5  p-[3px] px-5  text-white  md:flex-row lg:grid">
 					{filters.map((filter) => (
 						<Filter key={filter.id} filter={filter} />
 					))}
@@ -67,7 +67,7 @@ export default function ProductFilters({ filters }: ProductFiltersProps) {
 				</div>
 				<button
 					type="submit"
-					className="mx-5 mb-3 h-full rounded-2xl border-4 border-zinc-950  border-l-[rgb(32,32,32)] border-t-[rgb(32,32,32)] bg-[rgb(24,24,24)] p-[3px] px-5 font-bold uppercase  text-white hover:border-red-700 hover:border-l-red-500 hover:border-t-red-500 hover:bg-red-600"
+					className="mx-5 mb-3 h-full rounded-[10px] bg-[rgb(28,28,28)] p-[3px] px-5 font-bold uppercase  text-white  hover:bg-red-600"
 				>
 					{t("apply")}
 				</button>
