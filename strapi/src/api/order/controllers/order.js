@@ -1,5 +1,5 @@
 // @ts-ignore
-const stripe = require("stripe")(process.env.STRIPE_KEY);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 ("use strict");
 
@@ -38,8 +38,8 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       );
       const session = await stripe.checkout.sessions.create({
         mode: "payment",
-        success_url: `${process.env.CLIENT_URL}/order?state=success&session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.CLIENT_URL}/order?state=error&session_id={CHECKOUT_SESSION_ID}`,
+        success_url: `${process.env.SHOP_URL}/order?state=success&session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${process.env.SHOP_URL}/order?state=error&session_id={CHECKOUT_SESSION_ID}`,
         line_items: lineItems,
       });
 

@@ -41,7 +41,7 @@ export default function BundleDisplay({
 					<Link href={`/product/${uuid}`} title="Check" className="w-full">
 						<div className="relative w-full bg-[rgb(12,12,12)]    ">
 							<Image
-								src={`${process.env.NEXT_PUBLIC_PROD_PATH}${display}`}
+								src={`${process.env.NEXT_PUBLIC_STRAPI_PATH}${display}`}
 								alt={name}
 								width={600}
 								height={600}

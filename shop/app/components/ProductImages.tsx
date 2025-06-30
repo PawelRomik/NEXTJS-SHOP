@@ -27,7 +27,7 @@ export default function ProductImages({ images }: ProductShowcaseGalleryClientPr
 		<div className="flex h-[500px] w-full flex-col items-center justify-end lg:h-[700px]">
 			<div className="flex h-full max-h-[300px] w-full items-center justify-start p-5 lg:max-h-[500px]">
 				<div
-					style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_PROD_PATH + mainPhotoSrc})` }}
+					style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_STRAPI_PATH + mainPhotoSrc})` }}
 					className="mirror after:z-3 h-full w-full bg-contain bg-center bg-no-repeat"
 				></div>
 			</div>
@@ -40,7 +40,7 @@ export default function ProductImages({ images }: ProductShowcaseGalleryClientPr
 								<Image
 									width={600}
 									height={600}
-									src={`${process.env.NEXT_PUBLIC_PROD_PATH}${image.attributes.url}`}
+									src={`${process.env.NEXT_PUBLIC_STRAPI_PATH}${image.attributes.url}`}
 									alt={`${t("productImage")} ${index + 1}`}
 									className={`h-[100%] border-2 object-cover p-2 transition hover:p-1 lg:p-4 hover:lg:p-3 ${mainPhotoSrc === image.attributes.url ? "border-red-500" : "border-zinc-800"}`}
 									onClick={() => changeMainPhotoSrc(index)}

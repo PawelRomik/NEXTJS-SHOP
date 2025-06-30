@@ -26,7 +26,7 @@ export default function NavigationLinks() {
 				}
 			});
 			const dataUrl = data.categories.data[0]?.attributes.image.data.attributes.url;
-			setImageSrc(`${process.env.NEXT_PUBLIC_PROD_PATH}${dataUrl}`);
+			setImageSrc(`${process.env.NEXT_PUBLIC_STRAPI_PATH}${dataUrl}`);
 		} catch (err) {
 			setImageSrc("");
 		}
