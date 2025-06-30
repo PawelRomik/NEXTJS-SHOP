@@ -71,11 +71,11 @@ export default function ProductDescriptionSection({
 					return (
 						<div
 							key={index}
-							className={`flex flex-col items-center justify-between text-xl lg:flex-row ${bgClass}`}
+							className={`flex flex-col items-center justify-between text-lg md:text-xl lg:flex-row ${bgClass}`}
 						>
-							<div className="flex h-[250px] max-h-[250px] w-full items-center justify-between gap-5 px-6 lg:px-32">
+							<div className="flex md:h-[250px] py-3 lg:md-0 md:max-h-[250px] flex-col md:flex-row w-full items-center justify-between gap-5 px-6 lg:px-32">
 								{imageFirst && imageUrl && (
-									<div className="relative h-full w-[250px]">
+									<div className="relative md:block hidden h-full w-[250px]">
 										<Image
 											layout="fill"
 											objectFit="contain"
@@ -85,12 +85,21 @@ export default function ProductDescriptionSection({
 										/>
 									</div>
 								)}
+								{imageUrl && <div className="md:hidden block relative h-[250px] w-[250px]">
+										<Image
+											layout="fill"
+											objectFit="contain"
+											src={imageUrl}
+											className="p-4"
+											alt={t("productImage")}
+										/>
+									</div>}
 								<div
 									className="description flex-1 "
 									dangerouslySetInnerHTML={{ __html: description }}
 								/>
 								{!imageFirst && imageUrl && (
-									<div className="relative h-full w-[250px]">
+									<div className="relative md:block hidden h-full w-[250px]">
 										<Image
 											layout="fill"
 											objectFit="contain"

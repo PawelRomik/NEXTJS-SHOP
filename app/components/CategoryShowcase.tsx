@@ -80,7 +80,7 @@ export default async function CategoryShowcase({
 						style={{
 							backgroundImage: `url(${process.env.NEXT_PUBLIC_PROD_PATH}${item.attributes.url})`
 						}}
-						className="mirror h-[400px] w-[400px] bg-contain bg-center bg-no-repeat"
+						className="mirror h-[100px] w-[100px] bg-contain bg-center bg-no-repeat md:h-[200px] md:w-[200px] lg:h-[400px] lg:w-[400px]"
 					></div>
 				))}
 			</div>
@@ -88,7 +88,7 @@ export default async function CategoryShowcase({
 	}
 
 	return (
-		<div className="bg3d relative grid h-[500px] w-full grid-cols-[2fr_6fr] gap-4 overflow-hidden bg-cover  bg-center bg-no-repeat  shadow-[inset_0_20px_20px_-10px_rgba(0,0,0,0.6),inset_0_-20px_20px_-10px_rgba(0,0,0,0.6)]">
+		<div className="bg3d relative flex h-[500px] w-full grid-cols-[2fr_6fr] flex-col items-center justify-around gap-4 overflow-hidden bg-cover bg-center  bg-no-repeat shadow-[inset_0_20px_20px_-10px_rgba(0,0,0,0.6),inset_0_-20px_20px_-10px_rgba(0,0,0,0.6)]  md:grid">
 			<div className=" z-[4] flex flex-col justify-center gap-2  px-5  text-white">
 				<div className="flex w-full flex-col">
 					<h1 className="py-3 text-4xl font-bold">{await getName()}</h1>

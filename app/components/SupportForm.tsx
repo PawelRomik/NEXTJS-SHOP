@@ -87,63 +87,63 @@ export default function SupportForm() {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="mx-auto flex-[2] rounded-lg bg-[rgb(12,12,12)] p-6 text-white"
+			className="mx-auto flex-[2] rounded-lg pt-8 md:pt-0 bg-[rgb(12,12,12)] p-2 md:p-6 text-white"
 		>
 			<h2 className="mb-6 text-center text-4xl font-bold uppercase">{t("sendTicket")}</h2>
 
-			<div className="mb-4 flex items-center justify-center gap-3">
-				<label className="block w-[8rem] text-xl font-bold uppercase">Email</label>
+			<div className="mb-4 flex items-center flex-col lg:flex-row px-3 md:px-0 justify-center gap-3">
+				<label className="block w-full text-center lg:text-right lg:w-[10rem] text-xl font-bold uppercase">{t("email")}</label>
 				<input
 					type="email"
 					name="email"
 					value={formData.email}
 					onChange={handleChange}
 					required
-					className="flex-1 rounded-lg bg-white p-3 text-black "
+					className="flex-1 rounded-lg w-full lg:w-auto bg-white p-3 text-black "
 				/>
 				{errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
 			</div>
 
-			<div className="mb-4 flex items-center justify-center gap-3">
-				<label className="block w-[8rem] text-xl font-bold uppercase">Temat</label>
+			<div className="mb-4 flex items-center flex-col lg:flex-row px-3 md:px-0 justify-center gap-3">
+				<label className="block w-full text-center lg:text-right lg:w-[10rem] text-xl font-bold uppercase">{t("topic")}</label>
 				<input
 					type="text"
 					name="subject"
 					value={formData.subject}
 					onChange={handleChange}
 					required
-					className="flex-1 rounded-lg bg-white p-3 text-black"
+					className="flex-1 rounded-lg w-full lg:w-auto bg-white p-3 text-black"
 				/>
 				{errors.subject && <p className="text-sm text-red-500">{errors.subject}</p>}
 			</div>
 
-			<div className="mb-4 flex items-center justify-between gap-3">
-				<label className="block w-[8rem] text-xl font-bold uppercase">Opis</label>
+			<div className="mb-4 flex items-center flex-col lg:flex-row px-3 md:px-0 justify-center gap-3">
+				<label className="block w-full text-center lg:text-right lg:w-[10rem] text-xl font-bold uppercase">{t("desc")}</label>
 				<textarea
 					name="description"
 					value={formData.description}
 					onChange={handleChange}
 					required
-					className="flex-1 rounded-lg bg-white p-3 text-black"
+					className="flex-1 rounded-lg w-full lg:w-auto bg-white p-3 text-black"
 				/>
 				{errors.description && <p className="text-sm text-red-500">{errors.description}</p>}
 			</div>
 
-			<div className="mb-4 flex flex-col items-start justify-center gap-3">
-				<div className="flex w-full items-center justify-center gap-3">
-					<label className="block w-[8rem] text-xl font-bold uppercase">Załączniki</label>
+			<div className="md:mb-4 flex flex-col  items-start justify-center gap-3 w-full">
+				<div className="mb-4 w-full flex items-center flex-col lg:flex-row px-3 md:px-0 justify-center gap-3">
+					<label className=" w-full text-center lg:text-right lg:w-[10rem] text-xl font-bold uppercase flex-col flex">{t("attachments")} <span className="text-gray-300 text-base">{t("optional")}</span></label>
 					<input
 						type="file"
 						multiple
 						onChange={handleFileChange}
-						className="flex-1 rounded-lg bg-white p-3 text-white"
+						className="flex-1 rounded-lg w-full lg:w-auto bg-white p-3 text-black"
 					/>
 				</div>
-				<ul className="mt-2 flex min-h-[60px] gap-3">
+				{formData.attachments.length > 0 && <ul className="mt-2 flex min-h-[60px] gap-3">
 					{formData.attachments.map((file, index) => (
 						<li
 							key={index}
-							className="flex items-center justify-between gap-3 rounded-md border-2 border-red-600 bg-red-600 p-2 text-white"
+							className="flex items-center flex-wrap justify-between gap-3 rounded-md border-2 border-red-600 bg-red-600 p-2 text-white"
 						>
 							<a
 								href={URL.createObjectURL(file)}
@@ -160,14 +160,14 @@ export default function SupportForm() {
 							</button>
 						</li>
 					))}
-				</ul>
+				</ul>}
 			</div>
 
 			<Button
 				type="submit"
-				className="w-full rounded bg-red-600 px-4 py-6 text-2xl font-bold uppercase text-white hover:bg-red-700"
+				className="w-full mt-8 md:mt-0 rounded bg-red-600 px-4 py-6 text-2xl font-bold uppercase text-white hover:bg-red-700"
 			>
-				Wyślij
+				{t("send")}
 			</Button>
 		</form>
 	);

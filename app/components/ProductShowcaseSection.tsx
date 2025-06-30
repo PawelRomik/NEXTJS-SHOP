@@ -17,7 +17,7 @@ export default function ProductShowcaseSection({ productId, locale }: ProductSho
 				<ProductShowcaseGallery productId={productId} locale={locale} />
 			</div>
 
-			<div className="z-[4] flex flex-[40%] flex-col justify-between bg-[rgba(0,0,0,0.6)] px-6 py-6 text-white lg:px-20 lg:py-32">
+			<div className="z-[4] flex flex-[40%] flex-col justify-between gap-3 bg-[rgba(0,0,0,0.6)] px-6 py-6 text-white lg:gap-0 lg:px-20 lg:py-32">
 				<ProductShowcaseDesc productId={productId} locale={locale} />
 				<ProductPrice productId={productId} locale={locale} />
 			</div>

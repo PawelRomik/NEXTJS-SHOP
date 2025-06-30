@@ -160,7 +160,13 @@
 	"support": {
 		"sendTicket": "Send a ticket",
 		"contact": "Contact us",
-		"gotProblem": "Got any problems?"
+		"gotProblem": "Got any problems?",
+		"email": "Email",
+		"topic": "Topic",
+		"desc": "Description",
+		"attachments": "Attachments",
+		"optional": "(optional)",
+		"send": "Send"
 	},
 	"sign": {
 		"signIn": "Sign In",
