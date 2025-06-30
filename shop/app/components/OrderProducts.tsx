@@ -107,7 +107,7 @@ export default function OrderProducts({ id }: { id: number | string }) {
 									className="h-[200px] max-h-[200px] w-[200px] max-w-[200px] p-5"
 								>
 									<Image
-										src={`${process.env.NEXT_PUBLIC_PROD_PATH}${product.imageUrl}`}
+										src={`${process.env.NEXT_PUBLIC_STRAPI_PATH}${product.imageUrl}`}
 										alt="Product image"
 										className="h-full"
 										width={300}

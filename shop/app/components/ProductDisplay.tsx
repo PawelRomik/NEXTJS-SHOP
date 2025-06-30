@@ -49,7 +49,7 @@ export default function ProductDisplay({
 								</div>
 							)}
 							<Image
-								src={`${process.env.NEXT_PUBLIC_PROD_PATH}${imageUrl}`}
+								src={`${process.env.NEXT_PUBLIC_STRAPI_PATH}${imageUrl}`}
 								alt={name}
 								width={600}
 								height={600}

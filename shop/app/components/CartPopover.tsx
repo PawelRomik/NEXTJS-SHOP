@@ -31,7 +31,7 @@ export default function CartPopover() {
 	const dispatch = useDispatch();
 	const { exchangeRate } = useCurrency();
 	const pathname = usePathname();
-	  const router = useRouter();
+	const router = useRouter();
 
 	const totalPrice = () => {
 		let total = 0;
@@ -41,17 +41,17 @@ export default function CartPopover() {
 		return total.toFixed(2);
 	};
 
-	  const [isMobile, setIsMobile] = useState(false);
+	const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 1024);
-    };
+	useEffect(() => {
+		const checkMobile = () => {
+			setIsMobile(window.innerWidth <= 1024);
+		};
 
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+		return () => window.removeEventListener("resize", checkMobile);
+	}, []);
 
 	const prevTotalQuantity = useRef(products.reduce((sum, item) => sum + item.quantity, 0));
 
@@ -65,16 +65,16 @@ export default function CartPopover() {
 		prevTotalQuantity.current = currentTotalQuantity;
 	}, [products, pathname]);
 
-	  const handleClick = () => {
-    if (isMobile) {
-       router.push('/cart');
-    }
-  };
+	const handleClick = () => {
+		if (isMobile) {
+			router.push("/cart");
+		}
+	};
 
 	return (
 		<Popover.Root open={isOpen} defaultOpen={false} onOpenChange={(open) => setIsOpen(open)}>
 			<Popover.Trigger asChild>
-				<div   onClick={handleClick} className="flex items-center justify-center">
+				<div onClick={handleClick} className="flex items-center justify-center">
 					<button
 						className="inline-flex h-[35px] w-[35px] cursor-pointer items-center justify-center rounded-full outline-none"
 						aria-label="Update dimensions"
@@ -110,7 +110,7 @@ export default function CartPopover() {
 								>
 									<Image
 										className="h-[100px] max-h-[100px] w-[80px] max-w-[80px] object-contain"
-										src={process.env.NEXT_PUBLIC_PROD_PATH + item.image}
+										src={process.env.NEXT_PUBLIC_STRAPI_PATH + item.image}
 										width={80}
 										height={100}
 										alt={t("cart.productImage")}

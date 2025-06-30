@@ -83,7 +83,7 @@ export default async function CategoryBanner({ category, num, locale }: ProductO
 						)}
 						{num % 2 == 0 && (
 							<Image
-								src={`${process.env.NEXT_PUBLIC_PROD_PATH}${await getImage()}`}
+								src={`${process.env.NEXT_PUBLIC_STRAPI_PATH}${await getImage()}`}
 								width={600}
 								height={600}
 								className="img mr-[50px] hidden h-[40%] w-auto self-center  p-5 lg:flex lg:h-full"
@@ -93,7 +93,7 @@ export default async function CategoryBanner({ category, num, locale }: ProductO
 						<div className=" flex h-full w-[450px] flex-col items-center justify-around gap-2 text-white lg:items-start lg:gap-0">
 							<h2 className="text-2xl font-bold uppercase lg:text-5xl">{await getName()}</h2>
 							<Image
-								src={`${process.env.NEXT_PUBLIC_PROD_PATH}${await getImage()}`}
+								src={`${process.env.NEXT_PUBLIC_STRAPI_PATH}${await getImage()}`}
 								width={600}
 								height={600}
 								className="img h-[30%] w-auto self-center lg:hidden  lg:h-full"
@@ -109,7 +109,7 @@ export default async function CategoryBanner({ category, num, locale }: ProductO
 						</div>
 						{num % 2 == 1 && (
 							<Image
-								src={`${process.env.NEXT_PUBLIC_PROD_PATH}${await getImage()}`}
+								src={`${process.env.NEXT_PUBLIC_STRAPI_PATH}${await getImage()}`}
 								width={600}
 								height={600}
 								className="img hidden  h-[40%] w-auto self-center  p-5 lg:flex lg:h-full"

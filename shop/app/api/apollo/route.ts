@@ -1,6 +1,6 @@
 async function handler(request: Request) {
-	const apolloAuthKey = process.env.APOLLO_AUTH_KEY;
-	const httpLinkUri = `${process.env.NEXT_PUBLIC_PROD_PATH}/graphql`;
+	const apolloAuthKey = process.env.NEXT_PUBLIC_STRAPI_AUTH_KEY;
+	const httpLinkUri = `${process.env.NEXT_PUBLIC_STRAPI_PATH}/graphql`;
 	return new Response(
 		JSON.stringify({
 			httpLinkUri,

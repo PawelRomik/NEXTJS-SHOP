@@ -66,7 +66,7 @@ export default function CartContent() {
 		prevTotalQuantity.current = currentTotalQuantity;
 	}, [products]);
 
-	const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PROD_KEY || "");
+	const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "");
 
 	const addCode = () => {
 		setDiscountMessage(false);
@@ -81,10 +81,9 @@ export default function CartContent() {
 			const stripe = await stripePromise;
 			const res = await axios
 				.create({
-					baseURL: process.env.NEXT_PUBLIC_PROD_PATH,
+					baseURL: process.env.NEXT_PUBLIC_STRAPI_PATH,
 					headers: {
-						Authorization:
-							"bearer " + process.env.NEXT_PUBLIC_STRIPE_TOKEN
+						Authorization: "bearer " + process.env.NEXT_PUBLIC_STRAPI_AUTH_KEY
 					}
 				})
 				.post("/api/orders", {
@@ -125,7 +124,7 @@ export default function CartContent() {
 									<Link title="Product" href={`/product/${item.id}`}>
 										<Image
 											className="h-[100px] max-h-[100px] w-[80px] max-w-[80px] object-contain"
-											src={process.env.NEXT_PUBLIC_PROD_PATH + item.image}
+											src={process.env.NEXT_PUBLIC_STRAPI_PATH + item.image}
 											width={80}
 											height={100}
 											alt={t("cart.productImage")}
@@ -214,7 +213,7 @@ export default function CartContent() {
 							</div>
 							<button
 								onClick={handlePayment}
-								className="mb-3 flex md:w-[400px] cursor-pointer items-center justify-center gap-5 border-none bg-red-600 p-3 font-bold  uppercase text-white transition hover:bg-red-500"
+								className="mb-3 flex cursor-pointer items-center justify-center gap-5 border-none bg-red-600 p-3 font-bold uppercase  text-white transition hover:bg-red-500 md:w-[400px]"
 							>
 								{t("cart.checkout")}
 							</button>

@@ -78,7 +78,7 @@ export default async function CategoryShowcase({
 					<div
 						key={index}
 						style={{
-							backgroundImage: `url(${process.env.NEXT_PUBLIC_PROD_PATH}${item.attributes.url})`
+							backgroundImage: `url(${process.env.NEXT_PUBLIC_STRAPI_PATH}${item.attributes.url})`
 						}}
 						className="mirror h-[100px] w-[100px] bg-contain bg-center bg-no-repeat md:h-[200px] md:w-[200px] lg:h-[400px] lg:w-[400px]"
 					></div>
