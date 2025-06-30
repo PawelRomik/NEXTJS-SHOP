@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "convertionrates",
+  "info": {
+    "singularName": "convertionrate",
+    "pluralName": "convertionrates",
+    "displayName": "convertionrate"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "currency": {
+      "type": "string"
+    },
+    "rate": {
+      "type": "float"
+    }
+  }
+}
