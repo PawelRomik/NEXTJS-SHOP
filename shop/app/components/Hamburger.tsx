@@ -35,7 +35,7 @@ export default function Hamburger() {
 			{menuOn && (
 				<NavigationMenu.Root className="no-scrollbar fixed left-0 top-0 z-30 flex h-screen w-svw origin-left animate-showSearchbar flex-col justify-between overflow-y-auto bg-[rgb(20,20,20)] text-xl lg:hidden">
 					<div className="flex h-full flex-col">
-						<NavigationMenu.Item className="flex h-[60px] w-full list-none items-center justify-between bg-[rgb(11,11,11)] px-3 md:h-[100px] ">
+						<NavigationMenu.Item className="flex h-[60px] w-full list-none items-center justify-between bg-[rgb(11,11,11)] px-3 md:h-[100px] md:px-6 ">
 							<button onClick={() => setMenuOn(false)}>
 								<i className="ri-close-circle-line text-3xl text-red-600 md:text-4xl"></i>
 							</button>
@@ -51,7 +51,7 @@ export default function Hamburger() {
 								{category.subCategories ? (
 									<div className="group w-full bg-[rgb(11,11,11)]">
 										<button
-											className={`w-full cursor-pointer items-center justify-center bg-[rgb(11,11,11)] px-4 py-4 transition md:py-6 ${
+											className={`w-full cursor-pointer items-center justify-center bg-[rgb(11,11,11)] px-4 py-4 transition md:px-6 md:py-6 ${
 												openCategoryId === category.id ? "bg-red-600" : ""
 											}`}
 											onClick={() =>
@@ -98,7 +98,7 @@ export default function Hamburger() {
 										)}
 									</div>
 								) : (
-									<div className="bg-[rgb(11,11,11)] px-4 py-4 md:py-6">
+									<div className="bg-[rgb(11,11,11)] px-4 py-4 md:px-6 md:py-6">
 										<Link
 											href={`/category/${category.slug}`}
 											onClick={() => setMenuOn(false)}

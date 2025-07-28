@@ -50,16 +50,17 @@ async function loadProducts(page: number, locale: string) {
 					key={product.id}
 					className="flex h-[80px] w-full items-center justify-between bg-[rgb(20,20,20)]   text-xl  text-white"
 				>
-					<td className="flex h-full flex-1 items-center justify-start  pr-8">
-						<div className="flex h-full items-center justify-start gap-8 px-8">
+					<td className="flex h-full flex-1 items-center justify-start  lg:pr-8">
+						<div className="flex h-full items-center justify-start gap-2 px-2 lg:gap-8 lg:px-8">
 							<div className="flex h-[10px] w-[10px] items-center justify-center rounded-full  bg-green-600 p-3"></div>
 							<p className="flex items-center justify-center">
-								{t("order")}: #{product.id}
+								<span className="hidden lg:inline">{t("order")}:</span>
+								<span>#{product.id}</span>
 							</p>
 						</div>
 					</td>
-					<td className="flex h-full flex-1 items-center justify-center pl-8">
-						<div className="flex h-full items-center justify-center px-8">
+					<td className="flex h-full flex-1 items-center justify-center lg:pl-8">
+						<div className="flex h-full items-center justify-center px-8 text-center">
 							{new Date(product.attributes.createdAt)
 								.toISOString()
 								.replace("T", " ")
@@ -113,14 +114,14 @@ export default function OrderHistoryPage({
 			<ProductSectionTitle title={t("history")} />
 			<div className="shadow-inset flex h-full flex-col items-center justify-between pt-5">
 				<Suspense fallback={<p>Loading</p>}>
-					<table className="flex  w-[95%] flex-row flex-wrap items-start justify-start gap-2 overflow-y-auto  bg-[rgb(12,12,12)] px-2 ">
+					<table className="flex w-full  flex-row flex-wrap items-start justify-start gap-2 overflow-y-auto bg-[rgb(12,12,12)]  lg:w-[95%] lg:px-2 ">
 						<tr className="sticky top-0 flex h-[80px] w-full items-center justify-between border-b-2 border-red-600  bg-[rgb(12,12,12)] p-3 text-2xl uppercase  text-white">
-							<th className="flex-1  pl-8 text-start">{t("order")}</th>
-							<th className="flex-1  pl-8 text-center">{t("date")}</th>
+							<th className="flex-1  text-start lg:pl-8">{t("order")}</th>
+							<th className="flex-1  text-center lg:pl-8">{t("date")}</th>
 							<th className="flex-1 text-end">{t("details")}</th>
 						</tr>
 						{loadProducts(page, locale)}
-						<tr className="h=[80px] bg-[rgb(12,12,12)"></tr>
+						<tr className="bg-[rgb(12,12,12)"></tr>
 					</table>
 				</Suspense>
 				<Suspense>{loadPagination(page)}</Suspense>

@@ -13,7 +13,8 @@
 		"loggedIn": "Hello ",
 		"notLoggedIn": "Guest",
 		"settings": "Settings",
-		"logOut": "Log out"
+		"logOut": "Log out",
+		"orders": "Orders"
 	},
 	"filters": {
 		"filters": "Filters",

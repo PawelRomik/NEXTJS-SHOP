@@ -13,7 +13,8 @@
 		"loggedIn": "Witaj ",
 		"notLoggedIn": "Gość",
 		"settings": "Ustawienia",
-		"logOut": "Wyloguj się"
+		"logOut": "Wyloguj się",
+		"orders": "Zamówienia"
 	},
 	"filters": {
 		"filters": "Filtry",
