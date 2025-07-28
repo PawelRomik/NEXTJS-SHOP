@@ -33,7 +33,7 @@ export default function OrderStatusPage({
 	const state = searchParams.state ? searchParams.state : "error";
 
 	return (
-		<div className="flex flex-1 flex-col items-center justify-center gap-6">
+		<div className="flex h-full flex-1 flex-col items-center justify-center bg-[rgb(12,12,12)]">
 			{state === "success" ? <OrderSuccessContent locale={locale} /> : <OrderErrorContent />}
 		</div>
 	);
