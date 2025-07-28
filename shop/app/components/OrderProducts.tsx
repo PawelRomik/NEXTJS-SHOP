@@ -98,9 +98,9 @@ export default function OrderProducts({ id }: { id: number | string }) {
 				{products.map((product) => (
 					<tr
 						key={product.id}
-						className="flex h-[200px] w-full items-center justify-between gap-2 bg-[rgb(26,26,26)] p-2 font-bold uppercase text-white"
+						className="flex h-[200px] w-full items-center justify-between gap-1 bg-[rgb(26,26,26)] p-1 font-bold uppercase text-white md:gap-2 md:p-2"
 					>
-						<td className="flex h-full flex-col items-center justify-center gap-3 bg-[rgb(16,16,16)] px-4 py-2">
+						<td className="hidden h-full flex-col items-center justify-center gap-3 bg-[rgb(16,16,16)] px-4 py-2 md:flex">
 							<div className="flex  items-center justify-center">
 								<Link
 									href={`/product/${product.id}`}
@@ -119,9 +119,21 @@ export default function OrderProducts({ id }: { id: number | string }) {
 
 						<td className="flex h-full flex-[1] items-center justify-between gap-5   font-bold uppercase">
 							<div className="flex h-full flex-[2] flex-col  bg-[rgb(20,20,20)] ">
-								<p className="w-full border-b-2 border-red-600 bg-[rgb(16,16,16)] p-2 text-center text-xl">
-									{product.name}
-								</p>
+								<div className="flex items-center justify-center border-b-2 border-red-600 bg-[rgb(16,16,16)] p-2">
+									<Link
+										href={`/product/${product.id}`}
+										className="flex h-[50px] max-h-[60px] w-[60px]  md:hidden"
+									>
+										<Image
+											src={`${process.env.NEXT_PUBLIC_STRAPI_PATH}${product.imageUrl}`}
+											alt="Product image"
+											className="h-full"
+											width={300}
+											height={300}
+										/>
+									</Link>
+									<p className="w-full  text-center text-sm md:text-xl">{product.name}</p>
+								</div>
 								<p className="p-3">
 									<span>{t("order.price")}: </span>
 									<span className="text-red-600">
@@ -146,7 +158,7 @@ export default function OrderProducts({ id }: { id: number | string }) {
 						<td className="flex h-full items-center justify-between gap-5   font-bold uppercase">
 							<div className="flex h-full flex-1 items-center justify-center bg-[rgb(16,16,16)] ">
 								<Link
-									className="flex h-full w-full items-center justify-center px-4 py-2 transition-all hover:bg-red-600"
+									className="flex h-full w-full items-center justify-center py-2 transition-all hover:bg-red-600 md:px-4"
 									href={`/product/${product.id}`}
 								>
 									<button>
