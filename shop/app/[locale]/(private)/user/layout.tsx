@@ -17,7 +17,7 @@ export default function UserLayout({ children }: PrivateLayoutProps) {
 		<div className={`roboto flex min-h-screen flex-col`}>
 			<ShopHeader />
 			<main className="flex flex-1  ">
-				<div className="flex  min-w-[250px] flex-[10%] border-r-4 border-red-600  bg-[rgb(12,12,12)]">
+				<div className="hidden lg:flex  min-w-[250px] flex-[10%] border-r-4 border-red-600  bg-[rgb(12,12,12)]">
 					<ul className="flex w-full flex-col items-center gap-3 pt-1">
 						{userCategories.map((category) => (
 							<UserCategoryLink key={category.slug} category={category} />
