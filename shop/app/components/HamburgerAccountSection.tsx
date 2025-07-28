@@ -40,6 +40,12 @@ export default function HamburgerAccountSection() {
 									{t("hamburger.settings").toUpperCase()}
 								</button>
 							</Link>
+							<Link href={"/user/orders"} title={t("hamburger.settings")}>
+								<button className=" flex gap-1 border-2 border-red-600 bg-[rgb(11,11,11)] p-1 px-4 text-base md:p-2 md:px-6 md:text-xl">
+									<i className="ri-bank-card-line"></i>
+									{t("hamburger.orders").toUpperCase()}
+								</button>
+							</Link>
 							<SignOutButton>
 								<button className=" flex gap-1 border-2 border-red-600 bg-[rgb(11,11,11)] p-1 px-4 text-base md:p-2 md:px-6 md:text-xl">
 									<i className="ri-logout-box-line"></i>
