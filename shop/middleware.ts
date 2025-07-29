@@ -12,9 +12,9 @@ const nextIntlMiddleware = createMiddleware({
 	defaultLocale: "en"
 });
 
-export default clerkMiddleware((auth, req) => {
+export default clerkMiddleware(async (auth, req) => {
 	if (isProtectedRoute(req)) {
-		auth().protect();
+		await auth.protect();
 	}
 
 	const path = req.nextUrl.pathname;

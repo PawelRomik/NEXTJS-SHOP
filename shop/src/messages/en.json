@@ -209,5 +209,22 @@
 		"passwordSuccess": "Password succesfully changed!",
 		"error": "An unknown error occured",
 		"shortName": "Username must be at least 4 characters long"
+	},
+	"auth": {
+		"signInTitle": "Sign in to Ephonix",
+		"username": "Username",
+		"enterUsername": "Enter your username",
+		"password": "Password",
+		"signIn": "Sign In",
+		"signUp": "Sign Up",
+		"noAccount": "No account?",
+		"createAccount": "Create an account",
+		"email": "Email",
+		"enterEmail": "Enter your email",
+		"haveAnAccount": "Already have an account?",
+		"verifyEmail": "Verify email code",
+		"emailCode": "Email code",
+		"verify": "Verify",
+		"continue": "Continue"
 	}
 }
