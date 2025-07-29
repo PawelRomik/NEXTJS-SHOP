@@ -209,5 +209,22 @@
 		"passwordSuccess": "Hasło zostało pomyślnie zmienione!",
 		"error": "Wystąpił nieznany błąd",
 		"shortName": "Nazwa użytkownika musi mieć co najmniej 4 znaki"
+	},
+	"auth": {
+		"signInTitle": "Zaloguj się do Ephonix",
+		"username": "Nazwa użytkownika",
+		"enterUsername": "Wprowadź nazwę użytkownika",
+		"password": "Hasło",
+		"signIn": "Zaloguj się",
+		"signUp": "Zarejestruj się",
+		"noAccount": "Nie masz konta?",
+		"createAccount": "Utwórz konto",
+		"email": "E‑mail",
+		"enterEmail": "Wprowadź adres e‑mail",
+		"haveAnAccount": "Masz już konto?",
+		"verifyEmail": "Zweryfikuj kod e‑mail",
+		"emailCode": "Kod e‑mail",
+		"verify": "Zweryfikuj",
+		"continue": "Kontynuuj"
 	}
 }
