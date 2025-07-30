@@ -213,7 +213,7 @@
 	"auth": {
 		"signInTitle": "Zaloguj się do Ephonix",
 		"username": "Nazwa użytkownika",
-		"enterUsername": "Wprowadź nazwę użytkownika",
+		"enterUsername": "Wprowadź nazwę użytkownika lub e-mail",
 		"password": "Hasło",
 		"signIn": "Zaloguj się",
 		"signUp": "Zarejestruj się",
@@ -225,6 +225,17 @@
 		"verifyEmail": "Zweryfikuj kod e‑mail",
 		"emailCode": "Kod e‑mail",
 		"verify": "Zweryfikuj",
-		"continue": "Kontynuuj"
+		"continue": "Kontynuuj",
+		"emailTaken": "Ten adres e-mail jest już zajęty. Spróbuj inny.",
+		"invalidEmail": "Podany adres e-mail jest nieprawidłowy.",
+		"shortPassword": "Hasło musi mieć co najmniej 8 znaków.",
+		"strongerPassword": "To hasło zostało znalezione w publicznym wycieku danych. Dla bezpieczeństwa konta użyj innego hasła.",
+		"incorrectCode": "Nieprawidłowy kod.",
+		"usernameTaken": "Ta nazwa użytkownika jest już zajęta. Spróbuj inną.",
+		"wrongUsername": "Nazwa użytkownika musi mieć od 4 do 64 znaków.",
+		"unexpectedError": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie.",
+		"invalidIdentifier": "Identyfikator jest nieprawidłowy.",
+		"noAccountFound": "Nie znaleziono konta.",
+		"invalidPassword": "Nieprawidłowe hasło."
 	}
 }
