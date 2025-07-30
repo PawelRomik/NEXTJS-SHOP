@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { clerkClient } from "@clerk/nextjs/server";
 
 export async function POST(req: NextRequest) {
+	const clerk = await clerkClient();
 	const { userId } = await req.json();
 
 	if (!userId) {
@@ -9,12 +10,12 @@ export async function POST(req: NextRequest) {
 	}
 
 	try {
-		const user = await clerkClient.users.getUser(userId);
-		await clerkClient.emailAddresses.updateEmailAddress(user.emailAddresses[0].id, {
+		const user = await clerk.users.getUser(userId);
+		await clerk.emailAddresses.updateEmailAddress(user.emailAddresses[0].id, {
 			primary: true
 		});
 
-		await clerkClient.emailAddresses.deleteEmailAddress(user.emailAddresses[1].id);
+		await clerk.emailAddresses.deleteEmailAddress(user.emailAddresses[1].id);
 
 		return NextResponse.json({ message: "Email updated successfully!" });
 	} catch (error) {

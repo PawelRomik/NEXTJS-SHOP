@@ -33,6 +33,9 @@ function ChangePasswordForm() {
 			await user.updatePassword({ currentPassword, newPassword });
 			await user.reload();
 			setSuccessMessage(t("passwordSuccess"));
+			setNewPassword("");
+			setConfirmPassword("");
+			setCurrentPassword("");
 		} catch (err: any) {
 			if (err.errors[0].code == "form_password_validation_failed") {
 				setErrorMessage(t("incorrectPassword"));

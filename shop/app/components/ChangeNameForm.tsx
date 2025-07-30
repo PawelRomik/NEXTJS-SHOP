@@ -26,6 +26,7 @@ function ChangeNameForm() {
 			await user.update({ username });
 			await user.reload();
 			setSuccessMessage(t("usernameSuccess"));
+			setUsername("");
 		} catch (err) {
 			setErrorMessage(t("usernameError"));
 		}
