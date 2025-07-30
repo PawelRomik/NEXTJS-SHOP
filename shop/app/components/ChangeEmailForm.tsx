@@ -91,6 +91,9 @@ const ChangeEmailForm = () => {
 
 			await response.json();
 			setSuccessMessage(t("emailSuccess"));
+			setCode("");
+			setPasswordCurrent("");
+			setEmail("");
 		} catch (err) {
 			setErrorMessage(t("error"));
 			console.log(err);

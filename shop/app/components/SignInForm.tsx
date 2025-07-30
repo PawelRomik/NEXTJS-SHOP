@@ -7,6 +7,20 @@ import { useTranslations } from "next-intl";
 
 export default function SignInForm() {
 	const t = useTranslations();
+
+	const getErrorMessage = (message: string) => {
+		switch (message) {
+			case "Identifier is invalid.":
+				return t("auth.invalidIdentifier");
+			case "Couldn't find your account.":
+				return t("auth.noAccountFound");
+			case "Password is incorrect. Try again, or use another method.":
+				return t("auth.invalidPassword");
+			default:
+				return t("auth.unexpectedError");
+		}
+	};
+
 	return (
 		<div className="dottedBg grid w-full flex-grow items-center  px-4 sm:justify-center">
 			<SignIn.Root>
@@ -34,7 +48,13 @@ export default function SignInForm() {
 								className="w-full rounded bg-white px-3.5 py-2 text-sm text-black outline-none ring-1 ring-inset ring-zinc-300 hover:ring-zinc-400 focus:ring-[1.5px] focus:ring-white data-[invalid]:ring-red-500"
 								placeholder={t("auth.enterUsername")}
 							/>
-							<Clerk.FieldError className="block text-sm text-red-500" />
+							<Clerk.FieldState>
+								{({ state, message = "error" }) =>
+									state === "error" && (
+										<span className="block text-sm text-red-500">{getErrorMessage(message)}</span>
+									)
+								}
+							</Clerk.FieldState>
 						</Clerk.Field>
 
 						<Clerk.Field name="password" className="space-y-2">
@@ -47,7 +67,13 @@ export default function SignInForm() {
 								className="w-full rounded bg-white px-3.5 py-2 text-sm text-black outline-none ring-1 ring-inset ring-zinc-300 hover:ring-zinc-400 focus:ring-[1.5px] focus:ring-white data-[invalid]:ring-red-500"
 								placeholder="••••••••"
 							/>
-							<Clerk.FieldError className="block text-sm text-red-500" />
+							<Clerk.FieldState>
+								{({ state, message = "error" }) =>
+									state === "error" && (
+										<span className="block text-sm text-red-500">{getErrorMessage(message)}</span>
+									)
+								}
+							</Clerk.FieldState>
 						</Clerk.Field>
 					</div>
 

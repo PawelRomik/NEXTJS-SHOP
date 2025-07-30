@@ -3,13 +3,14 @@ import { clerkClient } from "@clerk/nextjs/server";
 
 export async function POST(req: NextRequest) {
 	try {
+		const clerk = await clerkClient();
 		const { userId, password } = await req.json();
 
 		if (!userId || !password) {
 			return NextResponse.json({ error: "Missing userId or password" }, { status: 400 });
 		}
 
-		const response = await clerkClient.users.verifyPassword({
+		const response = await clerk.users.verifyPassword({
 			userId,
 			password
 		});

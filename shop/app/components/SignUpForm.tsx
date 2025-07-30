@@ -7,6 +7,27 @@ import { useTranslations } from "next-intl";
 
 export default function SignUpForm() {
 	const t = useTranslations();
+
+	const getErrorMessage = (message: string) => {
+		switch (message) {
+			case "That email address is taken. Please try another.":
+				return t("auth.emailTaken");
+			case "email_address must be a valid email address.":
+				return t("auth.invalidEmail");
+			case "Passwords must be 8 characters or more.":
+				return t("auth.shortPassword");
+			case "Password has been found in an online data breach. For account safety, please use a different password.":
+				return t("auth.strongerPassword");
+			case "Incorrect code":
+				return t("auth.incorrectCode");
+			case "That username is taken. Please try another.":
+				return t("auth.usernameTaken");
+			case "Username must be between 4 and 64 characters long.":
+				return t("auth.wrongUsername");
+			default:
+				return t("auth.unexpectedError");
+		}
+	};
 	return (
 		<div className="dottedBg grid w-full flex-grow items-center bg-zinc-950 px-4 sm:justify-center">
 			<SignUp.Root>
@@ -34,7 +55,13 @@ export default function SignUpForm() {
 								className="w-full rounded bg-white px-3.5 py-2 text-sm text-black outline-none ring-1 ring-inset ring-zinc-300 hover:ring-zinc-400 focus:ring-[1.5px] focus:ring-white data-[invalid]:ring-red-500"
 								placeholder={t("auth.enterEmail")}
 							/>
-							<Clerk.FieldError className="block text-sm text-red-500" />
+							<Clerk.FieldState>
+								{({ state, message = "error" }) =>
+									state === "error" && (
+										<span className="block text-sm text-red-500">{getErrorMessage(message)}</span>
+									)
+								}
+							</Clerk.FieldState>
 						</Clerk.Field>
 						<Clerk.Field name="password" className="space-y-2">
 							<Clerk.Label className="text-sm font-bold uppercase text-white">
@@ -46,7 +73,13 @@ export default function SignUpForm() {
 								className="w-full rounded bg-white px-3.5 py-2 text-sm text-black outline-none ring-1 ring-inset ring-zinc-300 hover:ring-zinc-400 focus:ring-[1.5px] focus:ring-white data-[invalid]:ring-red-500"
 								placeholder="••••••••"
 							/>
-							<Clerk.FieldError className="block text-sm text-red-500" />
+							<Clerk.FieldState>
+								{({ state, message = "error" }) =>
+									state === "error" && (
+										<span className="block text-sm text-red-500">{getErrorMessage(message)}</span>
+									)
+								}
+							</Clerk.FieldState>
 						</Clerk.Field>
 					</div>
 
@@ -89,7 +122,13 @@ export default function SignUpForm() {
 								required
 								className="w-full rounded bg-white px-3.5 py-2 text-sm text-black outline-none ring-1 ring-inset ring-zinc-300 hover:ring-zinc-400 focus:ring-[1.5px] focus:ring-white data-[invalid]:ring-red-500"
 							/>
-							<Clerk.FieldError className="block text-sm text-red-500" />
+							<Clerk.FieldState>
+								{({ state, message = "error" }) =>
+									state === "error" && (
+										<span className="block text-sm text-red-500">{getErrorMessage(message)}</span>
+									)
+								}
+							</Clerk.FieldState>
 						</Clerk.Field>
 						<SignUp.Action
 							submit
@@ -130,7 +169,13 @@ export default function SignUpForm() {
 							className="w-full rounded bg-white px-3.5 py-2 text-sm text-black outline-none ring-1 ring-inset ring-zinc-300 hover:ring-zinc-400 focus:ring-[1.5px] focus:ring-white data-[invalid]:ring-red-500"
 							placeholder={t("auth.username")}
 						/>
-						<Clerk.FieldError className="block text-sm text-red-500" />
+						<Clerk.FieldState>
+							{({ state, message = "error" }) =>
+								state === "error" && (
+									<span className="block text-sm text-red-500">{getErrorMessage(message)}</span>
+								)
+							}
+						</Clerk.FieldState>
 					</Clerk.Field>
 					<SignUp.Action
 						submit

@@ -213,7 +213,7 @@
 	"auth": {
 		"signInTitle": "Sign in to Ephonix",
 		"username": "Username",
-		"enterUsername": "Enter your username",
+		"enterUsername": "Enter your username or email",
 		"password": "Password",
 		"signIn": "Sign In",
 		"signUp": "Sign Up",
@@ -225,6 +225,17 @@
 		"verifyEmail": "Verify email code",
 		"emailCode": "Email code",
 		"verify": "Verify",
-		"continue": "Continue"
+		"continue": "Continue",
+		"emailTaken": "That email address is taken. Please try another.",
+		"invalidEmail": "The email address provided is incorrect.",
+		"shortPassword": "Password must be 8 characters or more.",
+		"strongerPassword": "Password has been found in an online data breach. For account safety, please use a different password.",
+		"incorrectCode": "Incorrect code",
+		"usernameTaken": "That username is taken. Please try another.",
+		"wrongUsername": "Username must be between 4 and 64 characters long.",
+		"unexpectedError": "An unexpected error occurred. Please try again.",
+		"invalidIdentifier": "Identifier is invalid.",
+		"noAccountFound": "Couldn't find your account.",
+		"invalidPassword": "Password is incorrect."
 	}
 }
