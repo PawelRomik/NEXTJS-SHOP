@@ -9,7 +9,7 @@ export const GET_SEARCH_PRODUCTS = gql`
 				or: [
 					{ fancywords: { name: { eqi: $name } } }
 					{ name: { containsi: $name } }
-					{ categories: { name: { eqi: $name } } }
+					{ categories: { slug: { eqi: $name } } }
 				]
 			}
 			locale: $locale
@@ -56,7 +56,7 @@ export const GET_SEARCH_PRODUCTS_COUNT = gql`
 				or: [
 					{ fancywords: { name: { eqi: $name } } }
 					{ name: { containsi: $name } }
-					{ categories: { name: { eqi: $name } } }
+					{ categories: { slug: { eqi: $name } } }
 				]
 			}
 			locale: $locale

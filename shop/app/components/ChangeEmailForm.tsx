@@ -71,7 +71,6 @@ const ChangeEmailForm = () => {
 			}
 		} catch (err) {
 			setErrorMessage(t("error"));
-			console.error(JSON.stringify(err, null, 2));
 		}
 		setTimeout(() => {
 			setErrorMessage(null);
@@ -96,7 +95,6 @@ const ChangeEmailForm = () => {
 			setEmail("");
 		} catch (err) {
 			setErrorMessage(t("error"));
-			console.log(err);
 		}
 		setTimeout(() => {
 			setErrorMessage(null);

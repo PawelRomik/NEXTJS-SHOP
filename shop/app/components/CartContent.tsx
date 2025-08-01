@@ -106,7 +106,6 @@ export default function CartContent() {
 					})
 				);
 			} catch (e) {
-				console.error("Error fetching products:", e);
 				setProducts([]);
 			}
 		}
@@ -174,7 +173,7 @@ export default function CartContent() {
 				sessionId: res.data.stripeSession.id
 			});
 		} catch (err) {
-			console.log(err);
+			return null;
 		}
 	};
 

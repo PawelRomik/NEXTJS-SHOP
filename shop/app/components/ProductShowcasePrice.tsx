@@ -12,10 +12,9 @@ type ProductShowcasePriceProps = {
 export default function ProductShowcasePrice({ price, productId }: ProductShowcasePriceProps) {
 	const t = useTranslations("product");
 	const { exchangeRate } = useCurrency();
-	console.log(exchangeRate);
 
 	return (
-		<div className="mr-4 flex items-center justify-end lg:justify-center gap-3 lg:flex-col lg:items-start ">
+		<div className="mr-4 flex items-center justify-end gap-3 lg:flex-col lg:items-start lg:justify-center ">
 			<p className="text-2xl font-bold text-white">
 				{t("price", { amount: formatPrice(price, exchangeRate) })}
 			</p>

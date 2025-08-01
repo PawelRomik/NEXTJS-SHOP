@@ -16,7 +16,7 @@ export default function NotFound() {
 			<ShopHeader />
 			<div className="flex flex-1 items-stretch bg-[rgb(20,20,20)]">
 				<div className="flex w-full items-center justify-center py-20">
-					<p className="flex h-full w-full flex-col items-center justify-center gap-8 text-center text-3xl font-bold text-white ">
+					<div className="flex h-full w-full flex-col items-center justify-center gap-8 text-center text-3xl font-bold text-white ">
 						<Image
 							src={nextLogo}
 							width={220}
@@ -38,7 +38,7 @@ export default function NotFound() {
 								</button>
 							</Link>
 						</div>
-					</p>
+					</div>
 				</div>
 				<ScrollToTopButton />
 			</div>

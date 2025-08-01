@@ -100,7 +100,6 @@ export default function CartPopover() {
 					})
 				);
 			} catch (e) {
-				console.error("Error fetching products:", e);
 				setProducts([]);
 			}
 		}

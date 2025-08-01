@@ -40,7 +40,6 @@ export default function OrderProducts({ id }: { id: number | string }) {
 					setError(true);
 				}
 			} catch (err) {
-				console.error(err);
 				setError(true);
 			}
 		}
@@ -76,7 +75,6 @@ export default function OrderProducts({ id }: { id: number | string }) {
 				const productData = await Promise.all(productRequests);
 				setProducts(productData);
 			} catch (err) {
-				console.error(err);
 				setError(true);
 			} finally {
 				setLoading(false);
