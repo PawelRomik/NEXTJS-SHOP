@@ -1,4 +1,4 @@
-import { configureStore, Store } from "@reduxjs/toolkit";
+import { configureStore, Middleware, Store } from "@reduxjs/toolkit";
 import cartReducer from "./cardReducer";
 import { createStateSyncMiddleware, initMessageListener } from "redux-state-sync";
 import { Persistor, persistReducer, persistStore } from "redux-persist";
@@ -11,7 +11,6 @@ let persistor: Persistor;
 
 const defaultConfig = {
 	channel: "redux_state_sync",
-	predicate: null,
 	blacklist: [PERSIST, PURGE],
 	whitelist: [],
 	broadcastChannelOption: undefined,
@@ -28,6 +27,7 @@ if (isClient) {
 	};
 
 	const persistedReducer = persistReducer(persistConfig, cartReducer);
+	const stateSyncMiddleware = createStateSyncMiddleware(defaultConfig) as Middleware;
 
 	store = configureStore({
 		reducer: {
@@ -36,7 +36,7 @@ if (isClient) {
 		middleware: (getDefaultMiddleware) =>
 			getDefaultMiddleware({
 				serializableCheck: false
-			}).concat(createStateSyncMiddleware(defaultConfig))
+			}).concat(stateSyncMiddleware)
 	});
 
 	initMessageListener(store);
