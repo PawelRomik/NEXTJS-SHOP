@@ -16,7 +16,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
           const items = await strapi.entityService.findMany(
             "api::product.product",
             {
-              filters: { uuid: product.id },
+              filters: { uuid: product.uuid },
               locale: locale,
             }
           );
@@ -24,13 +24,14 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
           const price = item.salePrice
             ? item.salePrice - (item.salePrice * discount) / 100
             : item.price - (item.price * discount) / 100;
+          console.log(price);
           return {
             price_data: {
               currency: currency.toLowerCase(),
               product_data: {
                 name: item.name,
               },
-              unit_amount: parseFloat((price * exchangeRate).toFixed(2)),
+              unit_amount: Math.round(price * exchangeRate),
             },
             quantity: product.quantity,
           };
@@ -44,7 +45,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       });
 
       const transformedProducts = products.map((product) => ({
-        id: product.id,
+        id: product.uuid,
         price: product.price - (product.price * discount) / 100,
         quantity: product.quantity,
       }));

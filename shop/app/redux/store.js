@@ -17,7 +17,9 @@ export const store = configureStore({
 		cart: persistedReducer
 	},
 	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware().concat(createStateSyncMiddleware({ blacklist: [PERSIST, PURGE] }))
+		getDefaultMiddleware({
+			serializableCheck: false
+		}).concat(createStateSyncMiddleware({ blacklist: [PERSIST, PURGE] }))
 });
 
 initMessageListener(store);

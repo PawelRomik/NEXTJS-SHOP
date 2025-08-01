@@ -24,14 +24,7 @@ function CartCounter({ productId }: { productId: string }) {
 			dispatch(
 				addToCart({
 					id: currProduct.attributes.uuid,
-					name: currProduct.attributes.name,
-					desc: currProduct.attributes.desc,
-					price: currProduct.attributes.salePrice
-						? currProduct.attributes.salePrice
-						: currProduct.attributes.price,
-					onSale: currProduct.attributes.salePrice ? currProduct.attributes.salePrice : null,
-					image: currProduct.attributes.images.data[0].attributes.url,
-					quantity: cartValue
+					quantity: 1
 				})
 			);
 		}

@@ -13,6 +13,8 @@ import { useCurrency } from "../context/CurrencyProvider";
 import { useUser } from "@clerk/nextjs";
 import { useEffect } from "react";
 import Link from "next/link";
+import { GET_PRODUCTS_BY_IDS } from "../queries/productPage";
+import createApolloClient from "../../apollo-client";
 
 type RootState = {
 	cart: {
@@ -25,18 +27,92 @@ type inputData = {
 	discount: string;
 };
 
+type productId = {
+	id: string;
+	attributes: {
+		uuid: string;
+		name: string;
+		desc: string;
+		price: number;
+		salePrice: number;
+		onSale: boolean;
+		images: {
+			data: {
+				attributes: {
+					url: string;
+				};
+			}[];
+		};
+		quantity: number;
+	};
+};
+
+type product = {
+	id: string;
+	uuid: string;
+	name: string;
+	desc: string;
+	price: number;
+	salePrice: number;
+	onSale: boolean;
+	image: string;
+	quantity: number;
+};
+
 export default function CartContent() {
 	const t = useTranslations();
-	const products = useSelector((state: RootState) => state.cart.products);
+	const productsIds = useSelector((state: RootState) => state.cart.products);
+	const [products, setProducts] = useState<product[]>([]);
 	const count = useSelector((state: RootState) => state.cart.count);
 	const [discount, setDiscount] = useState(0);
-	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 	const [discountMessage, setDiscountMessage] = useState(false);
+	const locale = useLocale();
 	const [price, setPrice] = useState<number | string>(0);
 	const [oldPrice, setOldPrice] = useState<number | string>(0);
 	const [formData, setFormData] = useState<inputData>({
 		discount: ""
 	});
+
+	useEffect(() => {
+		async function fetchFullProducts() {
+			if (productsIds.length === 0) {
+				setProducts([]);
+				return;
+			}
+
+			try {
+				const client = await createApolloClient();
+				const { data } = await client.query({
+					query: GET_PRODUCTS_BY_IDS,
+					variables: {
+						ids: productsIds.map((p) => p.id),
+						locale: locale
+					}
+				});
+
+				setProducts(
+					data.products.data.map((p: productId) => {
+						const cartItem = productsIds.find((item) => item.id === p.attributes.uuid);
+						return {
+							id: p.id,
+							uuid: p.attributes.uuid,
+							name: p.attributes.name,
+							price: p.attributes.salePrice ? p.attributes.salePrice : p.attributes.price,
+							onSale: p.attributes.salePrice ? true : false,
+							image: p.attributes.images.data[0].attributes.url,
+							desc: p.attributes.desc,
+							quantity: cartItem?.quantity ?? 0
+						};
+					})
+				);
+			} catch (e) {
+				console.error("Error fetching products:", e);
+				setProducts([]);
+			}
+		}
+
+		fetchFullProducts();
+	}, [productsIds, locale]);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -45,7 +121,6 @@ export default function CartContent() {
 
 	const dispatch = useDispatch();
 	const { exchangeRate, currency } = useCurrency();
-	const locale = useLocale();
 	const { user } = useUser();
 
 	useEffect(() => {
@@ -114,14 +189,14 @@ export default function CartContent() {
 					<div className="shadow-inset flex h-full w-full flex-1 flex-col gap-3 pt-7">
 						{products?.map((item) => (
 							<div
-								key={item.id}
+								key={item.uuid}
 								className="mx-auto flex max-h-[500px] w-[90%] flex-col gap-3 overflow-y-auto rounded-lg bg-[rgb(32,32,32)]"
 							>
 								<div
 									className="item flex w-full items-center justify-between gap-5 bg-[rgb(12,12,12)] px-5"
-									key={item.id}
+									key={item.uuid}
 								>
-									<Link title="Product" href={`/product/${item.id}`}>
+									<Link title="Product" href={`/product/${item.uuid}`}>
 										<Image
 											className="h-[100px] max-h-[100px] w-[80px] max-w-[80px] object-contain"
 											src={process.env.NEXT_PUBLIC_STRAPI_PATH + item.image}
@@ -146,19 +221,19 @@ export default function CartContent() {
 									<div className="flex items-center justify-center gap-2">
 										<button
 											className="delete cursor-pointer text-2xl"
-											onClick={() => dispatch(removeItem(item.id))}
+											onClick={() => dispatch(removeItem(item.uuid))}
 										>
 											<i className="ri-indeterminate-circle-line text-[rgb(100,100,100)]  transition hover:text-red-600"></i>
 										</button>
 										<button
 											className="delete cursor-pointer text-2xl"
-											onClick={() => dispatch(increaseQuantity(item.id))}
+											onClick={() => dispatch(increaseQuantity(item.uuid))}
 										>
 											<i className="ri-add-circle-line text-[rgb(100,100,100)] transition hover:text-red-600"></i>
 										</button>
 										<button
 											className="delete cursor-pointer text-2xl"
-											onClick={() => dispatch(removeAllOfItem(item.id))}
+											onClick={() => dispatch(removeAllOfItem(item.uuid))}
 										>
 											<i className="ri-delete-bin-line text-[rgb(100,100,100)] transition hover:text-red-600"></i>
 										</button>
