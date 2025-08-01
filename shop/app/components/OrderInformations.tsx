@@ -36,7 +36,6 @@ export default function OrderInformations({ id }: { id: number | string }) {
 					setError(true);
 				}
 			} catch (err) {
-				console.error(err);
 				setError(true);
 			} finally {
 				setLoading(false);
@@ -50,8 +49,6 @@ export default function OrderInformations({ id }: { id: number | string }) {
 
 	if (loading) return <p>Loading...</p>;
 	if (error || !order) return <ErrorText />;
-
-	console.log(order.products);
 
 	const totalPrice = order.products.reduce(
 		(sum: number, item: { price: number; quantity: number }) => sum + item.price * item.quantity,

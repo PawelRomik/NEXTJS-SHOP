@@ -18,12 +18,10 @@ export default async function ProductPrice({ productId, locale }: ProductPricePr
 				productId: productId
 			}
 		});
-		console.log("aaa" + data);
 
 		const currProduct = data.products.data[0].attributes;
 		return <ProductShowcasePrice price={currProduct.price} productId={productId} />;
 	} catch (err) {
-		console.log(err);
 		return null;
 	}
 }

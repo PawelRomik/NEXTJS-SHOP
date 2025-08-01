@@ -108,10 +108,15 @@ export default function SearchPage({
 	const query = searchParams?.query;
 	const page = searchParams?.page || 1;
 
-	if (!query) return null;
+	if (!query)
+		return (
+			<main className=" h-full w-full bg-[rgb(20,20,20)] text-white">
+				<p>No Query</p>
+			</main>
+		);
 
 	return (
-		<main className=" w-full bg-[rgb(20,20,20)]">
+		<main className=" h-full w-full flex-1 bg-[rgb(20,20,20)]">
 			<div className="flex h-[120px] items-center justify-center bg-[rgb(11,11,11)] text-4xl font-bold uppercase text-white">
 				<h2 className=" flex items-center gap-3   text-3xl font-bold uppercase text-white">
 					<Suspense>

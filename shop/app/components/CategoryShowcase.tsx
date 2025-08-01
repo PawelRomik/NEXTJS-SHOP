@@ -70,7 +70,6 @@ export default async function CategoryShowcase({
 
 	async function getShowcaseImg() {
 		const showcase = await fetchShowcase();
-		console.log(showcase);
 		if (showcase == null) return;
 		return (
 			<div className=" z-[3] flex items-center justify-around bg-contain">

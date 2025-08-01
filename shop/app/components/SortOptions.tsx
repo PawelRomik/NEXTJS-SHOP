@@ -1,6 +1,7 @@
+"use client";
 import { useTranslations } from "next-intl";
 
-export default async function SortOptions() {
+export default function SortOptions() {
 	const t = useTranslations("filters");
 
 	return (
@@ -10,11 +11,10 @@ export default async function SortOptions() {
 			</h2>
 			<select
 				name="sort"
+				defaultValue={"latest"}
 				className="border-none bg-zinc-800 p-2 pr-3 text-center outline-none  focus:bg-zinc-900"
 			>
-				<option value={"latest"} selected>
-					{t("sortNewest")}
-				</option>
+				<option value={"latest"}>{t("sortNewest")}</option>
 				<option value={"priceLow"}>{t("sortPriceToHigh")}</option>
 				<option value={"priceHigh"}>{t("sortPriceToLow")}</option>
 				<option value={"nameStart"}>{t("sortNameToZ")}</option>

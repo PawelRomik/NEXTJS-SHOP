@@ -22,6 +22,37 @@ export const GET_PRODUCT_DESC = gql`
 	}
 `;
 
+export const GET_PRODUCTS_BY_IDS = gql`
+	query GetProductsByIds($ids: [String!]!, $locale: I18NLocaleCode!) {
+		products(filters: { uuid: { in: $ids } }, locale: $locale) {
+			data {
+				id
+				attributes {
+					name
+					price
+					uuid
+					salePrice
+					desc
+					images {
+						data {
+							attributes {
+								url
+							}
+						}
+					}
+					categories {
+						data {
+							attributes {
+								name
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+`;
+
 export const GET_PRODUCT_TECHNICAL = gql`
 	query getProduct($productId: String!, $locale: I18NLocaleCode!) {
 		products(filters: { uuid: { eq: $productId } }, locale: $locale) {

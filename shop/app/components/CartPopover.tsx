@@ -1,20 +1,19 @@
 "use client";
 
 import { useRef } from "react";
-import axios from "axios";
 import * as Popover from "@radix-ui/react-popover";
 import { useSelector } from "react-redux";
 import { removeItem, increaseQuantity, resetCart, removeAllOfItem } from "../redux/cardReducer";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
-import { loadStripe } from "@stripe/stripe-js";
 import { useLocale, useTranslations } from "next-intl";
 import { formatPrice } from "../lib/utils/formatPrice";
 import { useCurrency } from "../context/CurrencyProvider";
-import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import createApolloClient from "../../apollo-client";
+import { GET_PRODUCTS_BY_IDS } from "../queries/productPage";
 
 type RootState = {
 	cart: {
@@ -23,15 +22,90 @@ type RootState = {
 	};
 };
 
+type productId = {
+	id: string;
+	attributes: {
+		uuid: string;
+		name: string;
+		desc: string;
+		price: number;
+		salePrice: number;
+		onSale: boolean;
+		images: {
+			data: {
+				attributes: {
+					url: string;
+				};
+			}[];
+		};
+		quantity: number;
+	};
+};
+
+type product = {
+	id: string;
+	uuid: string;
+	name: string;
+	desc: string;
+	price: number;
+	salePrice: number;
+	onSale: boolean;
+	image: string;
+	quantity: number;
+};
+
 export default function CartPopover() {
 	const t = useTranslations();
 	const [isOpen, setIsOpen] = useState(false);
-	const products = useSelector((state: RootState) => state.cart.products);
+	const productsIds = useSelector((state: RootState) => state.cart.products);
 	const count = useSelector((state: RootState) => state.cart.count);
 	const dispatch = useDispatch();
 	const { exchangeRate } = useCurrency();
 	const pathname = usePathname();
 	const router = useRouter();
+	const locale = useLocale();
+
+	const [products, setProducts] = useState<product[]>([]);
+
+	useEffect(() => {
+		async function fetchFullProducts() {
+			if (productsIds.length === 0) {
+				setProducts([]);
+				return;
+			}
+
+			try {
+				const client = await createApolloClient();
+				const { data } = await client.query({
+					query: GET_PRODUCTS_BY_IDS,
+					variables: {
+						ids: productsIds.map((p) => p.id),
+						locale: locale
+					}
+				});
+
+				setProducts(
+					data.products.data.map((p: productId) => {
+						const cartItem = productsIds.find((item) => item.id === p.attributes.uuid);
+						return {
+							id: p.id,
+							uuid: p.attributes.uuid,
+							name: p.attributes.name,
+							price: p.attributes.salePrice ? p.attributes.salePrice : p.attributes.price,
+							onSale: p.attributes.salePrice ? true : false,
+							image: p.attributes.images.data[0].attributes.url,
+							desc: p.attributes.desc,
+							quantity: cartItem?.quantity ?? 0
+						};
+					})
+				);
+			} catch (e) {
+				setProducts([]);
+			}
+		}
+
+		fetchFullProducts();
+	}, [productsIds, locale]);
 
 	const totalPrice = () => {
 		let total = 0;
@@ -56,14 +130,14 @@ export default function CartPopover() {
 	const prevTotalQuantity = useRef(products.reduce((sum, item) => sum + item.quantity, 0));
 
 	useEffect(() => {
-		const currentTotalQuantity = products.reduce((sum, item) => sum + item.quantity, 0);
+		const currentTotalQuantity = productsIds.reduce((sum, item) => sum + item.quantity, 0);
 
 		if (currentTotalQuantity > prevTotalQuantity.current && !pathname.endsWith("/cart")) {
 			setIsOpen(true);
 		}
 
 		prevTotalQuantity.current = currentTotalQuantity;
-	}, [products, pathname]);
+	}, [productsIds, pathname]);
 
 	const handleClick = () => {
 		if (isMobile) {
@@ -106,7 +180,7 @@ export default function CartPopover() {
 							{products?.slice(0, 3).map((item) => (
 								<div
 									className="item mb-7 flex w-full items-center justify-between gap-5 bg-[rgb(12,12,12)] px-5"
-									key={item.id}
+									key={item.uuid}
 								>
 									<Image
 										className="h-[100px] max-h-[100px] w-[80px] max-w-[80px] object-contain"
@@ -132,19 +206,19 @@ export default function CartPopover() {
 									<div className="flex items-center justify-center gap-2">
 										<button
 											className="delete cursor-pointer text-2xl"
-											onClick={() => dispatch(removeItem(item.id))}
+											onClick={() => dispatch(removeItem(item.uuid))}
 										>
 											<i className="ri-indeterminate-circle-line text-[rgb(100,100,100)]  transition hover:text-red-600"></i>
 										</button>
 										<button
 											className="delete cursor-pointer text-2xl"
-											onClick={() => dispatch(increaseQuantity(item.id))}
+											onClick={() => dispatch(increaseQuantity(item.uuid))}
 										>
 											<i className="ri-add-circle-line text-[rgb(100,100,100)] transition hover:text-red-600"></i>
 										</button>
 										<button
 											className="delete cursor-pointer text-2xl"
-											onClick={() => dispatch(removeAllOfItem(item.id))}
+											onClick={() => dispatch(removeAllOfItem(item.uuid))}
 										>
 											<i className="ri-delete-bin-line text-[rgb(100,100,100)] transition hover:text-red-600"></i>
 										</button>
