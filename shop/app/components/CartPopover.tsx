@@ -130,14 +130,14 @@ export default function CartPopover() {
 	const prevTotalQuantity = useRef(products.reduce((sum, item) => sum + item.quantity, 0));
 
 	useEffect(() => {
-		const currentTotalQuantity = products.reduce((sum, item) => sum + item.quantity, 0);
+		const currentTotalQuantity = productsIds.reduce((sum, item) => sum + item.quantity, 0);
 
 		if (currentTotalQuantity > prevTotalQuantity.current && !pathname.endsWith("/cart")) {
 			setIsOpen(true);
 		}
 
 		prevTotalQuantity.current = currentTotalQuantity;
-	}, [products, pathname]);
+	}, [productsIds, pathname]);
 
 	const handleClick = () => {
 		if (isMobile) {
