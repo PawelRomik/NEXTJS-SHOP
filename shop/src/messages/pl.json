@@ -167,7 +167,12 @@
 		"desc": "Opis",
 		"attachments": "Załączniki",
 		"optional": "(opcjonalnie)",
-		"send": "Wyślij"
+		"send": "Wyślij",
+		"invalidTopic": "Temat nie może być pusty.",
+		"invalidDesc": "Opis nie może być pusty.",
+		"invalidEmail": "Niepoprawny email.",
+		"maxFiles": "Można dodać maksymalnie 5 plików.",
+		"formSent": "Pomyślnie wysłano!"
 	},
 	"sign": {
 		"signIn": "Zaloguj się",

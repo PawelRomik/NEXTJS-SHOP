@@ -34,7 +34,7 @@ export default function SupportForm() {
 		let files = Array.from(e.target.files || []);
 
 		if (formData.attachments.length + files.length > 5) {
-			alert("Można dodać tylko maksymalnie 5 plików.");
+			alert(t("maxFiles"));
 			e.target.value = "";
 			return;
 		}
@@ -55,15 +55,15 @@ export default function SupportForm() {
 		let isValid = true;
 
 		if (!formData.email.includes("@")) {
-			newErrors.email = "Podaj poprawny adres e-mail";
+			newErrors.email = t("invalidEmail");
 			isValid = false;
 		}
 		if (formData.subject.trim() === "") {
-			newErrors.subject = "Temat nie może być pusty";
+			newErrors.subject = t("invalidTopic");
 			isValid = false;
 		}
 		if (formData.description.trim() === "") {
-			newErrors.description = "Opis problemu nie może być pusty";
+			newErrors.description = t("invalidDesc");
 			isValid = false;
 		}
 		setErrors(newErrors);
@@ -74,7 +74,7 @@ export default function SupportForm() {
 		e.preventDefault();
 		if (!validateForm()) return;
 
-		alert("Formularz został wysłany!");
+		alert(t("formSent"));
 		setFormData({
 			email: "",
 			subject: "",

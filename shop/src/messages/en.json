@@ -167,7 +167,12 @@
 		"desc": "Description",
 		"attachments": "Attachments",
 		"optional": "(optional)",
-		"send": "Send"
+		"send": "Send",
+		"invalidTopic": "Subject cannot be empty.",
+		"invalidDesc": "Description cannot be empty.",
+		"invalidEmail": "Invalid email.",
+		"maxFiles": "You can upload up to 5 files.",
+		"formSent": "Successfully sent!"
 	},
 	"sign": {
 		"signIn": "Sign In",
