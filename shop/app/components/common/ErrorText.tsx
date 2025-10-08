@@ -1,6 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
-import nextLogo from "../../public/logo.png";
+import nextLogo from "../../../public/logo.png";
 import Image from "next/image";
 import Link from "next/link";
 

@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { gql } from "@apollo/client";
 import { Webhook, WebhookRequiredHeaders } from "svix";
-import createApolloClient from "../../../../apollo-client";
+import { getApolloClient } from "../../../../apollo-client";
 
 const CREATE_USER = gql`
 	mutation createClient($email: String, $name: String) {
@@ -53,7 +53,7 @@ async function handler(request: Request) {
 		console.error((err as Error).message);
 		return NextResponse.json({}, { status: 400 });
 	}
-	const client = await createApolloClient();
+	const client = await getApolloClient();
 
 	const eventType = evt.type;
 	if (eventType === "user.created") {

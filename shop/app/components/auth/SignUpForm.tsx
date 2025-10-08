@@ -1,7 +1,7 @@
 "use client";
 import * as Clerk from "@clerk/elements/common";
 import * as SignUp from "@clerk/elements/sign-up";
-import nextLogo from "../../public/logolg.png";
+import nextLogo from "../../../public/logolg.png";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
