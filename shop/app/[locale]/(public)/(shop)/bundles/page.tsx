@@ -1,17 +1,17 @@
 import { Grid } from "@radix-ui/themes";
 import { ApolloQueryResult } from "@apollo/client";
-import createApolloClient from "../../../../../apollo-client";
+import { getApolloClient } from "../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
 import { BundlesResult } from "../../../../queries/productType";
 import { Metadata } from "next";
-import Pagination from "../../../../components/Pagination";
+import Pagination from "../../../../components/common/Pagination";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
-import ErrorText from "../../../../components/ErrorText";
+import ErrorText from "../../../../components/common/ErrorText";
 import { getTranslations } from "next-intl/server";
 import CategoryShowcase from "../../../../components/CategoryShowcase";
 import { GET_BUNDLES } from "../../../../queries/bundles";
-import BundleDisplay from "../../../../components/BundleDisplay";
+import BundleDisplay from "../../../../components/bundles-section/BundleDisplay";
 
 export async function generateMetadata({
 	params: { locale }
@@ -26,7 +26,7 @@ export async function generateMetadata({
 }
 
 async function fetchProducts(page: number, locale: string) {
-	const client = await createApolloClient();
+	const client = await getApolloClient();
 	try {
 		const { data }: ApolloQueryResult<BundlesResult> = await client.query({
 			query: GET_BUNDLES,

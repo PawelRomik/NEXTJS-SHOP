@@ -1,7 +1,7 @@
 import { Separator } from "@radix-ui/themes";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import LanguageSwitcher from "./LanguageSwitcher";
+import LanguageSwitcher from "../language/LanguageSwitcher";
 
 export default function Footer() {
 	const t = useTranslations("footer");

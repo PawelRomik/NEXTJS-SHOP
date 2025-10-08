@@ -4,12 +4,12 @@ import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { GET_CATEGORY_IMAGE } from "../queries/category";
-import nextLogo from "../../public/logo.png";
+import { GET_CATEGORY_IMAGE } from "../../queries/category";
+import nextLogo from "../../../public/logo.png";
 import { useTranslations } from "next-intl";
-import { categories } from "../data/categories";
-import createApolloClient from "../../apollo-client";
-import { CategoryData } from "../queries/productType";
+import { categories } from "../../data/categories";
+import { getApolloClient } from "../../../apollo-client";
+import { CategoryData } from "../../queries/productType";
 import { ApolloQueryResult } from "@apollo/client";
 
 export default function NavigationLinks() {
@@ -18,7 +18,7 @@ export default function NavigationLinks() {
 
 	const changeImageSrc = async (category: string) => {
 		try {
-			const client = await createApolloClient();
+			const client = await getApolloClient();
 			const { data }: ApolloQueryResult<CategoryData> = await client.query({
 				query: GET_CATEGORY_IMAGE,
 				variables: {

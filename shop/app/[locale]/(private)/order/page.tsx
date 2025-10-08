@@ -1,15 +1,6 @@
 import { revalidatePath } from "next/cache";
-import Link from "next/link";
-import ProductDisplay from "../../../components/ProductDisplay";
-import createApolloClient from "../../../../apollo-client";
-import { ApolloQueryResult } from "@apollo/client";
-import { QueryResult } from "../../../queries/productType";
-import { Suspense } from "react";
-import SkeletonProductDisplay from "../../../components/SkeletonProductDisplay";
 import { useTranslations } from "next-intl";
-import { GET_OTHER_PRODUCTS } from "../../../queries/productPage";
 import { getTranslations } from "next-intl/server";
-import ResetCartHandler from "../../../components/ResetCartHandler";
 import OrderSuccessContent from "../../../components/OrderSuccessContent";
 import OrderErrorContent from "../../../components/OrderErrorContent";
 

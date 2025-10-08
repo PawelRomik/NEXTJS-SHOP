@@ -2,11 +2,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { formatPrice } from "../lib/utils/formatPrice";
-import { useCurrency } from "../context/CurrencyProvider";
+import { formatPrice } from "../../lib/utils/formatPrice";
+import { useCurrency } from "../../context/CurrencyProvider";
 import { SignedIn } from "@clerk/nextjs";
-import { ProductData } from "../queries/productType";
-import CartCounter from "./CartCounter";
+import { ProductData } from "../../queries/productType";
+import CartCounter from "../cart/CartCounter";
 
 type BundleDisplayProps = {
 	uuid: string;

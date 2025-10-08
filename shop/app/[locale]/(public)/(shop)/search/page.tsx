@@ -1,16 +1,16 @@
 import { Grid } from "@radix-ui/themes";
 import ProductDisplay from "../../../../components/ProductDisplay";
 import { ApolloQueryResult } from "@apollo/client";
-import createApolloClient from "../../../../../apollo-client";
+import { getApolloClient } from "../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
 import { QueryResult } from "../../../../queries/productType";
-import Pagination from "../../../../components/Pagination";
+import Pagination from "../../../../components/common/Pagination";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
 import { GET_SEARCH_PRODUCTS, GET_SEARCH_PRODUCTS_COUNT } from "../../../../queries/search";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
-import ErrorText from "../../../../components/ErrorText";
+import ErrorText from "../../../../components/common/ErrorText";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
 	const t = await getTranslations({ locale, namespace: "search" });
@@ -22,7 +22,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 
 async function fetchProducts(query: string, page: number, locale: string) {
 	try {
-		const client = await createApolloClient();
+		const client = await getApolloClient();
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_SEARCH_PRODUCTS,
 			variables: {
@@ -40,7 +40,7 @@ async function fetchProducts(query: string, page: number, locale: string) {
 
 async function loadCount(query: string, page: number, locale: string) {
 	try {
-		const client = await createApolloClient();
+		const client = await getApolloClient();
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_SEARCH_PRODUCTS_COUNT,
 			variables: {

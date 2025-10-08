@@ -2,11 +2,11 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/cardReducer";
-import createApolloClient from "../../apollo-client";
-import { QueryResult } from "../queries/productType";
+import { addToCart } from "../../redux/cardReducer";
+import { getApolloClient } from "../../../apollo-client";
+import { QueryResult } from "../../queries/productType";
 import { ApolloQueryResult } from "@apollo/client";
-import { GET_PRODUCT_ALLDATA } from "../queries/productPage";
+import { GET_PRODUCT_ALLDATA } from "../../queries/productPage";
 
 function CartCounter({ productId }: { productId: string }) {
 	const [cartValue, setCartValue] = useState(1);
@@ -32,7 +32,7 @@ function CartCounter({ productId }: { productId: string }) {
 
 	const getProductData = async (locale: string) => {
 		try {
-			const client = await createApolloClient();
+			const client = await getApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_ALLDATA,
 				variables: {

@@ -1,11 +1,11 @@
 import { revalidatePath } from "next/cache";
 import { Metadata } from "next";
-import CategorySection from "../../../components/CategorySection";
+import CategorySection from "../../../components/category-section/CategorySection";
 import NewProductsSection from "../../../components/NewProductsSection";
 import SaleProductsSection from "../../../components/SaleProductsSection";
-import BundlesSection from "../../../components/BundlesSection";
+import BundlesSection from "../../../components/bundles-section/BundlesSection";
 import { GET_CATEGORIES } from "../../../queries/category";
-import createApolloClient from "../../../../apollo-client";
+import { getApolloClient } from "../../../../apollo-client";
 import { CategoryData, QueryResult } from "../../../queries/productType";
 import { ApolloQueryResult } from "@apollo/client";
 
@@ -15,10 +15,10 @@ export const metadata: Metadata = {
 
 export default async function MainPage({ params: { locale } }: { params: { locale: string } }) {
 	revalidatePath("/[locale]/", "page");
+	const client = await getApolloClient();
 
 	async function getCategories() {
 		try {
-			const client = await createApolloClient();
 			const { data }: ApolloQueryResult<CategoryData> = await client.query({
 				query: GET_CATEGORIES,
 				variables: {

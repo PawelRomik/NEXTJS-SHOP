@@ -3,11 +3,11 @@ import { revalidatePath } from "next/cache";
 import { GET_ORDER_HISTORY } from "../../../../queries/order";
 import { OrderHistoryData } from "../../../../queries/productType";
 import { ApolloQueryResult } from "@apollo/client";
-import createApolloClient from "../../../../../apollo-client";
-import ErrorText from "../../../../components/ErrorText";
+import { getApolloClient } from "../../../../../apollo-client";
+import ErrorText from "../../../../components/common/ErrorText";
 import { Suspense } from "react";
 import { currentUser } from "@clerk/nextjs/server";
-import Pagination from "../../../../components/Pagination";
+import Pagination from "../../../../components/common/Pagination";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import ProductSectionTitle from "../../../../components/ProductSectionTitle";
@@ -23,7 +23,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 async function fetchProducts(page: number) {
 	try {
 		const user = await currentUser();
-		const client = await createApolloClient();
+		const client = await getApolloClient();
 		const { data }: ApolloQueryResult<OrderHistoryData> = await client.query({
 			query: GET_ORDER_HISTORY,
 			variables: {

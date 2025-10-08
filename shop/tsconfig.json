@@ -29,7 +29,8 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"app/api/webhooks/user/createOrder.js"
+		"app/api/webhooks/user/createOrder.js",
+		"apollo-client.js"
 	],
 	"exclude": ["node_modules"]
 }

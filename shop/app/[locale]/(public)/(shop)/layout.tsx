@@ -1,6 +1,6 @@
-import Footer from "../../../components/Footer";
-import ShopHeader from "../../../components/ShopHeader";
-import ScrollToTopButton from "../../../components/ScrollToTopButton";
+import Footer from "../../../components/footer/Footer";
+import ShopHeader from "../../../components/header/ShopHeader";
+import ScrollToTopButton from "../../../components/common/ScrollToTopButton";
 type shopLayoutProps = {
 	children: React.ReactNode;
 };

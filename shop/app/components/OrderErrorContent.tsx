@@ -1,16 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Suspense, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { resetCart } from "../redux/cardReducer";
 import Link from "next/link";
-import SkeletonProductDisplay from "./SkeletonProductDisplay";
-import ProductDisplay from "./ProductDisplay";
-import { getTranslations } from "next-intl/server";
-import createApolloClient from "../../apollo-client";
-import { GET_OTHER_PRODUCTS } from "../queries/productPage";
-import { QueryResult } from "../queries/productType";
-import { ApolloQueryResult } from "@apollo/client";
 import nextLogo from "../../public/logolg.png";
 import Image from "next/image";
 

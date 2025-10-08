@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import createApolloClient from "../../../../../apollo-client";
+import { getApolloClient } from "../../../../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
 import { QueryResult } from "../../../../queries/productType";
-import ErrorText from "../../../../components/ErrorText";
+import ErrorText from "../../../../components/common/ErrorText";
 import ProductDisplay from "../../../../components/ProductDisplay";
 import { revalidatePath } from "next/cache";
 import { Grid } from "@radix-ui/themes";
@@ -11,7 +11,7 @@ import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
 import { GET_SALE_PRODUCTS } from "../../../../queries/shopPage";
 import CategoryShowcase from "../../../../components/CategoryShowcase";
-import Pagination from "../../../../components/Pagination";
+import Pagination from "../../../../components/common/Pagination";
 
 type CategoryKeys = keyof IntlMessages["categories"];
 
@@ -28,7 +28,7 @@ export async function generateMetadata({
 }
 
 async function fetchProducts(page: number, locale: string) {
-	const client = await createApolloClient();
+	const client = await getApolloClient();
 
 	try {
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
