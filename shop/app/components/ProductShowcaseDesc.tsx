@@ -2,7 +2,7 @@ import { GET_PRODUCT_DESC } from "../queries/productPage";
 import { ApolloQueryResult } from "@apollo/client";
 import { QueryResult } from "../queries/productType";
 import { Suspense } from "react";
-import createApolloClient from "../../apollo-client";
+import { getApolloClient } from "../../apollo-client";
 import { useTranslations } from "next-intl";
 
 type ProductShowcaseDescProps = {
@@ -20,7 +20,7 @@ export default function ProductShowcaseDesc({ productId, locale }: ProductShowca
 
 	async function getProductDesc() {
 		try {
-			const client = await createApolloClient();
+			const client = await getApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_DESC,
 				variables: {

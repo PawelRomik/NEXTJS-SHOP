@@ -1,9 +1,9 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import ScrollToTopButton from "./components/ScrollToTopButton";
-import ShopHeader from "./components/ShopHeader";
-import Footer from "./components/Footer";
+import ScrollToTopButton from "./components/common/ScrollToTopButton";
+import ShopHeader from "./components/header/ShopHeader";
+import Footer from "./components/footer/Footer";
 import { useTranslations } from "next-intl";
 import nextLogo from "../public/logo.png";
 import Image from "next/image";

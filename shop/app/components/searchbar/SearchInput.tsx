@@ -4,10 +4,10 @@ import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { GET_CATEGORY, GET_KEYWORDS } from "../queries/search";
-import { CategoriesData, KeywordsData } from "../queries/productType";
+import { GET_CATEGORY, GET_KEYWORDS } from "../../queries/search";
+import { CategoriesData, KeywordsData } from "../../queries/productType";
 import { ApolloQueryResult } from "@apollo/client";
-import createApolloClient from "../../apollo-client";
+import { getApolloClient } from "../../../apollo-client";
 import Link from "next/link";
 
 type SearchInputProps = {
@@ -45,7 +45,7 @@ export default function SearchInput({ closeSearchBar }: SearchInputProps) {
 	useEffect(() => {
 		const getKeywords = async () => {
 			if (inputValue) {
-				const client = await createApolloClient();
+				const client = await getApolloClient();
 				const keywords: ApolloQueryResult<KeywordsData> = await client.query({
 					query: GET_KEYWORDS,
 					variables: {

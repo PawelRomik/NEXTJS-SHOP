@@ -1,4 +1,4 @@
-import createApolloClient from "../../apollo-client";
+import { getApolloClient } from "../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
 import { GET_PRODUCT_TECHNICAL } from "../queries/productPage";
 import { Suspense } from "react";
@@ -18,7 +18,7 @@ export default function ProductTechnicalSection({
 
 	async function getTechnical() {
 		try {
-			const client = await createApolloClient();
+			const client = await getApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_TECHNICAL,
 				variables: {

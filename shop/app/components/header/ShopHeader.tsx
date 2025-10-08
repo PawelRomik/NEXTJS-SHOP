@@ -1,10 +1,10 @@
-import CartPopover from "./CartPopover";
-import Hamburger from "./Hamburger";
+import CartPopover from "../cart/CartPopover";
+import Hamburger from "../hamburger/Hamburger";
 import ShopLogo from "./ShopLogo";
-import UserProfile from "./UserProfile";
+import UserProfile from "../UserProfile";
 import { SignedIn } from "@clerk/nextjs";
 import NavigationLinks from "./NavigationLinks";
-import SearchBar from "./SearchBar";
+import SearchBar from "../searchbar/SearchBar";
 
 export default function ShopHeader() {
 	return (

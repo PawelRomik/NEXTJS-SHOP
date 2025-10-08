@@ -1,4 +1,4 @@
-import createApolloClient from "../../apollo-client";
+import { getApolloClient } from "../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
 import { GET_OTHER_PRODUCTS, GET_PRODUCT_CATEGORY } from "../queries/productPage";
 import { Suspense } from "react";
@@ -16,7 +16,7 @@ export default function ProductOtherSection({ productId, locale }: ProductOtherS
 
 	async function getCategory() {
 		try {
-			const client = await createApolloClient();
+			const client = await getApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_CATEGORY,
 				variables: {
@@ -33,7 +33,7 @@ export default function ProductOtherSection({ productId, locale }: ProductOtherS
 
 	async function getProducts() {
 		try {
-			const client = await createApolloClient();
+			const client = await getApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_OTHER_PRODUCTS,
 				variables: {

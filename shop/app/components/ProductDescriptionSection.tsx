@@ -1,5 +1,5 @@
 import Image from "next/image";
-import createApolloClient from "../../apollo-client";
+import { getApolloClient } from "../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
 import { GET_PRODUCT_DESC } from "../queries/productPage";
 import { Suspense } from "react";
@@ -19,7 +19,7 @@ export default function ProductDescriptionSection({
 
 	async function getProductDesc() {
 		try {
-			const client = await createApolloClient();
+			const client = await getApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_DESC,
 				variables: {
@@ -73,9 +73,9 @@ export default function ProductDescriptionSection({
 							key={index}
 							className={`flex flex-col items-center justify-between text-lg md:text-xl lg:flex-row ${bgClass}`}
 						>
-							<div className="flex md:h-[250px] py-3 lg:md-0 md:max-h-[250px] flex-col md:flex-row w-full items-center justify-between gap-5 px-6 lg:px-32">
+							<div className="lg:md-0 flex w-full flex-col items-center justify-between gap-5 px-6 py-3 md:h-[250px] md:max-h-[250px] md:flex-row lg:px-32">
 								{imageFirst && imageUrl && (
-									<div className="relative md:block hidden h-full w-[250px]">
+									<div className="relative hidden h-full w-[250px] md:block">
 										<Image
 											layout="fill"
 											objectFit="contain"
@@ -85,7 +85,8 @@ export default function ProductDescriptionSection({
 										/>
 									</div>
 								)}
-								{imageUrl && <div className="md:hidden block relative h-[250px] w-[250px]">
+								{imageUrl && (
+									<div className="relative block h-[250px] w-[250px] md:hidden">
 										<Image
 											layout="fill"
 											objectFit="contain"
@@ -93,13 +94,14 @@ export default function ProductDescriptionSection({
 											className="p-4"
 											alt={t("productImage")}
 										/>
-									</div>}
+									</div>
+								)}
 								<div
 									className="description flex-1 "
 									dangerouslySetInnerHTML={{ __html: description }}
 								/>
 								{!imageFirst && imageUrl && (
-									<div className="relative md:block hidden h-full w-[250px]">
+									<div className="relative hidden h-full w-[250px] md:block">
 										<Image
 											layout="fill"
 											objectFit="contain"

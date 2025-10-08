@@ -1,5 +1,5 @@
 import { ApolloQueryResult } from "@apollo/client";
-import createApolloClient from "../../../../../../apollo-client";
+import { getApolloClient } from "../../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
 import { GET_PRODUCT_NAME } from "../../../../../queries/productPage";
 import { Metadata } from "next";
@@ -14,7 +14,7 @@ import { getTranslations } from "next-intl/server";
 
 async function fetchProduct(productId: string, locale: string) {
 	try {
-		const client = await createApolloClient();
+		const client = await getApolloClient();
 
 		const { data }: ApolloQueryResult<QueryResult> = await client.query({
 			query: GET_PRODUCT_NAME,

@@ -2,7 +2,7 @@
 import { useTranslations } from "next-intl";
 import { formatPrice } from "../lib/utils/formatPrice";
 import { useCurrency } from "../context/CurrencyProvider";
-import BuyButton from "./BuyButton";
+import BuyButton from "./common/BuyButton";
 
 type ProductShowcasePriceProps = {
 	price: number;

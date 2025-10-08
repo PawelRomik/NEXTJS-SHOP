@@ -4,12 +4,12 @@ import Link from "next/link";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { categories } from "../data/categories";
+import { categories } from "../../data/categories";
 import HamburgerAccountSection from "./HamburgerAccountSection";
 import { useTranslations } from "next-intl";
 import { SignOutButton } from "@clerk/nextjs";
-import SearchBar from "./SearchBar";
-import SearchInput from "./SearchInput";
+import SearchBar from "../searchbar/SearchBar";
+import SearchInput from "../searchbar/SearchInput";
 import HamburgerSearch from "./HamburgerSearch";
 
 export default function Hamburger() {

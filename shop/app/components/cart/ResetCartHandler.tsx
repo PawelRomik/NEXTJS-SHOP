@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { resetCart } from "../redux/cardReducer";
+import { resetCart } from "../../redux/cardReducer";
 
 export default function ResetCartHandler() {
 	const dispatch = useDispatch();

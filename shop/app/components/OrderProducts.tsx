@@ -1,9 +1,9 @@
 "use client";
 import { useLocale, useTranslations } from "next-intl";
-import createApolloClient from "../../apollo-client";
+import { getApolloClient } from "../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
 import { GET_ORDER, GET_ORDER_PRODUCT } from "../queries/order";
-import ErrorText from "./ErrorText";
+import ErrorText from "./common/ErrorText";
 import { formatPrice } from "../lib/utils/formatPrice";
 import { useCurrency } from "../context/CurrencyProvider";
 import { OrderData, QueryResult } from "../queries/productType";
@@ -25,7 +25,7 @@ export default function OrderProducts({ id }: { id: number | string }) {
 	useEffect(() => {
 		async function fetchOrder(orderId: string | number) {
 			try {
-				const client = await createApolloClient();
+				const client = await getApolloClient();
 				const { data }: ApolloQueryResult<OrderData> = await client.query({
 					query: GET_ORDER,
 					variables: {
@@ -53,7 +53,7 @@ export default function OrderProducts({ id }: { id: number | string }) {
 		async function fetchProducts() {
 			if (!order) return;
 			try {
-				const client = await createApolloClient();
+				const client = await getApolloClient();
 				const productRequests = order.products.map(async (product: any) => {
 					const { data }: ApolloQueryResult<QueryResult> = await client.query({
 						query: GET_ORDER_PRODUCT,

@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { getCurrency } from "../lib/utils/getCurrency";
 import { useParams } from "next/navigation";
-import createApolloClient from "../../apollo-client";
+import { getApolloClient } from "../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
 import { RatesData } from "../queries/productType";
 import { GET_RATES } from "../queries/rates";
@@ -27,7 +27,7 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
 			let targetCurrency = getCurrency(locale);
 
 			try {
-				const client = await createApolloClient();
+				const client = await getApolloClient();
 				const { data }: ApolloQueryResult<RatesData> = await client.query({
 					query: GET_RATES,
 					variables: {

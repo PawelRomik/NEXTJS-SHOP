@@ -3,18 +3,18 @@
 import { useRef, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { removeItem, increaseQuantity, resetCart, removeAllOfItem } from "../redux/cardReducer";
+import { removeItem, increaseQuantity, resetCart, removeAllOfItem } from "../../redux/cardReducer";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 import { loadStripe } from "@stripe/stripe-js";
 import { useLocale, useTranslations } from "next-intl";
-import { formatPrice } from "../lib/utils/formatPrice";
-import { useCurrency } from "../context/CurrencyProvider";
+import { formatPrice } from "../../lib/utils/formatPrice";
+import { useCurrency } from "../../context/CurrencyProvider";
 import { useUser } from "@clerk/nextjs";
 import { useEffect } from "react";
 import Link from "next/link";
-import { GET_PRODUCTS_BY_IDS } from "../queries/productPage";
-import createApolloClient from "../../apollo-client";
+import { GET_PRODUCTS_BY_IDS } from "../../queries/productPage";
+import { getApolloClient } from "../../../apollo-client";
 
 type RootState = {
 	cart: {
@@ -81,7 +81,7 @@ export default function CartContent() {
 			}
 
 			try {
-				const client = await createApolloClient();
+				const client = await getApolloClient();
 				const { data } = await client.query({
 					query: GET_PRODUCTS_BY_IDS,
 					variables: {

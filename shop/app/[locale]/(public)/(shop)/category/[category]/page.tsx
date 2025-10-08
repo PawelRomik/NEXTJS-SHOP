@@ -1,15 +1,15 @@
 import { Grid } from "@radix-ui/themes";
 import ProductDisplay from "../../../../../components/ProductDisplay";
 import { ApolloQueryResult } from "@apollo/client";
-import createApolloClient from "../../../../../../apollo-client";
+import { getApolloClient } from "../../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
 import { FiltersData, QueryResult } from "../../../../../queries/productType";
 import { Metadata } from "next";
-import Pagination from "../../../../../components/Pagination";
+import Pagination from "../../../../../components/common/Pagination";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../../components/SkeletonProductDisplay";
 import { gql } from "@apollo/client";
-import ErrorText from "../../../../../components/ErrorText";
+import ErrorText from "../../../../../components/common/ErrorText";
 import { GET_FILTERS } from "../../../../../queries/filters";
 import ProductFilters from "../../../../../components/ProductFilters";
 import { getTranslations } from "next-intl/server";
@@ -37,7 +37,7 @@ async function fetchProducts(
 	tags?: string[],
 	sort: string = "latest"
 ) {
-	const client = await createApolloClient();
+	const client = await getApolloClient();
 
 	const getSortOrder = (sortKey: string) => {
 		switch (sortKey) {
@@ -162,7 +162,7 @@ async function loadPagination(category: string, page: number, locale: string, ta
 
 async function LoadFilters(category: string, locale: string) {
 	try {
-		const client = await createApolloClient();
+		const client = await getApolloClient();
 		const { data }: ApolloQueryResult<FiltersData> = await client.query({
 			query: GET_FILTERS,
 			variables: {

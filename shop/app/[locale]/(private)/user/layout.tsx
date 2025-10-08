@@ -1,7 +1,6 @@
-import Footer from "../../../components/Footer";
-import ShopHeader from "../../../components/ShopHeader";
-import ScrollToTopButton from "../../../components/ScrollToTopButton";
-import Link from "next/link";
+import Footer from "../../../components/footer/Footer";
+import ShopHeader from "../../../components/header/ShopHeader";
+import ScrollToTopButton from "../../../components/common/ScrollToTopButton";
 import { SignOutButton } from "@clerk/nextjs";
 import { userCategories } from "../../../data/categories";
 import { useTranslations } from "next-intl";
@@ -17,7 +16,7 @@ export default function UserLayout({ children }: PrivateLayoutProps) {
 		<div className={`roboto flex min-h-screen flex-col`}>
 			<ShopHeader />
 			<main className="flex flex-1  ">
-				<div className="hidden lg:flex  min-w-[250px] flex-[10%] border-r-4 border-red-600  bg-[rgb(12,12,12)]">
+				<div className="hidden min-w-[250px]  flex-[10%] border-r-4 border-red-600 bg-[rgb(12,12,12)]  lg:flex">
 					<ul className="flex w-full flex-col items-center gap-3 pt-1">
 						{userCategories.map((category) => (
 							<UserCategoryLink key={category.slug} category={category} />

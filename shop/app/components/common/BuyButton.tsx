@@ -1,14 +1,14 @@
 "use client";
 
 import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/cardReducer";
+import { addToCart } from "../../redux/cardReducer";
 import { SignedIn } from "@clerk/nextjs";
 import { SignedOut } from "@clerk/nextjs";
 import { ApolloQueryResult } from "@apollo/client";
-import { QueryResult } from "../queries/productType";
-import createApolloClient from "../../apollo-client";
-import { GET_PRODUCT_ALLDATA } from "../queries/productPage";
-import LoginButton from "./LoginButton";
+import { QueryResult } from "../../queries/productType";
+import { getApolloClient } from "../../../apollo-client";
+import { GET_PRODUCT_ALLDATA } from "../../queries/productPage";
+import LoginButton from "../auth/LoginButton";
 import { useLocale, useTranslations } from "next-intl";
 
 type BuyButtonsProps = {
@@ -38,7 +38,7 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 
 	const getProductData = async (locale: string) => {
 		try {
-			const client = await createApolloClient();
+			const client = await getApolloClient();
 			const { data }: ApolloQueryResult<QueryResult> = await client.query({
 				query: GET_PRODUCT_ALLDATA,
 				variables: {

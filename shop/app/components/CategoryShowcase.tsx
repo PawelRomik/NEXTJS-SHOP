@@ -6,7 +6,7 @@ import {
 	GET_CATEGORY_NAME,
 	GET_CATEGORY_SHOWCASE
 } from "../queries/category";
-import createApolloClient from "../../apollo-client";
+import { getApolloClient } from "../../apollo-client";
 import { CategoriesData, CategoryData, QueryResult } from "../queries/productType";
 import { ApolloQueryResult } from "@apollo/client";
 
@@ -18,10 +18,10 @@ export default async function CategoryShowcase({
 	locale: string;
 }) {
 	const t = await getTranslations();
+	const client = await getApolloClient();
 
 	async function getName() {
 		try {
-			const client = await createApolloClient();
 			const { data }: ApolloQueryResult<CategoryData> = await client.query({
 				query: GET_CATEGORY_NAME,
 				variables: {
@@ -38,7 +38,6 @@ export default async function CategoryShowcase({
 
 	async function getDesc() {
 		try {
-			const client = await createApolloClient();
 			const { data }: ApolloQueryResult<CategoryData> = await client.query({
 				query: GET_CATEGORY_DESC,
 				variables: {
@@ -55,7 +54,6 @@ export default async function CategoryShowcase({
 
 	async function fetchShowcase() {
 		try {
-			const client = await createApolloClient();
 			const { data }: ApolloQueryResult<CategoryData> = await client.query({
 				query: GET_CATEGORY_SHOWCASE,
 				variables: {

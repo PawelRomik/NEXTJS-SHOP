@@ -1,9 +1,9 @@
 "use client";
-import { useLocale, useTranslations } from "next-intl";
-import createApolloClient from "../../apollo-client";
+import { useTranslations } from "next-intl";
+import { getApolloClient } from "../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
 import { GET_ORDER } from "../queries/order";
-import ErrorText from "./ErrorText";
+import ErrorText from "./common/ErrorText";
 import { formatPrice } from "../lib/utils/formatPrice";
 import { useCurrency } from "../context/CurrencyProvider";
 import { OrderData } from "../queries/productType";
@@ -21,7 +21,7 @@ export default function OrderInformations({ id }: { id: number | string }) {
 	useEffect(() => {
 		async function fetchOrder(orderId: string | number) {
 			try {
-				const client = await createApolloClient();
+				const client = await getApolloClient();
 				const { data }: ApolloQueryResult<OrderData> = await client.query({
 					query: GET_ORDER,
 					variables: {
