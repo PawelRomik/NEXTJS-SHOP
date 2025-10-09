@@ -241,6 +241,7 @@
 		"unexpectedError": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie.",
 		"invalidIdentifier": "Identyfikator jest nieprawidłowy.",
 		"noAccountFound": "Nie znaleziono konta.",
-		"invalidPassword": "Nieprawidłowe hasło."
+		"invalidPassword": "Nieprawidłowe hasło.",
+		"emptyField": "Pole nie może być puste."
 	}
 }

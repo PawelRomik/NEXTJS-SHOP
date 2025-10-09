@@ -241,6 +241,7 @@
 		"unexpectedError": "An unexpected error occurred. Please try again.",
 		"invalidIdentifier": "Identifier is invalid.",
 		"noAccountFound": "Couldn't find your account.",
-		"invalidPassword": "Password is incorrect."
+		"invalidPassword": "Password is incorrect.",
+		"emptyField": "Field cannot be empty."
 	}
 }

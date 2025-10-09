@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import SignUpForm from "../../../../../components/auth/SignUpForm";
+import SignUpForm from "../../../../../components/auth/signup/SignUpForm";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
 	const t = await getTranslations({ locale, namespace: "sign" });
