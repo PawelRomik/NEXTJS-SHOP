@@ -7,9 +7,13 @@ import Link from "next/link";
 export default function ErrorText() {
 	const t = useTranslations();
 
+	const handleReload = () => {
+		window.location.reload();
+	};
+
 	return (
 		<div className="flex w-full items-center justify-center py-20">
-			<p className="flex h-full w-full flex-col items-center justify-center gap-8 text-center text-3xl font-bold text-white ">
+			<div className="flex h-full w-full flex-col items-center justify-center gap-8 text-center text-3xl font-bold text-white ">
 				<Image
 					src={nextLogo}
 					width={220}
@@ -27,13 +31,13 @@ export default function ErrorText() {
 					</Link>
 
 					<button
-						onClick={() => window.location.reload()}
+						onClick={handleReload}
 						className="rotate-3 rounded-lg bg-red-600 px-6 py-3 transition hover:bg-red-500"
 					>
 						{t("common.retry")}
 					</button>
 				</div>
-			</p>
+			</div>
 		</div>
 	);
 }

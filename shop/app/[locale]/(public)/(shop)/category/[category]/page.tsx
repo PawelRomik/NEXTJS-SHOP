@@ -126,7 +126,6 @@ async function loadProducts(
 	tags?: string[],
 	sort?: string
 ) {
-	await new Promise((resolve) => setTimeout(resolve, 10000));
 	const data = await fetchProducts(category, page, locale, tags, sort);
 	if (!data || data.data.length == 0) return <ErrorText />;
 
