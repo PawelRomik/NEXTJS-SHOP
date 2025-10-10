@@ -1,9 +1,9 @@
 "use client";
 
+import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cardReducer";
-import { SignedIn } from "@clerk/nextjs";
-import { SignedOut } from "@clerk/nextjs";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { ApolloQueryResult } from "@apollo/client";
 import { QueryResult } from "../../queries/productType";
 import { getApolloClient } from "../../../apollo-client";
@@ -15,54 +15,60 @@ type BuyButtonsProps = {
 	productId: string;
 };
 
+async function fetchProductData(productId: string, locale: string): Promise<QueryResult | null> {
+	try {
+		const client = await getApolloClient();
+		const { data }: ApolloQueryResult<QueryResult> = await client.query({
+			query: GET_PRODUCT_ALLDATA,
+			variables: { productId, locale }
+		});
+		return data;
+	} catch {
+		return null;
+	}
+}
+
 export default function BuyButton({ productId }: BuyButtonsProps) {
 	const t = useTranslations("shop");
-	const dispatch = useDispatch();
 	const locale = useLocale();
+	const dispatch = useDispatch();
 
-	const handleButtonClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-		e.preventDefault();
-		e.stopPropagation();
+	const [loading, setLoading] = useState(false);
 
-		const product = await getProductData(locale);
-		if (product) {
-			const currProduct = product.products.data[0];
-			dispatch(
-				addToCart({
-					id: currProduct.attributes.uuid,
-					quantity: 1
-				})
-			);
-		}
-	};
+	const handleButtonClick = useCallback(
+		async (e: React.MouseEvent<HTMLButtonElement>) => {
+			e.preventDefault();
+			e.stopPropagation();
 
-	const getProductData = async (locale: string) => {
-		try {
-			const client = await getApolloClient();
-			const { data }: ApolloQueryResult<QueryResult> = await client.query({
-				query: GET_PRODUCT_ALLDATA,
-				variables: {
-					productId: productId,
-					locale: locale
-				}
-			});
+			setLoading(true);
+			try {
+				const product = await fetchProductData(productId, locale);
+				const currProduct = product?.products?.data?.[0];
+				if (!currProduct) return;
 
-			return data;
-		} catch {
-			return null;
-		}
-	};
+				dispatch(
+					addToCart({
+						id: currProduct.attributes.uuid,
+						quantity: 1
+					})
+				);
+			} finally {
+				setLoading(false);
+			}
+		},
+		[dispatch, locale, productId]
+	);
 
 	return (
 		<>
 			<SignedIn>
 				<button
-					className="flex h-full items-center justify-center rounded-full bg-red-600 p-2 px-3 font-bold text-white hover:scale-105 hover:bg-red-500 lg:w-[80%] lg:p-3
-"
+					className="ignore-popover-close flex h-full items-center justify-center rounded-full bg-red-600 p-2 px-3 font-bold text-white hover:scale-105 hover:bg-red-500 lg:w-[80%] lg:p-3"
 					title={t("buyButtonText")}
-					onClick={(e) => handleButtonClick(e)}
+					onClick={handleButtonClick}
+					disabled={loading}
 				>
-					{t("buyButtonText")}
+					{loading ? "loading" : t("buyButtonText")}
 				</button>
 			</SignedIn>
 			<SignedOut>
