@@ -6,8 +6,9 @@ import SaleProductsSection from "../../../components/SaleProductsSection";
 import BundlesSection from "../../../components/bundles-section/BundlesSection";
 import { GET_CATEGORIES } from "../../../queries/category";
 import { getApolloClient } from "../../../../apollo-client";
-import { CategoryData, QueryResult } from "../../../queries/productType";
+import { CategoryData } from "../../../queries/productType";
 import { ApolloQueryResult } from "@apollo/client";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
 	title: "Ephonix"
@@ -48,12 +49,28 @@ export default async function MainPage({ params: { locale } }: { params: { local
 
 	return (
 		<main className="w-full bg-black">
-			<NewProductsSection />
-			<CategorySection num={1} locale={locale} category={cat1} />
-			<SaleProductsSection />
-			<CategorySection num={2} locale={locale} category={cat2} />
-			<BundlesSection />
-			<CategorySection num={3} locale={locale} category={cat3} />
+			<Suspense>
+				<NewProductsSection />
+			</Suspense>
+			<Suspense>
+				<CategorySection num={1} locale={locale} category={cat1} />
+			</Suspense>
+
+			<Suspense>
+				<SaleProductsSection />
+			</Suspense>
+
+			<Suspense>
+				<CategorySection num={2} locale={locale} category={cat2} />
+			</Suspense>
+
+			<Suspense>
+				<BundlesSection />
+			</Suspense>
+
+			<Suspense>
+				<CategorySection num={3} locale={locale} category={cat3} />
+			</Suspense>
 		</main>
 	);
 }

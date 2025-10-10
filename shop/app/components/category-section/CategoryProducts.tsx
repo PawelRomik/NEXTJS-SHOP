@@ -5,6 +5,7 @@ import { QueryResult } from "../../queries/productType";
 import { useTranslations } from "next-intl";
 import ProductDisplay from "../ProductDisplay";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 type ProductOtherSectionProps = {
 	category: string;
@@ -27,7 +28,7 @@ export interface ProductData {
 }
 
 export default async function CategoryDisplay({ category, locale }: ProductOtherSectionProps) {
-	const t = useTranslations("productSection");
+	const t = await getTranslations("productSection");
 	const client = await getApolloClient();
 	let productsData: ProductData[] = [];
 	try {
