@@ -1,21 +1,28 @@
 "use client";
 
-import { IconButton } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function ScrollToTopButton() {
 	const t = useTranslations("common");
 	const [isVisible, setIsVisible] = useState(false);
-	const buttonRef = useRef<HTMLButtonElement>(null);
 
-	const toggleVisibility = () => {
-		if (window.scrollY > 200) {
-			setIsVisible(true);
-		} else {
-			setIsVisible(false);
-		}
-	};
+	useEffect(() => {
+		let ticking = false;
+
+		const handleScroll = () => {
+			if (!ticking) {
+				window.requestAnimationFrame(() => {
+					setIsVisible(window.scrollY > 200);
+					ticking = false;
+				});
+				ticking = true;
+			}
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
 	const scrollToTop = () => {
 		window.scrollTo({
@@ -24,27 +31,16 @@ export default function ScrollToTopButton() {
 		});
 	};
 
-	useEffect(() => {
-		const handleScroll = () => {
-			toggleVisibility();
-		};
-
-		window.addEventListener("scroll", handleScroll);
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
-	}, []);
-
 	return (
-		<IconButton
-			ref={buttonRef}
-			className={`scroll-to-top-button fixed bottom-4 right-4 z-20 h-12 w-12 cursor-pointer border-2 border-solid border-red-600 bg-zinc-950 font-bold text-white transition hover:bg-zinc-900  ${
+		<button
+			className={`scroll-to-top-button fixed bottom-4 right-4 z-20 h-12 w-12 cursor-pointer border-2 border-solid border-red-600 bg-zinc-950 text-xl font-bold text-white transition hover:bg-red-600  hover:text-3xl ${
 				isVisible ? "opacity-100" : "opacity-0"
 			}`}
 			title={t("scrollButtonTitle")}
 			onClick={scrollToTop}
+			aria-label={t("scrollButtonTitle")}
 		>
-			<i className="ri-arrow-up-line"></i>
-		</IconButton>
+			<i className="ri-arrow-up-line "></i>
+		</button>
 	);
 }
