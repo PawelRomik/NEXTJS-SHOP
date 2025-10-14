@@ -59,7 +59,7 @@ async function fetchProducts(
 	const newQuery = `
 		query getProducts($category: String!, $page: Int!${tags ? ", $tags: [String]" : ""}, $locale: I18NLocaleCode!) {
 			products(
-				pagination: { page: $page, pageSize: 1 }
+				pagination: { page: $page, pageSize: 8 }
 				sort: "${getSortOrder(sort)}"
 				filters: { categories: { slug: { eq: $category } }${tags ? ", tags: { name: { in: $tags } } " : ""} }
 				locale: $locale
