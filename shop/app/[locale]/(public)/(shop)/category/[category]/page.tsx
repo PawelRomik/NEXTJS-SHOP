@@ -5,7 +5,7 @@ import { getApolloClient } from "../../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
 import { FiltersData, QueryResult } from "../../../../../queries/productType";
 import { Metadata } from "next";
-import Pagination from "../../../../../components/common/Pagination";
+import Pagination from "../../../../../components/pagination/Pagination";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../../components/SkeletonProductDisplay";
 import { gql } from "@apollo/client";
@@ -59,7 +59,7 @@ async function fetchProducts(
 	const newQuery = `
 		query getProducts($category: String!, $page: Int!${tags ? ", $tags: [String]" : ""}, $locale: I18NLocaleCode!) {
 			products(
-				pagination: { page: $page, pageSize: 8 }
+				pagination: { page: $page, pageSize: 1 }
 				sort: "${getSortOrder(sort)}"
 				filters: { categories: { slug: { eq: $category } }${tags ? ", tags: { name: { in: $tags } } " : ""} }
 				locale: $locale

@@ -4,7 +4,7 @@ import { ApolloQueryResult } from "@apollo/client";
 import { getApolloClient } from "../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
 import { QueryResult } from "../../../../queries/productType";
-import Pagination from "../../../../components/common/Pagination";
+import Pagination from "../../../../components/pagination/Pagination";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
 import { GET_SEARCH_PRODUCTS, GET_SEARCH_PRODUCTS_COUNT } from "../../../../queries/search";
