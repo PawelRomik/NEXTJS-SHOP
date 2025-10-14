@@ -11,7 +11,7 @@ import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
 import { GET_SALE_PRODUCTS } from "../../../../queries/shopPage";
 import CategoryShowcase from "../../../../components/CategoryShowcase";
-import Pagination from "../../../../components/common/Pagination";
+import Pagination from "../../../../components/pagination/Pagination";
 
 type CategoryKeys = keyof IntlMessages["categories"];
 

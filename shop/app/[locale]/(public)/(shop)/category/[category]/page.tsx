@@ -5,7 +5,7 @@ import { getApolloClient } from "../../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
 import { FiltersData, QueryResult } from "../../../../../queries/productType";
 import { Metadata } from "next";
-import Pagination from "../../../../../components/common/Pagination";
+import Pagination from "../../../../../components/pagination/Pagination";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../../components/SkeletonProductDisplay";
 import { gql } from "@apollo/client";

@@ -7,7 +7,7 @@ import { getApolloClient } from "../../../../../apollo-client";
 import ErrorText from "../../../../components/common/ErrorText";
 import { Suspense } from "react";
 import { currentUser } from "@clerk/nextjs/server";
-import Pagination from "../../../../components/common/Pagination";
+import Pagination from "../../../../components/pagination/Pagination";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import ProductSectionTitle from "../../../../components/ProductSectionTitle";

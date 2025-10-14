@@ -3,7 +3,7 @@ import { ApolloQueryResult } from "@apollo/client";
 import { getApolloClient } from "../../../../../apollo-client";
 import { BundlesResult } from "../../../../queries/productType";
 import { Metadata } from "next";
-import Pagination from "../../../../components/common/Pagination";
+import Pagination from "../../../../components/pagination/Pagination";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
 import ErrorText from "../../../../components/common/ErrorText";
