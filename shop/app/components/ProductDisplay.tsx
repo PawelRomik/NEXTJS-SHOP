@@ -4,8 +4,8 @@ import Link from "next/link";
 import BuyButton from "./common/BuyButton";
 import { useTranslations } from "next-intl";
 import { formatPrice } from "../lib/utils/formatPrice";
-import { useCurrency } from "../context/CurrencyProvider";
-import CartCounter from "./cart/CartCounter";
+import { useCurrency } from "../lib/context/CurrencyProvider";
+import CartCounter from "./common/CartCounter";
 import { SignedIn } from "@clerk/nextjs";
 
 type ProductDisplayProps = {

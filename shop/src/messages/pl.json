@@ -127,7 +127,8 @@
 		"add": "Dodaj",
 		"wrongCode": "Niepoprawny kod",
 		"addedDiscount": "Dodano -{discount}% rabatu!",
-		"payAndOrder": "Zapłać i zamów"
+		"payAndOrder": "Zapłać i zamów",
+		"more": "Więcej"
 	},
 	"categories": {
 		"shop": "Sklep",

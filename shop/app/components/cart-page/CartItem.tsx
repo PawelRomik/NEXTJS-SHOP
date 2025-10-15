@@ -5,8 +5,8 @@ import { useDispatch } from "react-redux";
 import { removeItem, increaseQuantity, removeAllOfItem } from "../../redux/cardReducer";
 import { useTranslations } from "next-intl";
 import { formatPrice } from "../../lib/utils/formatPrice";
-import { useCurrency } from "../../context/CurrencyProvider";
-import type { Product } from "./useCartProducts";
+import { useCurrency } from "../../lib/context/CurrencyProvider";
+import type { Product } from "../../lib/hooks/useCartProducts";
 
 type CartItemProps = {
 	item: Product;

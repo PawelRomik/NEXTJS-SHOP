@@ -1,8 +1,8 @@
 "use client";
-import Filter from "./filter/Filter";
 import { useRouter } from "next/navigation";
 import SortOptions from "./filter/SortOptions";
 import { useTranslations } from "next-intl";
+import FilterBox from "./filter/FilterBox";
 
 type ProductFiltersProps = {
 	filters: {
@@ -60,7 +60,7 @@ export default function ProductFilters({ filters }: ProductFiltersProps) {
 			>
 				<div className="flex w-full grid-cols-5 flex-col flex-wrap items-center justify-center gap-5  p-[3px] px-5  text-white  md:flex-row lg:grid">
 					{filters.map((filter) => (
-						<Filter key={filter.id} filter={filter} />
+						<FilterBox key={filter.id} filter={filter} />
 					))}
 
 					<SortOptions />

@@ -1,7 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { formatPrice } from "../lib/utils/formatPrice";
-import { useCurrency } from "../context/CurrencyProvider";
+import { useCurrency } from "../lib/context/CurrencyProvider";
 import BuyButton from "./common/BuyButton";
 
 type ProductShowcasePriceProps = {

@@ -1,10 +1,10 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { getCurrency } from "../lib/utils/getCurrency";
+import { getCurrency } from "../utils/getCurrency";
 import { useParams } from "next/navigation";
-import { getApolloClient } from "../../apollo-client";
+import { getApolloClient } from "../../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
-import { RatesData } from "../queries/productType";
-import { GET_RATES } from "../queries/rates";
+import { RatesData } from "../../queries/productType";
+import { GET_RATES } from "../../queries/rates";
 
 type CurrencyContextType = {
 	exchangeRate: number;
