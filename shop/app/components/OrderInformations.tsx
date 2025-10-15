@@ -5,7 +5,7 @@ import { ApolloQueryResult } from "@apollo/client";
 import { GET_ORDER } from "../queries/order";
 import ErrorText from "./common/ErrorText";
 import { formatPrice } from "../lib/utils/formatPrice";
-import { useCurrency } from "../context/CurrencyProvider";
+import { useCurrency } from "../lib/context/CurrencyProvider";
 import { OrderData } from "../queries/productType";
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";

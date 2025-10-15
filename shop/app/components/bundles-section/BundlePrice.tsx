@@ -1,8 +1,8 @@
 "use client";
 import { SignedIn } from "@clerk/nextjs";
-import CartCounter from "../cart/CartCounter";
+import CartCounter from "../common/CartCounter";
 import { formatPrice } from "../../lib/utils/formatPrice";
-import { useCurrency } from "../../context/CurrencyProvider";
+import { useCurrency } from "../../lib/context/CurrencyProvider";
 import { useTranslations } from "next-intl";
 import { ProductData } from "../../queries/productType";
 

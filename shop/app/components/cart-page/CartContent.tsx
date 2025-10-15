@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { resetCart } from "../../redux/cardReducer";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
-import { useCartProducts } from "./useCartProducts";
+import { useCartProducts } from "../../lib/hooks/useCartProducts";
 import CartItem from "./CartItem";
 import CartDiscount from "./CartDiscount";
 import CartSummary from "./CartSummary";

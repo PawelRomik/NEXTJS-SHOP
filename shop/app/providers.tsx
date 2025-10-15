@@ -4,7 +4,7 @@ import { Theme } from "@radix-ui/themes";
 import { store, persistor } from "./redux/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { CurrencyProvider } from "./context/CurrencyProvider";
+import { CurrencyProvider } from "./lib/context/CurrencyProvider";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
 	return (

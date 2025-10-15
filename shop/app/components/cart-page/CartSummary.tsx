@@ -2,11 +2,11 @@
 import { useMemo, useState } from "react";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
-import { useCurrency } from "../../context/CurrencyProvider";
+import { useCurrency } from "../../lib/context/CurrencyProvider";
 import { useTranslations } from "next-intl";
 import { useUser } from "@clerk/nextjs";
 import { formatPrice } from "../../lib/utils/formatPrice";
-import type { Product } from "./useCartProducts";
+import type { Product } from "../../lib/hooks/useCartProducts";
 
 type CartSummaryProps = {
 	products: Product[];
