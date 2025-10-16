@@ -1,20 +1,19 @@
+"use client";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuLabel,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { locales } from "@/i18n";
 import CountryItem from "./CountryItem";
 import Flag from "./Flag";
-import { useTranslations } from "next-intl";
-import { getLocale } from "next-intl/server";
+import { useLocale, useTranslations } from "next-intl";
 import { DropdownMenuArrow } from "@radix-ui/react-dropdown-menu";
 
-export default async function LanguageSwitcher() {
+export default function LanguageSwitcher() {
 	const t = useTranslations("footer");
-	const locale = await getLocale();
+	const locale = useLocale();
 
 	return (
 		<DropdownMenu modal={false}>

@@ -14,14 +14,14 @@ export default async function DocsList() {
 	return (
 		<nav className="flex items-center justify-center gap-3 lg:w-1/3">
 			{pageLinks.map((link, index) => (
-				<>
+				<div key={link.href} className="flex items-center gap-3">
 					<Link href={link.href} className="hover:text-white" title={link.label}>
 						{link.label}
 					</Link>
 					{index < pageLinks.length - 1 && (
 						<Separator orientation="vertical" className="bg-zinc-300" aria-hidden="true" />
 					)}
-				</>
+				</div>
 			))}
 		</nav>
 	);
