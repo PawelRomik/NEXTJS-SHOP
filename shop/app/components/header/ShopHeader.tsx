@@ -3,7 +3,7 @@ import Hamburger from "../hamburger/Hamburger";
 import ShopLogo from "./ShopLogo";
 import UserProfile from "../UserProfile";
 import { SignedIn } from "@clerk/nextjs";
-import NavigationLinks from "./NavigationLinks";
+import Navigation from "../navigation/Navigation";
 import SearchBar from "../searchbar/SearchBar";
 
 export default function ShopHeader() {
@@ -12,7 +12,7 @@ export default function ShopHeader() {
 			<Hamburger />
 			<ShopLogo />
 			<nav className="hidden h-full w-1/3 items-center justify-center lg:flex">
-				<NavigationLinks />
+				<Navigation />
 			</nav>
 			<div className="flex h-full items-center justify-end gap-5 lg:w-1/3">
 				<SearchBar />
