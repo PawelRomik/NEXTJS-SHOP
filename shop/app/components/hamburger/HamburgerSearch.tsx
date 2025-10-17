@@ -1,9 +1,9 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export default function HamburgerSearch() {
 	const t = useTranslations();
@@ -11,27 +11,29 @@ export default function HamburgerSearch() {
 	const router = useRouter();
 	const [inputValue, setInputValue] = useState("");
 
-	const handleSearch = () => {
+	const handleSearch = useCallback(() => {
+		const trimmed = inputValue.trim();
 		const params = new URLSearchParams(searchParams);
-		if (inputValue) {
-			params.set("query", inputValue);
+
+		if (trimmed) {
+			params.set("query", trimmed);
 			params.set("page", "1");
 			router.push(`/search?${params.toString()}`);
 		} else {
 			params.delete("query");
 			router.push("/");
 		}
-	};
+	}, [inputValue, router, searchParams]);
 
-	const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		if (event.key === "Enter") {
-			handleSearch();
-		}
-	};
-
-	const handleInputChange = (term: string) => {
-		setInputValue(term);
-	};
+	const handleKeyDown = useCallback(
+		(event: React.KeyboardEvent<HTMLInputElement>) => {
+			if (event.key === "Enter") {
+				event.currentTarget.blur();
+				handleSearch();
+			}
+		},
+		[handleSearch]
+	);
 
 	return (
 		<div className=" z-10 flex h-full w-[80vw] origin-right items-center justify-center py-2">
@@ -43,10 +45,8 @@ export default function HamburgerSearch() {
 				className=" h-full w-full bg-zinc-900 p-2  text-xl outline-none"
 				maxLength={100}
 				value={inputValue}
-				onChange={(e) => {
-					handleInputChange(e.target.value);
-				}}
-				onKeyUp={handleKeyPress}
+				onChange={(e) => setInputValue(e.target.value)}
+				onKeyDown={handleKeyDown}
 			></input>
 			<button onClick={handleSearch} className="h-full  bg-zinc-900 p-2 outline-none">
 				<i className="ri-search-line pl-1 text-xl md:text-2xl"></i>
