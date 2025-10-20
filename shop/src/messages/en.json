@@ -173,7 +173,9 @@
 		"invalidDesc": "Description cannot be empty.",
 		"invalidEmail": "Invalid email.",
 		"maxFiles": "You can upload up to 5 files.",
-		"formSent": "Successfully sent!"
+		"formSent": "Successfully sent!",
+		"fileTooLarge": "is too large. The maximum file size is 50 MB.",
+		"formError": "An error occurred while submitting the form. Please try again later."
 	},
 	"sign": {
 		"signIn": "Sign In",
