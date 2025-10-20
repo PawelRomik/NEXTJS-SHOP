@@ -1,7 +1,7 @@
 import Attachment from "./Attachment";
 
 type FileUploaderProps = {
-	onChange: (files: FileList | null) => void;
+	onChange: (files: FileList | null, inputEl?: HTMLInputElement) => void;
 	attachments: File[];
 	removeAttachment: (index: number) => void;
 	label: string;
@@ -24,7 +24,7 @@ export function FileUploader({
 				<input
 					type="file"
 					multiple
-					onChange={(e) => onChange(e.target.files)}
+					onChange={(e) => onChange(e.target.files, e.target)}
 					className="w-full flex-1 rounded-lg bg-white p-3 text-black lg:w-auto"
 				/>
 			</div>

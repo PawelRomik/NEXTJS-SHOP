@@ -173,7 +173,9 @@
 		"invalidDesc": "Opis nie może być pusty.",
 		"invalidEmail": "Niepoprawny email.",
 		"maxFiles": "Można dodać maksymalnie 5 plików.",
-		"formSent": "Pomyślnie wysłano!"
+		"formSent": "Pomyślnie wysłano!",
+		"fileTooLarge": "jest zbyt duży. Maksymalny rozmiar to 50 MB.",
+		"formError": "Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie później."
 	},
 	"sign": {
 		"signIn": "Zaloguj się",

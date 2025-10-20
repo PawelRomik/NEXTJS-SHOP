@@ -21,8 +21,26 @@ export default function SupportForm() {
 		e.preventDefault();
 		if (!validateForm()) return;
 
-		alert(t("formSent"));
-		resetForm();
+		const formDataToSend = new FormData();
+		formDataToSend.append("email", formData.email);
+		formDataToSend.append("subject", formData.subject);
+		formDataToSend.append("description", formData.description);
+		formData.attachments.forEach((file) => {
+			formDataToSend.append("attachments", file);
+		});
+
+		try {
+			const res = await fetch("/api/support", {
+				method: "POST",
+				body: formDataToSend
+			});
+			if (!res.ok) throw new Error("Request failed");
+
+			alert(t("formSent"));
+			resetForm();
+		} catch {
+			alert(t("formError"));
+		}
 	};
 
 	return (

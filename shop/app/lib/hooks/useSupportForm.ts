@@ -31,16 +31,31 @@ export function useSupportForm() {
 		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const handleFileChange = (files: FileList | null) => {
+	const handleFileChange = (files: FileList | null, inputEl?: HTMLInputElement) => {
 		if (!files) return;
-		const newFiles = Array.from(files);
 
-		if (formData.attachments.length + newFiles.length > 5) {
+		let fileArray = Array.from(files);
+
+		const totalFiles = formData.attachments.length + fileArray.length;
+
+		if (totalFiles > 5) {
 			alert(t("maxFiles"));
 			return;
 		}
 
-		setFormData((prev) => ({ ...prev, attachments: [...prev.attachments, ...newFiles] }));
+		const tooLargeFiles = fileArray.filter((file) => file.size > 50 * 1024 * 1024);
+		if (tooLargeFiles.length > 0) {
+			alert(`${tooLargeFiles.map((f) => f.name).join(", ")} ${t("fileTooLarge")}`);
+			if (inputEl) inputEl.value = "";
+			return;
+		}
+
+		setFormData((prev) => ({
+			...prev,
+			attachments: [...prev.attachments, ...fileArray]
+		}));
+
+		if (inputEl) inputEl.value = "";
 	};
 
 	const removeAttachment = (index: number) => {
