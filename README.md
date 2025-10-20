@@ -74,4 +74,6 @@ NEXT_PUBLIC_STRAPI_AUTH_KEY=your_strapi_api_token
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=stripe_publishable_key
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=clerk_publishable_key
 CLERK_SECRET_KEY=clerk_secret_key
+RESEND_API_KEY=resend_api_key
+SUPPORT_EMAIL_TO=email
 ```
