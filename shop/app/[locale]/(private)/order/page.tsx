@@ -1,8 +1,8 @@
 import { revalidatePath } from "next/cache";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
-import OrderSuccessContent from "../../../components/OrderSuccessContent";
-import OrderErrorContent from "../../../components/OrderErrorContent";
+import OrderSuccessContent from "../../../components/order-status/OrderSuccessContent";
+import OrderErrorContent from "../../../components/order-status/OrderErrorContent";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
 	const t = await getTranslations({ locale, namespace: "order" });

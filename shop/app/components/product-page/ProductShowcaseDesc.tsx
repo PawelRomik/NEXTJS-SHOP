@@ -1,8 +1,8 @@
-import { GET_PRODUCT_DESC } from "../queries/productPage";
+import { GET_PRODUCT_DESC } from "../../queries/productPage";
 import { ApolloQueryResult } from "@apollo/client";
-import { QueryResult } from "../queries/productType";
+import { QueryResult } from "../../queries/productType";
 import { Suspense } from "react";
-import { getApolloClient } from "../../apollo-client";
+import { getApolloClient } from "../../../apollo-client";
 import { useTranslations } from "next-intl";
 
 type ProductShowcaseDescProps = {

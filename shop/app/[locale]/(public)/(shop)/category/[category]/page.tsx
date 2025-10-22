@@ -1,5 +1,5 @@
 import { Grid } from "@radix-ui/themes";
-import ProductDisplay from "../../../../../components/ProductDisplay";
+import ProductDisplay from "../../../../../components/common/ProductDisplay";
 import { ApolloQueryResult } from "@apollo/client";
 import { getApolloClient } from "../../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
@@ -7,14 +7,14 @@ import { FiltersData, QueryResult } from "../../../../../queries/productType";
 import { Metadata } from "next";
 import Pagination from "../../../../../components/pagination/Pagination";
 import { Suspense } from "react";
-import SkeletonProductDisplay from "../../../../../components/SkeletonProductDisplay";
+import SkeletonProductDisplay from "../../../../../components/common/SkeletonProductDisplay";
 import { gql } from "@apollo/client";
 import ErrorText from "../../../../../components/common/ErrorText";
 import { GET_FILTERS } from "../../../../../queries/filters";
-import ProductFilters from "../../../../../components/ProductFilters";
+import ProductFilters from "../../../../../components/product-filters/ProductFilters";
 import { getTranslations } from "next-intl/server";
 import { useTranslations } from "next-intl";
-import CategoryShowcase from "../../../../../components/CategoryShowcase";
+import CategoryShowcase from "../../../../../components/category-showcase/CategoryShowcase";
 
 type CategoryKeys = keyof IntlMessages["categories"];
 

@@ -1,7 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import nextLogo from "../../public/logolg.png";
+import nextLogo from "../../../public/logolg.png";
 import Image from "next/image";
 
 export default function OrderErrorContent() {

@@ -2,10 +2,10 @@
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { resetCart } from "../redux/cardReducer";
+import { resetCart } from "../../redux/cardReducer";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../../public/logolg.png";
+import logo from "../../../public/logolg.png";
 
 export default function OrderSuccessContent({ locale }: { locale: string }) {
 	const t = useTranslations("order");

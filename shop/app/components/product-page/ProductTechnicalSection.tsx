@@ -1,8 +1,8 @@
-import { getApolloClient } from "../../apollo-client";
+import { getApolloClient } from "../../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
-import { GET_PRODUCT_TECHNICAL } from "../queries/productPage";
+import { GET_PRODUCT_TECHNICAL } from "../../queries/productPage";
 import { Suspense } from "react";
-import { QueryResult } from "../queries/productType";
+import { QueryResult } from "../../queries/productType";
 import { useTranslations } from "next-intl";
 
 type ProductTechnicalSectionProps = {

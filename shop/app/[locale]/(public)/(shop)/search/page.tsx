@@ -1,12 +1,12 @@
 import { Grid } from "@radix-ui/themes";
-import ProductDisplay from "../../../../components/ProductDisplay";
+import ProductDisplay from "../../../../components/common/ProductDisplay";
 import { ApolloQueryResult } from "@apollo/client";
 import { getApolloClient } from "../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
 import { QueryResult } from "../../../../queries/productType";
 import Pagination from "../../../../components/pagination/Pagination";
 import { Suspense } from "react";
-import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
+import SkeletonProductDisplay from "../../../../components/common/SkeletonProductDisplay";
 import { GET_SEARCH_PRODUCTS, GET_SEARCH_PRODUCTS_COUNT } from "../../../../queries/search";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";

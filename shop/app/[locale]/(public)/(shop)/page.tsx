@@ -1,9 +1,9 @@
 import { revalidatePath } from "next/cache";
 import { Metadata } from "next";
 import CategorySection from "../../../components/category-section/CategorySection";
-import NewProductsSection from "../../../components/NewProductsSection";
-import SaleProductsSection from "../../../components/SaleProductsSection";
-import BundlesSection from "../../../components/bundles-section/BundlesSection";
+import NewProductsSection from "../../../components/main-cards/NewProductsSection";
+import SaleProductsSection from "../../../components/main-cards/SaleProductsSection";
+import BundlesSection from "../../../components/main-cards/BundlesSection";
 import { GET_CATEGORIES } from "../../../queries/category";
 import { getApolloClient } from "../../../../apollo-client";
 import { CategoryData } from "../../../queries/productType";

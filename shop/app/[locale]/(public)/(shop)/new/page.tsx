@@ -4,13 +4,13 @@ import { getApolloClient } from "../../../../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
 import { QueryResult } from "../../../../queries/productType";
 import ErrorText from "../../../../components/common/ErrorText";
-import ProductDisplay from "../../../../components/ProductDisplay";
+import ProductDisplay from "../../../../components/common/ProductDisplay";
 import { revalidatePath } from "next/cache";
 import { Grid } from "@radix-ui/themes";
 import { Suspense } from "react";
-import SkeletonProductDisplay from "../../../../components/SkeletonProductDisplay";
+import SkeletonProductDisplay from "../../../../components/common/SkeletonProductDisplay";
 import { GET_NEW_PRODUCTS } from "../../../../queries/shopPage";
-import CategoryShowcase from "../../../../components/CategoryShowcase";
+import CategoryShowcase from "../../../../components/category-showcase/CategoryShowcase";
 
 type CategoryKeys = keyof IntlMessages["categories"];
 

@@ -1,11 +1,10 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import BuyButton from "./common/BuyButton";
 import { useTranslations } from "next-intl";
-import { formatPrice } from "../lib/utils/formatPrice";
-import { useCurrency } from "../lib/context/CurrencyProvider";
-import CartCounter from "./common/CartCounter";
+import { formatPrice } from "../../lib/utils/formatPrice";
+import { useCurrency } from "../../lib/context/CurrencyProvider";
+import CartCounter from "./CartCounter";
 import { SignedIn } from "@clerk/nextjs";
 
 type ProductDisplayProps = {

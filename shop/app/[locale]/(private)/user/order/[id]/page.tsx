@@ -1,10 +1,10 @@
 import { getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
-import OrderInformations from "../../../../../components/OrderInformations";
-import OrderProducts from "../../../../../components/OrderProducts";
+import OrderInformations from "../../../../../components/order-informations/OrderInformations";
+import OrderProducts from "../../../../../components/order-informations/OrderProducts";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import ProductSectionTitle from "../../../../../components/ProductSectionTitle";
+import ProductSectionTitle from "../../../../../components/product-page/ProductSectionTitle";
 
 export async function generateMetadata({
 	params: { locale, id }
