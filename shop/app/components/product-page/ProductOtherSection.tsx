@@ -4,7 +4,6 @@ import { GET_OTHER_PRODUCTS, GET_PRODUCT_CATEGORY } from "../../queries/productP
 import { Suspense } from "react";
 import ProductDisplay from "../common/ProductDisplay";
 import { QueryResult } from "../../queries/productType";
-import { useTranslations } from "next-intl";
 
 type ProductOtherSectionProps = {
 	productId: string;

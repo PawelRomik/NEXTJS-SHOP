@@ -1,4 +1,4 @@
-import { Grid, Skeleton } from "@radix-ui/themes";
+import { Grid } from "@radix-ui/themes";
 
 export default function SkeletonProductDisplay() {
 	return (

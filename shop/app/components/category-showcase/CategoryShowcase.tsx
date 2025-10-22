@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import Image from "next/image";
 import { GET_CATEGORY_ALLDATA } from "../../queries/category";
 import { getApolloClient } from "../../../apollo-client";
 import { CategoryData } from "../../queries/productType";
