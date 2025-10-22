@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { ApolloQueryResult } from "@apollo/client";
 import { getApolloClient } from "../../../apollo-client";
