@@ -1,7 +1,7 @@
 import CartPopover from "../cart/CartPopover";
 import Hamburger from "../hamburger/Hamburger";
 import ShopLogo from "./ShopLogo";
-import UserProfile from "../UserProfile";
+import UserProfile from "../user-profile/UserProfile";
 import { SignedIn } from "@clerk/nextjs";
 import Navigation from "../navigation/Navigation";
 import SearchBar from "../searchbar/SearchBar";

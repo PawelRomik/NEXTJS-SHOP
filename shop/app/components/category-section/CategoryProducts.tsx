@@ -2,8 +2,7 @@ import { getApolloClient } from "../../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
 import { GET_RANDOM_PRODUCTS } from "../../queries/productPage";
 import { QueryResult } from "../../queries/productType";
-import { useTranslations } from "next-intl";
-import ProductDisplay from "../ProductDisplay";
+import ProductDisplay from "../common/ProductDisplay";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 

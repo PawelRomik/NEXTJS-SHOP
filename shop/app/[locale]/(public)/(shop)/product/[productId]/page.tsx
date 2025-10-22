@@ -3,13 +3,13 @@ import { getApolloClient } from "../../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
 import { GET_PRODUCT_NAME } from "../../../../../queries/productPage";
 import { Metadata } from "next";
-import ProductNavigationButtons from "../../../../../components/ProductNavigationButtons";
-import ProductShowcaseSection from "../../../../../components/ProductShowcaseSection";
-import ProductDescriptionSection from "../../../../../components/ProductDescriptionSection";
-import ProductTechnicalSection from "../../../../../components/ProductTechnicalSection";
-import ProductOtherSection from "../../../../../components/ProductOtherSection";
+import ProductNavigationButtons from "../../../../../components/product-page/ProductNavigationButtons";
+import ProductShowcaseSection from "../../../../../components/product-page/ProductShowcaseSection";
+import ProductDescriptionSection from "../../../../../components/product-page/ProductDescriptionSection";
+import ProductTechnicalSection from "../../../../../components/product-page/ProductTechnicalSection";
+import ProductOtherSection from "../../../../../components/product-page/ProductOtherSection";
 import { QueryResult } from "../../../../../queries/productType";
-import ProductSectionTitle from "../../../../../components/ProductSectionTitle";
+import ProductSectionTitle from "../../../../../components/product-page/ProductSectionTitle";
 import { getTranslations } from "next-intl/server";
 
 async function fetchProduct(productId: string, locale: string) {

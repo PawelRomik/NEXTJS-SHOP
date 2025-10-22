@@ -1,8 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
-import SortOptions from "./filter/SortOptions";
+import SortOptions from "../filter/SortOptions";
 import { useTranslations } from "next-intl";
-import FilterBox from "./filter/FilterBox";
+import FilterBox from "../filter/FilterBox";
 
 type ProductFiltersProps = {
 	filters: {

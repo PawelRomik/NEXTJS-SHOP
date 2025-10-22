@@ -4,7 +4,7 @@ import ScrollToTopButton from "../../../components/common/ScrollToTopButton";
 import { SignOutButton } from "@clerk/nextjs";
 import { userCategories } from "../../../data/categories";
 import { useTranslations } from "next-intl";
-import UserCategoryLink from "../../../components/UserCategoryLink";
+import UserCategoryLink from "../../../components/user-links/UserCategoryLink";
 
 type PrivateLayoutProps = {
 	children: React.ReactNode;

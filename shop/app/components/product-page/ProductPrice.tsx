@@ -1,7 +1,7 @@
-import { GET_PRODUCT_PRICE } from "../queries/productPage";
-import { getApolloClient } from "../../apollo-client";
+import { GET_PRODUCT_PRICE } from "../../queries/productPage";
+import { getApolloClient } from "../../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
-import { QueryResult } from "../queries/productType";
+import { QueryResult } from "../../queries/productType";
 import ProductShowcasePrice from "./ProductShowcasePrice";
 
 type ProductPriceProps = {

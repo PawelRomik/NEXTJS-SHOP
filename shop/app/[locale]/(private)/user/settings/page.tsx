@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
 import ChangeEmailForm from "../../../../components/user-settings/ChangeEmailForm";
-import ProductSectionTitle from "../../../../components/ProductSectionTitle";
+import ProductSectionTitle from "../../../../components/product-page/ProductSectionTitle";
 import ChangeNameForm from "../../../../components/user-settings/ChangeNameForm";
 import ChangeAvatarForm from "../../../../components/user-settings/ChangeAvatarForm";
 import ChangePasswordForm from "../../../../components/user-settings/ChangePasswordForm";

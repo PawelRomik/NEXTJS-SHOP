@@ -1,9 +1,9 @@
-import { getApolloClient } from "../../apollo-client";
+import { getApolloClient } from "../../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
-import { GET_OTHER_PRODUCTS, GET_PRODUCT_CATEGORY } from "../queries/productPage";
+import { GET_OTHER_PRODUCTS, GET_PRODUCT_CATEGORY } from "../../queries/productPage";
 import { Suspense } from "react";
-import ProductDisplay from "./ProductDisplay";
-import { QueryResult } from "../queries/productType";
+import ProductDisplay from "../common/ProductDisplay";
+import { QueryResult } from "../../queries/productType";
 import { useTranslations } from "next-intl";
 
 type ProductOtherSectionProps = {
@@ -12,8 +12,6 @@ type ProductOtherSectionProps = {
 };
 
 export default function ProductOtherSection({ productId, locale }: ProductOtherSectionProps) {
-	const t = useTranslations("product");
-
 	async function getCategory() {
 		try {
 			const client = await getApolloClient();

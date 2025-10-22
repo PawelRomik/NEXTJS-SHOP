@@ -10,7 +10,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import Pagination from "../../../../components/pagination/Pagination";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import ProductSectionTitle from "../../../../components/ProductSectionTitle";
+import ProductSectionTitle from "../../../../components/product-page/ProductSectionTitle";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
 	const t = await getTranslations({ locale, namespace: "order" });

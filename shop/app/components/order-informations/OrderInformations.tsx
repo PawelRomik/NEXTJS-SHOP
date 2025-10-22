@@ -1,12 +1,12 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { getApolloClient } from "../../apollo-client";
+import { getApolloClient } from "../../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
-import { GET_ORDER } from "../queries/order";
-import ErrorText from "./common/ErrorText";
-import { formatPrice } from "../lib/utils/formatPrice";
-import { useCurrency } from "../lib/context/CurrencyProvider";
-import { OrderData } from "../queries/productType";
+import { GET_ORDER } from "../../queries/order";
+import ErrorText from "../common/ErrorText";
+import { formatPrice } from "../../lib/utils/formatPrice";
+import { useCurrency } from "../../lib/context/CurrencyProvider";
+import { OrderData } from "../../queries/productType";
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 

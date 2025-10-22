@@ -1,7 +1,7 @@
 import { ApolloQueryResult } from "@apollo/client";
-import { QueryResult } from "../queries/productType";
-import { GET_PRODUCT_IMAGES } from "../queries/productPage";
-import { getApolloClient } from "../../apollo-client";
+import { QueryResult } from "../../queries/productType";
+import { GET_PRODUCT_IMAGES } from "../../queries/productPage";
+import { getApolloClient } from "../../../apollo-client";
 import ProductImages from "./ProductImages";
 
 type ProductShowcaseGalleryServerProps = {
