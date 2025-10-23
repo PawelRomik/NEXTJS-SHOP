@@ -5,7 +5,7 @@ import { BundlesResult } from "../../../../queries/productType";
 import { Metadata } from "next";
 import Pagination from "../../../../components/pagination/Pagination";
 import { Suspense } from "react";
-import SkeletonProductDisplay from "../../../../components/common/SkeletonProductDisplay";
+import SkeletonProductDisplay from "../../../../components/product-display/SkeletonProductDisplay";
 import ErrorText from "../../../../components/common/ErrorText";
 import { getTranslations } from "next-intl/server";
 import CategoryShowcase from "../../../../components/category-showcase/CategoryShowcase";
