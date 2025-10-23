@@ -1,7 +1,7 @@
 "use client";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useUserCategoryState } from "../../lib/hooks/useUserCategoryState";
 
 type UserCategoryLinkProps = {
 	category: {
@@ -10,31 +10,20 @@ type UserCategoryLinkProps = {
 	};
 };
 
-function UserCategoryLink({ category }: UserCategoryLinkProps) {
-	const pathname = usePathname();
-	const locale = useLocale();
-	const isActive = pathname === `/pl/user/${category.slug}`;
+export default function UserCategoryLink({ category }: UserCategoryLinkProps) {
 	const t = useTranslations();
-	let isOrder = false;
-	let isOrderPath = false;
+	const { href, isActive, isVisible, isOrder } = useUserCategoryState(category.name, category.slug);
 
-	if (category.name === "Order") {
-		isOrder = true;
-		if (new RegExp(`^/${locale}/user/order/\\d+$`).test(pathname)) {
-			isOrderPath = true;
-		}
-	}
+	if (!isVisible) return null;
 
 	return (
-		<Link className="w-full" key={category.name} href={isOrder ? "#" : `/user/${category.slug}`}>
+		<Link href={href} className="w-full">
 			<li
-				className={`w-full border-b-4 p-[1rem]  pl-[2rem] text-center font-bold uppercase text-white transition ${isOrder && !isOrderPath && "opacity-0"}  ${isOrder && "bg-red-600"}
-        ${isActive ? "border-red-600 bg-red-600" : "border-[rgb(20,20,20)] bg-[rgb(20,20,20)] hover:border-[rgb(32,32,32)] hover:bg-[rgb(32,32,32)] "}`}
+				className={`w-full border-b-4 border-[rgb(20,20,20)] bg-[rgb(20,20,20)] p-[1rem] text-center font-bold uppercase text-white transition
+          ${isActive ? "border-red-600 bg-red-600" : "hover:border-[rgb(32,32,32)] hover:bg-[rgb(32,32,32)]"}`}
 			>
-				{isOrder ? t(`order.order`) : t(`categories.${category.slug}`)}
+				{isOrder ? t("order.order") : t(`categories.${category.slug}`)}
 			</li>
 		</Link>
 	);
 }
-
-export default UserCategoryLink;
