@@ -1,5 +1,5 @@
 import { Grid } from "@radix-ui/themes";
-import ProductDisplay from "../../../../../components/common/ProductDisplay";
+import ProductDisplay from "../../../../../components/product-display/ProductDisplay";
 import { ApolloQueryResult } from "@apollo/client";
 import { getApolloClient } from "../../../../../../apollo-client";
 import { revalidatePath } from "next/cache";
@@ -7,7 +7,7 @@ import { FiltersData, QueryResult } from "../../../../../queries/productType";
 import { Metadata } from "next";
 import Pagination from "../../../../../components/pagination/Pagination";
 import { Suspense } from "react";
-import SkeletonProductDisplay from "../../../../../components/common/SkeletonProductDisplay";
+import SkeletonProductDisplay from "../../../../../components/product-display/SkeletonProductDisplay";
 import { gql } from "@apollo/client";
 import ErrorText from "../../../../../components/common/ErrorText";
 import { GET_FILTERS } from "../../../../../queries/filters";

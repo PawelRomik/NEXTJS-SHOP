@@ -2,7 +2,7 @@ import { getApolloClient } from "../../../apollo-client";
 import { ApolloQueryResult } from "@apollo/client";
 import { GET_OTHER_PRODUCTS, GET_PRODUCT_CATEGORY } from "../../queries/productPage";
 import { Suspense } from "react";
-import ProductDisplay from "../common/ProductDisplay";
+import ProductDisplay from "../product-display/ProductDisplay";
 import { QueryResult } from "../../queries/productType";
 
 type ProductOtherSectionProps = {
