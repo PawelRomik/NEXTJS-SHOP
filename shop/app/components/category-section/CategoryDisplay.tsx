@@ -31,11 +31,7 @@ export default async function CategoryDisplay({
 			></Image>
 
 			<div className="flex-2 flex h-full w-[450px] flex-col items-center justify-around gap-2 text-white lg:items-start lg:gap-0">
-				<h2
-					className={`text-2xl font-bold uppercase lg:text-5xl  ${direction ? "lg:text-right" : "lg:text-left"}`}
-				>
-					{name}
-				</h2>
+				<h2 className="text-2xl font-bold uppercase lg:text-left  lg:text-5xl">{name}</h2>
 				<Image
 					src={`${process.env.NEXT_PUBLIC_STRAPI_PATH}${imageUrl}`}
 					width={300}
@@ -43,16 +39,12 @@ export default async function CategoryDisplay({
 					className="img h-[60%] self-center  object-contain lg:hidden"
 					alt={category}
 				></Image>
-				<p
-					className={`w-[80%] text-center text-sm lg:w-auto ${direction ? "lg:text-right" : "lg:text-left"} lg:text-lg`}
-				>
-					{desc}
-				</p>
+				<p className={`w-[80%] text-center text-sm lg:w-auto lg:text-left lg:text-lg`}>{desc}</p>
 				<Link
 					href={`/category/${category}`}
-					className={`flex  w-full items-center ${direction ? "justify-end" : "justify-start"}`}
+					className="flex w-full  items-center justify-center lg:justify-start"
 				>
-					<button className="w-[300px] rounded-lg bg-red-600 p-4 text-2xl font-bold text-white hover:bg-red-500">
+					<button className="w-[300px] rounded-lg bg-red-600 p-2 text-xl font-bold text-white hover:bg-red-500 lg:p-4 lg:text-2xl">
 						{t("productSection.check")}
 					</button>
 				</Link>
