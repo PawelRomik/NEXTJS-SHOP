@@ -128,7 +128,8 @@
 		"wrongCode": "Invalid code",
 		"addedDiscount": "Added -{discount}% discount!",
 		"payAndOrder": "Pay and Order",
-		"more": "More"
+		"more": "More",
+		"codeUsed": "This code has already been used"
 	},
 	"categories": {
 		"shop": "Shop",

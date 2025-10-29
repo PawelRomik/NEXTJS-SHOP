@@ -128,7 +128,8 @@
 		"wrongCode": "Niepoprawny kod",
 		"addedDiscount": "Dodano -{discount}% rabatu!",
 		"payAndOrder": "Zapłać i zamów",
-		"more": "Więcej"
+		"more": "Więcej",
+		"codeUsed": "Ten kod został już użyty"
 	},
 	"categories": {
 		"shop": "Sklep",

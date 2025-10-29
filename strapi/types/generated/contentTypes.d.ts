@@ -985,6 +985,58 @@ export interface ApiConvertionrateConvertionrate extends Schema.CollectionType {
   };
 }
 
+export interface ApiDiscountDiscount extends Schema.CollectionType {
+  collectionName: 'discounts';
+  info: {
+    singularName: 'discount';
+    pluralName: 'discounts';
+    displayName: 'discount';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    code: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    value: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::discount.discount',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::discount.discount',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::discount.discount',
+      'oneToMany',
+      'api::discount.discount'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface ApiFancywordFancyword extends Schema.CollectionType {
   collectionName: 'fancywords';
   info: {
@@ -1277,6 +1329,7 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::client.client': ApiClientClient;
       'api::convertionrate.convertionrate': ApiConvertionrateConvertionrate;
+      'api::discount.discount': ApiDiscountDiscount;
       'api::fancyword.fancyword': ApiFancywordFancyword;
       'api::filter.filter': ApiFilterFilter;
       'api::order.order': ApiOrderOrder;

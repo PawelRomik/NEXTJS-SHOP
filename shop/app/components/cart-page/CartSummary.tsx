@@ -56,7 +56,7 @@ export default function CartSummary({ products, discount, locale }: CartSummaryP
 					{t("product.price", { amount: oldPrice })}
 				</span>
 			</div>
-			<div className="flex items-center justify-center gap-3 bg-[rgb(12,12,12)] font-bold">
+			<div className="mb-2 flex items-center justify-center gap-3 bg-[rgb(12,12,12)] font-bold">
 				{discount != 0 && <span className="rounded-lg bg-red-600 px-3">-{discount}%</span>}
 				<span>{t("cart.subtotal")}</span>
 				<span className="text-red-600">{t("product.price", { amount: price })}</span>
