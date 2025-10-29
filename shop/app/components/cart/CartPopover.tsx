@@ -58,9 +58,9 @@ export default function CartPopover() {
 							event.preventDefault();
 						}
 					}}
-					className="hidden w-[100vw] origin-top animate-showNav border-[3px] border-red-600 bg-[rgb(20,20,20)] lg:flex  lg:w-auto  "
+					className=" hidden w-[100vw]  origin-top animate-showNav border-[3px] border-red-600 bg-[rgb(20,20,20)] lg:flex  lg:w-auto  "
 				>
-					<div className="z-50 uppercase text-white">
+					<div className="uppercase text-white">
 						<h1 className="mb-7 bg-[rgb(12,12,12)] p-3 text-center text-2xl font-bold lg:px-10">
 							{t("cart.content")}
 						</h1>
@@ -74,7 +74,7 @@ export default function CartPopover() {
 						</div>
 					</div>
 					<Popover.Close
-						className="absolute right-[5px] top-[5px] z-50 inline-flex h-[25px] w-[25px] cursor-pointer items-center justify-center rounded-full text-red-600 outline-none hover:text-red-400 "
+						className="absolute right-[5px] top-[5px] inline-flex h-[25px] w-[25px] cursor-pointer items-center justify-center rounded-full text-red-600 outline-none hover:text-red-400 "
 						aria-label="Close"
 					>
 						<i className="ri-close-circle-line"></i>

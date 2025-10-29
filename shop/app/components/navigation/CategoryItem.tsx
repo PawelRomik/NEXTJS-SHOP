@@ -15,7 +15,7 @@ export function CategoryItem({ category, imageSrc, onHoverSub }: CategoryItemPro
 	const t = useTranslations("categories");
 
 	return (
-		<NavigationMenu.Item key={category.id}>
+		<NavigationMenu.Item key={category.id} className="relative">
 			<NavigationMenu.Trigger className="font-bold text-white hover:text-red-600 data-[state=open]:text-red-600">
 				<Link href={`/${category.slug}`} title={t(category.slug)}>
 					{t(category.slug).toUpperCase()}
