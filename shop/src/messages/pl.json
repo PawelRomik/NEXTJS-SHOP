@@ -88,6 +88,8 @@
 		"total": "Razem",
 		"price": "Cena",
 		"amount": "Ilość",
+		"checkInfo": "Sprawdź swoje zamówienie",
+		"id": "Nr. Zamówienia",
 		"estimatedDelivery": "Przewidywana dostawa: 3-5 dni roboczych"
 	},
 	"product": {

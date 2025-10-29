@@ -122,3 +122,19 @@ export const GET_OTHER_PRODUCTS = gql`
 		}
 	}
 `;
+
+export const GET_ORDER_BY_SESSION_ID = gql`
+	query GetOrderBySessionId($session_id: String!) {
+		orders(filters: { session_id: { eq: $session_id } }) {
+			data {
+				id
+				attributes {
+					session_id
+					products
+					total
+					date
+				}
+			}
+		}
+	}
+`;

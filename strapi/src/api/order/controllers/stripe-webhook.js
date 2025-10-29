@@ -1,3 +1,5 @@
+const product = require("../../product/controllers/product");
+
 // @ts-ignore
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
@@ -6,7 +8,6 @@ module.exports = {
   async handleWebhook(ctx) {
     const sig = ctx.request.headers["stripe-signature"];
 
-    // użycie Symbol.for("unparsedBody") do raw body
     const raw = ctx.request.body
       ? ctx.request.body[Symbol.for("unparsedBody")]
       : null;
@@ -32,13 +33,19 @@ module.exports = {
       const session = event.data.object;
       const user = session.metadata.user;
       const products = JSON.parse(session.metadata.products);
+      let sum = 0;
+      products.map((prod) => {
+        sum += prod.price * prod.quantity;
+      });
 
       await strapi.service("api::order.order").create({
         data: {
           products,
           stripeId: session.id,
+          session_id: session.id,
           user,
-          status: "paid",
+          total: sum,
+          date: new Date(),
         },
       });
     }

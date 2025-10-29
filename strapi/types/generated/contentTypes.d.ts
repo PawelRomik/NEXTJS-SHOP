@@ -1152,6 +1152,9 @@ export interface ApiOrderOrder extends Schema.CollectionType {
     stripeId: Attribute.Text;
     products: Attribute.JSON;
     user: Attribute.String;
+    session_id: Attribute.Text;
+    total: Attribute.Integer;
+    date: Attribute.Date;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -20,6 +20,15 @@
     },
     "user": {
       "type": "string"
+    },
+    "session_id": {
+      "type": "text"
+    },
+    "total": {
+      "type": "integer"
+    },
+    "date": {
+      "type": "date"
     }
   }
 }

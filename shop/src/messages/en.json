@@ -88,6 +88,8 @@
 		"total": "Total",
 		"price": "Price",
 		"amount": "Amount",
+		"checkInfo": "Check your order",
+		"id": "Order ID",
 		"estimatedDelivery": "Estimated delivery time: 3–5 working days"
 	},
 	"product": {

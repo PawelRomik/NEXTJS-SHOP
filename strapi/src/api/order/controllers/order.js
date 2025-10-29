@@ -40,7 +40,9 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       const metadataProducts = products.map((p) => ({
         id: p.uuid,
         quantity: p.quantity,
-        price: Math.round((p.salePrice ?? p.price) * exchangeRate),
+        price: p.salePrice
+          ? p.salePrice - (p.salePrice * discount) / 100
+          : p.price - (p.price * discount) / 100,
       }));
 
       const session = await stripe.checkout.sessions.create({
