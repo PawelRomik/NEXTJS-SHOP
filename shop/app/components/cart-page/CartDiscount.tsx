@@ -1,27 +1,16 @@
 "use client";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useDiscount } from "../../lib/hooks/useDiscount";
 
 type CartDiscountProps = {
 	onDiscountApply: (discount: number) => void;
 };
 
-const DISCOUNT_CODES: Record<string, number> = {
-	//TEMP
-	Rabat123: 30,
-	AUTUMN10: 10
-};
-
 export default function CartDiscount({ onDiscountApply }: CartDiscountProps) {
 	const t = useTranslations("cart");
 	const [input, setInput] = useState("");
-	const [message, setMessage] = useState<string | null>(null);
-
-	const handleApply = () => {
-		const value = DISCOUNT_CODES[input] || 0;
-		onDiscountApply(value);
-		setMessage(value ? t("addedDiscount", { discount: value }) : t("wrongCode"));
-	};
+	const { message, applyDiscount } = useDiscount(onDiscountApply);
 
 	return (
 		<div className="flex w-full flex-col items-center justify-center md:w-[300px] md:items-start ">
@@ -34,13 +23,19 @@ export default function CartDiscount({ onDiscountApply }: CartDiscountProps) {
 					className="w-full bg-white p-3 text-black"
 				/>
 				<button
-					onClick={handleApply}
+					onClick={() => applyDiscount(input)}
 					className="bg-red-600 p-2 font-bold text-white transition hover:bg-red-500"
 				>
 					{t("add")}
 				</button>
 			</div>
-			{message && <p className="mt-2 font-bold text-red-600">{message}</p>}
+			{message && (
+				<p
+					className={`mt-2 font-bold ${message.includes("%") ? "text-green-600" : "text-red-600"}`}
+				>
+					{message}
+				</p>
+			)}
 		</div>
 	);
 }

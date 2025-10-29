@@ -1,8 +1,8 @@
 import { revalidatePath } from "next/cache";
-import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import OrderSuccessContent from "../../../components/order-status/OrderSuccessContent";
 import OrderErrorContent from "../../../components/order-status/OrderErrorContent";
+import { getOrderData } from "../../../lib/hooks/getOrderData";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
 	const t = await getTranslations({ locale, namespace: "order" });
@@ -12,20 +12,24 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 	};
 }
 
-export default function OrderStatusPage({
+export default async function OrderStatusPage({
 	searchParams,
 	params: { locale }
 }: {
-	searchParams: { state: string };
+	searchParams: { state: string; session_id: string };
 	params: { locale: string };
 }) {
 	revalidatePath("/[locale]/order/[state]", "page");
-	const t = useTranslations("order");
 	const state = searchParams.state ? searchParams.state : "error";
-
+	const session_id = searchParams.session_id ? searchParams.session_id : "";
+	const order = await getOrderData(session_id);
 	return (
 		<div className="flex h-full flex-1 flex-col items-center justify-center bg-[rgb(12,12,12)]">
-			{state === "success" ? <OrderSuccessContent locale={locale} /> : <OrderErrorContent />}
+			{state === "success" ? (
+				<OrderSuccessContent order={order} locale={locale} />
+			) : (
+				<OrderErrorContent />
+			)}
 		</div>
 	);
 }

@@ -11,9 +11,9 @@ export default function Navigation() {
 	return (
 		<NavigationMenu.Root
 			onValueChange={() => changeImageSrc("")}
-			className="relative z-[1] hidden w-svw flex-1 justify-center lg:flex"
+			className="relative z-[30] hidden w-svw flex-1 justify-center lg:flex"
 		>
-			<NavigationMenu.List className="flex items-center justify-center gap-6 overflow-hidden">
+			<NavigationMenu.List className="relative flex items-center justify-center gap-6 overflow-hidden">
 				{categories.map((category) => (
 					<CategoryItem
 						key={category.id}
