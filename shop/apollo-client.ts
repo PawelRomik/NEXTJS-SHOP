@@ -8,7 +8,7 @@ async function getApolloConfig() {
 	if (apolloConfigCache) return apolloConfigCache;
 
 	const isServer = typeof window === "undefined";
-	const apiUrl = isServer ? `https://${process.env.VERCEL_URL}` : "/api/apollo";
+	const apiUrl = isServer ? `https://${process.env.VERCEL_URL}/api/apollo` : "/api/apollo";
 
 	const res = await fetch(apiUrl, { cache: "no-store" });
 	if (!res.ok) throw new Error("Błąd podczas pobierania konfiguracji Apollo!");
