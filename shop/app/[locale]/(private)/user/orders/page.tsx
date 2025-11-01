@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import { revalidatePath } from "next/cache";
 import { GET_ORDER_HISTORY } from "../../../../queries/order";
 import { OrderHistoryData } from "../../../../queries/productType";
 import { ApolloQueryResult } from "@apollo/client";
@@ -105,7 +104,6 @@ export default function OrderHistoryPage({
 	};
 	params: { locale: string };
 }) {
-	revalidatePath("/[locale]/user/orders", "page");
 	const page = searchParams?.page || 1;
 	const t = useTranslations("order");
 

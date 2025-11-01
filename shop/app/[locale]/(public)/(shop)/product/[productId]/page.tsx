@@ -1,6 +1,5 @@
 import { ApolloQueryResult } from "@apollo/client";
 import { getApolloClient } from "../../../../../../apollo-client";
-import { revalidatePath } from "next/cache";
 import { GET_PRODUCT_NAME } from "../../../../../queries/productPage";
 import { Metadata } from "next";
 import ProductNavigationButtons from "../../../../../components/product-page/ProductNavigationButtons";
@@ -53,7 +52,6 @@ export default async function ProductPage({
 }: {
 	params: { productId: string; locale: string };
 }) {
-	revalidatePath("/[locale]/product/[productId]", "page");
 	const t = await getTranslations("product");
 
 	return (

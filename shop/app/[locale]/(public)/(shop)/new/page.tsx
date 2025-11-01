@@ -5,7 +5,6 @@ import { ApolloQueryResult } from "@apollo/client";
 import { QueryResult } from "../../../../queries/productType";
 import ErrorText from "../../../../components/common/ErrorText";
 import ProductDisplay from "../../../../components/product-display/ProductDisplay";
-import { revalidatePath } from "next/cache";
 import { Grid } from "@radix-ui/themes";
 import { Suspense } from "react";
 import SkeletonProductDisplay from "../../../../components/product-display/SkeletonProductDisplay";
@@ -83,8 +82,6 @@ export default function NewPage({
 		sort?: string;
 	};
 }) {
-	revalidatePath("/[locale]/new", "page");
-
 	return (
 		<main className=" w-full bg-[rgb(20,20,20)]">
 			<CategoryShowcase locale={locale} category="new" />

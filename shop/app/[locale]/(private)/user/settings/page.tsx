@@ -1,6 +1,5 @@
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
-import { revalidatePath } from "next/cache";
 import ChangeEmailForm from "../../../../components/user-settings/ChangeEmailForm";
 import ProductSectionTitle from "../../../../components/product-page/ProductSectionTitle";
 import ChangeNameForm from "../../../../components/user-settings/ChangeNameForm";
@@ -16,7 +15,6 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 }
 
 export default function SettingsPage() {
-	revalidatePath("/[locale]/user/settings", "page");
 	const t = useTranslations("categories");
 
 	return (

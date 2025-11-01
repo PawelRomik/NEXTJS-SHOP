@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import { revalidatePath } from "next/cache";
 import OrderInformations from "../../../../../components/order-informations/OrderInformations";
 import OrderProducts from "../../../../../components/order-informations/OrderProducts";
 import Link from "next/link";
@@ -19,7 +18,6 @@ export async function generateMetadata({
 }
 
 export default function OrderInfoPage({ params: { id } }: { params: { id: string } }) {
-	revalidatePath("/[locale]/user/order/[id]", "page");
 	const t = useTranslations();
 
 	return (

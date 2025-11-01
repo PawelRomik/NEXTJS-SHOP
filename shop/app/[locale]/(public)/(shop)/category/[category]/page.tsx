@@ -2,7 +2,6 @@ import { Grid } from "@radix-ui/themes";
 import ProductDisplay from "../../../../../components/product-display/ProductDisplay";
 import { ApolloQueryResult } from "@apollo/client";
 import { getApolloClient } from "../../../../../../apollo-client";
-import { revalidatePath } from "next/cache";
 import { FiltersData, QueryResult } from "../../../../../queries/productType";
 import { Metadata } from "next";
 import Pagination from "../../../../../components/pagination/Pagination";
@@ -13,7 +12,6 @@ import ErrorText from "../../../../../components/common/ErrorText";
 import { GET_FILTERS } from "../../../../../queries/filters";
 import ProductFilters from "../../../../../components/product-filters/ProductFilters";
 import { getTranslations } from "next-intl/server";
-import { useTranslations } from "next-intl";
 import CategoryShowcase from "../../../../../components/category-showcase/CategoryShowcase";
 
 type CategoryKeys = keyof IntlMessages["categories"];
@@ -193,7 +191,6 @@ export default function ShopPage({
 		sort?: string;
 	};
 }) {
-	revalidatePath("/[locale]/category/[category]", "page");
 	const page = searchParams?.page || 1;
 	const tagsFromUrl = searchParams?.tags;
 	const tags = tagsFromUrl ? tagsFromUrl.split(",") : undefined;
