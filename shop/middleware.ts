@@ -1,5 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import createMiddleware from "next-intl/middleware";
+import { NextResponse } from "next/server";
 
 const isProtectedRoute = createRouteMatcher([
 	"/:locale/user(.*)",
@@ -19,7 +20,7 @@ export default clerkMiddleware(async (auth, req) => {
 
 	const path = req.nextUrl.pathname;
 	if (path.includes("/api")) {
-		return;
+		return NextResponse.next();
 	}
 
 	return nextIntlMiddleware(req);

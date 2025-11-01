@@ -1,4 +1,3 @@
-import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import OrderSuccessContent from "../../../components/order-status/OrderSuccessContent";
 import OrderErrorContent from "../../../components/order-status/OrderErrorContent";
@@ -19,7 +18,6 @@ export default async function OrderStatusPage({
 	searchParams: { state: string; session_id: string };
 	params: { locale: string };
 }) {
-	revalidatePath("/[locale]/order/[state]", "page");
 	const state = searchParams.state ? searchParams.state : "error";
 	const session_id = searchParams.session_id ? searchParams.session_id : "";
 	const order = await getOrderData(session_id);

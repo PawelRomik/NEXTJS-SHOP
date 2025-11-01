@@ -1,4 +1,3 @@
-import { revalidatePath } from "next/cache";
 import { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
@@ -16,7 +15,6 @@ export async function generateMetadata({
 }
 export default function PrivacyPage() {
 	const t = useTranslations("information");
-	revalidatePath("/[locale]/privacy", "page");
 
 	return (
 		<main className="flex flex-1 flex-col justify-start ">

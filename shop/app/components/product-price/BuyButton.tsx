@@ -33,14 +33,11 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 	const locale = useLocale();
 	const dispatch = useDispatch();
 
-	const [loading, setLoading] = useState(false);
-
 	const handleButtonClick = useCallback(
 		async (e: React.MouseEvent<HTMLButtonElement>) => {
 			e.preventDefault();
 			e.stopPropagation();
 
-			setLoading(true);
 			try {
 				const product = await fetchProductData(productId, locale);
 				const currProduct = product?.products?.data?.[0];
@@ -52,8 +49,8 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 						quantity: 1
 					})
 				);
-			} finally {
-				setLoading(false);
+			} catch (error) {
+				console.error(error);
 			}
 		},
 		[dispatch, locale, productId]
@@ -66,9 +63,8 @@ export default function BuyButton({ productId }: BuyButtonsProps) {
 					className="ignore-popover-close flex h-full items-center justify-center bg-red-600 p-2 px-3 font-bold text-white hover:scale-105 hover:bg-red-500 lg:w-[80%] lg:p-3"
 					title={t("buyButtonText")}
 					onClick={handleButtonClick}
-					disabled={loading}
 				>
-					{loading ? "loading" : t("buyButtonText")}
+					{t("buyButtonText")}
 				</button>
 			</SignedIn>
 			<SignedOut>

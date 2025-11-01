@@ -2,7 +2,7 @@ import ProductsSectionIcons from "./ProductsSectionIcons";
 import CardBanner from "./CardBanner";
 import { useTranslations } from "next-intl";
 
-export default async function NewProductsSection() {
+export default function NewProductsSection() {
 	const t = useTranslations("productSection");
 	return (
 		<div

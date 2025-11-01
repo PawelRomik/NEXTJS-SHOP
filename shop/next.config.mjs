@@ -11,8 +11,8 @@ const config = {
 				hostname: "img.clerk.com"
 			},
 			{
-				protocol: "http",
-				hostname: "**"
+				protocol: "https",
+				hostname: "adam111-30111.wykr.es"
 			}
 		]
 	},

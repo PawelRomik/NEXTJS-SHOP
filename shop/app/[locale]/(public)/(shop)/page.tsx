@@ -1,4 +1,3 @@
-import { revalidatePath } from "next/cache";
 import { Metadata } from "next";
 import CategorySection from "../../../components/category-section/CategorySection";
 import NewProductsSection from "../../../components/main-cards/NewProductsSection";
@@ -15,7 +14,6 @@ export const metadata: Metadata = {
 };
 
 export default async function MainPage({ params: { locale } }: { params: { locale: string } }) {
-	revalidatePath("/[locale]/", "page");
 	const client = await getApolloClient();
 
 	async function getCategories() {
@@ -49,28 +47,15 @@ export default async function MainPage({ params: { locale } }: { params: { local
 
 	return (
 		<main className="w-full bg-black">
-			<Suspense>
-				<NewProductsSection />
-			</Suspense>
-			<Suspense>
-				<CategorySection num={1} locale={locale} category={cat1} />
-			</Suspense>
+			<NewProductsSection />
+			<CategorySection num={1} locale={locale} category={cat1} />
 
-			<Suspense>
-				<SaleProductsSection />
-			</Suspense>
+			<SaleProductsSection />
+			<CategorySection num={2} locale={locale} category={cat2} />
 
-			<Suspense>
-				<CategorySection num={2} locale={locale} category={cat2} />
-			</Suspense>
+			<BundlesSection />
 
-			<Suspense>
-				<BundlesSection />
-			</Suspense>
-
-			<Suspense>
-				<CategorySection num={3} locale={locale} category={cat3} />
-			</Suspense>
+			<CategorySection num={3} locale={locale} category={cat3} />
 		</main>
 	);
 }

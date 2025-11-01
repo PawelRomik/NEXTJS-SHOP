@@ -2,7 +2,6 @@ import { Grid } from "@radix-ui/themes";
 import ProductDisplay from "../../../../components/product-display/ProductDisplay";
 import { ApolloQueryResult } from "@apollo/client";
 import { getApolloClient } from "../../../../../apollo-client";
-import { revalidatePath } from "next/cache";
 import { QueryResult } from "../../../../queries/productType";
 import Pagination from "../../../../components/pagination/Pagination";
 import { Suspense } from "react";
@@ -102,7 +101,6 @@ export default function SearchPage({
 		locale: string;
 	};
 }) {
-	revalidatePath("/[locale]/search", "page");
 	const t = useTranslations("search");
 
 	const query = searchParams?.query;
